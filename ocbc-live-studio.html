@@ -2432,6 +2432,30 @@
       background: var(--paper-100);
     }
 
+    .analytics-detail-modal { max-width: 1080px; }
+    .analytics-detail-meta { font-size: 11.5px; color: var(--ink-500); margin: 4px 0 0; }
+    .analytics-detail-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .analytics-detail-kpis { margin-bottom: 16px; }
+    .performance-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0; }
+    .performance-toolbar .search { width: 240px; }
+    .performance-table-wrap { overflow-x: auto; }
+    .result-count, .pagination-status { font-size: 11.5px; color: var(--ink-500); }
+    .sort-button { font: inherit; font-size: 10px; text-transform: uppercase; color: inherit; background: none; border: 0; cursor: pointer; }
+    .sort-button.active { color: var(--ink-900); }
+    .sort-indicator { display: inline-block; width: 10px; color: var(--teal-600); }
+    .top-performer { display: inline-block; margin-left: 7px; padding: 2px 6px; border-radius: 10px; background: var(--amber-bg); color: var(--amber-600); font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .pagination { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+    .view-details-btn { font-family: inherit; font-size: 10.5px; font-weight: 600; white-space: nowrap; padding: 5px 9px; border: 1px solid var(--line-strong); border-radius: 7px; color: var(--ink-700); background: transparent; cursor: pointer; }
+    .view-details-btn:hover, .view-details-btn:focus-visible { color: var(--ink-900); border-color: var(--teal-600); outline: none; }
+    .engagement-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; }
+    .engagement-metric { padding: 12px; background: var(--paper-100); border: 1px solid var(--line); border-radius: 9px; }
+    .engagement-metric span { display: block; font-size: 10.5px; color: var(--ink-500); margin-bottom: 5px; }
+    .engagement-metric b { font-family: 'Sora',sans-serif; font-size: 18px; }
+    .moment-item { display: grid; grid-template-columns: 55px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+    .moment-time { font-family: 'JetBrains Mono',monospace; font-size: 11px; color: var(--teal-600); }
+    .moment-copy b, .moment-copy span { display: block; font-size: 11px; }
+    .moment-copy span { color: var(--ink-500); margin-top: 2px; }
+
     @media (max-width:900px) {
       .app {
         grid-template-columns: 1fr;
@@ -2481,6 +2505,10 @@
       .performance-row>span {
         grid-column: 2;
       }
+
+      .analytics-detail-grid { grid-template-columns: 1fr; }
+      .performance-toolbar { align-items: stretch; flex-direction: column; }
+      .performance-toolbar .search { width: 100%; }
 
       /* Overview only: without this, the new live-status pill + as-of stamp
        pin to the right and crush the title/description into a narrow
@@ -3197,30 +3225,31 @@
         </div>
 
         <div class="analytics-filters">
-          <label>Date range<select>
-              <option>Last 30 days</option>
-              <option>Last 7 days</option>
-              <option>Last 90 days</option>
+          <label>Date range<select id="analyticsDateFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="30">Last 30 days</option>
+              <option value="7">Last 7 days</option>
+              <option value="90">Last 90 days</option>
             </select></label>
-          <label>Content section<select>
-              <option>All sections</option>
+          <label>Content section<select id="analyticsSectionFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All sections</option>
               <option>Markets</option>
               <option>Wealth</option>
               <option>SME</option>
             </select></label>
-          <label>Creator or host<select>
-              <option>All creators</option>
+          <label>Creator or host<select id="analyticsCreatorFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All creators</option>
               <option>OCBC Research</option>
               <option>Wealth Insights</option>
+              <option>Business Banking</option>
             </select></label>
-          <label>User segment<select>
-              <option>All users</option>
+          <label>User segment<select id="analyticsSegmentFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All users</option>
               <option>New users</option>
               <option>Returning users</option>
               <option>Premier Banking</option>
             </select></label>
-          <label>Content status<select id="analyticsStatusFilter">
-              <option>All statuses</option>
+          <label>Content status<select id="analyticsStatusFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All statuses</option>
               <option>Upcoming</option>
               <option>Completed</option>
               <option>Cancelled</option>
@@ -3292,32 +3321,36 @@
                   <th>Attendance</th>
                   <th>Avg Watch</th>
                   <th>Engagement</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>Q3 Market Outlook →</td>
+              <tbody id="livePerformanceBody">
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',0)">
+                  <td>Q3 Market Outlook</td>
                   <td>3,840</td>
                   <td>84%</td>
                   <td>71%</td>
                   <td>44m</td>
                   <td>38%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',0)">View details</button></td>
                 </tr>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>Home Ownership 2026 →</td>
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',1)">
+                  <td>Home Ownership 2026</td>
                   <td>2,960</td>
                   <td>79%</td>
                   <td>66%</td>
                   <td>39m</td>
                   <td>31%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',1)">View details</button></td>
                 </tr>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>SME Growth Forum →</td>
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',2)">
+                  <td>SME Growth Forum</td>
                   <td>2,410</td>
                   <td>76%</td>
                   <td>61%</td>
                   <td>36m</td>
                   <td>29%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',2)">View details</button></td>
                 </tr>
               </tbody>
             </table>
@@ -3383,46 +3416,26 @@
             </div>
           </div>
           <div class="chart-card" style="margin-bottom:16px;">
-            <h3>Top Uploads</h3>
-            <p class="chart-sub">Sortable performance context for uploaded videos</p>
+            <h3>Upload Performance</h3>
+            <p class="chart-sub">All uploads matching the selected analytics filters</p>
+            <div class="performance-toolbar"><span class="result-count" id="uploadPerformanceCount"></span><input class="search" id="uploadPerformanceSearch" placeholder="Search uploads..." oninput="renderPerformanceTable('uploads')" /></div>
+            <div class="performance-table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Upload</th>
-                  <th>Views</th>
+                  <th><button class="sort-button" onclick="sortPerformance('uploads','title')">Upload<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" onclick="sortPerformance('uploads','views')">Views<span class="sort-indicator">↓</span></button></th>
                   <th>Avg Watch</th>
                   <th>Completion</th>
                   <th>Engagement</th>
                   <th>Flag Rate</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Q2 earnings roundup</td>
-                  <td>41,300</td>
-                  <td>5m 12s</td>
-                  <td>68%</td>
-                  <td>12.4%</td>
-                  <td>0.3%</td>
-                </tr>
-                <tr>
-                  <td>FX morning brief</td>
-                  <td>28,900</td>
-                  <td>3m 44s</td>
-                  <td>61%</td>
-                  <td>8.7%</td>
-                  <td>0.2%</td>
-                </tr>
-                <tr>
-                  <td>Rate hike explainer</td>
-                  <td>22,150</td>
-                  <td>4m 08s</td>
-                  <td>64%</td>
-                  <td>10.1%</td>
-                  <td>0.5%</td>
-                </tr>
-              </tbody>
+              <tbody id="uploadPerformanceBody"></tbody>
             </table>
+            </div>
+            <div class="pagination"><button class="btn btn-sm" onclick="changePerformancePage('uploads',-1)">Previous</button><span class="pagination-status" id="uploadPerformancePage"></span><button class="btn btn-sm" onclick="changePerformancePage('uploads',1)">Next</button></div>
           </div>
           <div class="chart-card">
             <h3>Upload Performance by Section</h3>
@@ -3528,46 +3541,26 @@
           </div>
 
           <div class="chart-card">
-            <h3>Most Discussed Threads</h3>
-            <p class="chart-sub">Engagement and safety context for leading conversations</p>
+            <h3>Thread Performance</h3>
+            <p class="chart-sub">All threads matching the selected analytics filters</p>
+            <div class="performance-toolbar"><span class="result-count" id="threadPerformanceCount"></span><input class="search" id="threadPerformanceSearch" placeholder="Search threads..." oninput="renderPerformanceTable('threads')" /></div>
+            <div class="performance-table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Thread</th>
-                  <th>Views</th>
+                  <th><button class="sort-button" onclick="sortPerformance('threads','title')">Thread<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" onclick="sortPerformance('threads','views')">Views<span class="sort-indicator">↓</span></button></th>
                   <th>Replies</th>
                   <th>Contributors</th>
                   <th>Engagement</th>
                   <th>Flag Rate</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Where are rates heading next?</td>
-                  <td>8,420</td>
-                  <td>214</td>
-                  <td>126</td>
-                  <td>24.8%</td>
-                  <td>0.8%</td>
-                </tr>
-                <tr>
-                  <td>Q2 bank earnings discussion</td>
-                  <td>6,980</td>
-                  <td>186</td>
-                  <td>104</td>
-                  <td>22.1%</td>
-                  <td>0.5%</td>
-                </tr>
-                <tr>
-                  <td>CPF LIFE plan comparison</td>
-                  <td>5,740</td>
-                  <td>142</td>
-                  <td>88</td>
-                  <td>19.7%</td>
-                  <td>0.3%</td>
-                </tr>
-              </tbody>
+              <tbody id="threadPerformanceBody"></tbody>
             </table>
+            </div>
+            <div class="pagination"><button class="btn btn-sm" onclick="changePerformancePage('threads',-1)">Previous</button><span class="pagination-status" id="threadPerformancePage"></span><button class="btn btn-sm" onclick="changePerformancePage('threads',1)">Next</button></div>
           </div>
         </div>
 
@@ -3587,6 +3580,19 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ANALYTICS DETAIL MODAL -->
+  <div class="overlay" id="analyticsDetailOverlay">
+    <div class="modal analytics-detail-modal" role="dialog" aria-modal="true" aria-labelledby="analyticsDetailTitle">
+      <div class="modal-head">
+        <div><h2 id="analyticsDetailTitle"></h2><p class="analytics-detail-meta" id="analyticsDetailMeta"></p></div>
+        <button class="modal-close" aria-label="Close analytics details" onclick="closeAnalyticsDetail()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="analyticsDetailBody"></div>
     </div>
   </div>
 
@@ -4749,16 +4755,227 @@
       document.querySelectorAll('.thread-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'thread-' + tab));
     }
 
+    const analyticsItems = {
+      live: [
+        {title:"Q3 Market Outlook",owner:"OCBC Research",section:"Markets",views:7210,primary:3840,primaryLabel:"Registrations",rate:71,rateLabel:"Attendance",engagement:38,watch:"44m",flag:.3},
+        {title:"Home Ownership 2026",owner:"Wealth Insights",section:"Wealth",views:5980,primary:2960,primaryLabel:"Registrations",rate:66,rateLabel:"Attendance",engagement:31,watch:"39m",flag:.2},
+        {title:"SME Growth Forum",owner:"Business Banking",section:"SME",views:4860,primary:2410,primaryLabel:"Registrations",rate:61,rateLabel:"Attendance",engagement:29,watch:"36m",flag:.4}
+      ],
+      uploads: [
+        {title:"Q2 Earnings Roundup",owner:"OCBC Research",section:"Markets",views:41300,watch:"5m 12s",rate:68,engagement:12.4,flag:.3},
+        {title:"FX Morning Brief",owner:"OCBC Research",section:"Markets",views:28900,watch:"3m 44s",rate:61,engagement:8.7,flag:.2},
+        {title:"Rate Hike Explainer",owner:"Wealth Insights",section:"Wealth",views:22150,watch:"4m 08s",rate:64,engagement:10.1,flag:.5},
+        {title:"First Home Budget Guide",owner:"Wealth Insights",section:"Wealth",views:18420,watch:"4m 46s",rate:72,engagement:11.8,flag:.1},
+        {title:"SME Cash Flow Essentials",owner:"Business Banking",section:"SME",views:15880,watch:"5m 38s",rate:59,engagement:9.6,flag:.4},
+        {title:"Regional Markets Weekly",owner:"OCBC Research",section:"Markets",views:13640,watch:"3m 18s",rate:57,engagement:7.9,flag:.2},
+        {title:"Retirement Income Basics",owner:"Wealth Insights",section:"Wealth",views:11920,watch:"4m 24s",rate:66,engagement:10.7,flag:.1}
+      ],
+      threads: [
+        {title:"Where are rates heading next?",owner:"OCBC Research",section:"Markets",views:8420,replies:214,contributors:126,engagement:24.8,flag:.8},
+        {title:"Q2 bank earnings discussion",owner:"OCBC Research",section:"Markets",views:6980,replies:186,contributors:104,engagement:22.1,flag:.5},
+        {title:"CPF LIFE plan comparison",owner:"Wealth Insights",section:"Wealth",views:5740,replies:142,contributors:88,engagement:19.7,flag:.3},
+        {title:"First home affordability check",owner:"Wealth Insights",section:"Wealth",views:4880,replies:118,contributors:76,engagement:21.4,flag:.2},
+        {title:"Managing FX risk for exporters",owner:"Business Banking",section:"SME",views:4210,replies:96,contributors:61,engagement:18.9,flag:.4},
+        {title:"STI outlook for next quarter",owner:"OCBC Research",section:"Markets",views:3760,replies:84,contributors:58,engagement:17.6,flag:.6},
+        {title:"SME grants experiences",owner:"Business Banking",section:"SME",views:2860,replies:68,contributors:43,engagement:18.4,flag:.3}
+      ]
+    };
+    [
+      {daysAgo:5,segment:"Returning users",status:"Completed",appAccess:84},
+      {daysAgo:12,segment:"Premier Banking",status:"Completed",appAccess:79},
+      {daysAgo:24,segment:"New users",status:"Completed",appAccess:76}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.live[index],meta));
+    [
+      {daysAgo:3,segment:"Returning users",status:"Published"},
+      {daysAgo:5,segment:"Returning users",status:"Published"},
+      {daysAgo:8,segment:"Premier Banking",status:"Published"},
+      {daysAgo:12,segment:"New users",status:"Published"},
+      {daysAgo:16,segment:"Returning users",status:"Published"},
+      {daysAgo:34,segment:"Returning users",status:"Archived"},
+      {daysAgo:62,segment:"Premier Banking",status:"Published"}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.uploads[index],meta));
+    [
+      {daysAgo:2,segment:"Returning users",status:"Active"},
+      {daysAgo:4,segment:"Premier Banking",status:"Active"},
+      {daysAgo:7,segment:"Returning users",status:"Active"},
+      {daysAgo:10,segment:"New users",status:"Active"},
+      {daysAgo:14,segment:"Premier Banking",status:"Active"},
+      {daysAgo:36,segment:"Returning users",status:"Dormant"},
+      {daysAgo:11,segment:"New users",status:"Flagged"}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.threads[index],meta));
+    const performanceState = {uploads:{page:1,key:"views",dir:"desc"},threads:{page:1,key:"views",dir:"desc"}};
+    let analyticsDetailTrigger = null;
+
+    function analyticsFilteredItems(type) {
+      const days=Number(document.getElementById("analyticsDateFilter").value);
+      const section=document.getElementById("analyticsSectionFilter").value;
+      const creator=document.getElementById("analyticsCreatorFilter").value;
+      const segment=document.getElementById("analyticsSegmentFilter").value;
+      const status=document.getElementById("analyticsStatusFilter").value;
+      return analyticsItems[type].filter(item =>
+        item.daysAgo<=days &&
+        (section==="all" || item.section===section) &&
+        (creator==="all" || item.owner===creator) &&
+        (segment==="all" || item.segment===segment) &&
+        (status==="all" || item.status===status)
+      );
+    }
+
+    function renderAnalyticsSummary(type,rows) {
+      const pane=document.getElementById(`analytics-${type}`);
+      const values=pane.querySelectorAll(".kpi-grid .stat-card .value");
+      const deltas=pane.querySelectorAll(".kpi-grid .stat-card .kpi-delta");
+      const average=key=>rows.length ? rows.reduce((sum,item)=>sum+Number(item[key]||0),0)/rows.length : 0;
+      if(type==="live") {
+        const registrations=rows.reduce((sum,item)=>sum+item.primary,0);
+        const weighted=key=>registrations ? rows.reduce((sum,item)=>sum+item.primary*item[key],0)/registrations : 0;
+        values[0].textContent=rows.length.toLocaleString();
+        values[1].textContent=registrations.toLocaleString();
+        values[2].textContent=`${weighted("appAccess").toFixed(1)}%`;
+        values[3].textContent=`${weighted("rate").toFixed(1)}%`;
+      } else if(type==="uploads") {
+        const totalViews=rows.reduce((sum,item)=>sum+item.views,0);
+        const watchSeconds=rows.length ? rows.reduce((sum,item)=>{
+          const match=item.watch.match(/(\d+)m\s*(\d+)?s?/); return sum+(Number(match?.[1]||0)*60+Number(match?.[2]||0));
+        },0)/rows.length : 0;
+        values[0].textContent=Math.round(totalViews*.84).toLocaleString();
+        values[1].textContent=`${Math.floor(watchSeconds/60)}m ${String(Math.round(watchSeconds%60)).padStart(2,"0")}s`;
+        values[2].textContent=`${average("rate").toFixed(1)}%`;
+        values[3].textContent=`${average("engagement").toFixed(1)}%`;
+      } else {
+        values[0].textContent=rows.reduce((sum,item)=>sum+item.views,0).toLocaleString();
+        values[1].textContent=rows.filter(item=>item.status==="Active").length.toLocaleString();
+        values[2].textContent=`${average("engagement").toFixed(1)}%`;
+        values[3].textContent=average("replies").toFixed(1);
+      }
+      deltas.forEach(delta=>{delta.textContent=rows.length ? `${rows.length} matching ${rows.length===1?"item":"items"}` : "No matching data";delta.classList.toggle("down",rows.length===0)});
+    }
+
+    function renderLiveFunnel(rows) {
+      const totals=rows.reduce((result,item)=>{
+        const appAccess=Math.round(item.primary*item.appAccess/100);
+        const attendance=Math.round(item.primary*item.rate/100);
+        result.views+=item.views;
+        result.registrations+=item.primary;
+        result.appAccess+=appAccess;
+        result.attendance+=attendance;
+        result.watched+=Math.round(attendance*.89);
+        result.engaged+=Math.round(attendance*item.engagement/100);
+        return result;
+      },{views:0,registrations:0,appAccess:0,attendance:0,watched:0,engaged:0});
+      const values=[totals.views,totals.registrations,totals.appAccess,totals.attendance,totals.watched,totals.engaged];
+      document.querySelectorAll("#analytics-live .funnel-step b").forEach((element,index)=>{
+        element.textContent=(values[index]||0).toLocaleString();
+      });
+    }
+
+    function renderLivePerformanceTable() {
+      const rows=analyticsFilteredItems("live");
+      document.getElementById("livePerformanceBody").innerHTML=rows.length ? rows.map(item=>{
+        const index=analyticsItems.live.indexOf(item);
+        return `<tr class="event-row-link" onclick="openAnalyticsDetail('live',${index})"><td>${item.title}</td><td>${item.primary.toLocaleString()}</td><td>${item.appAccess}%</td><td>${item.rate}%</td><td>${item.watch}</td><td>${item.engagement}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',${index})">View details</button></td></tr>`;
+      }).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No live sessions match the selected filters.</td></tr>`;
+      renderAnalyticsSummary("live",rows);
+      renderLiveFunnel(rows);
+    }
+
+    function renderPerformanceTable(type) {
+      const singular = type === "uploads" ? "upload" : "thread";
+      const search = document.getElementById(`${singular}PerformanceSearch`).value.toLowerCase();
+      const state = performanceState[type];
+      const rows = analyticsFilteredItems(type).filter(x => x.title.toLowerCase().includes(search)).sort((a,b) => {
+        const result = typeof a[state.key] === "string" ? a[state.key].localeCompare(b[state.key]) : a[state.key]-b[state.key];
+        return state.dir === "asc" ? result : -result;
+      });
+      const pages = Math.max(1,Math.ceil(rows.length/5));
+      state.page = Math.min(state.page,pages);
+      const visible = rows.slice((state.page-1)*5,state.page*5);
+      document.getElementById(`${singular}PerformanceCount`).textContent = `${rows.length} ${type} in selected period`;
+      document.getElementById(`${singular}PerformancePage`).textContent = `Page ${state.page} of ${pages}`;
+      document.getElementById(`${singular}PerformanceBody`).innerHTML = visible.map(item => {
+        const index = analyticsItems[type].indexOf(item);
+        return type === "uploads"
+          ? `<tr class="event-row-link" onclick="openAnalyticsDetail('uploads',${index})"><td>${item.title}</td><td>${item.views.toLocaleString()}</td><td>${item.watch}</td><td>${item.rate}%</td><td>${item.engagement}%</td><td>${item.flag}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('uploads',${index})">View details</button></td></tr>`
+          : `<tr class="event-row-link" onclick="openAnalyticsDetail('threads',${index})"><td>${item.title}</td><td>${item.views.toLocaleString()}</td><td>${item.replies}</td><td>${item.contributors}</td><td>${item.engagement}%</td><td>${item.flag}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('threads',${index})">View details</button></td></tr>`;
+      }).join("");
+      if(!visible.length) document.getElementById(`${singular}PerformanceBody`).innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No ${type} match the selected filters.</td></tr>`;
+      renderAnalyticsSummary(type,rows);
+    }
+
+    function handleAnalyticsFilterChange() {
+      performanceState.uploads.page=1;
+      performanceState.threads.page=1;
+      renderLivePerformanceTable();
+      renderPerformanceTable("uploads");
+      renderPerformanceTable("threads");
+    }
+
+    function sortPerformance(type,key) {
+      const state=performanceState[type];
+      if(state.key===key) state.dir=state.dir==="asc"?"desc":"asc"; else {state.key=key;state.dir="asc";}
+      state.page=1;
+      renderPerformanceTable(type);
+    }
+    function changePerformancePage(type,direction) {
+      performanceState[type].page=Math.max(1,performanceState[type].page+direction);
+      renderPerformanceTable(type);
+    }
+
+    function detailTrend(item) {
+      const values=[.12,.18,.24,.2,.15,.11].map(x=>Math.round(item.views*x));
+      const max=Math.max(...values);
+      return `<div style="display:flex;align-items:flex-end;gap:10px;height:150px;margin-top:18px">${values.map((v,i)=>`<div style="flex:1;text-align:center"><div style="height:${Math.max(8,v/max*115)}px;background:var(--chart-red);border-radius:5px 5px 0 0"></div><small style="color:var(--ink-500)">Day ${i+1}</small></div>`).join("")}</div>`;
+    }
+    function openAnalyticsDetail(type,index) {
+      const item=analyticsItems[type][index]; if(!item)return;
+      analyticsDetailTrigger=document.activeElement;
+      document.getElementById("analyticsDetailTitle").textContent=item.title;
+      document.getElementById("analyticsDetailMeta").textContent=`${type==="live"?"Live session":type==="uploads"?"Upload":"Thread"} · ${item.owner} · ${item.section}`;
+      const secondValue=type==="threads"?item.replies.toLocaleString():type==="live"?item.primary.toLocaleString():item.watch;
+      const secondLabel=type==="threads"?"Replies":type==="live"?item.primaryLabel:"Average Watch";
+      const thirdValue=type==="threads"?item.contributors.toLocaleString():`${item.rate}%`;
+      const thirdLabel=type==="threads"?"Contributors":type==="live"?item.rateLabel:"Completion";
+      document.getElementById("analyticsDetailBody").innerHTML=`
+        <div class="kpi-grid analytics-detail-kpis">
+          <div class="stat-card"><p class="label">Views</p><p class="value">${item.views.toLocaleString()}</p><p class="kpi-delta">+8.4% vs recent average</p></div>
+          <div class="stat-card"><p class="label">${secondLabel}</p><p class="value">${secondValue}</p><p class="kpi-delta">+4.2% vs recent average</p></div>
+          <div class="stat-card"><p class="label">${thirdLabel}</p><p class="value">${thirdValue}</p><p class="kpi-delta">+2.1 pts vs recent average</p></div>
+          <div class="stat-card"><p class="label">Engagement</p><p class="value">${item.engagement}%</p><p class="kpi-delta">+1.6 pts vs recent average</p></div>
+        </div>
+        <div class="analytics-detail-grid">
+          <div class="chart-card"><h3>${type==="threads"?"Conversation Activity":"Performance Over Time"}</h3><p class="chart-sub">Activity across the first six reporting intervals</p>${detailTrend(item)}</div>
+          <div class="chart-card"><h3>${type==="threads"?"Conversation Health":"Engagement Breakdown"}</h3><p class="chart-sub">Quality and participation signals</p><div class="engagement-grid">
+            <div class="engagement-metric"><span>${type==="threads"?"Reactions":"Comments"}</span><b>${Math.round(item.views*item.engagement/140).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>Shares</span><b>${Math.round(item.views*item.engagement/600).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>${type==="threads"?"Follows":"Saves"}</span><b>${Math.round(item.views*item.engagement/450).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>Returning Users</span><b>62%</b></div>
+          </div></div>
+        </div>
+        <div class="analytics-detail-grid">
+          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
+          <div class="chart-card"><h3>Moderation Health</h3><div class="health-grid" style="grid-template-columns:repeat(2,1fr)"><div class="health-metric"><span>Flag Rate</span><b>${item.flag}%</b></div><div class="health-metric"><span>Status</span><b>${item.flag>1?"Reviewing":"Healthy"}</b></div><div class="health-metric"><span>Resolution SLA</span><b>96%</b></div><div class="health-metric"><span>Response Time</span><b>1.4h</b></div></div></div>
+        </div>`;
+      document.getElementById("analyticsDetailOverlay").classList.add("open");
+      document.querySelector("#analyticsDetailOverlay .modal-close").focus();
+    }
+    function closeAnalyticsDetail() {
+      document.getElementById("analyticsDetailOverlay").classList.remove("open");
+      if(analyticsDetailTrigger&&analyticsDetailTrigger.focus)analyticsDetailTrigger.focus();
+    }
+    document.getElementById("analyticsDetailOverlay").addEventListener("click",e=>{if(e.target===e.currentTarget)closeAnalyticsDetail()});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.getElementById("analyticsDetailOverlay").classList.contains("open"))closeAnalyticsDetail()});
+
     function switchAnalyticsTab(tab) {
       document.querySelectorAll('#analyticsTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.atab === tab));
       document.querySelectorAll('.analytics-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'analytics-' + tab));
       const status = document.getElementById('analyticsStatusFilter');
       const options = {
-        live: ['All statuses', 'Upcoming', 'Completed', 'Cancelled'],
-        uploads: ['All statuses', 'Published', 'Draft', 'Archived'],
-        threads: ['All statuses', 'Active', 'Dormant', 'Flagged']
+        live: ['Upcoming', 'Completed', 'Cancelled'],
+        uploads: ['Published', 'Draft', 'Archived'],
+        threads: ['Active', 'Dormant', 'Flagged']
       };
-      status.innerHTML = options[tab].map(label => `<option>${label}</option>`).join('');
+      status.innerHTML = `<option value="all">All statuses</option>${options[tab].map(label => `<option>${label}</option>`).join('')}`;
+      handleAnalyticsFilterChange();
     }
 
     const livePosts = [
@@ -5068,6 +5285,9 @@
     renderTopics();
     renderHotTopicsStats();
     renderHotTopics();
+    renderLivePerformanceTable();
+    renderPerformanceTable('uploads');
+    renderPerformanceTable('threads');
   </script>
 </body>
 
