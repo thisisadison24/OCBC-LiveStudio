@@ -47,22 +47,25 @@
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.disp{font-family:'Sora','Inter',sans-serif;letter-spacing:-.01em;}
-  .app{display:grid;grid-template-columns:224px 1fr;min-height:100vh;}
+  .app{display:flex;flex-direction:column;min-height:100vh;}
 
-  /* Sidebar */
-  .sidebar{
+  /* Top bar */
+  .topbar{
     background:#08090A;
     color:#EFEDE8;
-    padding:22px 14px;
+    padding:10px 20px;
     display:flex;
-    flex-direction:column;
-    gap:4px;
+    align-items:center;
+    gap:22px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    position:sticky;top:0;z-index:40;
+    overflow-x:auto;
   }
   .brand{
     display:flex;
     align-items:center;
     gap:10px;
-    padding:4px 10px 26px;
+    flex-shrink:0;
   }
   .brand-mark{
     width:30px;height:30px;border-radius:8px;
@@ -75,22 +78,22 @@
   .brand-text .name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#fff;}
   .brand-text .sub{font-size:11px;color:#A7A39A;letter-spacing:.02em;}
 
+  .topbar-nav{display:flex;align-items:center;gap:2px;}
+
   .nav-item{
-    display:flex;align-items:center;gap:10px;
-    padding:10px 12px;border-radius:8px;
+    display:flex;align-items:center;gap:8px;
+    padding:8px 13px;border-radius:8px;
     font-size:13.5px;font-weight:500;
-    color:#C9C6BE;cursor:pointer;
+    color:#C9C6BE;cursor:pointer;white-space:nowrap;flex-shrink:0;
     transition:background .12s ease,color .12s ease;
     user-select:none;
   }
   .nav-item:hover{background:rgba(255,255,255,0.06);color:#fff;}
   .nav-item.active{background:var(--red-600);color:#fff;}
   .nav-item svg{flex-shrink:0;opacity:.9;}
-  .nav-divider{height:1px;background:rgba(255,255,255,0.08);margin:12px 6px;}
-  .nav-label{font-size:11px;color:#7A776E;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px;}
 
   /* Main */
-  .main{padding:28px 34px 48px;max-width:1240px;}
+  .main{padding:28px 34px 48px;max-width:1240px;margin:0 auto;width:100%;}
   .page{display:none;}
   .page.active{display:block;}
 
@@ -125,6 +128,8 @@
   .stat-grid{
     display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px;
   }
+  .stat-grid.cols-5{grid-template-columns:repeat(5,minmax(0,1fr));}
+  .stat-grid.cols-6{grid-template-columns:repeat(6,minmax(0,1fr));}
   .stat-card{
     background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-lg);
     padding:16px 18px;position:relative;overflow:hidden;
@@ -226,6 +231,23 @@
   .badge.flagged{background:var(--danger-bg);color:var(--danger-600);}
   .badge.approved{background:var(--teal-bg);color:var(--teal-600);}
   .badge.rejected{background:rgba(143,139,130,0.16);color:var(--ink-500);}
+  .badge.draft{background:transparent;border:1px dashed var(--line-strong);color:var(--ink-500);}
+
+  .expiry-chip{font-size:12px;white-space:nowrap;}
+  .expiry-chip.none{color:var(--ink-300);}
+  .expiry-chip.scheduled{color:var(--ink-500);}
+  .expiry-chip.expiring{color:var(--amber-600);font-weight:600;}
+  .expiry-chip.expired{color:var(--danger-600);font-weight:600;}
+
+  .row-check-cell{width:32px;}
+  .row-check{accent-color:var(--red-600);cursor:pointer;}
+
+  .bulk-bar{
+    display:none;align-items:center;justify-content:space-between;gap:12px;
+    padding:10px 18px;background:var(--red-50);border-bottom:1px solid var(--line);
+  }
+  .bulk-bar-count{font-size:13px;font-weight:600;color:var(--ink-900);}
+  .bulk-bar-actions{display:flex;align-items:center;gap:8px;}
 
   /* Community submissions feed (Threads page) */
   .feed-list{display:flex;flex-direction:column;gap:10px;}
@@ -235,6 +257,9 @@
   }
   .feed-card:hover{border-color:var(--line-strong);background:var(--paper-100);}
   .feed-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
+  .feed-card-head-left{display:flex;align-items:flex-start;gap:10px;}
+  .feed-card-head-left .row-check{margin-top:8px;}
+  .select-all-row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-500);}
   .feed-author{display:flex;gap:10px;align-items:center;}
   .feed-avatar{
     width:34px;height:34px;border-radius:50%;background:var(--red-50);color:var(--red-700);
@@ -373,6 +398,23 @@
 
   .upload-tab-pane{display:none;}
   .upload-tab-pane.active{display:block;}
+
+  /* Live session scheduling (TikTok-style: single flow, time-first) */
+  .live-when-card{
+    border:1.5px solid var(--teal-600);border-radius:12px;padding:16px 18px 18px;
+    background:var(--teal-bg);margin-bottom:20px;
+  }
+  .live-when-label{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink-900);margin:0 0 14px;}
+  .live-when-label svg{color:var(--teal-600);flex-shrink:0;}
+  .live-when-card .field-row-3{gap:10px;}
+  .live-cover-box{
+    width:120px;height:120px;border-radius:14px;background:var(--paper-100);
+    border:1.5px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;
+    color:var(--ink-300);flex-shrink:0;
+  }
+  .live-audience-note{
+    display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-500);margin:8px 0 0;
+  }
 
   .thumb-row{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;}
   .thumb-box{
@@ -530,10 +572,79 @@
   .event-row-link{cursor:pointer;}
   .event-row-link:hover{background:var(--paper-100);}
 
+  /* Customer 360 */
+  .sync-flag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px;display:inline-block;white-space:nowrap;}
+  .sync-flag.yes{background:var(--teal-bg);color:var(--teal-600);}
+  .sync-flag.no{background:rgba(143,139,130,0.16);color:var(--ink-500);}
+
+  .c360-view{display:none;}
+  .c360-view.active{display:block;}
+
+  .dossier-back{
+    display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink-500);
+    cursor:pointer;margin-bottom:16px;user-select:none;
+  }
+  .dossier-back:hover{color:var(--ink-900);}
+  .dossier-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+  .dossier-identity{display:flex;align-items:center;gap:14px;}
+  .dossier-avatar{
+    width:48px;height:48px;border-radius:50%;background:var(--red-50);color:var(--red-700);
+    display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;
+    font-size:16px;flex-shrink:0;
+  }
+  .dossier-name{font-size:19px;font-weight:700;margin:0;letter-spacing:-.01em;}
+  .dossier-meta{font-size:12.5px;color:var(--ink-500);margin:3px 0 0;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .dossier-badges{display:flex;gap:8px;flex-wrap:wrap;}
+
+  .dossier-tab-pane{display:none;}
+  .dossier-tab-pane.active{display:block;}
+
+  .dossier-body{display:flex;align-items:flex-start;gap:24px;}
+  .dossier-rail{
+    width:210px;flex-shrink:0;display:flex;flex-direction:column;gap:2px;
+    position:sticky;top:76px;
+  }
+  .dossier-rail-item{
+    font-family:inherit;text-align:left;border:none;background:transparent;cursor:pointer;
+    padding:9px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--ink-500);
+    transition:background .12s ease,color .12s ease;
+  }
+  .dossier-rail-item:hover{background:var(--paper-0);color:var(--ink-900);}
+  .dossier-rail-item.active{background:var(--red-600);color:#fff;}
+  .dossier-content{flex:1;min-width:0;}
+
+  .ai-summary-card{
+    background:var(--paper-0);border:1.5px solid var(--teal-600);border-radius:var(--radius-lg);padding:20px 22px;
+  }
+  .ai-summary-head{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:13px;font-weight:700;color:var(--teal-600);text-transform:uppercase;letter-spacing:.04em;}
+  .ai-summary-narrative{font-size:13.5px;line-height:1.7;color:var(--ink-700);margin:0 0 16px;}
+  .ai-summary-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+  .ai-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;}
+  .ai-tag.green{background:var(--green-bg);color:var(--green-600);}
+  .ai-tag.teal{background:var(--teal-bg);color:var(--teal-600);}
+  .ai-tag.amber{background:var(--amber-bg);color:var(--amber-600);}
+  .ai-tag.red{background:var(--danger-bg);color:var(--danger-600);}
+  .ai-summary-highlights{margin:0;padding-left:18px;}
+  .ai-summary-highlights li{font-size:12.5px;color:var(--ink-700);margin-bottom:7px;line-height:1.55;}
+  .ai-summary-highlights li:last-child{margin-bottom:0;}
+
+  .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;}
+  .info-item .info-label{font-size:11px;color:var(--ink-500);margin:0 0 4px;text-transform:uppercase;letter-spacing:.04em;}
+  .info-item .info-value{font-size:13.5px;color:var(--ink-900);font-weight:500;margin:0;}
+
+  .memory-tag{
+    font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--teal-600);
+    background:var(--teal-bg);padding:1.5px 7px;border-radius:10px;margin-left:7px;
+  }
+
+  .star-rating{color:var(--amber-600);font-size:11px;letter-spacing:1px;white-space:nowrap;}
+
   @media (max-width:900px){
-    .app{grid-template-columns:1fr;}
-    .sidebar{display:none;}
-    .stat-grid,.kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .info-grid{grid-template-columns:1fr;}
+  }
+
+  @media (max-width:900px){
+    .stat-grid,.kpi-grid,.stat-grid.cols-5,.stat-grid.cols-6{grid-template-columns:repeat(2,1fr);}
     .chart-row,.detail-grid,.field-row,.field-row-3{grid-template-columns:1fr;}
     .analytics-filters{grid-template-columns:repeat(2,1fr);}
     .health-grid{grid-template-columns:repeat(2,1fr);}
@@ -542,14 +653,16 @@
     .performance-head{display:none;}
     .performance-row{grid-template-columns:90px 1fr;gap:9px;}
     .performance-row > span{grid-column:2;}
+    .dossier-body{flex-direction:column;}
+    .dossier-rail{width:100%;flex-direction:row;flex-wrap:wrap;position:static;}
   }
 </style>
 </head>
 <body>
 
 <div class="app">
-  <!-- Sidebar -->
-  <div class="sidebar">
+  <!-- Top bar -->
+  <div class="topbar">
     <div class="brand">
       <div class="brand-mark">OS</div>
       <div class="brand-text">
@@ -557,30 +670,35 @@
         <div class="sub">OCBC</div>
       </div>
     </div>
-    <div class="nav-label">Menu</div>
-    <div class="nav-item active" data-page="overview" onclick="goToPage('overview')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
-      Overview
-    </div>
-    <div class="nav-item" data-page="uploads" onclick="goToPage('uploads')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>
-      Uploads
-    </div>
-    <div class="nav-item" data-page="live" onclick="goToPage('live')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>
-      Live
-    </div>
-    <div class="nav-item" data-page="threads" onclick="goToPage('threads')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-      Threads
-    </div>
-    <div class="nav-item" data-page="hottopics" onclick="goToPage('hottopics')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3 2 5.2 2 7 0 1.5-1 2.5-2 2.5S10 10.5 10 9c-1.5 1.5-2.5 3.5-2.5 5.5a4.5 4.5 0 009 0C16.5 10 15 5.5 12 2z"/></svg>
-      Hot Topics
-    </div>
-    <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-5"/></svg>
-      Analytics
+    <div class="topbar-nav">
+      <div class="nav-item active" data-page="overview" onclick="goToPage('overview')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Overview
+      </div>
+      <div class="nav-item" data-page="uploads" onclick="goToPage('uploads')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>
+        Uploads
+      </div>
+      <div class="nav-item" data-page="live" onclick="goToPage('live')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>
+        Live
+      </div>
+      <div class="nav-item" data-page="threads" onclick="goToPage('threads')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        Threads
+      </div>
+      <div class="nav-item" data-page="hottopics" onclick="goToPage('hottopics')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3 2 5.2 2 7 0 1.5-1 2.5-2 2.5S10 10.5 10 9c-1.5 1.5-2.5 3.5-2.5 5.5a4.5 4.5 0 009 0C16.5 10 15 5.5 12 2z"/></svg>
+        Hot Topics
+      </div>
+      <div class="nav-item" data-page="customer360" onclick="goToPage('customer360')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Customer 360
+      </div>
+      <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-5"/></svg>
+        Analytics
+      </div>
     </div>
   </div>
 
@@ -699,15 +817,24 @@
           <h1>Uploads</h1>
           <p>Manage on-demand video content uploaded across OCBC channels.</p>
         </div>
-        <button class="btn btn-primary" onclick="openUploadModal('Upload')">
+        <button class="btn btn-primary" onclick="openUploadModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
           New Upload
         </button>
       </div>
 
-      <div class="stat-grid" id="uploadsStats"></div>
+      <div class="stat-grid cols-6" id="uploadsStats"></div>
 
       <div class="panel">
+        <div class="bulk-bar" id="uploadsBulkBar">
+          <span class="bulk-bar-count" id="uploadsBulkCount">0 selected</span>
+          <div class="bulk-bar-actions">
+            <button class="btn btn-sm" onclick="clearUploadSelection()">Clear</button>
+            <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectUploads()">Reject</button>
+            <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteUploads()">Delete</button>
+            <button class="btn btn-sm btn-primary" onclick="bulkApproveUploads()">Approve</button>
+          </div>
+        </div>
         <div class="panel-head">
           <h2>Uploads Log</h2>
           <div class="filter-row">
@@ -719,6 +846,7 @@
               </button>
               <div class="ui-select-menu">
                 <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderUploadsTable')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="ui-select-option" data-value="draft" onclick="chooseOption(this,'renderUploadsTable')">Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderUploadsTable')">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderUploadsTable')">Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderUploadsTable')">Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -731,7 +859,8 @@
         <table>
           <thead>
             <tr>
-              <td>Title</td><td>Owner</td><td>Section</td><td>Tags</td><td>Status</td><td>Description</td>
+              <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll" onchange="toggleSelectAllUploads(this)" /></td>
+              <td>Title</td><td>Owner</td><td>Section</td><td>Tags</td><td>Status</td><td>Expires</td><td>Description</td>
             </tr>
           </thead>
           <tbody id="uploadsTableBody"></tbody>
@@ -746,15 +875,24 @@
           <h1>Live</h1>
           <p>Manage and moderate live streaming sessions across OCBC channels.</p>
         </div>
-        <button class="btn btn-primary" onclick="openUploadModal('Live')">
+        <button class="btn btn-primary" onclick="openLiveModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
           New Live Session
         </button>
       </div>
 
-      <div class="stat-grid" id="liveStats"></div>
+      <div class="stat-grid cols-5" id="liveStats"></div>
 
       <div class="panel">
+        <div class="bulk-bar" id="liveBulkBar">
+          <span class="bulk-bar-count" id="liveBulkCount">0 selected</span>
+          <div class="bulk-bar-actions">
+            <button class="btn btn-sm" onclick="clearLiveSelection()">Clear</button>
+            <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectLive()">Reject</button>
+            <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteLive()">Delete</button>
+            <button class="btn btn-sm btn-primary" onclick="bulkApproveLive()">Approve</button>
+          </div>
+        </div>
         <div class="panel-head">
           <h2>Live Log</h2>
           <div class="filter-row">
@@ -766,6 +904,7 @@
               </button>
               <div class="ui-select-menu">
                 <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderLiveTable')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="ui-select-option" data-value="draft" onclick="chooseOption(this,'renderLiveTable')">Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderLiveTable')">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderLiveTable')">Live Now<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
                 <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderLiveTable')">Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -777,6 +916,7 @@
         <table>
           <thead>
             <tr>
+              <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll" onchange="toggleSelectAllLive(this)" /></td>
               <td>Title</td><td>Owner</td><td>Section</td><td>Tags</td><td>Status</td><td>Description</td>
             </tr>
           </thead>
@@ -822,6 +962,15 @@
       <!-- VERIFICATION QUEUE -->
       <div class="thread-tab-pane active" id="thread-queue">
         <div class="panel">
+          <div class="bulk-bar" id="submissionsBulkBar">
+            <span class="bulk-bar-count" id="submissionsBulkCount">0 selected</span>
+            <div class="bulk-bar-actions">
+              <button class="btn btn-sm" onclick="clearSubmissionSelection()">Clear</button>
+              <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectSubmissions()">Reject</button>
+              <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteSubmissions()">Delete</button>
+              <button class="btn btn-sm btn-primary" onclick="bulkApproveSubmissions()">Approve</button>
+            </div>
+          </div>
           <div class="panel-head">
             <h2>Awaiting Verification</h2>
             <div class="filter-row">
@@ -865,6 +1014,10 @@
               </div>
             </div>
           </div>
+          <div class="select-all-row" style="padding:12px 18px 0;">
+            <input type="checkbox" class="row-check" id="submissionsSelectAll" onchange="toggleSelectAllSubmissions(this)" />
+            <label for="submissionsSelectAll">Select all</label>
+          </div>
           <div class="feed-list" id="submissionsFeed" style="padding:14px 18px 18px;"></div>
         </div>
       </div>
@@ -872,6 +1025,15 @@
       <!-- LIVE FEED -->
       <div class="thread-tab-pane" id="thread-live">
         <div class="panel">
+          <div class="bulk-bar" id="liveFeedBulkBar">
+            <span class="bulk-bar-count" id="liveFeedBulkCount">0 selected</span>
+            <div class="bulk-bar-actions">
+              <button class="btn btn-sm" onclick="clearLiveFeedSelection()">Clear</button>
+              <button class="btn btn-sm btn-danger-outline" onclick="bulkRemoveLiveFeedPosts()">Remove</button>
+              <button class="btn btn-sm" onclick="bulkUnfeatureLiveFeedPosts()">Unfeature</button>
+              <button class="btn btn-sm btn-primary" onclick="bulkFeatureLiveFeedPosts()">Feature</button>
+            </div>
+          </div>
           <div class="panel-head">
             <h2>Published to App Feed</h2>
             <div class="filter-row">
@@ -899,6 +1061,10 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="select-all-row" style="padding:12px 18px 0;">
+            <input type="checkbox" class="row-check" id="liveFeedSelectAll" onchange="toggleSelectAllLiveFeed(this)" />
+            <label for="liveFeedSelectAll">Select all</label>
           </div>
           <div class="feed-list" id="liveFeedList" style="padding:14px 18px 18px;"></div>
         </div>
@@ -946,6 +1112,202 @@
           </div>
         </div>
         <div class="hot-topic-grid" id="hotTopicsGrid" style="padding:14px 18px 18px;"></div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER 360 PAGE -->
+    <div class="page" id="page-customer360">
+
+      <!-- ROSTER VIEW -->
+      <div class="c360-view active" id="c360-roster">
+        <div class="page-header">
+          <div>
+            <h1>Customer 360</h1>
+            <p>Recently cached CIP/Cruise roster — select a CIF to open its full customer dossier.</p>
+          </div>
+        </div>
+
+        <div class="stat-grid" id="c360RosterStats"></div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Cached Roster</h2>
+            <div class="filter-row">
+              <input class="search" type="text" id="c360Search" placeholder="Search CIF or name..." oninput="renderC360Roster()" />
+              <div class="ui-select filter" id="c360StatusFilter" data-value="all">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">All Statuses</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderC360Roster')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderC360Roster')">Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="dormant" onclick="chooseOption(this,'renderC360Roster')">Dormant<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="restricted" onclick="chooseOption(this,'renderC360Roster')">Restricted<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                </div>
+              </div>
+              <div class="ui-select filter" id="c360CipFilter" data-value="all">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">CIP: All</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderC360Roster')">CIP: All<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="yes" onclick="chooseOption(this,'renderC360Roster')">CIP: Synced<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="no" onclick="chooseOption(this,'renderC360Roster')">CIP: Missing<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                </div>
+              </div>
+              <div class="ui-select filter" id="c360CruiseFilter" data-value="all">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">Cruise: All</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderC360Roster')">Cruise: All<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="yes" onclick="chooseOption(this,'renderC360Roster')">Cruise: Synced<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="ui-select-option" data-value="no" onclick="chooseOption(this,'renderC360Roster')">Cruise: Missing<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td>CIF</td><td>Status</td><td>CIP</td><td>Cruise</td><td>Last Refreshed</td>
+              </tr>
+            </thead>
+            <tbody id="c360RosterBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DOSSIER VIEW -->
+      <div class="c360-view" id="c360-dossier">
+        <div class="dossier-back" onclick="closeCustomerDossier()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+          Back to Roster
+        </div>
+
+        <div class="dossier-header">
+          <div class="dossier-identity">
+            <div class="dossier-avatar" id="dossierAvatar">WT</div>
+            <div>
+              <p class="dossier-name" id="dossierName">Customer Name</p>
+              <p class="dossier-meta" id="dossierMeta">CIF · Segment · RM</p>
+            </div>
+          </div>
+          <div class="dossier-badges" id="dossierBadges"></div>
+        </div>
+
+        <div class="dossier-body">
+          <div class="dossier-rail" id="dossierTabbar">
+            <button class="dossier-rail-item active" data-dtab="summary" onclick="switchDossierTab('summary')">AI Summary</button>
+            <button class="dossier-rail-item" data-dtab="identity" onclick="switchDossierTab('identity')">Identity &amp; Preferences</button>
+            <button class="dossier-rail-item" data-dtab="sessions" onclick="switchDossierTab('sessions')">Sessions &amp; Logins</button>
+            <button class="dossier-rail-item" data-dtab="conversations" onclick="switchDossierTab('conversations')">Conversations &amp; Memory</button>
+            <button class="dossier-rail-item" data-dtab="engagement" onclick="switchDossierTab('engagement')">Content Reactions &amp; Engagement</button>
+            <button class="dossier-rail-item" data-dtab="suitability" onclick="switchDossierTab('suitability')">Product Suitability</button>
+            <button class="dossier-rail-item" data-dtab="notifications" onclick="switchDossierTab('notifications')">Notifications &amp; Feedback</button>
+            <button class="dossier-rail-item" data-dtab="livestudio" onclick="switchDossierTab('livestudio')">Live Studio</button>
+          </div>
+
+          <div class="dossier-content">
+            <!-- AI SUMMARY -->
+            <div class="dossier-tab-pane active" id="dossier-summary">
+              <div class="ai-summary-card">
+                <p class="ai-summary-head">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2z"/></svg>
+                  AI Summary
+                </p>
+                <p class="ai-summary-narrative" id="dossierNarrative"></p>
+                <div class="ai-summary-tags" id="dossierTags"></div>
+                <p class="subsection-label">Key Highlights</p>
+                <ul class="ai-summary-highlights" id="dossierHighlights"></ul>
+              </div>
+            </div>
+
+            <!-- IDENTITY & PREFERENCES -->
+            <div class="dossier-tab-pane" id="dossier-identity">
+              <div class="chart-card">
+                <h3>Identity &amp; Preferences</h3>
+                <p class="chart-sub">Core profile details and communication preferences on file</p>
+                <div class="info-grid" id="dossierIdentityGrid"></div>
+              </div>
+            </div>
+
+            <!-- SESSIONS & LOGINS -->
+            <div class="dossier-tab-pane" id="dossier-sessions">
+              <div class="chart-card">
+                <h3>Sessions &amp; Logins</h3>
+                <p class="chart-sub">Most recent authenticated sessions across app and web</p>
+                <table class="data-table">
+                  <thead><tr><th style="text-align:left;">Device &amp; Channel</th><th style="text-align:left;">Location</th><th>Time</th><th>Status</th></tr></thead>
+                  <tbody id="dossierSessionsBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- CONVERSATIONS & MEMORY -->
+            <div class="dossier-tab-pane" id="dossier-conversations">
+              <div class="chart-card">
+                <h3>Conversations &amp; Memory</h3>
+                <p class="chart-sub">Recent assistant interactions and durable memory facts learned about this customer</p>
+                <div id="dossierConversations"></div>
+              </div>
+            </div>
+
+            <!-- CONTENT REACTIONS & ENGAGEMENT -->
+            <div class="dossier-tab-pane" id="dossier-engagement">
+              <div class="chart-card">
+                <h3>Content Reactions &amp; Engagement</h3>
+                <p class="chart-sub">Uploads, live sessions and thread activity this customer has engaged with</p>
+                <table class="data-table">
+                  <thead><tr><th style="text-align:left;">Content</th><th style="text-align:left;">Type</th><th style="text-align:left;">Reaction</th><th>Date</th></tr></thead>
+                  <tbody id="dossierEngagementBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- PRODUCT SUITABILITY -->
+            <div class="dossier-tab-pane" id="dossier-suitability">
+              <div class="chart-card">
+                <h3>Product Suitability</h3>
+                <p class="chart-sub">Suitability assessment status for products held or under consideration</p>
+                <table class="data-table">
+                  <thead><tr><th style="text-align:left;">Product</th><th style="text-align:left;">Risk Profile</th><th style="text-align:left;">Last Assessed</th><th>Status</th></tr></thead>
+                  <tbody id="dossierSuitabilityBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- NOTIFICATIONS & FEEDBACK -->
+            <div class="dossier-tab-pane" id="dossier-notifications">
+              <div class="chart-row">
+                <div class="chart-card">
+                  <h3>Notifications Sent</h3>
+                  <p class="chart-sub">Recent outbound notifications to this customer</p>
+                  <div id="dossierNotifications"></div>
+                </div>
+                <div class="chart-card">
+                  <h3>Feedback Received</h3>
+                  <p class="chart-sub">Ratings and comments left by this customer</p>
+                  <div id="dossierFeedback"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LIVE STUDIO -->
+            <div class="dossier-tab-pane" id="dossier-livestudio">
+              <div class="stat-grid" id="dossierLiveStudioStats"></div>
+              <div class="chart-card">
+                <h3>Recent Live Studio Activity</h3>
+                <p class="chart-sub">This customer's activity across Live, Uploads and Threads</p>
+                <div id="dossierLiveStudioActivity"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1158,7 +1520,7 @@
 
       <div class="field-group">
         <label class="field-label">Title</label>
-        <input type="text" placeholder="e.g. Weekly Market Wrap" />
+        <input type="text" id="uploadTitleInput" placeholder="e.g. Weekly Market Wrap" />
       </div>
 
       <div class="field-group">
@@ -1169,7 +1531,7 @@
       <div class="field-row field-group">
         <div>
           <label class="field-label">Owner</label>
-          <div class="ui-select" data-value="J. Tan">
+          <div class="ui-select" id="uploadOwnerSelect" data-value="J. Tan">
             <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
               <span class="ui-select-label">J. Tan</span>
               <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
@@ -1185,7 +1547,7 @@
         </div>
         <div>
           <label class="field-label">Section</label>
-          <div class="ui-select" data-value="Markets">
+          <div class="ui-select" id="uploadSectionSelect" data-value="Markets">
             <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
               <span class="ui-select-label">Markets</span>
               <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
@@ -1329,12 +1691,209 @@
           <span class="slider"></span>
         </label>
       </div>
+
+      <div class="section-divider"></div>
+
+      <div class="field-group">
+        <label class="field-label">Unpublish After (Optional)</label>
+        <input type="date" id="uploadExpiryInput" />
+        <p class="rc-sub" style="margin-top:6px;">Content is automatically unpublished after this date. Leave blank to keep it live indefinitely.</p>
+      </div>
       </div>
     </div>
     <div class="modal-foot">
       <button class="btn" onclick="closeModal('uploadOverlay')">Cancel</button>
-      <button class="btn">Save as draft</button>
-      <button class="btn btn-primary" onclick="closeModal('uploadOverlay')">Submit for review</button>
+      <button class="btn" onclick="saveUploadDraft()">Save as Draft</button>
+      <button class="btn btn-primary" onclick="submitUploadForReview()">Submit for Review</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE LIVE SESSION MODAL (TikTok-style: cover, title, then time up front) -->
+<div class="overlay" id="liveScheduleOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Schedule Live Session</h2>
+      <button class="modal-close" onclick="closeModal('liveScheduleOverlay')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="thumb-row">
+        <div class="live-cover-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>
+        </div>
+        <div class="thumb-actions">
+          <p>This cover shows in the app before you go live — pick something that grabs attention.</p>
+          <div class="thumb-btns">
+            <button class="btn btn-sm">Upload Cover</button>
+            <button class="btn btn-sm btn-ghost">Auto-generate</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Session Title</label>
+        <input type="text" id="liveTitleInput" placeholder="e.g. Fed Rate Reaction Live" />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Description</label>
+        <textarea placeholder="Tell viewers what this session covers..."></textarea>
+      </div>
+
+      <div class="live-when-card">
+        <p class="live-when-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          When does this go live?
+        </p>
+        <div class="field-row-3">
+          <div>
+            <label class="field-label">Date</label>
+            <input type="date" />
+          </div>
+          <div>
+            <label class="field-label">Time</label>
+            <input type="time" />
+          </div>
+          <div>
+            <label class="field-label">Time Zone</label>
+            <div class="ui-select" data-value="SGT (UTC+8)">
+              <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                <span class="ui-select-label">SGT (UTC+8)</span>
+                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="ui-select-menu">
+                <div class="ui-select-option selected" data-value="SGT (UTC+8)" onclick="chooseOption(this)">SGT (UTC+8)<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="ui-select-option" data-value="HKT (UTC+8)" onclick="chooseOption(this)">HKT (UTC+8)<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="ui-select-option" data-value="GMT (UTC+0)" onclick="chooseOption(this)">GMT (UTC+0)<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="ui-select-option" data-value="EST (UTC-5)" onclick="chooseOption(this)">EST (UTC-5)<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="live-audience-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          Viewers can set a reminder as soon as this is scheduled.
+        </p>
+      </div>
+
+      <div class="field-row field-group">
+        <div>
+          <label class="field-label">Host</label>
+          <div class="ui-select" id="liveHostSelect" data-value="J. Tan">
+            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+              <span class="ui-select-label">J. Tan</span>
+              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="ui-select-menu">
+              <div class="ui-select-option selected" data-value="J. Tan" onclick="chooseOption(this)">J. Tan<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="M. Lee" onclick="chooseOption(this)">M. Lee<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="A. Kumar" onclick="chooseOption(this)">A. Kumar<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="S. Wong" onclick="chooseOption(this)">S. Wong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="R. Ong" onclick="chooseOption(this)">R. Ong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="field-label">Section</label>
+          <div class="ui-select" id="liveSectionSelect" data-value="Markets">
+            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+              <span class="ui-select-label">Markets</span>
+              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="ui-select-menu">
+              <div class="ui-select-option selected" data-value="Markets" onclick="chooseOption(this)">Markets<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="Wealth" onclick="chooseOption(this)">Wealth<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="Personal banking" onclick="chooseOption(this)">Personal banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="SME Banking" onclick="chooseOption(this)">SME Banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <div class="ui-select-option" data-value="Corporate banking" onclick="chooseOption(this)">Corporate banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Invite Co-Hosts or Panelists</label>
+        <input type="text" placeholder="e.g. P. Sharma, Treasury Desk" />
+      </div>
+
+      <div class="section-divider"></div>
+
+      <p class="subsection-label">Who Can Watch</p>
+      <div class="vis-options" id="liveVisOptions">
+        <div class="radio-card checked" data-vis="public" onclick="selectVisOption(this)">
+          <input type="radio" name="liveVis" checked />
+          <div>
+            <p class="rc-title">Public</p>
+            <p class="rc-sub">Anyone can search, get notified, and watch.</p>
+          </div>
+        </div>
+
+        <div class="radio-card" data-vis="filter" onclick="selectVisOption(this)">
+          <input type="radio" name="liveVis" />
+          <div style="width:100%;">
+            <p class="rc-title">Restricted</p>
+            <p class="rc-sub">Only visible to clients matching selected tags or CIF.</p>
+            <div class="vis-filter-fields" style="display:none;">
+              <label class="field-label">Client Tags</label>
+              <input type="text" placeholder="e.g. Premier, Wealth" style="margin-bottom:10px;" />
+              <label class="field-label">CIF Number</label>
+              <input type="text" placeholder="Optional — restrict to specific CIF" />
+              <p class="rc-sub" style="margin-top:8px;">Add at least one filter so the right audience is included.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="radio-card" data-vis="private" onclick="selectVisOption(this)">
+          <input type="radio" name="liveVis" />
+          <div>
+            <p class="rc-title">Private</p>
+            <p class="rc-sub">Only internal OCBC members can search and view.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <p class="subsection-label">During the Live</p>
+      <div class="toggle-row">
+        <div>
+          <p class="tr-title">Notify Followers When Live Starts</p>
+          <p class="tr-sub">Push a notification to followers of this section the moment the session goes live.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <p class="tr-title">Enable Live Chat</p>
+          <p class="tr-sub">Viewers can send messages and questions while the session is live.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <p class="tr-title">Enable Q&amp;A Queue</p>
+          <p class="tr-sub">Collect and surface viewer questions for the host to answer on air.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('liveScheduleOverlay')">Cancel</button>
+      <button class="btn" onclick="saveLiveDraft()">Save as Draft</button>
+      <button class="btn btn-primary" onclick="closeModal('liveScheduleOverlay')">Schedule Live Session</button>
     </div>
   </div>
 </div>
@@ -1364,15 +1923,16 @@
         </div>
         <div>
           <div class="side-block" id="contentCommentsBlock">
-            <h3>Review Comments</h3>
-            <div class="comment">
+            <h3 id="contentCommentsHeading">Review Comments</h3>
+            <p id="contentReviewerAs" style="display:none;margin:-4px 0 10px;font-size:12px;color:var(--ink-500);"></p>
+            <div class="comment" id="contentFlagComment">
               <div class="avatar">RF</div>
               <div>
                 <p class="c-name">R. Fernandez <span class="c-time">· 1h ago</span></p>
                 <p class="c-text">Phrasing implies a buy recommendation — needs disclaimer or rewording before this can be approved.</p>
               </div>
             </div>
-            <input type="text" class="search" placeholder="Add a comment..." style="width:100%;" />
+            <input type="text" class="search" id="contentReviewNoteInput" placeholder="Add a comment..." style="width:100%;" />
           </div>
           <div class="side-block">
             <h3>Audit Trail</h3>
@@ -1382,8 +1942,8 @@
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn" onclick="closeModal('contentOverlay')">Edit</button>
-      <button class="btn btn-primary" id="contentPrimaryBtn" onclick="closeModal('contentOverlay')">Mark complete</button>
+      <button class="btn" id="contentSecondaryBtn" onclick="closeModal('contentOverlay')">Edit</button>
+      <button class="btn btn-primary" id="contentPrimaryBtn" onclick="closeModal('contentOverlay')">Mark Complete</button>
     </div>
   </div>
 </div>
@@ -1457,34 +2017,49 @@
 </div>
 
 <script>
+  // Returns an ISO date string `n` days from today — used so demo expiry dates
+  // stay meaningful (expired / expiring soon / scheduled) no matter when this is opened.
+  function daysFromNow(n){
+    const d = new Date();
+    d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+
+  let uploadIdCounter = 100;
+
   // ---- Content data: split into the two categories, Upload and Live ----
   const uploadsData = [
-    {title:"Weekly Market Wrap", owner:"J. Tan", section:"Markets", tags:["Equities","SG"], status:"approved", description:"A round-up of the week's key equity market moves across the region, with commentary on rate expectations."},
-    {title:"Q2 Earnings Roundup", owner:"A. Kumar", section:"Markets", tags:["Earnings"], status:"active", description:"Summary of Q2 earnings across major regional banks and how results compare to consensus estimates."},
-    {title:"Wealth Planning 101", owner:"S. Wong", section:"Wealth", tags:["Retirement"], status:"pending", description:"Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups."},
-    {title:"SME Loan Explainer", owner:"R. Ong", section:"SME banking", tags:["Loans"], status:"approved", description:"Walkthrough of the SME working capital loan application process and eligibility criteria."},
-    {title:"Digital Assets Briefing", owner:"L. Ibrahim", section:"Markets", tags:["Digital Assets"], status:"flagged", description:"Overview of digital asset market trends and OCBC's current stance on custody services.",
+    {id:1, title:"Weekly Market Wrap", owner:"J. Tan", section:"Markets", tags:["Equities","SG"], status:"approved", description:"A round-up of the week's key equity market moves across the region, with commentary on rate expectations.", expiresOn: daysFromNow(-5)},
+    {id:2, title:"Q2 Earnings Roundup", owner:"A. Kumar", section:"Markets", tags:["Earnings"], status:"active", description:"Summary of Q2 earnings across major regional banks and how results compare to consensus estimates.", expiresOn: daysFromNow(3)},
+    {id:3, title:"Wealth Planning 101", owner:"S. Wong", section:"Wealth", tags:["Retirement"], status:"pending", description:"Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups."},
+    {id:4, title:"SME Loan Explainer", owner:"R. Ong", section:"SME banking", tags:["Loans"], status:"approved", description:"Walkthrough of the SME working capital loan application process and eligibility criteria.", expiresOn: daysFromNow(45)},
+    {id:5, title:"Digital Assets Briefing", owner:"L. Ibrahim", section:"Markets", tags:["Digital Assets"], status:"flagged", description:"Overview of digital asset market trends and OCBC's current stance on custody services.",
       transcript:'"...given the momentum, clients should <mark class="flagmark">allocate a portion of their portfolio into crypto now</mark> before the next leg up..."'},
-    {title:"Premier Client Welcome", owner:"S. Wong", section:"Wealth", tags:["Onboarding"], status:"pending", description:"Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support."},
-    {title:"Old Promo Reel", owner:"M. Lee", section:"Personal banking", tags:["Promo"], status:"rejected", description:"Legacy promotional video referencing a since-discontinued account pricing tier."}
+    {id:6, title:"Premier Client Welcome", owner:"S. Wong", section:"Wealth", tags:["Onboarding"], status:"pending", description:"Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support."},
+    {id:7, title:"Old Promo Reel", owner:"M. Lee", section:"Personal banking", tags:["Promo"], status:"rejected", description:"Legacy promotional video referencing a since-discontinued account pricing tier."},
+    {id:8, title:"Untitled Upload", owner:"A. Kumar", section:"Markets", tags:[], status:"draft", description:"Draft — not yet submitted for review."}
   ];
 
+  let liveIdCounter = 100;
+
   const liveData = [
-    {title:"Fed Rate Reaction Live", owner:"M. Lee", section:"Markets", tags:["Macro","FX"], status:"flagged", description:"Live reaction segment following the Fed's rate decision, covering FX and rates market impact.",
+    {id:1, title:"Fed Rate Reaction Live", owner:"M. Lee", section:"Markets", tags:["Macro","FX"], status:"flagged", description:"Live reaction segment following the Fed's rate decision, covering FX and rates market impact.",
       transcript:'"...this is a great time to <mark class="flagmark">buy into tech names before the next rally</mark>, especially with rates likely to ease..."'},
-    {title:"Interest Rate Outlook Live", owner:"P. Sharma", section:"Markets", tags:["Rates"], status:"active", description:"Live discussion on the interest rate outlook for the next two quarters with the treasury desk."},
-    {title:"Morning Market Open", owner:"P. Sharma", section:"Markets", tags:["Equities"], status:"pending", description:"Daily market-open segment awaiting compliance sign-off before this morning's broadcast."},
-    {title:"Treasury Desk AMA", owner:"R. Ong", section:"Wealth", tags:["Treasury","Q&A"], status:"approved", description:"Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast."}
+    {id:2, title:"Interest Rate Outlook Live", owner:"P. Sharma", section:"Markets", tags:["Rates"], status:"active", description:"Live discussion on the interest rate outlook for the next two quarters with the treasury desk."},
+    {id:3, title:"Morning Market Open", owner:"P. Sharma", section:"Markets", tags:["Equities"], status:"pending", description:"Daily market-open segment awaiting compliance sign-off before this morning's broadcast."},
+    {id:4, title:"Treasury Desk AMA", owner:"R. Ong", section:"Wealth", tags:["Treasury","Q&A"], status:"approved", description:"Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast."},
+    {id:5, title:"Untitled Live Session", owner:"S. Wong", section:"Wealth", tags:[], status:"draft", description:"Draft — not yet scheduled."}
   ];
 
   const typeIcon = {
     Upload:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>',
     Live:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>'
   };
-  const statusLabel = {pending:"Pending Review", active:"Active", flagged:"Flagged", approved:"Approved", rejected:"Rejected"};
+  const statusLabel = {draft:"Draft", pending:"Pending Review", active:"Active", flagged:"Flagged", approved:"Approved", rejected:"Rejected"};
 
   function computeStats(arr){
     return {
+      draft: arr.filter(x => x.status === 'draft').length,
       pending: arr.filter(x => x.status === 'pending').length,
       active: arr.filter(x => x.status === 'active').length,
       approved: arr.filter(x => x.status === 'approved').length,
@@ -1493,16 +2068,42 @@
     };
   }
 
-  function renderRow(item, icon, kind){
+  // Content expiry: classifies an item's expiresOn date into expired / expiring
+  // soon (within 7 days) / scheduled, so both the table chip and stats can share
+  // one source of truth for "urgency".
+  function expiryInfo(item){
+    if(!item.expiresOn) return {label:'—', cls:'none'};
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const exp = new Date(item.expiresOn + 'T00:00:00');
+    const diffDays = Math.round((exp - today) / 86400000);
+    const formatted = exp.toLocaleDateString('en-SG', {day:'numeric', month:'short'});
+    if(diffDays < 0) return {label:`Expired ${formatted}`, cls:'expired', diffDays};
+    if(diffDays <= 7) return {label:`Expires in ${diffDays}d`, cls:'expiring', diffDays};
+    return {label:`Expires ${formatted}`, cls:'scheduled', diffDays};
+  }
+
+  const selectedUploadIds = new Set();
+  const selectedLiveIds = new Set();
+
+  function renderRow(item, icon, kind, opts){
+    opts = opts || {};
     const tr = document.createElement('tr');
     tr.classList.add('clickable');
     tr.onclick = () => openContentModal(item, kind);
+    const checkboxCell = opts.selectable
+      ? `<td class="row-check-cell" onclick="event.stopPropagation()"><input type="checkbox" class="row-check" ${opts.selectedSet.has(item.id) ? 'checked' : ''} onchange="${opts.toggleFn}(${item.id}, this.checked)" /></td>`
+      : '';
+    const expiryCell = opts.expiry
+      ? (() => { const info = expiryInfo(item); return `<td><span class="expiry-chip ${info.cls}">${info.label}</span></td>`; })()
+      : '';
     tr.innerHTML = `
+      ${checkboxCell}
       <td><div class="title-cell"><div class="type-icon">${icon}</div>${item.title}</div></td>
       <td>${item.owner}</td>
       <td>${item.section}</td>
       <td>${item.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</td>
       <td><span class="badge ${item.status}">${statusLabel[item.status]}</span></td>
+      ${expiryCell}
       <td class="desc-cell" title="${item.description}">${item.description}</td>
     `;
     return tr;
@@ -1511,8 +2112,13 @@
   // Opens the content detail modal for ANY row, regardless of status.
   // Flagged items show their transcript + compliance comments; everything
   // else shows a description and a status-appropriate audit trail.
+  // Team attributed to approvals/rejections made through the Content Detail modal.
+  const REVIEWER_TEAM = 'OCBC Group Brands & Communications';
+
   function openContentModal(item, kind){
     const isFlagged = item.status === 'flagged';
+    const isPending = item.status === 'pending';
+    const isDraft = item.status === 'draft';
 
     document.getElementById('contentTitle').textContent = item.title;
     document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${kind === 'Live' ? 'Live session' : 'Upload'}`;
@@ -1527,22 +2133,54 @@
       transcriptBox.textContent = item.description;
     }
 
-    document.getElementById('contentCommentsBlock').style.display = isFlagged ? 'block' : 'none';
+    document.getElementById('contentCommentsBlock').style.display = (isFlagged || isPending) ? 'block' : 'none';
+    document.getElementById('contentCommentsHeading').textContent = isPending ? 'Reviewer Notes' : 'Review Comments';
+    document.getElementById('contentFlagComment').style.display = isFlagged ? 'flex' : 'none';
+    const reviewerAs = document.getElementById('contentReviewerAs');
+    reviewerAs.style.display = isPending ? 'block' : 'none';
+    reviewerAs.textContent = isPending ? `Reviewing as ${REVIEWER_TEAM}` : '';
+    const noteInput = document.getElementById('contentReviewNoteInput');
+    noteInput.value = '';
+    noteInput.placeholder = isPending ? 'Add a note for the approval record...' : 'Add a comment...';
 
-    const verb = kind === 'Live' ? 'scheduled this live session' : 'uploaded this content';
+    const verb = isDraft
+      ? (kind === 'Live' ? 'started scheduling this live session' : 'started this upload')
+      : (kind === 'Live' ? 'scheduled this live session' : 'uploaded this content');
     const audit = [`<span class="a-name">${item.owner}</span> ${verb}`];
-    if(item.status === 'pending') audit.push('Awaiting review');
+    if(isDraft) audit.push('Saved as draft — not yet submitted for review');
+    if(isPending) audit.push(`Awaiting approval from <span class="a-name">${REVIEWER_TEAM}</span>`);
     if(item.status === 'flagged'){
       audit.push('Auto-flag triggered on transcript scan');
       audit.push('Assigned to <span class="a-name">Compliance</span>');
       audit.push('<span class="a-name">R. Fernandez</span> left a comment');
     }
-    if(item.status === 'approved') audit.push('Reviewed and approved');
+    if(item.status === 'approved') audit.push(item.reviewedBy ? `Approved by <span class="a-name">${item.reviewedBy}</span>` : 'Reviewed and approved');
     if(item.status === 'active') audit.push(kind === 'Live' ? 'Currently live' : 'Published and available on demand');
-    if(item.status === 'rejected') audit.push('Rejected during review');
+    if(item.status === 'rejected') audit.push(item.reviewedBy ? `Rejected by <span class="a-name">${item.reviewedBy}</span>` : 'Rejected during review');
+    if(item.reviewNote) audit.push(`Reviewer note: "${item.reviewNote}"`);
+    if(item.expiresOn){
+      const info = expiryInfo(item);
+      audit.push(info.cls === 'expired'
+        ? `Unpublished automatically on ${info.label.replace('Expired ', '')} (content expiry)`
+        : `Scheduled to unpublish on ${new Date(item.expiresOn + 'T00:00:00').toLocaleDateString('en-SG', {day:'numeric', month:'short', year:'numeric'})}`);
+    }
     document.getElementById('contentAuditTrail').innerHTML = audit.map(a => `<div class="audit-item"><span>${a}</span></div>`).join('');
 
-    document.getElementById('contentPrimaryBtn').textContent = isFlagged ? 'Mark complete' : 'Close';
+    const secondaryBtn = document.getElementById('contentSecondaryBtn');
+    const primaryBtn = document.getElementById('contentPrimaryBtn');
+    secondaryBtn.classList.remove('btn-danger-outline');
+    if(isPending){
+      secondaryBtn.textContent = 'Reject';
+      secondaryBtn.classList.add('btn-danger-outline');
+      secondaryBtn.onclick = () => rejectContentItem(item, kind);
+      primaryBtn.textContent = 'Approve';
+      primaryBtn.onclick = () => approveContentItem(item, kind);
+    } else {
+      secondaryBtn.textContent = 'Edit';
+      secondaryBtn.onclick = () => closeModal('contentOverlay');
+      primaryBtn.textContent = isFlagged ? 'Mark Complete' : (isDraft ? 'Continue Editing' : 'Close');
+      primaryBtn.onclick = () => closeModal('contentOverlay');
+    }
 
     document.getElementById('contentOverlay').classList.add('open');
   }
@@ -1561,14 +2199,42 @@
   }
 
   // ---- Uploads page ----
+  // Status order used to keep filter dropdowns in a sensible, consistent sequence.
+  const STATUS_ORDER = ['draft', 'pending', 'active', 'approved', 'flagged', 'rejected'];
+
+  // Rebuilds a status filter's option list to only the statuses actually present
+  // in `data`, so the dropdown never offers a status with zero matching entries.
+  function syncStatusFilterOptions(filterId, data, callbackName, labelOverrides){
+    labelOverrides = labelOverrides || {};
+    const wrap = document.getElementById(filterId);
+    const menu = wrap.querySelector('.ui-select-menu');
+    const present = STATUS_ORDER.filter(s => data.some(item => item.status === s));
+    const values = ['all', ...present];
+    if(!values.includes(wrap.dataset.value)) wrap.dataset.value = 'all';
+    const activeValue = wrap.dataset.value;
+
+    menu.innerHTML = values.map(val => {
+      const label = val === 'all' ? 'All Statuses' : (labelOverrides[val] || statusLabel[val]);
+      const selectedClass = val === activeValue ? ' selected' : '';
+      return `<div class="ui-select-option${selectedClass}" data-value="${val}" onclick="chooseOption(this,'${callbackName}')">${label}<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>`;
+    }).join('');
+
+    const label = activeValue === 'all' ? 'All Statuses' : (labelOverrides[activeValue] || statusLabel[activeValue]);
+    wrap.querySelector('.ui-select-label').textContent = label;
+  }
+
   function renderUploadsStats(){
     const s = computeStats(uploadsData);
+    const expiringSoon = uploadsData.filter(x => expiryInfo(x).cls === 'expiring').length;
     document.getElementById('uploadsStats').innerHTML = `
+      <div class="stat-card accent-gray"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
       <div class="stat-card accent-green"><p class="label"><span class="dot green"></span>Published</p><p class="value">${s.active + s.approved}</p></div>
       <div class="stat-card flagged"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
+      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
       <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
     `;
+    syncStatusFilterOptions('uploadsStatusFilter', uploadsData, 'renderUploadsTable');
   }
   function renderUploadsTable(){
     const filter = document.getElementById('uploadsStatusFilter').dataset.value;
@@ -1576,26 +2242,33 @@
     const body = document.getElementById('uploadsTableBody');
     body.innerHTML = '';
     let visibleCount = 0;
+    const visibleIds = new Set();
     uploadsData.forEach(item => {
       if(filter !== 'all' && item.status !== filter) return;
       if(query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
       visibleCount++;
-      body.appendChild(renderRow(item, typeIcon.Upload, 'Upload'));
+      visibleIds.add(item.id);
+      body.appendChild(renderRow(item, typeIcon.Upload, 'Upload', {selectable:true, expiry:true, selectedSet:selectedUploadIds, toggleFn:'toggleUploadSelect'}));
     });
     if(visibleCount === 0){
-      body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-500);padding:20px 0;">No uploads match these filters.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--ink-500);padding:20px 0;">No uploads match these filters.</td></tr>`;
     }
+    // Drop selections for rows that scrolled out of the current filter/search results.
+    Array.from(selectedUploadIds).forEach(id => { if(!visibleIds.has(id)) selectedUploadIds.delete(id); });
+    updateUploadsBulkBar();
   }
 
   // ---- Live page ----
   function renderLiveStats(){
     const s = computeStats(liveData);
     document.getElementById('liveStats').innerHTML = `
+      <div class="stat-card accent-gray"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="stat-card accent-green"><p class="label"><span class="dot live"></span>Live Now</p><p class="value">${s.active}</p></div>
       <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
       <div class="stat-card flagged"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
+    syncStatusFilterOptions('liveLogStatusFilter', liveData, 'renderLiveTable', {active: 'Live Now'});
   }
   function renderLiveTable(){
     const filter = document.getElementById('liveLogStatusFilter').dataset.value;
@@ -1603,15 +2276,19 @@
     const body = document.getElementById('liveTableBody');
     body.innerHTML = '';
     let visibleCount = 0;
+    const visibleIds = new Set();
     liveData.forEach(item => {
       if(filter !== 'all' && item.status !== filter) return;
       if(query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
       visibleCount++;
-      body.appendChild(renderRow(item, typeIcon.Live, 'Live'));
+      visibleIds.add(item.id);
+      body.appendChild(renderRow(item, typeIcon.Live, 'Live', {selectable:true, selectedSet:selectedLiveIds, toggleFn:'toggleLiveSelect'}));
     });
     if(visibleCount === 0){
-      body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--ink-500);padding:20px 0;">No live sessions match these filters.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:20px 0;">No live sessions match these filters.</td></tr>`;
     }
+    Array.from(selectedLiveIds).forEach(id => { if(!visibleIds.has(id)) selectedLiveIds.delete(id); });
+    updateLiveBulkBar();
   }
 
   const submissions = [
@@ -1640,6 +2317,8 @@
   const submissionStatusBadge = {pending:"pending", approved:"approved", flagged:"flagged", rejected:"rejected"};
   const submissionStatusLabel = {pending:"Pending", approved:"Approved", flagged:"Flagged", rejected:"Rejected"};
 
+  const selectedSubmissionIndices = new Set();
+
   function renderSubmissionsFeed(){
     const statusFilter = document.getElementById('submissionStatusFilter').dataset.value;
     const categoryFilter = document.getElementById('submissionCategoryFilter').dataset.value;
@@ -1648,6 +2327,7 @@
     const list = document.getElementById('submissionsFeed');
     list.innerHTML = '';
     let visibleCount = 0;
+    const visibleIndices = new Set();
     submissions.forEach((s, idx) => {
       if(statusFilter !== 'all' && s.status !== statusFilter) return;
       if(categoryFilter !== 'all' && s.category !== categoryFilter) return;
@@ -1655,16 +2335,20 @@
       if(verifiedFilter === 'community' && s.tier === 'Verified Investor') return;
       if(query && !(s.author.toLowerCase().includes(query) || s.content.toLowerCase().includes(query) || s.category.toLowerCase().includes(query))) return;
       visibleCount++;
+      visibleIndices.add(idx);
       const card = document.createElement('div');
       card.className = 'feed-card';
       card.onclick = () => openSubmissionModal(idx);
       card.innerHTML = `
         <div class="feed-card-head">
-          <div class="feed-author">
-            <div class="feed-avatar">${s.initials}</div>
-            <div>
-              <p class="fa-name">${s.author} ${s.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}</p>
-              <p class="fa-meta">${s.submitted}</p>
+          <div class="feed-card-head-left">
+            <input type="checkbox" class="row-check" onclick="event.stopPropagation()" onchange="toggleSubmissionSelect(${idx}, this.checked)" ${selectedSubmissionIndices.has(idx) ? 'checked' : ''} />
+            <div class="feed-author">
+              <div class="feed-avatar">${s.initials}</div>
+              <div>
+                <p class="fa-name">${s.author} ${s.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}</p>
+                <p class="fa-meta">${s.submitted}</p>
+              </div>
             </div>
           </div>
           <span class="feed-tag">${s.category}</span>
@@ -1685,9 +2369,60 @@
     if(visibleCount === 0){
       list.innerHTML = `<p style="color:var(--ink-500);font-size:13px;padding:20px 0;text-align:center;">No submissions match these filters.</p>`;
     }
+    Array.from(selectedSubmissionIndices).forEach(idx => { if(!visibleIndices.has(idx)) selectedSubmissionIndices.delete(idx); });
+    updateSubmissionsBulkBar();
   }
 
-  function approveSubmission(idx){
+  function toggleSubmissionSelect(idx, checked){
+    if(checked) selectedSubmissionIndices.add(idx); else selectedSubmissionIndices.delete(idx);
+    updateSubmissionsBulkBar();
+  }
+
+  function toggleSelectAllSubmissions(checkbox){
+    const shouldCheck = checkbox.checked;
+    document.querySelectorAll('#submissionsFeed .row-check').forEach(box => {
+      box.checked = shouldCheck;
+      box.dispatchEvent(new Event('change'));
+    });
+  }
+
+  function clearSubmissionSelection(){
+    selectedSubmissionIndices.clear();
+    renderSubmissionsFeed();
+  }
+
+  function updateSubmissionsBulkBar(){
+    const bar = document.getElementById('submissionsBulkBar');
+    const count = selectedSubmissionIndices.size;
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('submissionsBulkCount').textContent = `${count} selected`;
+    const selectAll = document.getElementById('submissionsSelectAll');
+    const visibleChecks = document.querySelectorAll('#submissionsFeed .row-check');
+    if(selectAll) selectAll.checked = visibleChecks.length > 0 && count >= visibleChecks.length;
+  }
+
+  function bulkApproveSubmissions(){
+    Array.from(selectedSubmissionIndices).forEach(idx => approveSubmission(idx, {skipRender: true}));
+    selectedSubmissionIndices.clear();
+    renderSubmissionsFeed();
+    renderLiveFeed();
+  }
+
+  function bulkRejectSubmissions(){
+    submissions.forEach((s, idx) => { if(selectedSubmissionIndices.has(idx)) s.status = 'rejected'; });
+    selectedSubmissionIndices.clear();
+    renderSubmissionsFeed();
+  }
+
+  function bulkDeleteSubmissions(){
+    for(let i = submissions.length - 1; i >= 0; i--){
+      if(selectedSubmissionIndices.has(i)) submissions.splice(i, 1);
+    }
+    selectedSubmissionIndices.clear();
+    renderSubmissionsFeed();
+  }
+
+  function approveSubmission(idx, opts){
     const s = submissions[idx];
     s.status = 'approved';
     s.flagReason = null;
@@ -1696,6 +2431,7 @@
       publishedAt:"just now", content:s.content, hasChart:!!s.hasChart,
       views:0, likes:0, comments:0, featured:false, reported:false
     });
+    if(opts && opts.skipRender) return;
     renderSubmissionsFeed();
     renderLiveFeed();
   }
@@ -1753,6 +2489,8 @@
       views:566, likes:22, comments:41, featured:false, reported:true, reportReason:"Reported by 3 users as potentially misleading."}
   ];
 
+  const selectedLiveFeedIndices = new Set();
+
   function renderLiveFeed(){
     const filter = document.getElementById('liveFeedFilter').dataset.value;
     const verifiedFilter = document.getElementById('liveFeedVerifiedFilter').dataset.value;
@@ -1760,6 +2498,7 @@
     const list = document.getElementById('liveFeedList');
     list.innerHTML = '';
     let visibleCount = 0;
+    const visibleIndices = new Set();
     livePosts.forEach((p, idx) => {
       if(filter === 'featured' && !p.featured) return;
       if(filter === 'reported' && !p.reported) return;
@@ -1767,15 +2506,19 @@
       if(verifiedFilter === 'community' && p.tier === 'Verified Investor') return;
       if(query && !(p.author.toLowerCase().includes(query) || p.content.toLowerCase().includes(query) || p.category.toLowerCase().includes(query))) return;
       visibleCount++;
+      visibleIndices.add(idx);
       const card = document.createElement('div');
       card.className = 'feed-card';
       card.innerHTML = `
         <div class="feed-card-head">
-          <div class="feed-author">
-            <div class="feed-avatar">${p.initials}</div>
-            <div>
-              <p class="fa-name">${p.author} ${p.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}${p.featured ? ' <span class="feed-pin-badge">★ Featured</span>' : ''}</p>
-              <p class="fa-meta">${p.publishedAt}</p>
+          <div class="feed-card-head-left">
+            <input type="checkbox" class="row-check" onchange="toggleLiveFeedSelect(${idx}, this.checked)" ${selectedLiveFeedIndices.has(idx) ? 'checked' : ''} />
+            <div class="feed-author">
+              <div class="feed-avatar">${p.initials}</div>
+              <div>
+                <p class="fa-name">${p.author} ${p.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}${p.featured ? ' <span class="feed-pin-badge">★ Featured</span>' : ''}</p>
+                <p class="fa-meta">${p.publishedAt}</p>
+              </div>
             </div>
           </div>
           <span class="feed-tag">${p.category}</span>
@@ -1800,6 +2543,56 @@
     if(visibleCount === 0){
       list.innerHTML = `<p style="color:var(--ink-500);font-size:13px;padding:20px 0;text-align:center;">No live posts match these filters.</p>`;
     }
+    Array.from(selectedLiveFeedIndices).forEach(idx => { if(!visibleIndices.has(idx)) selectedLiveFeedIndices.delete(idx); });
+    updateLiveFeedBulkBar();
+  }
+
+  function toggleLiveFeedSelect(idx, checked){
+    if(checked) selectedLiveFeedIndices.add(idx); else selectedLiveFeedIndices.delete(idx);
+    updateLiveFeedBulkBar();
+  }
+
+  function toggleSelectAllLiveFeed(checkbox){
+    const shouldCheck = checkbox.checked;
+    document.querySelectorAll('#liveFeedList .row-check').forEach(box => {
+      box.checked = shouldCheck;
+      box.dispatchEvent(new Event('change'));
+    });
+  }
+
+  function clearLiveFeedSelection(){
+    selectedLiveFeedIndices.clear();
+    renderLiveFeed();
+  }
+
+  function updateLiveFeedBulkBar(){
+    const bar = document.getElementById('liveFeedBulkBar');
+    const count = selectedLiveFeedIndices.size;
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('liveFeedBulkCount').textContent = `${count} selected`;
+    const selectAll = document.getElementById('liveFeedSelectAll');
+    const visibleChecks = document.querySelectorAll('#liveFeedList .row-check');
+    if(selectAll) selectAll.checked = visibleChecks.length > 0 && count >= visibleChecks.length;
+  }
+
+  function bulkFeatureLiveFeedPosts(){
+    livePosts.forEach((p, idx) => { if(selectedLiveFeedIndices.has(idx)) p.featured = true; });
+    selectedLiveFeedIndices.clear();
+    renderLiveFeed();
+  }
+
+  function bulkUnfeatureLiveFeedPosts(){
+    livePosts.forEach((p, idx) => { if(selectedLiveFeedIndices.has(idx)) p.featured = false; });
+    selectedLiveFeedIndices.clear();
+    renderLiveFeed();
+  }
+
+  function bulkRemoveLiveFeedPosts(){
+    for(let i = livePosts.length - 1; i >= 0; i--){
+      if(selectedLiveFeedIndices.has(i)) livePosts.splice(i, 1);
+    }
+    selectedLiveFeedIndices.clear();
+    renderLiveFeed();
   }
 
   function toggleFeatured(idx){
@@ -1926,15 +2719,174 @@
     document.getElementById('page-' + page).classList.add('active');
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+    if(page === 'customer360') closeCustomerDossier();
   }
 
-  let currentUploadCategory = 'Upload';
-  function openUploadModal(category){
-    currentUploadCategory = category || 'Upload';
-    document.getElementById('uploadModalTitle').textContent = currentUploadCategory === 'Live' ? 'New Live Session' : 'New Upload';
-    document.getElementById('scheduleToggleTitle').textContent = currentUploadCategory === 'Live' ? 'Hold for scheduled start' : 'Premier';
+  function openUploadModal(){
     switchUploadTab('content');
     document.getElementById('uploadOverlay').classList.add('open');
+  }
+
+  function openLiveModal(){
+    document.getElementById('liveScheduleOverlay').classList.add('open');
+  }
+
+  function saveUploadDraft(){
+    const title = document.getElementById('uploadTitleInput').value.trim() || 'Untitled Upload';
+    const owner = document.getElementById('uploadOwnerSelect').dataset.value;
+    const section = document.getElementById('uploadSectionSelect').dataset.value;
+    const expiresOn = document.getElementById('uploadExpiryInput').value || null;
+    uploadsData.unshift({id: uploadIdCounter++, title, owner, section, tags:[], status:'draft', description:'Draft — not yet submitted for review.', expiresOn});
+    renderUploadsStats();
+    renderUploadsTable();
+    closeModal('uploadOverlay');
+  }
+
+  function submitUploadForReview(){
+    const title = document.getElementById('uploadTitleInput').value.trim() || 'Untitled Upload';
+    const owner = document.getElementById('uploadOwnerSelect').dataset.value;
+    const section = document.getElementById('uploadSectionSelect').dataset.value;
+    const expiresOn = document.getElementById('uploadExpiryInput').value || null;
+    uploadsData.unshift({id: uploadIdCounter++, title, owner, section, tags:[], status:'pending', description:'Submitted for review.', expiresOn});
+    renderUploadsStats();
+    renderUploadsTable();
+    closeModal('uploadOverlay');
+  }
+
+  // ---- Content Detail modal: single-item approve/reject for Pending Review items ----
+  function approveContentItem(item, kind){
+    item.status = 'approved';
+    item.reviewedBy = REVIEWER_TEAM;
+    const note = document.getElementById('contentReviewNoteInput').value.trim();
+    if(note) item.reviewNote = note;
+    if(kind === 'Live'){ renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+    closeModal('contentOverlay');
+  }
+
+  function rejectContentItem(item, kind){
+    item.status = 'rejected';
+    item.reviewedBy = REVIEWER_TEAM;
+    const note = document.getElementById('contentReviewNoteInput').value.trim();
+    if(note) item.reviewNote = note;
+    if(kind === 'Live'){ renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+    closeModal('contentOverlay');
+  }
+
+  // ---- Uploads: bulk selection & actions ----
+  function toggleUploadSelect(id, checked){
+    if(checked) selectedUploadIds.add(id); else selectedUploadIds.delete(id);
+    updateUploadsBulkBar();
+  }
+
+  function toggleSelectAllUploads(checkbox){
+    // Capture the desired state up front — updateUploadsBulkBar() (triggered by each
+    // dispatched change below) re-syncs this same checkbox's .checked mid-loop, so
+    // reading checkbox.checked fresh on every iteration would flip after the first row.
+    const shouldCheck = checkbox.checked;
+    document.querySelectorAll('#uploadsTableBody .row-check').forEach(box => {
+      box.checked = shouldCheck;
+      box.dispatchEvent(new Event('change'));
+    });
+  }
+
+  function clearUploadSelection(){
+    selectedUploadIds.clear();
+    renderUploadsTable();
+  }
+
+  function updateUploadsBulkBar(){
+    const bar = document.getElementById('uploadsBulkBar');
+    const count = selectedUploadIds.size;
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('uploadsBulkCount').textContent = `${count} selected`;
+    const selectAll = document.getElementById('uploadsSelectAll');
+    const visibleChecks = document.querySelectorAll('#uploadsTableBody .row-check');
+    if(selectAll) selectAll.checked = visibleChecks.length > 0 && count >= visibleChecks.length;
+  }
+
+  function bulkApproveUploads(){
+    uploadsData.forEach(item => { if(selectedUploadIds.has(item.id)) item.status = 'approved'; });
+    selectedUploadIds.clear();
+    renderUploadsStats();
+    renderUploadsTable();
+  }
+
+  function bulkRejectUploads(){
+    uploadsData.forEach(item => { if(selectedUploadIds.has(item.id)) item.status = 'rejected'; });
+    selectedUploadIds.clear();
+    renderUploadsStats();
+    renderUploadsTable();
+  }
+
+  function bulkDeleteUploads(){
+    for(let i = uploadsData.length - 1; i >= 0; i--){
+      if(selectedUploadIds.has(uploadsData[i].id)) uploadsData.splice(i, 1);
+    }
+    selectedUploadIds.clear();
+    renderUploadsStats();
+    renderUploadsTable();
+  }
+
+  // ---- Live: bulk selection & actions ----
+  function toggleLiveSelect(id, checked){
+    if(checked) selectedLiveIds.add(id); else selectedLiveIds.delete(id);
+    updateLiveBulkBar();
+  }
+
+  function toggleSelectAllLive(checkbox){
+    const shouldCheck = checkbox.checked;
+    document.querySelectorAll('#liveTableBody .row-check').forEach(box => {
+      box.checked = shouldCheck;
+      box.dispatchEvent(new Event('change'));
+    });
+  }
+
+  function clearLiveSelection(){
+    selectedLiveIds.clear();
+    renderLiveTable();
+  }
+
+  function updateLiveBulkBar(){
+    const bar = document.getElementById('liveBulkBar');
+    const count = selectedLiveIds.size;
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('liveBulkCount').textContent = `${count} selected`;
+    const selectAll = document.getElementById('liveSelectAll');
+    const visibleChecks = document.querySelectorAll('#liveTableBody .row-check');
+    if(selectAll) selectAll.checked = visibleChecks.length > 0 && count >= visibleChecks.length;
+  }
+
+  function bulkApproveLive(){
+    liveData.forEach(item => { if(selectedLiveIds.has(item.id)) item.status = 'approved'; });
+    selectedLiveIds.clear();
+    renderLiveStats();
+    renderLiveTable();
+  }
+
+  function bulkRejectLive(){
+    liveData.forEach(item => { if(selectedLiveIds.has(item.id)) item.status = 'rejected'; });
+    selectedLiveIds.clear();
+    renderLiveStats();
+    renderLiveTable();
+  }
+
+  function bulkDeleteLive(){
+    for(let i = liveData.length - 1; i >= 0; i--){
+      if(selectedLiveIds.has(liveData[i].id)) liveData.splice(i, 1);
+    }
+    selectedLiveIds.clear();
+    renderLiveStats();
+    renderLiveTable();
+  }
+
+  function saveLiveDraft(){
+    const title = document.getElementById('liveTitleInput').value.trim() || 'Untitled Live Session';
+    const owner = document.getElementById('liveHostSelect').dataset.value;
+    const section = document.getElementById('liveSectionSelect').dataset.value;
+    liveData.unshift({id: liveIdCounter++, title, owner, section, tags:[], status:'draft', description:'Draft — not yet scheduled.'});
+    renderLiveStats();
+    renderLiveTable();
+    closeModal('liveScheduleOverlay');
   }
 
   function switchUploadTab(tab){
@@ -1985,10 +2937,12 @@
   document.addEventListener('scroll', closeAllSelects, true);
 
   function selectVisOption(el){
-    document.querySelectorAll('#visOptions .radio-card').forEach(c => c.classList.remove('checked'));
+    const group = el.closest('.vis-options');
+    group.querySelectorAll('.radio-card').forEach(c => c.classList.remove('checked'));
     el.classList.add('checked');
     el.querySelector('input').checked = true;
-    document.getElementById('filterFields').style.display = (el.dataset.vis === 'filter') ? 'block' : 'none';
+    const filterFields = group.querySelector('.vis-filter-fields');
+    if(filterFields) filterFields.style.display = (el.dataset.vis === 'filter') ? 'block' : 'none';
   }
 
   // Analytics: thread lifecycle chart (Threads tab)
@@ -2007,6 +2961,376 @@
     </div>
   `).join('');
 
+  // ---- Customer 360 ----
+  const customerRoster = [
+    {cif:"C-10293847", name:"Wei Ling Tan", status:"active", cip:true, cruise:true, lastRefreshed:"27 Jul, 09:14"},
+    {cif:"C-10381922", name:"Marcus Lim", status:"active", cip:true, cruise:false, lastRefreshed:"27 Jul, 08:52"},
+    {cif:"C-10475610", name:"Priya Nair", status:"dormant", cip:false, cruise:true, lastRefreshed:"26 Jul, 22:10"},
+    {cif:"C-10592047", name:"Jonathan Koh", status:"active", cip:true, cruise:true, lastRefreshed:"27 Jul, 07:41"},
+    {cif:"C-10639182", name:"Aisha Rahman", status:"restricted", cip:false, cruise:false, lastRefreshed:"25 Jul, 16:03"},
+    {cif:"C-10712456", name:"Daniel Ong", status:"active", cip:true, cruise:false, lastRefreshed:"27 Jul, 06:15"}
+  ];
+
+  const c360StatusBadgeClass = {active:"active", dormant:"rejected", restricted:"flagged"};
+  const c360StatusLabel = {active:"Active", dormant:"Dormant", restricted:"Restricted"};
+
+  const customerDossiers = {
+    "C-10293847": {
+      segment:"Premier Banking", rm:"S. Wong", since:"Mar 2016", initials:"WT",
+      aiSummary:{
+        narrative:"Wei Ling has been a Premier client since 2016 with consistently high engagement across Live Studio content. Recent activity skews toward rate-sensitive and ESG topics, and she's asked the assistant twice this month about SRS deadlines — a good trigger for a proactive nudge before year-end.",
+        tags:[{label:"Engagement", value:"High", tone:"green"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Positive", tone:"teal"}],
+        highlights:["Attended 4 of the last 5 live sessions in the Markets section, including Fed Rate Reaction Live.","Asked the in-app assistant about SRS top-up deadlines twice in the past 30 days.","Consistently opts into ESG/sustainable investing content over other Wealth topics.","No flagged content or compliance touchpoints in the last 12 months."]
+      },
+      identity:[["Full Name","Wei Ling Tan"],["CIF","C-10293847"],["Segment","Premier Banking"],["Relationship Manager","S. Wong"],["Customer Since","Mar 2016"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Orchard"],["Risk Profile","Moderate"]],
+      sessions:[
+        {device:"iPhone 15 Pro · App", location:"Singapore, SG", time:"27 Jul, 09:02", status:"success"},
+        {device:"Chrome · Web", location:"Singapore, SG", time:"24 Jul, 19:41", status:"success"},
+        {device:"iPhone 15 Pro · App", location:"Singapore, SG", time:"22 Jul, 07:18", status:"success"},
+        {device:"Safari · Web", location:"Unrecognised device", time:"19 Jul, 23:05", status:"failed"}
+      ],
+      conversations:[
+        {date:"25 Jul", channel:"In-App Assistant", summary:"Asked about SRS top-up deadline and Premier fee waivers.", memory:false},
+        {date:"18 Jul", channel:"In-App Assistant", summary:"Requested a recap of the Fed Rate Reaction Live session she missed the start of.", memory:false},
+        {date:"—", channel:"Memory", summary:"Prefers sustainable / ESG investment options over conventional funds.", memory:true},
+        {date:"—", channel:"Memory", summary:"Has previously mentioned saving toward a child's overseas university tuition.", memory:true}
+      ],
+      engagement:[
+        {title:"Weekly Market Wrap", type:"Upload", reaction:"Watched 92%", date:"24 Jul"},
+        {title:"Fed Rate Reaction Live", type:"Live", reaction:"Attended, asked 1 question", date:"18 Jul"},
+        {title:"#RatesOutlook", type:"Thread", reaction:"Commented", date:"12 Jul"},
+        {title:"Wealth Planning 101", type:"Upload", reaction:"Watched 100%, liked", date:"3 Jul"}
+      ],
+      suitability:[
+        {product:"Premier Growth Portfolio", risk:"Moderate", lastAssessed:"Jun 2026", status:"suitable"},
+        {product:"Structured Notes – FX Linked", risk:"Moderate-High", lastAssessed:"Jan 2026", status:"review"},
+        {product:"ESG Balanced Fund", risk:"Moderate", lastAssessed:"Jun 2026", status:"suitable"}
+      ],
+      notifications:[
+        {date:"26 Jul", channel:"Push", content:"Reminder: SRS top-up deadline is 31 December."},
+        {date:"20 Jul", channel:"Email", content:"Invitation: Treasury Desk AMA live session."},
+        {date:"15 Jul", channel:"Push", content:"Your Premier portfolio review is ready to view."}
+      ],
+      feedback:[
+        {date:"20 Jul", rating:5, comment:"Loved the Fed Rate Reaction live session, very clear explanations."},
+        {date:"05 Jul", rating:4, comment:"Wealth Planning 101 was helpful but a bit long for a first watch."}
+      ],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"4"},{label:"Uploads Watched", value:"11"},{label:"Threads Posted", value:"3"},{label:"Hot Topics Followed", value:"2"}],
+        activity:[
+          "Attended <span class=\"a-name\">Fed Rate Reaction Live</span> and asked a question during Q&A",
+          "Watched <span class=\"a-name\">Weekly Market Wrap</span> to 92% completion",
+          "Commented on <span class=\"a-name\">#RatesOutlook</span> in Threads",
+          "Following <span class=\"a-name\">Digital Assets Allocation</span> in Hot Topics"
+        ]
+      }
+    },
+    "C-10381922": {
+      segment:"Personal Banking", rm:"A. Kumar", since:"Sep 2020", initials:"ML",
+      aiSummary:{
+        narrative:"Marcus is a moderately active Personal Banking customer who mostly consumes content passively — few live attendances, but steady upload viewership around SME and loans content, likely researching a business loan.",
+        tags:[{label:"Engagement", value:"Medium", tone:"teal"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Neutral", tone:"amber"}],
+        highlights:["Viewed the SME Loan Explainer upload twice in the last two weeks.","No live session attendance in the last 90 days.","CIP data not yet synced for this customer — Cruise cache only."]
+      },
+      identity:[["Full Name","Marcus Lim"],["CIF","C-10381922"],["Segment","Personal Banking"],["Relationship Manager","A. Kumar"],["Customer Since","Sep 2020"],["Preferred Language","English"],["Preferred Channel","Email"],["Marketing Consent","Opted In"],["Home Branch","Tampines"],["Risk Profile","Conservative"]],
+      sessions:[
+        {device:"Samsung S24 · App", location:"Singapore, SG", time:"27 Jul, 08:40", status:"success"},
+        {device:"Chrome · Web", location:"Singapore, SG", time:"21 Jul, 12:05", status:"success"}
+      ],
+      conversations:[
+        {date:"22 Jul", channel:"In-App Assistant", summary:"Asked what documents are needed for an SME working capital loan.", memory:false},
+        {date:"—", channel:"Memory", summary:"Runs a small F&B business, previously mentioned expansion plans.", memory:true}
+      ],
+      engagement:[
+        {title:"SME Loan Explainer", type:"Upload", reaction:"Watched twice, 100%", date:"22 Jul"},
+        {title:"Q2 Earnings Roundup", type:"Upload", reaction:"Watched 40%", date:"14 Jul"}
+      ],
+      suitability:[
+        {product:"SME Working Capital Loan", risk:"N/A", lastAssessed:"Not yet assessed", status:"review"},
+        {product:"Personal Savings Plan", risk:"Conservative", lastAssessed:"Sep 2025", status:"suitable"}
+      ],
+      notifications:[
+        {date:"23 Jul", channel:"Email", content:"Your SME loan enquiry — next steps from your Relationship Manager."}
+      ],
+      feedback:[
+        {date:"22 Jul", rating:4, comment:"SME Loan Explainer answered most of my questions."}
+      ],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"6"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"1"}],
+        activity:[
+          "Watched <span class=\"a-name\">SME Loan Explainer</span> twice this month",
+          "Following <span class=\"a-name\">SME Working Capital Demand</span> in Hot Topics"
+        ]
+      }
+    },
+    "C-10475610": {
+      segment:"Premier Banking", rm:"R. Ong", since:"Jan 2013", initials:"PN",
+      aiSummary:{
+        narrative:"Priya was highly engaged historically but has gone dormant — no logins or content activity in over 60 days. CIP data has not refreshed, which may indicate a stale or churned relationship worth a retention check-in.",
+        tags:[{label:"Engagement", value:"Dormant", tone:"red"},{label:"Churn Risk", value:"High", tone:"red"},{label:"Sentiment", value:"Unknown", tone:"amber"}],
+        highlights:["No app or web login recorded in the last 60+ days.","CIP cache missing — last successful sync unknown.","Was a frequent Wealth content viewer prior to going quiet in May."]
+      },
+      identity:[["Full Name","Priya Nair"],["CIF","C-10475610"],["Segment","Premier Banking"],["Relationship Manager","R. Ong"],["Customer Since","Jan 2013"],["Preferred Language","English"],["Preferred Channel","Phone"],["Marketing Consent","Opted Out"],["Home Branch","Raffles Place"],["Risk Profile","Moderate"]],
+      sessions:[
+        {device:"iPad · App", location:"Singapore, SG", time:"18 May, 10:12", status:"success"}
+      ],
+      conversations:[
+        {date:"—", channel:"Memory", summary:"Previously indicated interest in retirement drawdown planning ahead of turning 60.", memory:true}
+      ],
+      engagement:[
+        {title:"Wealth Planning 101", type:"Upload", reaction:"Watched 100%", date:"15 May"}
+      ],
+      suitability:[
+        {product:"Retirement Income Portfolio", risk:"Moderate", lastAssessed:"Nov 2025", status:"review"}
+      ],
+      notifications:[
+        {date:"10 Jul", channel:"Email", content:"We miss you — here's what's new on Live Studio."}
+      ],
+      feedback:[],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"1"},{label:"Uploads Watched", value:"3"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"0"}],
+        activity:["Last watched <span class=\"a-name\">Wealth Planning 101</span> on 15 May — no activity since"]
+      }
+    },
+    "C-10592047": {
+      segment:"SME Banking", rm:"M. Lee", since:"Jul 2019", initials:"JK",
+      aiSummary:{
+        narrative:"Jonathan runs an active SME relationship and engages heavily with Markets content, likely for treasury and FX hedging decisions for his business. Both CIP and Cruise caches are fresh.",
+        tags:[{label:"Engagement", value:"High", tone:"green"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Positive", tone:"teal"}],
+        highlights:["Attended Treasury Desk AMA and asked about FX hedging for SME invoicing.","Regularly reads Market News threads before market open.","Both CIP and Cruise data refreshed within the last 24 hours."]
+      },
+      identity:[["Full Name","Jonathan Koh"],["CIF","C-10592047"],["Segment","SME Banking"],["Relationship Manager","M. Lee"],["Customer Since","Jul 2019"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Jurong East"],["Risk Profile","Moderate-High"]],
+      sessions:[
+        {device:"MacBook · Web", location:"Singapore, SG", time:"27 Jul, 07:30", status:"success"},
+        {device:"iPhone 14 · App", location:"Singapore, SG", time:"26 Jul, 18:12", status:"success"}
+      ],
+      conversations:[
+        {date:"26 Jul", channel:"In-App Assistant", summary:"Asked about FX forward contracts for hedging supplier invoices.", memory:false},
+        {date:"—", channel:"Memory", summary:"Business imports raw materials priced in USD — FX exposure is a recurring concern.", memory:true}
+      ],
+      engagement:[
+        {title:"Treasury Desk AMA", type:"Live", reaction:"Attended, asked 2 questions", date:"26 Jul"},
+        {title:"Morning Market Open", type:"Live", reaction:"Attended", date:"25 Jul"},
+        {title:"Good recap from the treasury desk session...", type:"Thread", reaction:"Liked", date:"24 Jul"}
+      ],
+      suitability:[
+        {product:"FX Forward Contracts", risk:"Moderate-High", lastAssessed:"Jul 2026", status:"suitable"},
+        {product:"SME Working Capital Loan", risk:"Moderate", lastAssessed:"Feb 2026", status:"suitable"}
+      ],
+      notifications:[
+        {date:"25 Jul", channel:"Push", content:"Treasury Desk AMA starts in 30 minutes."},
+        {date:"20 Jul", channel:"Email", content:"Your FX exposure summary is ready to view."}
+      ],
+      feedback:[
+        {date:"26 Jul", rating:5, comment:"Treasury desk answered my hedging question directly — very useful."}
+      ],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"6"},{label:"Uploads Watched", value:"8"},{label:"Threads Posted", value:"2"},{label:"Hot Topics Followed", value:"3"}],
+        activity:[
+          "Attended <span class=\"a-name\">Treasury Desk AMA</span> and asked 2 questions",
+          "Attended <span class=\"a-name\">Morning Market Open</span>",
+          "Following <span class=\"a-name\">Fed Rate Decision Reaction</span> in Hot Topics"
+        ]
+      }
+    },
+    "C-10639182": {
+      segment:"Personal Banking", rm:"S. Wong", since:"Nov 2022", initials:"AR",
+      aiSummary:{
+        narrative:"Aisha's account is currently restricted pending a compliance review. Recent thread activity was flagged for phrasing that resembled investment advice, which triggered the restriction. No further content activity since the flag.",
+        tags:[{label:"Engagement", value:"Low", tone:"amber"},{label:"Compliance", value:"Under Review", tone:"red"},{label:"Sentiment", value:"Unknown", tone:"amber"}],
+        highlights:["Account restricted following a flagged thread submission on 21 Jul.","No CIP or Cruise data currently cached for this customer.","Recommend compliance sign-off before re-enabling full access."]
+      },
+      identity:[["Full Name","Aisha Rahman"],["CIF","C-10639182"],["Segment","Personal Banking"],["Relationship Manager","S. Wong"],["Customer Since","Nov 2022"],["Preferred Language","English"],["Preferred Channel","Email"],["Marketing Consent","Opted Out"],["Home Branch","Bedok"],["Risk Profile","Not Assessed"]],
+      sessions:[
+        {device:"iPhone 13 · App", location:"Singapore, SG", time:"21 Jul, 14:22", status:"success"}
+      ],
+      conversations:[
+        {date:"—", channel:"Memory", summary:"No durable memory facts recorded yet for this customer.", memory:true}
+      ],
+      engagement:[
+        {title:"Thinking of putting 40% of my portfolio into digital assets...", type:"Thread", reaction:"Flagged", date:"21 Jul"}
+      ],
+      suitability:[
+        {product:"Digital Assets Briefing (informational)", risk:"Not Assessed", lastAssessed:"—", status:"review"}
+      ],
+      notifications:[
+        {date:"21 Jul", channel:"Email", content:"Your recent post is under compliance review."}
+      ],
+      feedback:[],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"1"},{label:"Threads Posted", value:"1"},{label:"Hot Topics Followed", value:"0"}],
+        activity:["Thread submission flagged for compliance review on 21 Jul"]
+      }
+    },
+    "C-10712456": {
+      segment:"Premier Banking", rm:"P. Sharma", since:"Feb 2017", initials:"DO",
+      aiSummary:{
+        narrative:"Daniel is a steady, low-maintenance Premier client with consistent but light engagement. He watches uploads regularly but rarely interacts with live sessions or threads — likely a passive content consumer rather than an active community participant.",
+        tags:[{label:"Engagement", value:"Medium", tone:"teal"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Neutral", tone:"amber"}],
+        highlights:["Watches roughly one upload per week, mostly Markets content.","Has never attended a live session or posted in Threads.","Cruise cache not yet synced for this customer."]
+      },
+      identity:[["Full Name","Daniel Ong"],["CIF","C-10712456"],["Segment","Premier Banking"],["Relationship Manager","P. Sharma"],["Customer Since","Feb 2017"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Holland Village"],["Risk Profile","Moderate"]],
+      sessions:[
+        {device:"iPhone 15 · App", location:"Singapore, SG", time:"27 Jul, 06:05", status:"success"},
+        {device:"Chrome · Web", location:"Singapore, SG", time:"20 Jul, 21:30", status:"success"}
+      ],
+      conversations:[
+        {date:"—", channel:"Memory", summary:"Prefers concise, data-first summaries over long explainer videos.", memory:true}
+      ],
+      engagement:[
+        {title:"Weekly Market Wrap", type:"Upload", reaction:"Watched 78%", date:"24 Jul"},
+        {title:"Q2 Earnings Roundup", type:"Upload", reaction:"Watched 100%", date:"17 Jul"}
+      ],
+      suitability:[
+        {product:"Premier Growth Portfolio", risk:"Moderate", lastAssessed:"Mar 2026", status:"suitable"}
+      ],
+      notifications:[
+        {date:"24 Jul", channel:"Push", content:"New upload: Weekly Market Wrap is ready to watch."}
+      ],
+      feedback:[
+        {date:"17 Jul", rating:4, comment:"Good summary, would prefer a shorter cut next time."}
+      ],
+      liveStudio:{
+        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"14"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"1"}],
+        activity:[
+          "Watched <span class=\"a-name\">Weekly Market Wrap</span> to 78% completion",
+          "Following <span class=\"a-name\">SG Bank Earnings Season</span> in Hot Topics"
+        ]
+      }
+    }
+  };
+
+  function syncFlag(bool, label){
+    const text = label ? `${label} ${bool ? 'Synced' : 'Missing'}` : (bool ? 'Synced' : 'Missing');
+    return `<span class="sync-flag ${bool ? 'yes' : 'no'}">${text}</span>`;
+  }
+
+  function renderC360RosterStats(){
+    const total = customerRoster.length;
+    const cipSynced = customerRoster.filter(c => c.cip).length;
+    const cruiseSynced = customerRoster.filter(c => c.cruise).length;
+    const stale = customerRoster.filter(c => c.lastRefreshed.startsWith('25') || c.lastRefreshed.startsWith('26')).length;
+    document.getElementById('c360RosterStats').innerHTML = `
+      <div class="stat-card"><p class="label"><span class="dot gray"></span>Total Cached</p><p class="value">${total}</p></div>
+      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>CIP Synced</p><p class="value">${cipSynced}</p></div>
+      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Cruise Synced</p><p class="value">${cruiseSynced}</p></div>
+      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Stale (&gt;24h)</p><p class="value">${stale}</p></div>
+    `;
+  }
+
+  function renderC360Roster(){
+    const query = document.getElementById('c360Search').value.trim().toLowerCase();
+    const statusFilter = document.getElementById('c360StatusFilter').dataset.value;
+    const cipFilter = document.getElementById('c360CipFilter').dataset.value;
+    const cruiseFilter = document.getElementById('c360CruiseFilter').dataset.value;
+    const body = document.getElementById('c360RosterBody');
+    body.innerHTML = '';
+    let visibleCount = 0;
+    customerRoster.forEach(c => {
+      if(statusFilter !== 'all' && c.status !== statusFilter) return;
+      if(cipFilter === 'yes' && !c.cip) return;
+      if(cipFilter === 'no' && c.cip) return;
+      if(cruiseFilter === 'yes' && !c.cruise) return;
+      if(cruiseFilter === 'no' && c.cruise) return;
+      if(query && !(c.cif.toLowerCase().includes(query) || c.name.toLowerCase().includes(query))) return;
+      visibleCount++;
+      const tr = document.createElement('tr');
+      tr.classList.add('clickable');
+      tr.onclick = () => openCustomerDossier(c.cif);
+      tr.innerHTML = `
+        <td><div class="title-cell">${c.cif}<span style="color:var(--ink-500);font-weight:400;">· ${c.name}</span></div></td>
+        <td><span class="badge ${c360StatusBadgeClass[c.status]}">${c360StatusLabel[c.status]}</span></td>
+        <td>${syncFlag(c.cip)}</td>
+        <td>${syncFlag(c.cruise)}</td>
+        <td class="desc-cell">${c.lastRefreshed}</td>
+      `;
+      body.appendChild(tr);
+    });
+    if(visibleCount === 0){
+      body.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--ink-500);padding:20px 0;">No cached customers match these filters.</td></tr>`;
+    }
+  }
+
+  let currentDossierCif = null;
+
+  function openCustomerDossier(cif){
+    const roster = customerRoster.find(c => c.cif === cif);
+    const d = customerDossiers[cif];
+    if(!roster || !d) return;
+    currentDossierCif = cif;
+
+    document.getElementById('c360-roster').classList.remove('active');
+    document.getElementById('c360-dossier').classList.add('active');
+
+    document.getElementById('dossierAvatar').textContent = d.initials;
+    document.getElementById('dossierName').textContent = roster.name;
+    document.getElementById('dossierMeta').textContent = `${roster.cif} · ${d.segment} · RM ${d.rm} · Since ${d.since}`;
+    document.getElementById('dossierBadges').innerHTML = `
+      <span class="badge ${c360StatusBadgeClass[roster.status]}">${c360StatusLabel[roster.status]}</span>
+      ${syncFlag(roster.cip, 'CIP')} ${syncFlag(roster.cruise, 'Cruise')}
+    `;
+
+    // AI Summary
+    document.getElementById('dossierNarrative').textContent = d.aiSummary.narrative;
+    document.getElementById('dossierTags').innerHTML = d.aiSummary.tags.map(t => `<span class="ai-tag ${t.tone}">${t.label}: ${t.value}</span>`).join('');
+    document.getElementById('dossierHighlights').innerHTML = d.aiSummary.highlights.map(h => `<li>${h}</li>`).join('');
+
+    // Identity & Preferences
+    document.getElementById('dossierIdentityGrid').innerHTML = d.identity.map(([label, value]) => `
+      <div class="info-item"><p class="info-label">${label}</p><p class="info-value">${value}</p></div>
+    `).join('');
+
+    // Sessions & Logins
+    document.getElementById('dossierSessionsBody').innerHTML = d.sessions.map(s => `
+      <tr><td style="text-align:left;">${s.device}</td><td style="text-align:left;">${s.location}</td><td>${s.time}</td><td><span class="badge ${s.status === 'success' ? 'approved' : 'flagged'}">${s.status === 'success' ? 'Success' : 'Failed'}</span></td></tr>
+    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No recent sessions.</td></tr>`;
+
+    // Conversations & Memory
+    document.getElementById('dossierConversations').innerHTML = d.conversations.map(c => `
+      <div class="audit-item"><span>${c.memory ? '<span class="memory-tag">Memory</span>' : `<span class="a-name">${c.channel}</span> · ${c.date}`} — ${c.summary}</span></div>
+    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No conversation history yet.</p>`;
+
+    // Content Reactions & Engagement
+    document.getElementById('dossierEngagementBody').innerHTML = d.engagement.map(e => `
+      <tr><td style="text-align:left;">${e.title}</td><td style="text-align:left;">${e.type}</td><td style="text-align:left;">${e.reaction}</td><td>${e.date}</td></tr>
+    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No content activity recorded.</td></tr>`;
+
+    // Product Suitability
+    const suitabilityBadge = {suitable:"approved", review:"pending", notsuitable:"flagged"};
+    const suitabilityLabel = {suitable:"Suitable", review:"Review Needed", notsuitable:"Not Suitable"};
+    document.getElementById('dossierSuitabilityBody').innerHTML = d.suitability.map(s => `
+      <tr><td style="text-align:left;">${s.product}</td><td style="text-align:left;">${s.risk}</td><td style="text-align:left;">${s.lastAssessed}</td><td><span class="badge ${suitabilityBadge[s.status]}">${suitabilityLabel[s.status]}</span></td></tr>
+    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No suitability assessments on file.</td></tr>`;
+
+    // Notifications & Feedback
+    document.getElementById('dossierNotifications').innerHTML = d.notifications.map(n => `
+      <div class="audit-item"><span><span class="a-name">${n.channel}</span> · ${n.date} — ${n.content}</span></div>
+    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No notifications sent recently.</p>`;
+    document.getElementById('dossierFeedback').innerHTML = d.feedback.map(f => `
+      <div class="comment"><div class="avatar">${d.initials}</div><div><p class="c-name">${'★'.repeat(f.rating)}${'☆'.repeat(5 - f.rating)} <span class="c-time">· ${f.date}</span></p><p class="c-text">${f.comment}</p></div></div>
+    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No feedback submitted yet.</p>`;
+
+    // Live Studio
+    document.getElementById('dossierLiveStudioStats').innerHTML = d.liveStudio.stats.map(s => `
+      <div class="stat-card"><p class="label">${s.label}</p><p class="value">${s.value}</p></div>
+    `).join('');
+    document.getElementById('dossierLiveStudioActivity').innerHTML = d.liveStudio.activity.map(a => `<div class="audit-item"><span>${a}</span></div>`).join('');
+
+    switchDossierTab('summary');
+    window.scrollTo(0, 0);
+  }
+
+  function closeCustomerDossier(){
+    currentDossierCif = null;
+    document.getElementById('c360-dossier').classList.remove('active');
+    document.getElementById('c360-roster').classList.add('active');
+  }
+
+  function switchDossierTab(tab){
+    document.querySelectorAll('#dossierTabbar .dossier-rail-item').forEach(b => b.classList.toggle('active', b.dataset.dtab === tab));
+    document.querySelectorAll('.dossier-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'dossier-' + tab));
+  }
+
   // ---- Initial render ----
   renderOverviewStats();
   renderUploadsStats();
@@ -2018,6 +3342,8 @@
   renderTopics();
   renderHotTopicsStats();
   renderHotTopics();
+  renderC360RosterStats();
+  renderC360Roster();
 </script>
 </body>
 </html>
