@@ -769,6 +769,25 @@
 
   .star-rating{color:var(--amber-600);font-size:11px;letter-spacing:1px;white-space:nowrap;}
 
+  /* Customer 360 dossier: system-field-accurate tables (Sessions, Tool Calls,
+     Engagement, Campaigns) added per the real event-table schema */
+  .dossier-subhead{font-size:12.5px;font-weight:700;color:var(--ink-900);margin:18px 0 4px;}
+  .dossier-subhead:first-child{margin-top:0;}
+  .table-source-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-500);font-weight:400;margin-left:6px;}
+  .append-only-note{font-size:10.5px;color:var(--ink-300);font-style:italic;margin-left:6px;}
+  .engagement-block{margin-bottom:22px;}
+  .engagement-block:last-child{margin-bottom:0;}
+  .sync-status-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line);}
+  .sync-status-item{display:flex;flex-direction:column;gap:5px;}
+  .sync-status-item .info-label{font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:.04em;}
+  .args-results-cell{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-500);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+  .error-cell-ok{color:var(--ink-300);}
+  .error-cell-bad{color:var(--danger-600);font-weight:600;}
+  .push-log-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:12.5px;}
+  .push-log-item:first-child{border-top:none;}
+  .push-log-title{color:var(--ink-900);font-weight:500;}
+  .push-log-meta{color:var(--ink-500);font-family:'JetBrains Mono',monospace;font-size:11px;}
+
   @media (max-width:900px){
     .info-grid{grid-template-columns:1fr;}
   }
@@ -1390,7 +1409,7 @@
             <button class="dossier-rail-item" data-dtab="conversations" onclick="switchDossierTab('conversations')">Conversations &amp; Memory</button>
             <button class="dossier-rail-item" data-dtab="engagement" onclick="switchDossierTab('engagement')">Content Reactions &amp; Engagement</button>
             <button class="dossier-rail-item" data-dtab="suitability" onclick="switchDossierTab('suitability')">Product Suitability</button>
-            <button class="dossier-rail-item" data-dtab="notifications" onclick="switchDossierTab('notifications')">Notifications &amp; Feedback</button>
+            <button class="dossier-rail-item" data-dtab="notifications" onclick="switchDossierTab('notifications')">Notifications &amp; Campaigns</button>
             <button class="dossier-rail-item" data-dtab="livestudio" onclick="switchDossierTab('livestudio')">Live Studio</button>
           </div>
 
@@ -1404,8 +1423,7 @@
                 </p>
                 <p class="ai-summary-narrative" id="dossierNarrative"></p>
                 <div class="ai-summary-tags" id="dossierTags"></div>
-                <p class="subsection-label">Key Highlights</p>
-                <ul class="ai-summary-highlights" id="dossierHighlights"></ul>
+                <div id="dossierSummaryCategories"></div>
               </div>
             </div>
 
@@ -1413,41 +1431,89 @@
             <div class="dossier-tab-pane" id="dossier-identity">
               <div class="chart-card">
                 <h3>Identity &amp; Preferences</h3>
-                <p class="chart-sub">Core profile details and communication preferences on file</p>
+                <p class="chart-sub">Core profile details, cache sync status and stored preference keys</p>
                 <div class="info-grid" id="dossierIdentityGrid"></div>
+                <p class="dossier-subhead">Sync Status</p>
+                <div class="sync-status-row" id="dossierSyncStatus"></div>
+                <p class="dossier-subhead">Preferences</p>
+                <table class="data-table">
+                  <thead><tr><th style="text-align:left;">Key</th><th style="text-align:left;">Value</th></tr></thead>
+                  <tbody id="dossierPreferencesBody"></tbody>
+                </table>
               </div>
             </div>
 
             <!-- SESSIONS & LOGINS -->
             <div class="dossier-tab-pane" id="dossier-sessions">
               <div class="chart-card">
-                <h3>Sessions &amp; Logins</h3>
-                <p class="chart-sub">Most recent authenticated sessions across app and web</p>
+                <h3>Login &amp; Session Events</h3>
+                <p class="chart-sub">Most recent authenticated session and login events for this CIF</p>
+                <div class="performance-table-wrap">
                 <table class="data-table">
-                  <thead><tr><th style="text-align:left;">Device &amp; Channel</th><th style="text-align:left;">Location</th><th>Time</th><th>Status</th></tr></thead>
+                  <thead><tr>
+                    <th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Action</th><th style="text-align:left;">Function Group</th>
+                    <th>Status</th><th style="text-align:left;">Channel</th><th style="text-align:left;">Source IP</th>
+                    <th style="text-align:left;">Portfolio</th><th style="text-align:left;">Error</th>
+                  </tr></thead>
                   <tbody id="dossierSessionsBody"></tbody>
                 </table>
+                </div>
               </div>
             </div>
 
             <!-- CONVERSATIONS & MEMORY -->
             <div class="dossier-tab-pane" id="dossier-conversations">
               <div class="chart-card">
-                <h3>Conversations &amp; Memory</h3>
-                <p class="chart-sub">Recent assistant interactions and durable memory facts learned about this customer</p>
-                <div id="dossierConversations"></div>
+                <h3>Memory</h3>
+                <p class="chart-sub">Durable facts the assistant has learned about this customer</p>
+                <div id="dossierMemoryFacts"></div>
+              </div>
+              <div class="chart-card" style="margin-top:16px;">
+                <h3>Tool Calls</h3>
+                <p class="chart-sub">Assistant tool invocations made on behalf of, or about, this customer</p>
+                <div class="performance-table-wrap">
+                <table class="data-table">
+                  <thead><tr>
+                    <th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Portfolio</th><th style="text-align:left;">Tool</th>
+                    <th>Duration (ms)</th><th style="text-align:left;">Error</th><th style="text-align:left;">Args / Results</th>
+                  </tr></thead>
+                  <tbody id="dossierToolCallsBody"></tbody>
+                </table>
+                </div>
               </div>
             </div>
 
             <!-- CONTENT REACTIONS & ENGAGEMENT -->
             <div class="dossier-tab-pane" id="dossier-engagement">
               <div class="chart-card">
-                <h3>Content Reactions &amp; Engagement</h3>
-                <p class="chart-sub">Uploads, live sessions and thread activity this customer has engaged with</p>
-                <table class="data-table">
-                  <thead><tr><th style="text-align:left;">Content</th><th style="text-align:left;">Type</th><th style="text-align:left;">Reaction</th><th>Date</th></tr></thead>
-                  <tbody id="dossierEngagementBody"></tbody>
-                </table>
+                <div class="engagement-block">
+                  <p class="dossier-subhead" style="margin-top:0;">Product Idea Reactions<span class="table-source-tag">t_product_idea_reaction</span></p>
+                  <table class="data-table">
+                    <thead><tr><th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Product Idea</th><th>Reaction</th></tr></thead>
+                    <tbody id="dossierProductIdeaBody"></tbody>
+                  </table>
+                </div>
+                <div class="engagement-block">
+                  <p class="dossier-subhead">Universe List Reactions<span class="table-source-tag">t_universe_list_reaction</span></p>
+                  <table class="data-table">
+                    <thead><tr><th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Instrument</th><th style="text-align:left;">Asset Class</th><th>Reaction</th></tr></thead>
+                    <tbody id="dossierUniverseListBody"></tbody>
+                  </table>
+                </div>
+                <div class="engagement-block">
+                  <p class="dossier-subhead">News Bookmarks<span class="table-source-tag">t_news_bookmark</span></p>
+                  <table class="data-table">
+                    <thead><tr><th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Headline</th><th style="text-align:left;">Category</th></tr></thead>
+                    <tbody id="dossierNewsBookmarkBody"></tbody>
+                  </table>
+                </div>
+                <div class="engagement-block">
+                  <p class="dossier-subhead">News Clicks<span class="table-source-tag">t_news_click</span><span class="append-only-note">append-only</span></p>
+                  <table class="data-table">
+                    <thead><tr><th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Headline</th><th style="text-align:left;">Source</th></tr></thead>
+                    <tbody id="dossierNewsClickBody"></tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
@@ -1463,29 +1529,36 @@
               </div>
             </div>
 
-            <!-- NOTIFICATIONS & FEEDBACK -->
+            <!-- NOTIFICATIONS & CAMPAIGNS -->
             <div class="dossier-tab-pane" id="dossier-notifications">
-              <div class="chart-row">
-                <div class="chart-card">
-                  <h3>Notifications Sent</h3>
-                  <p class="chart-sub">Recent outbound notifications to this customer</p>
-                  <div id="dossierNotifications"></div>
-                </div>
-                <div class="chart-card">
-                  <h3>Feedback Received</h3>
-                  <p class="chart-sub">Ratings and comments left by this customer</p>
-                  <div id="dossierFeedback"></div>
+              <div class="chart-card">
+                <h3>Notifications &amp; Campaigns</h3>
+                <p class="chart-sub">Outbound push notifications and campaign sends to this customer</p>
+                <div class="performance-table-wrap">
+                <table class="data-table">
+                  <thead><tr><th style="text-align:left;">Time (SGT)</th><th>Status</th><th style="text-align:left;">OS</th><th style="text-align:left;">Title</th><th style="text-align:left;">Error</th></tr></thead>
+                  <tbody id="dossierCampaignsBody"></tbody>
+                </table>
                 </div>
               </div>
             </div>
 
             <!-- LIVE STUDIO -->
             <div class="dossier-tab-pane" id="dossier-livestudio">
-              <div class="stat-grid" id="dossierLiveStudioStats"></div>
               <div class="chart-card">
-                <h3>Recent Live Studio Activity</h3>
-                <p class="chart-sub">This customer's activity across Live, Uploads and Threads</p>
-                <div id="dossierLiveStudioActivity"></div>
+                <h3>Send Live Video Recommendation</h3>
+                <p class="chart-sub">Push a notification recommending a live session to CIF <span id="liveStudioCif" style="font-family:'JetBrains Mono',monospace;color:var(--ink-900);"></span></p>
+                <div class="field-group">
+                  <label class="field-label">Live Session</label>
+                  <select id="liveStudioSessionSelect"></select>
+                </div>
+                <button class="btn btn-primary" onclick="sendLiveStudioPush()">Send Push Notification</button>
+                <p class="rc-sub" id="liveStudioSendStatus" style="margin-top:10px;display:none;color:var(--green-600);"></p>
+              </div>
+              <div class="chart-card" style="margin-top:16px;">
+                <h3>Recent Live Studio Pushes</h3>
+                <p class="chart-sub">Push notifications sent to this customer recommending live content</p>
+                <div id="liveStudioPushLog"></div>
               </div>
             </div>
           </div>
@@ -3814,223 +3887,224 @@
       aiSummary:{
         narrative:"Wei Ling has been a Premier client since 2016 with consistently high engagement across Live Studio content. Recent activity skews toward rate-sensitive and ESG topics, and she's asked the assistant twice this month about SRS deadlines — a good trigger for a proactive nudge before year-end.",
         tags:[{label:"Engagement", value:"High", tone:"green"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Positive", tone:"teal"}],
-        highlights:["Attended 4 of the last 5 live sessions in the Markets section, including Fed Rate Reaction Live.","Asked the in-app assistant about SRS top-up deadlines twice in the past 30 days.","Consistently opts into ESG/sustainable investing content over other Wealth topics.","No flagged content or compliance touchpoints in the last 12 months."]
+        keyPreferences:["Sustainable / ESG investment options over conventional funds","Concise push notifications over long email digests"],
+        lifeEvents:["Saving toward a child's overseas university tuition"],
+        engagementHighlights:["Attended 4 of the last 5 live sessions in the Markets section, including Fed Rate Reaction Live.","Asked the in-app assistant about SRS top-up deadlines twice in the past 30 days."],
+        productInterests:["ESG Balanced Fund","Structured Notes – FX Linked","SRS top-up planning"],
+        notableTopics:["#RatesOutlook","Fed Rate Reaction Live","SRS top-up deadline"]
       },
-      identity:[["Full Name","Wei Ling Tan"],["CIF","C-10293847"],["Segment","Premier Banking"],["Relationship Manager","S. Wong"],["Customer Since","Mar 2016"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Orchard"],["Risk Profile","Moderate"]],
+      identity:[["Full Name","Wei Ling Tan"],["CIF","C-10293847"],["Segment","Premier Banking"],["Relationship Manager","S. Wong"],["Customer Since","Mar 2016"],["Home Branch","Orchard"],["Risk Profile","Moderate"]],
+      sync:{cip:true, cipCachedAt:"27 Jul, 06:00", cruise:true, cruiseCachedAt:"27 Jul, 05:45"},
+      preferences:[["PREFERRED_NAME","Wei Ling"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","Y"],["PUSH_OPT_IN","Y"]],
       sessions:[
-        {device:"iPhone 15 Pro · App", location:"Singapore, SG", time:"27 Jul, 09:02", status:"success"},
-        {device:"Chrome · Web", location:"Singapore, SG", time:"24 Jul, 19:41", status:"success"},
-        {device:"iPhone 15 Pro · App", location:"Singapore, SG", time:"22 Jul, 07:18", status:"success"},
-        {device:"Safari · Web", location:"Unrecognised device", time:"19 Jul, 23:05", status:"failed"}
+        {time:"27 Jul, 09:02:14", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"203.117.22.10", portfolio:"-", error:"-"},
+        {time:"27 Jul, 09:03:01", action:"VIEW_PORTFOLIO", functionGroup:"WEALTH", status:"success", channel:"MOBILE_APP", sourceIp:"203.117.22.10", portfolio:"SGD-INV-2291", error:"-"},
+        {time:"24 Jul, 19:41:37", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"WEB", sourceIp:"116.86.4.201", portfolio:"-", error:"-"},
+        {time:"22 Jul, 07:18:52", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"203.117.22.10", portfolio:"-", error:"-"},
+        {time:"19 Jul, 23:05:09", action:"LOGIN_FAILED", functionGroup:"AUTH", status:"failed", channel:"WEB", sourceIp:"41.203.88.14", portfolio:"-", error:"INVALID_OTP"}
       ],
-      conversations:[
-        {date:"25 Jul", channel:"In-App Assistant", summary:"Asked about SRS top-up deadline and Premier fee waivers.", memory:false},
-        {date:"18 Jul", channel:"In-App Assistant", summary:"Requested a recap of the Fed Rate Reaction Live session she missed the start of.", memory:false},
-        {date:"—", channel:"Memory", summary:"Prefers sustainable / ESG investment options over conventional funds.", memory:true},
-        {date:"—", channel:"Memory", summary:"Has previously mentioned saving toward a child's overseas university tuition.", memory:true}
+      memoryFacts:["Prefers sustainable / ESG investment options over conventional funds.","Has previously mentioned saving toward a child's overseas university tuition."],
+      toolCalls:[
+        {time:"25 Jul, 14:02:11", portfolio:"SGD-INV-2291", tool:"get_srs_deadline", durationMs:184, error:"-", argsResults:"{\"cif\":\"C-10293847\"} → {\"deadline\":\"2026-12-31\"}"},
+        {time:"25 Jul, 14:02:40", portfolio:"SGD-INV-2291", tool:"get_premier_fee_waivers", durationMs:212, error:"-", argsResults:"{\"segment\":\"Premier\"} → 3 waivers found"},
+        {time:"18 Jul, 20:11:05", portfolio:"-", tool:"summarize_live_session", durationMs:1340, error:"-", argsResults:"{\"session\":\"Fed Rate Reaction Live\"} → summary returned"}
       ],
-      engagement:[
-        {title:"Weekly Market Wrap", type:"Upload", reaction:"Watched 92%", date:"24 Jul"},
-        {title:"Fed Rate Reaction Live", type:"Live", reaction:"Attended, asked 1 question", date:"18 Jul"},
-        {title:"#RatesOutlook", type:"Thread", reaction:"Commented", date:"12 Jul"},
-        {title:"Wealth Planning 101", type:"Upload", reaction:"Watched 100%, liked", date:"3 Jul"}
-      ],
+      engagement:{
+        productIdeaReactions:[{time:"24 Jul, 10:12", product:"ESG Balanced Fund", reaction:"Liked"},{time:"12 Jul, 08:44", product:"Structured Notes – FX Linked", reaction:"Saved"}],
+        universeListReactions:[{time:"20 Jul, 09:30", instrument:"OCBC ESG Global Bond Fund", assetClass:"Bond", reaction:"Liked"},{time:"15 Jul, 17:02", instrument:"Singtel", assetClass:"Equity", reaction:"Watchlisted"}],
+        newsBookmarks:[{time:"22 Jul, 07:40", headline:"SRS top-up deadline: what Premier clients should know", category:"Wealth"}],
+        newsClicks:[{time:"27 Jul, 09:05", headline:"Fed holds rates, signals cut in Q4", source:"OCBC Research"},{time:"24 Jul, 10:10", headline:"ESG fund inflows hit 3-year high in SG", source:"Business Times"}]
+      },
       suitability:[
         {product:"Premier Growth Portfolio", risk:"Moderate", lastAssessed:"Jun 2026", status:"suitable"},
         {product:"Structured Notes – FX Linked", risk:"Moderate-High", lastAssessed:"Jan 2026", status:"review"},
         {product:"ESG Balanced Fund", risk:"Moderate", lastAssessed:"Jun 2026", status:"suitable"}
       ],
-      notifications:[
-        {date:"26 Jul", channel:"Push", content:"Reminder: SRS top-up deadline is 31 December."},
-        {date:"20 Jul", channel:"Email", content:"Invitation: Treasury Desk AMA live session."},
-        {date:"15 Jul", channel:"Push", content:"Your Premier portfolio review is ready to view."}
+      campaigns:[
+        {time:"26 Jul, 08:00:02", status:"Delivered", os:"iOS", title:"Reminder: SRS top-up deadline is 31 December.", error:"-"},
+        {time:"20 Jul, 09:15:30", status:"Delivered", os:"iOS", title:"Invitation: Treasury Desk AMA live session.", error:"-"},
+        {time:"15 Jul, 08:00:11", status:"Failed", os:"iOS", title:"Your Premier portfolio review is ready to view.", error:"DEVICE_TOKEN_EXPIRED"}
       ],
-      feedback:[
-        {date:"20 Jul", rating:5, comment:"Loved the Fed Rate Reaction live session, very clear explanations."},
-        {date:"05 Jul", rating:4, comment:"Wealth Planning 101 was helpful but a bit long for a first watch."}
-      ],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"4"},{label:"Uploads Watched", value:"11"},{label:"Threads Posted", value:"3"},{label:"Hot Topics Followed", value:"2"}],
-        activity:[
-          "Attended <span class=\"a-name\">Fed Rate Reaction Live</span> and asked a question during Q&A",
-          "Watched <span class=\"a-name\">Weekly Market Wrap</span> to 92% completion",
-          "Commented on <span class=\"a-name\">#RatesOutlook</span> in Threads",
-          "Following <span class=\"a-name\">Digital Assets Allocation</span> in Hot Topics"
-        ]
-      }
+      liveStudioPushes:[
+        {time:"18 Jul, 09:00:00", session:"Fed Rate Reaction Live", os:"iOS"}
+      ]
     },
     "C-10381922": {
       segment:"Personal Banking", rm:"A. Kumar", since:"Sep 2020", initials:"ML",
       aiSummary:{
         narrative:"Marcus is a moderately active Personal Banking customer who mostly consumes content passively — few live attendances, but steady upload viewership around SME and loans content, likely researching a business loan.",
         tags:[{label:"Engagement", value:"Medium", tone:"teal"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Neutral", tone:"amber"}],
-        highlights:["Viewed the SME Loan Explainer upload twice in the last two weeks.","No live session attendance in the last 90 days.","CIP data not yet synced for this customer — Cruise cache only."]
+        keyPreferences:["Email over push for account-related updates"],
+        lifeEvents:["Runs a small F&B business, previously mentioned expansion plans"],
+        engagementHighlights:["Viewed the SME Loan Explainer upload twice in the last two weeks.","No live session attendance in the last 90 days."],
+        productInterests:["SME Working Capital Loan"],
+        notableTopics:["SME working capital documentation"]
       },
-      identity:[["Full Name","Marcus Lim"],["CIF","C-10381922"],["Segment","Personal Banking"],["Relationship Manager","A. Kumar"],["Customer Since","Sep 2020"],["Preferred Language","English"],["Preferred Channel","Email"],["Marketing Consent","Opted In"],["Home Branch","Tampines"],["Risk Profile","Conservative"]],
+      identity:[["Full Name","Marcus Lim"],["CIF","C-10381922"],["Segment","Personal Banking"],["Relationship Manager","A. Kumar"],["Customer Since","Sep 2020"],["Home Branch","Tampines"],["Risk Profile","Conservative"]],
+      sync:{cip:false, cipCachedAt:"—", cruise:true, cruiseCachedAt:"27 Jul, 04:50"},
+      preferences:[["PREFERRED_NAME","Marcus"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","Y"],["PUSH_OPT_IN","N"]],
       sessions:[
-        {device:"Samsung S24 · App", location:"Singapore, SG", time:"27 Jul, 08:40", status:"success"},
-        {device:"Chrome · Web", location:"Singapore, SG", time:"21 Jul, 12:05", status:"success"}
+        {time:"27 Jul, 08:40:22", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"175.156.30.7", portfolio:"-", error:"-"},
+        {time:"21 Jul, 12:05:44", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"WEB", sourceIp:"175.156.30.7", portfolio:"-", error:"-"}
       ],
-      conversations:[
-        {date:"22 Jul", channel:"In-App Assistant", summary:"Asked what documents are needed for an SME working capital loan.", memory:false},
-        {date:"—", channel:"Memory", summary:"Runs a small F&B business, previously mentioned expansion plans.", memory:true}
+      memoryFacts:["Runs a small F&B business, previously mentioned expansion plans."],
+      toolCalls:[
+        {time:"22 Jul, 11:20:03", portfolio:"-", tool:"get_sme_loan_requirements", durationMs:298, error:"-", argsResults:"{\"loanType\":\"working_capital\"} → checklist returned"}
       ],
-      engagement:[
-        {title:"SME Loan Explainer", type:"Upload", reaction:"Watched twice, 100%", date:"22 Jul"},
-        {title:"Q2 Earnings Roundup", type:"Upload", reaction:"Watched 40%", date:"14 Jul"}
-      ],
+      engagement:{
+        productIdeaReactions:[{time:"22 Jul, 11:25", product:"SME Working Capital Loan", reaction:"Saved"}],
+        universeListReactions:[],
+        newsBookmarks:[],
+        newsClicks:[{time:"14 Jul, 09:02", headline:"SME lending rates ease in Q2", source:"OCBC Research"}]
+      },
       suitability:[
         {product:"SME Working Capital Loan", risk:"N/A", lastAssessed:"Not yet assessed", status:"review"},
         {product:"Personal Savings Plan", risk:"Conservative", lastAssessed:"Sep 2025", status:"suitable"}
       ],
-      notifications:[
-        {date:"23 Jul", channel:"Email", content:"Your SME loan enquiry — next steps from your Relationship Manager."}
+      campaigns:[
+        {time:"23 Jul, 10:00:00", status:"Delivered", os:"Android", title:"Your SME loan enquiry — next steps from your Relationship Manager.", error:"-"}
       ],
-      feedback:[
-        {date:"22 Jul", rating:4, comment:"SME Loan Explainer answered most of my questions."}
-      ],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"6"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"1"}],
-        activity:[
-          "Watched <span class=\"a-name\">SME Loan Explainer</span> twice this month",
-          "Following <span class=\"a-name\">SME Working Capital Demand</span> in Hot Topics"
-        ]
-      }
+      liveStudioPushes:[]
     },
     "C-10475610": {
       segment:"Premier Banking", rm:"R. Ong", since:"Jan 2013", initials:"PN",
       aiSummary:{
         narrative:"Priya was highly engaged historically but has gone dormant — no logins or content activity in over 60 days. CIP data has not refreshed, which may indicate a stale or churned relationship worth a retention check-in.",
         tags:[{label:"Engagement", value:"Dormant", tone:"red"},{label:"Churn Risk", value:"High", tone:"red"},{label:"Sentiment", value:"Unknown", tone:"amber"}],
-        highlights:["No app or web login recorded in the last 60+ days.","CIP cache missing — last successful sync unknown.","Was a frequent Wealth content viewer prior to going quiet in May."]
+        keyPreferences:["Phone over digital channels historically"],
+        lifeEvents:["Approaching age 60 — retirement drawdown planning window"],
+        engagementHighlights:["No app or web login recorded in the last 60+ days."],
+        productInterests:["Retirement Income Portfolio"],
+        notableTopics:["Retirement drawdown planning"]
       },
-      identity:[["Full Name","Priya Nair"],["CIF","C-10475610"],["Segment","Premier Banking"],["Relationship Manager","R. Ong"],["Customer Since","Jan 2013"],["Preferred Language","English"],["Preferred Channel","Phone"],["Marketing Consent","Opted Out"],["Home Branch","Raffles Place"],["Risk Profile","Moderate"]],
+      identity:[["Full Name","Priya Nair"],["CIF","C-10475610"],["Segment","Premier Banking"],["Relationship Manager","R. Ong"],["Customer Since","Jan 2013"],["Home Branch","Raffles Place"],["Risk Profile","Moderate"]],
+      sync:{cip:false, cipCachedAt:"—", cruise:false, cruiseCachedAt:"—"},
+      preferences:[["PREFERRED_NAME","Priya"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","N"],["PUSH_OPT_IN","N"]],
       sessions:[
-        {device:"iPad · App", location:"Singapore, SG", time:"18 May, 10:12", status:"success"}
+        {time:"18 May, 10:12:40", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"175.141.9.63", portfolio:"-", error:"-"}
       ],
-      conversations:[
-        {date:"—", channel:"Memory", summary:"Previously indicated interest in retirement drawdown planning ahead of turning 60.", memory:true}
-      ],
-      engagement:[
-        {title:"Wealth Planning 101", type:"Upload", reaction:"Watched 100%", date:"15 May"}
-      ],
+      memoryFacts:["Previously indicated interest in retirement drawdown planning ahead of turning 60."],
+      toolCalls:[],
+      engagement:{
+        productIdeaReactions:[],
+        universeListReactions:[],
+        newsBookmarks:[{time:"15 May, 09:00", headline:"Planning your CPF LIFE payout: Basic vs Escalating", category:"Wealth"}],
+        newsClicks:[]
+      },
       suitability:[
         {product:"Retirement Income Portfolio", risk:"Moderate", lastAssessed:"Nov 2025", status:"review"}
       ],
-      notifications:[
-        {date:"10 Jul", channel:"Email", content:"We miss you — here's what's new on Live Studio."}
+      campaigns:[
+        {time:"10 Jul, 08:00:00", status:"Delivered", os:"iOS", title:"We miss you — here's what's new on Live Studio.", error:"-"}
       ],
-      feedback:[],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"1"},{label:"Uploads Watched", value:"3"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"0"}],
-        activity:["Last watched <span class=\"a-name\">Wealth Planning 101</span> on 15 May — no activity since"]
-      }
+      liveStudioPushes:[]
     },
     "C-10592047": {
       segment:"SME Banking", rm:"M. Lee", since:"Jul 2019", initials:"JK",
       aiSummary:{
         narrative:"Jonathan runs an active SME relationship and engages heavily with Markets content, likely for treasury and FX hedging decisions for his business. Both CIP and Cruise caches are fresh.",
         tags:[{label:"Engagement", value:"High", tone:"green"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Positive", tone:"teal"}],
-        highlights:["Attended Treasury Desk AMA and asked about FX hedging for SME invoicing.","Regularly reads Market News threads before market open.","Both CIP and Cruise data refreshed within the last 24 hours."]
+        keyPreferences:["App push for time-sensitive treasury desk sessions"],
+        lifeEvents:["Business imports raw materials priced in USD — recurring FX exposure"],
+        engagementHighlights:["Attended Treasury Desk AMA and asked about FX hedging for SME invoicing.","Regularly reads Market News threads before market open."],
+        productInterests:["FX Forward Contracts","SME Working Capital Loan"],
+        notableTopics:["FX hedging for SME invoicing","Treasury Desk AMA"]
       },
-      identity:[["Full Name","Jonathan Koh"],["CIF","C-10592047"],["Segment","SME Banking"],["Relationship Manager","M. Lee"],["Customer Since","Jul 2019"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Jurong East"],["Risk Profile","Moderate-High"]],
+      identity:[["Full Name","Jonathan Koh"],["CIF","C-10592047"],["Segment","SME Banking"],["Relationship Manager","M. Lee"],["Customer Since","Jul 2019"],["Home Branch","Jurong East"],["Risk Profile","Moderate-High"]],
+      sync:{cip:true, cipCachedAt:"27 Jul, 05:10", cruise:true, cruiseCachedAt:"27 Jul, 05:12"},
+      preferences:[["PREFERRED_NAME","Jonathan"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","Y"],["PUSH_OPT_IN","Y"]],
       sessions:[
-        {device:"MacBook · Web", location:"Singapore, SG", time:"27 Jul, 07:30", status:"success"},
-        {device:"iPhone 14 · App", location:"Singapore, SG", time:"26 Jul, 18:12", status:"success"}
+        {time:"27 Jul, 07:30:18", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"WEB", sourceIp:"58.185.20.44", portfolio:"-", error:"-"},
+        {time:"26 Jul, 18:12:55", action:"VIEW_PORTFOLIO", functionGroup:"TREASURY", status:"success", channel:"MOBILE_APP", sourceIp:"58.185.20.44", portfolio:"SGD-SME-0087", error:"-"}
       ],
-      conversations:[
-        {date:"26 Jul", channel:"In-App Assistant", summary:"Asked about FX forward contracts for hedging supplier invoices.", memory:false},
-        {date:"—", channel:"Memory", summary:"Business imports raw materials priced in USD — FX exposure is a recurring concern.", memory:true}
+      memoryFacts:["Business imports raw materials priced in USD — FX exposure is a recurring concern."],
+      toolCalls:[
+        {time:"26 Jul, 18:15:02", portfolio:"SGD-SME-0087", tool:"get_fx_forward_rates", durationMs:401, error:"-", argsResults:"{\"pair\":\"USDSGD\"} → 6 tenors returned"}
       ],
-      engagement:[
-        {title:"Treasury Desk AMA", type:"Live", reaction:"Attended, asked 2 questions", date:"26 Jul"},
-        {title:"Morning Market Open", type:"Live", reaction:"Attended", date:"25 Jul"},
-        {title:"Good recap from the treasury desk session...", type:"Thread", reaction:"Liked", date:"24 Jul"}
-      ],
+      engagement:{
+        productIdeaReactions:[{time:"26 Jul, 18:20", product:"FX Forward Contracts", reaction:"Liked"}],
+        universeListReactions:[{time:"25 Jul, 08:10", instrument:"OCBC SME Working Capital Note", assetClass:"UT", reaction:"Watchlisted"}],
+        newsBookmarks:[{time:"24 Jul, 07:55", headline:"Treasury desk recap: rate outlook for exporters", category:"Markets"}],
+        newsClicks:[{time:"27 Jul, 07:32", headline:"USD/SGD steadies ahead of Fed decision", source:"OCBC Research"}]
+      },
       suitability:[
         {product:"FX Forward Contracts", risk:"Moderate-High", lastAssessed:"Jul 2026", status:"suitable"},
         {product:"SME Working Capital Loan", risk:"Moderate", lastAssessed:"Feb 2026", status:"suitable"}
       ],
-      notifications:[
-        {date:"25 Jul", channel:"Push", content:"Treasury Desk AMA starts in 30 minutes."},
-        {date:"20 Jul", channel:"Email", content:"Your FX exposure summary is ready to view."}
+      campaigns:[
+        {time:"25 Jul, 08:30:00", status:"Delivered", os:"iOS", title:"Treasury Desk AMA starts in 30 minutes.", error:"-"},
+        {time:"20 Jul, 09:00:00", status:"Delivered", os:"Android", title:"Your FX exposure summary is ready to view.", error:"-"}
       ],
-      feedback:[
-        {date:"26 Jul", rating:5, comment:"Treasury desk answered my hedging question directly — very useful."}
-      ],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"6"},{label:"Uploads Watched", value:"8"},{label:"Threads Posted", value:"2"},{label:"Hot Topics Followed", value:"3"}],
-        activity:[
-          "Attended <span class=\"a-name\">Treasury Desk AMA</span> and asked 2 questions",
-          "Attended <span class=\"a-name\">Morning Market Open</span>",
-          "Following <span class=\"a-name\">Fed Rate Decision Reaction</span> in Hot Topics"
-        ]
-      }
+      liveStudioPushes:[
+        {time:"25 Jul, 08:30:00", session:"Treasury Desk AMA", os:"iOS"}
+      ]
     },
     "C-10639182": {
       segment:"Personal Banking", rm:"S. Wong", since:"Nov 2022", initials:"AR",
       aiSummary:{
         narrative:"Aisha's account is currently restricted pending a compliance review. Recent thread activity was flagged for phrasing that resembled investment advice, which triggered the restriction. No further content activity since the flag.",
         tags:[{label:"Engagement", value:"Low", tone:"amber"},{label:"Compliance", value:"Under Review", tone:"red"},{label:"Sentiment", value:"Unknown", tone:"amber"}],
-        highlights:["Account restricted following a flagged thread submission on 21 Jul.","No CIP or Cruise data currently cached for this customer.","Recommend compliance sign-off before re-enabling full access."]
+        keyPreferences:[],
+        lifeEvents:[],
+        engagementHighlights:["Account restricted following a flagged thread submission on 21 Jul."],
+        productInterests:["Digital Assets Briefing (informational)"],
+        notableTopics:["Digital asset allocation"]
       },
-      identity:[["Full Name","Aisha Rahman"],["CIF","C-10639182"],["Segment","Personal Banking"],["Relationship Manager","S. Wong"],["Customer Since","Nov 2022"],["Preferred Language","English"],["Preferred Channel","Email"],["Marketing Consent","Opted Out"],["Home Branch","Bedok"],["Risk Profile","Not Assessed"]],
+      identity:[["Full Name","Aisha Rahman"],["CIF","C-10639182"],["Segment","Personal Banking"],["Relationship Manager","S. Wong"],["Customer Since","Nov 2022"],["Home Branch","Bedok"],["Risk Profile","Not Assessed"]],
+      sync:{cip:false, cipCachedAt:"—", cruise:false, cruiseCachedAt:"—"},
+      preferences:[["PREFERRED_NAME","Aisha"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","N"],["PUSH_OPT_IN","N"]],
       sessions:[
-        {device:"iPhone 13 · App", location:"Singapore, SG", time:"21 Jul, 14:22", status:"success"}
+        {time:"21 Jul, 14:22:09", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"119.74.5.201", portfolio:"-", error:"-"}
       ],
-      conversations:[
-        {date:"—", channel:"Memory", summary:"No durable memory facts recorded yet for this customer.", memory:true}
-      ],
-      engagement:[
-        {title:"Thinking of putting 40% of my portfolio into digital assets...", type:"Thread", reaction:"Flagged", date:"21 Jul"}
-      ],
+      memoryFacts:["No durable memory facts recorded yet for this customer."],
+      toolCalls:[],
+      engagement:{
+        productIdeaReactions:[],
+        universeListReactions:[],
+        newsBookmarks:[],
+        newsClicks:[]
+      },
       suitability:[
         {product:"Digital Assets Briefing (informational)", risk:"Not Assessed", lastAssessed:"—", status:"review"}
       ],
-      notifications:[
-        {date:"21 Jul", channel:"Email", content:"Your recent post is under compliance review."}
+      campaigns:[
+        {time:"21 Jul, 15:00:00", status:"Delivered", os:"Android", title:"Your recent post is under compliance review.", error:"-"}
       ],
-      feedback:[],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"1"},{label:"Threads Posted", value:"1"},{label:"Hot Topics Followed", value:"0"}],
-        activity:["Thread submission flagged for compliance review on 21 Jul"]
-      }
+      liveStudioPushes:[]
     },
     "C-10712456": {
       segment:"Premier Banking", rm:"P. Sharma", since:"Feb 2017", initials:"DO",
       aiSummary:{
         narrative:"Daniel is a steady, low-maintenance Premier client with consistent but light engagement. He watches uploads regularly but rarely interacts with live sessions or threads — likely a passive content consumer rather than an active community participant.",
         tags:[{label:"Engagement", value:"Medium", tone:"teal"},{label:"Churn Risk", value:"Low", tone:"green"},{label:"Sentiment", value:"Neutral", tone:"amber"}],
-        highlights:["Watches roughly one upload per week, mostly Markets content.","Has never attended a live session or posted in Threads.","Cruise cache not yet synced for this customer."]
+        keyPreferences:["Concise, data-first summaries over long explainer videos"],
+        lifeEvents:[],
+        engagementHighlights:["Watches roughly one upload per week, mostly Markets content."],
+        productInterests:["Premier Growth Portfolio"],
+        notableTopics:["Weekly Market Wrap"]
       },
-      identity:[["Full Name","Daniel Ong"],["CIF","C-10712456"],["Segment","Premier Banking"],["Relationship Manager","P. Sharma"],["Customer Since","Feb 2017"],["Preferred Language","English"],["Preferred Channel","App Push"],["Marketing Consent","Opted In"],["Home Branch","Holland Village"],["Risk Profile","Moderate"]],
+      identity:[["Full Name","Daniel Ong"],["CIF","C-10712456"],["Segment","Premier Banking"],["Relationship Manager","P. Sharma"],["Customer Since","Feb 2017"],["Home Branch","Holland Village"],["Risk Profile","Moderate"]],
+      sync:{cip:true, cipCachedAt:"27 Jul, 05:30", cruise:false, cruiseCachedAt:"—"},
+      preferences:[["PREFERRED_NAME","Daniel"],["PREFERRED_LANGUAGE","EN"],["MARKETING_OPT_IN","Y"],["PUSH_OPT_IN","Y"]],
       sessions:[
-        {device:"iPhone 15 · App", location:"Singapore, SG", time:"27 Jul, 06:05", status:"success"},
-        {device:"Chrome · Web", location:"Singapore, SG", time:"20 Jul, 21:30", status:"success"}
+        {time:"27 Jul, 06:05:12", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"MOBILE_APP", sourceIp:"137.132.90.5", portfolio:"-", error:"-"},
+        {time:"20 Jul, 21:30:47", action:"LOGIN_SUCCESS", functionGroup:"AUTH", status:"success", channel:"WEB", sourceIp:"137.132.90.5", portfolio:"-", error:"-"}
       ],
-      conversations:[
-        {date:"—", channel:"Memory", summary:"Prefers concise, data-first summaries over long explainer videos.", memory:true}
-      ],
-      engagement:[
-        {title:"Weekly Market Wrap", type:"Upload", reaction:"Watched 78%", date:"24 Jul"},
-        {title:"Q2 Earnings Roundup", type:"Upload", reaction:"Watched 100%", date:"17 Jul"}
-      ],
+      memoryFacts:["Prefers concise, data-first summaries over long explainer videos."],
+      toolCalls:[],
+      engagement:{
+        productIdeaReactions:[{time:"24 Jul, 07:10", product:"Premier Growth Portfolio", reaction:"Liked"}],
+        universeListReactions:[],
+        newsBookmarks:[],
+        newsClicks:[{time:"24 Jul, 07:05", headline:"Weekly wrap: STI up 1.2%, led by financials", source:"OCBC Research"}]
+      },
       suitability:[
         {product:"Premier Growth Portfolio", risk:"Moderate", lastAssessed:"Mar 2026", status:"suitable"}
       ],
-      notifications:[
-        {date:"24 Jul", channel:"Push", content:"New upload: Weekly Market Wrap is ready to watch."}
+      campaigns:[
+        {time:"24 Jul, 08:00:00", status:"Delivered", os:"iOS", title:"New upload: Weekly Market Wrap is ready to watch.", error:"-"}
       ],
-      feedback:[
-        {date:"17 Jul", rating:4, comment:"Good summary, would prefer a shorter cut next time."}
-      ],
-      liveStudio:{
-        stats:[{label:"Sessions Attended", value:"0"},{label:"Uploads Watched", value:"14"},{label:"Threads Posted", value:"0"},{label:"Hot Topics Followed", value:"1"}],
-        activity:[
-          "Watched <span class=\"a-name\">Weekly Market Wrap</span> to 78% completion",
-          "Following <span class=\"a-name\">SG Bank Earnings Season</span> in Hot Topics"
-        ]
-      }
+      liveStudioPushes:[]
     }
   };
 
@@ -4107,27 +4181,63 @@
     // AI Summary
     document.getElementById('dossierNarrative').textContent = d.aiSummary.narrative;
     document.getElementById('dossierTags').innerHTML = d.aiSummary.tags.map(t => `<span class="ai-tag ${t.tone}">${t.label}: ${t.value}</span>`).join('');
-    document.getElementById('dossierHighlights').innerHTML = d.aiSummary.highlights.map(h => `<li>${h}</li>`).join('');
+    const summaryCategories = [
+      ["Key Preferences", d.aiSummary.keyPreferences],
+      ["Life Events", d.aiSummary.lifeEvents],
+      ["Engagement Highlights", d.aiSummary.engagementHighlights],
+      ["Product Interests", d.aiSummary.productInterests],
+      ["Notable Topics", d.aiSummary.notableTopics]
+    ];
+    document.getElementById('dossierSummaryCategories').innerHTML = summaryCategories.map(([label, items]) => `
+      <p class="subsection-label" style="margin-top:16px;">${label}</p>
+      ${items.length
+        ? `<ul class="ai-summary-highlights">${items.map(i => `<li>${i}</li>`).join('')}</ul>`
+        : `<p style="color:var(--ink-500);font-size:12.5px;margin:0;">None on file.</p>`}
+    `).join('');
 
     // Identity & Preferences
     document.getElementById('dossierIdentityGrid').innerHTML = d.identity.map(([label, value]) => `
       <div class="info-item"><p class="info-label">${label}</p><p class="info-value">${value}</p></div>
     `).join('');
+    document.getElementById('dossierSyncStatus').innerHTML = `
+      <div class="sync-status-item"><span class="info-label">CIP</span>${syncFlag(d.sync.cip)}<span class="table-source-tag">${d.sync.cip ? 'Cached ' + d.sync.cipCachedAt : ''}</span></div>
+      <div class="sync-status-item"><span class="info-label">Cruise</span>${syncFlag(d.sync.cruise)}<span class="table-source-tag">${d.sync.cruise ? 'Cached ' + d.sync.cruiseCachedAt : ''}</span></div>
+    `;
+    document.getElementById('dossierPreferencesBody').innerHTML = d.preferences.map(([key, value]) => `
+      <tr><td style="text-align:left;font-family:'JetBrains Mono',monospace;">${key}</td><td style="text-align:left;">${value}</td></tr>
+    `).join('');
 
     // Sessions & Logins
     document.getElementById('dossierSessionsBody').innerHTML = d.sessions.map(s => `
-      <tr><td style="text-align:left;">${s.device}</td><td style="text-align:left;">${s.location}</td><td>${s.time}</td><td><span class="badge ${s.status === 'success' ? 'approved' : 'flagged'}">${s.status === 'success' ? 'Success' : 'Failed'}</span></td></tr>
-    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No recent sessions.</td></tr>`;
+      <tr><td style="text-align:left;">${s.time}</td><td style="text-align:left;">${s.action}</td><td style="text-align:left;">${s.functionGroup}</td>
+      <td><span class="badge ${s.status === 'success' ? 'approved' : 'flagged'}">${s.status === 'success' ? 'Success' : 'Failed'}</span></td>
+      <td style="text-align:left;">${s.channel}</td><td style="text-align:left;font-family:'JetBrains Mono',monospace;">${s.sourceIp}</td>
+      <td style="text-align:left;">${s.portfolio}</td><td style="text-align:left;" class="${s.error === '-' ? 'error-cell-ok' : 'error-cell-bad'}">${s.error}</td></tr>
+    `).join('') || `<tr><td colspan="8" style="text-align:center;color:var(--ink-500);padding:16px 0;">No recent sessions.</td></tr>`;
 
     // Conversations & Memory
-    document.getElementById('dossierConversations').innerHTML = d.conversations.map(c => `
-      <div class="audit-item"><span>${c.memory ? '<span class="memory-tag">Memory</span>' : `<span class="a-name">${c.channel}</span> · ${c.date}`} — ${c.summary}</span></div>
-    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No conversation history yet.</p>`;
+    document.getElementById('dossierMemoryFacts').innerHTML = d.memoryFacts.length
+      ? d.memoryFacts.map(f => `<div class="audit-item"><span><span class="memory-tag">Memory</span> ${f}</span></div>`).join('')
+      : `<p style="color:var(--ink-500);font-size:13px;">No durable memory facts recorded yet.</p>`;
+    document.getElementById('dossierToolCallsBody').innerHTML = d.toolCalls.map(t => `
+      <tr><td style="text-align:left;">${t.time}</td><td style="text-align:left;">${t.portfolio}</td><td style="text-align:left;font-family:'JetBrains Mono',monospace;">${t.tool}</td>
+      <td>${t.durationMs}</td><td style="text-align:left;" class="${t.error === '-' ? 'error-cell-ok' : 'error-cell-bad'}">${t.error}</td>
+      <td class="args-results-cell" title="${t.argsResults.replace(/"/g,'&quot;')}">${t.argsResults}</td></tr>
+    `).join('') || `<tr><td colspan="6" style="text-align:center;color:var(--ink-500);padding:16px 0;">No tool calls recorded.</td></tr>`;
 
     // Content Reactions & Engagement
-    document.getElementById('dossierEngagementBody').innerHTML = d.engagement.map(e => `
-      <tr><td style="text-align:left;">${e.title}</td><td style="text-align:left;">${e.type}</td><td style="text-align:left;">${e.reaction}</td><td>${e.date}</td></tr>
-    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No content activity recorded.</td></tr>`;
+    document.getElementById('dossierProductIdeaBody').innerHTML = d.engagement.productIdeaReactions.map(e => `
+      <tr><td style="text-align:left;">${e.time}</td><td style="text-align:left;">${e.product}</td><td>${e.reaction}</td></tr>
+    `).join('') || `<tr><td colspan="3" style="text-align:center;color:var(--ink-500);padding:12px 0;">No product idea reactions.</td></tr>`;
+    document.getElementById('dossierUniverseListBody').innerHTML = d.engagement.universeListReactions.map(e => `
+      <tr><td style="text-align:left;">${e.time}</td><td style="text-align:left;">${e.instrument}</td><td style="text-align:left;">${e.assetClass}</td><td>${e.reaction}</td></tr>
+    `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:12px 0;">No universe list reactions.</td></tr>`;
+    document.getElementById('dossierNewsBookmarkBody').innerHTML = d.engagement.newsBookmarks.map(e => `
+      <tr><td style="text-align:left;">${e.time}</td><td style="text-align:left;">${e.headline}</td><td style="text-align:left;">${e.category}</td></tr>
+    `).join('') || `<tr><td colspan="3" style="text-align:center;color:var(--ink-500);padding:12px 0;">No news bookmarks.</td></tr>`;
+    document.getElementById('dossierNewsClickBody').innerHTML = d.engagement.newsClicks.map(e => `
+      <tr><td style="text-align:left;">${e.time}</td><td style="text-align:left;">${e.headline}</td><td style="text-align:left;">${e.source}</td></tr>
+    `).join('') || `<tr><td colspan="3" style="text-align:center;color:var(--ink-500);padding:12px 0;">No news clicks recorded.</td></tr>`;
 
     // Product Suitability
     const suitabilityBadge = {suitable:"approved", review:"pending", notsuitable:"flagged"};
@@ -4136,22 +4246,64 @@
       <tr><td style="text-align:left;">${s.product}</td><td style="text-align:left;">${s.risk}</td><td style="text-align:left;">${s.lastAssessed}</td><td><span class="badge ${suitabilityBadge[s.status]}">${suitabilityLabel[s.status]}</span></td></tr>
     `).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:16px 0;">No suitability assessments on file.</td></tr>`;
 
-    // Notifications & Feedback
-    document.getElementById('dossierNotifications').innerHTML = d.notifications.map(n => `
-      <div class="audit-item"><span><span class="a-name">${n.channel}</span> · ${n.date} — ${n.content}</span></div>
-    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No notifications sent recently.</p>`;
-    document.getElementById('dossierFeedback').innerHTML = d.feedback.map(f => `
-      <div class="comment"><div class="avatar">${d.initials}</div><div><p class="c-name">${'★'.repeat(f.rating)}${'☆'.repeat(5 - f.rating)} <span class="c-time">· ${f.date}</span></p><p class="c-text">${f.comment}</p></div></div>
-    `).join('') || `<p style="color:var(--ink-500);font-size:13px;">No feedback submitted yet.</p>`;
+    // Notifications & Campaigns
+    renderDossierCampaigns(d);
 
     // Live Studio
-    document.getElementById('dossierLiveStudioStats').innerHTML = d.liveStudio.stats.map(s => `
-      <div class="stat-card"><p class="label">${s.label}</p><p class="value">${s.value}</p></div>
-    `).join('');
-    document.getElementById('dossierLiveStudioActivity').innerHTML = d.liveStudio.activity.map(a => `<div class="audit-item"><span>${a}</span></div>`).join('');
+    document.getElementById('liveStudioCif').textContent = roster.cif;
+    const eligibleSessions = liveData.filter(x => x.status === 'active' || x.status === 'approved');
+    document.getElementById('liveStudioSessionSelect').innerHTML = eligibleSessions.length
+      ? eligibleSessions.map(s => `<option value="${s.id}">${s.title} · ${s.section}</option>`).join('')
+      : `<option value="">No eligible live sessions right now</option>`;
+    document.getElementById('liveStudioSendStatus').style.display = 'none';
+    renderLiveStudioPushLog(d);
 
     switchDossierTab('summary');
     window.scrollTo(0, 0);
+  }
+
+  function renderDossierCampaigns(d){
+    document.getElementById('dossierCampaignsBody').innerHTML = d.campaigns.map(c => `
+      <tr><td style="text-align:left;">${c.time}</td><td><span class="badge ${c.status === 'Delivered' ? 'approved' : 'flagged'}">${c.status}</span></td>
+      <td style="text-align:left;">${c.os}</td><td style="text-align:left;">${c.title}</td>
+      <td style="text-align:left;" class="${c.error === '-' ? 'error-cell-ok' : 'error-cell-bad'}">${c.error}</td></tr>
+    `).join('') || `<tr><td colspan="5" style="text-align:center;color:var(--ink-500);padding:16px 0;">No notifications or campaigns sent recently.</td></tr>`;
+  }
+
+  function renderLiveStudioPushLog(d){
+    document.getElementById('liveStudioPushLog').innerHTML = d.liveStudioPushes.length
+      ? d.liveStudioPushes.map(p => `
+        <div class="push-log-item"><span class="push-log-title">${p.session}</span><span class="push-log-meta">${p.time} · ${p.os}</span></div>
+      `).join('')
+      : `<p style="color:var(--ink-500);font-size:13px;">No Live Studio pushes sent to this customer yet.</p>`;
+  }
+
+  function sendLiveStudioPush(){
+    const d = customerDossiers[currentDossierCif];
+    if(!d) return;
+    const select = document.getElementById('liveStudioSessionSelect');
+    const sessionId = Number(select.value);
+    const session = liveData.find(s => s.id === sessionId);
+    if(!session){
+      const status = document.getElementById('liveStudioSendStatus');
+      status.style.display = 'block';
+      status.style.color = 'var(--danger-600)';
+      status.textContent = 'No live session selected — nothing was sent.';
+      return;
+    }
+    const now = new Date();
+    const time = now.toLocaleDateString('en-GB', {day:'2-digit', month:'short'}) + ', ' + now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+    const os = ['iOS', 'Android'][Math.floor(Math.random() * 2)];
+    d.liveStudioPushes.unshift({time, session: session.title, os});
+    d.campaigns.unshift({time, status:'Delivered', os, title:`Live session recommendation: ${session.title}`, error:'-'});
+
+    renderLiveStudioPushLog(d);
+    renderDossierCampaigns(d);
+
+    const status = document.getElementById('liveStudioSendStatus');
+    status.style.display = 'block';
+    status.style.color = 'var(--green-600)';
+    status.textContent = `Push notification sent to CIF ${currentDossierCif} recommending "${session.title}".`;
   }
 
   function closeCustomerDossier(){
