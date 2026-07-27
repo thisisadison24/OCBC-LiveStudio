@@ -480,10 +480,94 @@
   /* Analytics / overview sections */
   .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:22px;}
   .kpi-grid-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .kpi-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
   .chart-row{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px;}
-  .chart-card{background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;}
+  .chart-card{background:var(--paper-0);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin:0;}
   .chart-card h3{font-size:13.5px;font-weight:600;margin:0 0 4px;}
   .chart-card .chart-sub{font-size:11.5px;color:var(--ink-500);margin:0 0 16px;}
+
+  /* Overview: zone labels distinguishing "needs attention" from "performance" */
+  .overview-zone-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-300);margin:0 0 4px;}
+  .overview-zone-caption{font-size:12.5px;color:var(--ink-500);margin:0 0 14px;}
+
+  /* Overview: cards/charts that deep-link elsewhere */
+  .stat-card.clickable,.chart-card.clickable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
+  .stat-card.clickable:hover{border-color:var(--line-strong);background:var(--paper-100);}
+  .chart-card.clickable:hover{border-color:var(--line-strong);}
+
+  .pillar-link{font-size:12px;color:var(--teal-600);cursor:pointer;font-weight:600;white-space:nowrap;}
+  .pillar-link:hover{text-decoration:underline;}
+
+  /* Overview: light-touch trend badge, inline beside the value */
+  .value-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .value-row .value{margin:0;}
+  .stat-trend{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;}
+  .stat-trend.good{color:var(--green-600);}
+  .stat-trend.bad{color:var(--danger-600);}
+
+  /* Overview: cross-section breakdown links under a combined stat */
+  .stat-breakdown{display:flex;flex-wrap:wrap;gap:3px 10px;margin:8px 0 0;font-size:11px;color:var(--ink-500);}
+  .stat-breakdown a{color:var(--ink-500);cursor:pointer;border-bottom:1px dotted var(--line-strong);}
+  .stat-breakdown a:hover{color:var(--ink-900);border-color:var(--ink-500);}
+
+  /* Overview: Community pillar trending-topic callout beneath the sentiment donut */
+  .trending-callout{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+  .trending-callout .tc-info{display:flex;align-items:center;gap:10px;min-width:0;}
+  .trending-callout .tc-rank{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--ink-500);background:var(--paper-100);border-radius:6px;padding:2px 7px;flex-shrink:0;}
+  .trending-callout .tc-title{font-size:13px;font-weight:600;margin:0;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .trending-callout .tc-meta{font-size:11.5px;color:var(--ink-500);margin:2px 0 0;}
+
+  /* Overview: page-header live-status pill + "as of" freshness stamp */
+  .overview-header-meta{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex-shrink:0;}
+  .live-now-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:20px;border:1px solid var(--line-strong);background:var(--paper-0);color:var(--ink-900);cursor:pointer;white-space:nowrap;transition:border-color .12s ease,background .12s ease;}
+  .live-now-pill:hover{border-color:var(--green-600);background:var(--paper-100);}
+  .as-of-note{font-size:11.5px;color:var(--ink-500);margin:0;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+
+  /* Overview: small pillar identifier on "At a Glance" summary cards */
+  .summary-card-tag{font-size:10px;font-weight:700;color:var(--ink-500);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px;}
+
+  /* Overview: hoverable line chart (Registrations Over the Last 14 Days) */
+  .chart-card.stretch{display:flex;flex-direction:column;}
+  .chart-card.stretch .line-chart-wrap{flex:1;min-height:0;}
+  .line-chart-wrap{position:relative;}
+  .line-chart-wrap svg{width:100%;height:160px;display:block;cursor:crosshair;}
+  .chart-card.stretch .line-chart-wrap svg{height:100%;}
+  .chart-guideline{stroke:var(--ink-300);stroke-width:1;stroke-dasharray:3 3;pointer-events:none;}
+  .chart-hover-dot{fill:var(--chart-red);stroke:var(--paper-0);stroke-width:1.5;pointer-events:none;}
+  .chart-tooltip{position:absolute;top:0;left:0;transform:translate(-50%,-100%);background:var(--paper-100);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-size:11.5px;white-space:nowrap;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,0.45);opacity:0;transition:opacity .1s ease;margin-top:-10px;}
+  .chart-tooltip.visible{opacity:1;}
+  .chart-tooltip .ct-date{color:var(--ink-500);margin:0 0 2px;}
+  .chart-tooltip .ct-value{color:var(--ink-900);font-family:'JetBrains Mono',monospace;font-weight:600;}
+
+  /* Overview: "Live Preview" — a small mock of the actual app card */
+  .live-preview-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-300);margin:0 0 10px;}
+  .app-preview-card{border-radius:12px;overflow:hidden;border:1px solid var(--line-strong);background:#08090A;}
+  .app-preview-cover{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1b1e,#0c0d0f);display:flex;align-items:center;justify-content:center;color:var(--ink-300);}
+  .app-preview-cover .app-preview-mark{position:absolute;top:10px;left:10px;width:22px;height:22px;border-radius:6px;background:var(--red-600);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:10px;color:#fff;}
+  .app-preview-cover .app-preview-datetime{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;}
+  .app-preview-cover .app-preview-live-badge{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:6px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.03em;}
+  .app-preview-body{padding:13px 15px;}
+  .app-preview-title{font-size:14px;font-weight:700;margin:0 0 4px;color:var(--ink-900);}
+  .app-preview-meta{font-size:11.5px;color:var(--ink-500);margin:0;}
+  .live-preview-caption{font-size:11.5px;color:var(--ink-500);margin:11px 0 0;}
+
+  /* Overview: Live Preview carousel nav */
+  .preview-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;}
+  .preview-nav-btn{width:26px;height:26px;border-radius:50%;flex-shrink:0;border:1px solid var(--line-strong);background:var(--paper-0);color:var(--ink-500);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;line-height:1;transition:border-color .12s ease,color .12s ease;}
+  .preview-nav-btn:hover{border-color:var(--ink-500);color:var(--ink-900);}
+  .preview-nav-btn:disabled{opacity:.35;cursor:default;}
+  .preview-nav-btn:disabled:hover{border-color:var(--line-strong);color:var(--ink-500);}
+  .preview-nav-count{font-size:11px;color:var(--ink-500);font-family:'JetBrains Mono',monospace;min-width:34px;text-align:center;}
+
+  /* Overview: larger hero figures for the Needs Attention band */
+  #page-overview .stat-card.hero .value{font-size:30px;}
+
+  /* Overview: targeted type-scale pass (Overview only) */
+  #page-overview .page-header h1{font-size:25px;}
+  #page-overview .page-header p{font-size:14px;}
+  #page-overview .chart-card h3{font-size:15px;}
+  #page-overview .chart-card .chart-sub{font-size:12.5px;}
+  #page-overview .stat-card .label{font-size:12.5px;}
   .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
   .bar-row .b-label{font-size:12px;color:var(--ink-700);width:130px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .bar-track{flex:1;height:8px;background:var(--paper-100);border-radius:5px;overflow:hidden;}
@@ -710,49 +794,66 @@
       <div class="page-header">
         <div>
           <h1>Overview</h1>
-          <p>A high-level snapshot for leadership — summarised performance across Live, Uploads, and Threads.</p>
+          <p>A high-level snapshot for leadership — summarised performance across Live, Uploads, Threads, and Community sentiment.</p>
+        </div>
+        <div class="overview-header-meta">
+          <span class="live-now-pill" onclick="goToPage('live')" id="overviewLiveNowPill"></span>
+          <p class="as-of-note" id="overviewAsOf"></p>
         </div>
       </div>
 
-      <div class="stat-grid" id="overviewStats"></div>
+      <p class="overview-zone-label">Needs Attention</p>
+      <p class="overview-zone-caption">Current backlog and review speed, compared with this time last week.</p>
+      <div class="kpi-grid kpi-grid-3" id="overviewStats"></div>
+
+      <p class="overview-zone-label" style="margin-top:28px;">At a Glance</p>
+      <p class="overview-zone-caption">One headline figure per pillar — scroll down for the full breakdown.</p>
+      <div class="kpi-grid" id="overviewGlance"></div>
+
+      <p class="overview-zone-label" style="margin-top:28px;">Program Performance</p>
 
       <!-- Live section -->
-      <div class="overview-section">
+      <div class="overview-section" style="margin-top:8px;">
         <div class="overview-section-head">
-          <h2>Live</h2>
-          <p>Registration and attendance performance across live sessions.</p>
+          <div>
+            <h2>Live</h2>
+            <p>Registration and attendance performance across live sessions, shown vs. the previous 30 days.</p>
+          </div>
+          <span class="pillar-link" onclick="goToAnalytics('live')">View in Analytics →</span>
         </div>
 
-        <div class="kpi-grid kpi-grid-3">
-          <div class="stat-card"><p class="label">Completed Live Sessions (30d)</p><p class="value">18</p></div>
-          <div class="stat-card"><p class="label">Total Registrations</p><p class="value">12,480</p></div>
-          <div class="stat-card"><p class="label">Weighted Attendance Rate</p><p class="value">64.2%</p></div>
-        </div>
+        <div class="kpi-grid kpi-grid-2" id="overviewLiveKpis"></div>
 
-        <div class="chart-card">
-          <h3>Registrations Over the Last 14 Days</h3>
-          <p class="chart-sub">Daily registrations across all scheduled live sessions</p>
-          <svg viewBox="0 0 560 160" width="100%" height="160" preserveAspectRatio="none">
-            <polyline points="0,120 40,110 80,100 120,105 160,80 200,88 240,60 280,65 320,45 360,50 400,30 440,38 480,20 520,25 560,10"
-              fill="none" style="stroke:var(--chart-red);" stroke-width="2.5"/>
-            <polygon points="0,120 40,110 80,100 120,105 160,80 200,88 240,60 280,65 320,45 360,50 400,30 440,38 480,20 520,25 560,10 560,160 0,160"
-              style="fill:var(--chart-red);" opacity="0.14"/>
-          </svg>
+        <div class="chart-row">
+          <div class="chart-card stretch">
+            <h3>Registrations Over the Last 14 Days</h3>
+            <p class="chart-sub">Daily registrations across all scheduled live sessions — hover to inspect a day</p>
+            <div class="line-chart-wrap" id="liveRegChartWrap"></div>
+          </div>
+          <div class="chart-card">
+            <p class="live-preview-eyebrow">Live Preview · As Seen In App</p>
+            <div class="app-preview-card" id="nextLiveSessionPreview"></div>
+            <div class="preview-nav">
+              <button class="preview-nav-btn" onclick="cycleLivePreview(-1)" aria-label="Previous session">‹</button>
+              <span class="preview-nav-count" id="livePreviewIndex"></span>
+              <button class="preview-nav-btn" onclick="cycleLivePreview(1)" aria-label="Next session">›</button>
+            </div>
+            <p class="live-preview-caption">What's live or coming up next, as it will appear to app users.</p>
+          </div>
         </div>
       </div>
 
       <!-- Uploads section -->
       <div class="overview-section">
         <div class="overview-section-head">
-          <h2>Uploads</h2>
-          <p>Viewership and engagement across on-demand video content.</p>
+          <div>
+            <h2>Uploads</h2>
+            <p>Viewership and engagement across on-demand video content, shown vs. the previous 30 days.</p>
+          </div>
+          <span class="pillar-link" onclick="goToAnalytics('uploads')">View in Analytics →</span>
         </div>
 
-        <div class="kpi-grid kpi-grid-3">
-          <div class="stat-card"><p class="label">Unique Upload Viewers (30d)</p><p class="value">86,420</p></div>
-          <div class="stat-card"><p class="label">Avg Watch Time</p><p class="value">3m 48s</p></div>
-          <div class="stat-card"><p class="label">Upload Completion Rate</p><p class="value">58.7%</p></div>
-        </div>
+        <div class="kpi-grid kpi-grid-2" id="overviewUploadsKpis"></div>
 
         <div class="chart-card">
           <h3>Content by Section</h3>
@@ -779,15 +880,14 @@
       <!-- Threads section -->
       <div class="overview-section">
         <div class="overview-section-head">
-          <h2>Threads</h2>
-          <p>Community activity and moderation health from app users.</p>
+          <div>
+            <h2>Threads</h2>
+            <p>Community activity and moderation health from app users, shown vs. the previous 30 days.</p>
+          </div>
+          <span class="pillar-link" onclick="goToAnalytics('threads')">View in Analytics →</span>
         </div>
 
-        <div class="kpi-grid kpi-grid-3">
-          <div class="stat-card"><p class="label">Active Threads (30d)</p><p class="value">486</p></div>
-          <div class="stat-card"><p class="label">Active Thread Viewers</p><p class="value">34,860</p></div>
-          <div class="stat-card"><p class="label">Thread Engagement Rate</p><p class="value">18.6%</p></div>
-        </div>
+        <div class="kpi-grid kpi-grid-2" id="overviewThreadsKpis"></div>
 
         <div class="chart-card">
           <h3>Submissions by Status</h3>
@@ -806,6 +906,26 @@
               <div class="donut-legend-item"><span class="donut-legend-swatch" style="background:var(--danger-600);"></span><span class="donut-legend-label">Flagged</span><span class="donut-legend-value">514 · 16%</span></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Community section: sentiment pulse sourced from the Hot Topics data -->
+      <div class="overview-section">
+        <div class="overview-section-head">
+          <div>
+            <h2>Community</h2>
+            <p>Trending sentiment and discussion momentum surfaced from Hot Topics, shown vs. the previous 7 days.</p>
+          </div>
+          <span class="pillar-link" onclick="goToPage('hottopics')">View Hot Topics →</span>
+        </div>
+
+        <div class="kpi-grid kpi-grid-2" id="overviewCommunityKpis"></div>
+
+        <div class="chart-card">
+          <h3>Sentiment Split</h3>
+          <p class="chart-sub">Share of trending-topic mentions by sentiment (7d)</p>
+          <div class="donut-row" id="communityDonut"></div>
+          <div class="trending-callout" id="communityTrendingCallout"></div>
         </div>
       </div>
     </div>
@@ -2185,16 +2305,339 @@
     document.getElementById('contentOverlay').classList.add('open');
   }
 
-  // ---- Overview page: combined stats across Uploads + Live ----
+  // ---- Overview page ----
+  // Threads doesn't have a per-item sample array backing its top stat row (see
+  // renderSubmissionsFeed's `submissions` array, which is illustrative), so its
+  // headline pending/flagged/avg-review-time figures are tracked here as the one
+  // source of truth — the Threads page and Overview's cross-section totals both
+  // read from this rather than drifting apart with their own hardcoded numbers.
+  const THREADS_STATS = { pending: 14, livePosts: 486, flagged: 3, featuredTags: 2, avgReviewTimeHrs: 2.1 };
+
+  // Set by renderOverviewCommunity(), read by renderOverviewGlance() — single
+  // source of truth so the "At a Glance" strip and the Community section
+  // never show two different sentiment numbers.
+  let communityNetSentiment = 0;
+
+  // Pillar KPI figures shown on Overview are the same figures Analytics already
+  // shows, so the two pages never contradict each other — Overview just renders
+  // them lighter (no tooltip, no "vs previous period" sentence, a compact trend
+  // arrow instead).
+  const LIVE_METRICS = {
+    sessions: { label: 'Completed Live Sessions (30d)', value: '18', delta: '+2', good: true },
+    registrations: { label: 'Total Registrations', value: '12,480', delta: '+8.4%', good: true },
+    attendance: { label: 'Weighted Attendance Rate', value: '64.2%', delta: '+5.8%', good: true }
+  };
+  const UPLOADS_METRICS = {
+    viewers: { label: 'Unique Upload Viewers (30d)', value: '86,420', delta: '+12.1%', good: true },
+    watchTime: { label: 'Avg Watch Time', value: '3m 48s', delta: '+4.3%', good: true },
+    completion: { label: 'Upload Completion Rate', value: '58.7%', delta: '+2.6%', good: true }
+  };
+  const THREADS_METRICS = {
+    activeThreads: { label: 'Active Threads (30d)', value: '486', delta: '+6.4%', good: true },
+    viewers: { label: 'Active Thread Viewers', value: '34,860', delta: '+9.2%', good: true },
+    engagement: { label: 'Thread Engagement Rate', value: '18.6%', delta: '+2.1%', good: true }
+  };
+
+  // Daily points behind "Registrations Over the Last 14 Days" — x/y are the
+  // exact pixel coordinates of the original hand-plotted polyline (viewBox
+  // 0 0 560 160), paired with the raw registration count each point stands
+  // for, so hovering can show real numbers instead of just a shape.
+  const liveRegistrationsSeries = [
+    { x:0, y:120, date:'Jul 13', value:280 }, { x:40, y:110, date:'Jul 14', value:350 },
+    { x:80, y:100, date:'Jul 15', value:420 }, { x:120, y:105, date:'Jul 16', value:385 },
+    { x:160, y:80, date:'Jul 17', value:560 }, { x:200, y:88, date:'Jul 18', value:505 },
+    { x:240, y:60, date:'Jul 19', value:700 }, { x:280, y:65, date:'Jul 20', value:665 },
+    { x:320, y:45, date:'Jul 21', value:805 }, { x:360, y:50, date:'Jul 22', value:770 },
+    { x:400, y:30, date:'Jul 23', value:910 }, { x:440, y:38, date:'Jul 24', value:855 },
+    { x:480, y:20, date:'Jul 25', value:980 }, { x:520, y:25, date:'Jul 26', value:945 },
+    { x:560, y:10, date:'Jul 27', value:1050 }
+  ];
+
+  // "Live Preview": carousel over what's currently live or cleared to go live
+  // next, sourced straight from liveData so it can't show a session that
+  // doesn't exist. Upcoming (approved) items don't carry a real scheduled
+  // datetime yet (liveData has no datetime field) — that one value is a placeholder.
+  const livePreviewSessions = liveData.filter(x => x.status === 'active' || x.status === 'approved');
+  let livePreviewIndex = 0;
+
+  function cycleLivePreview(delta){
+    if(livePreviewSessions.length <= 1) return;
+    livePreviewIndex = (livePreviewIndex + delta + livePreviewSessions.length) % livePreviewSessions.length;
+    renderNextLiveSessionPreview();
+  }
+
+  function renderNextLiveSessionPreview(){
+    const session = livePreviewSessions[livePreviewIndex] || liveData[0];
+    if(!session) return;
+    const isLive = session.status === 'active';
+    const badgeHtml = isLive
+      ? `<span class="app-preview-live-badge"><span class="dot live"></span>Live</span>`
+      : `<span class="app-preview-datetime">Jul 29 · 3:00 PM SGT</span>`;
+
+    document.getElementById('nextLiveSessionPreview').innerHTML = `
+      <div class="app-preview-cover">
+        <span class="app-preview-mark">LS</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="opacity:.5;"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>
+        ${badgeHtml}
+      </div>
+      <div class="app-preview-body">
+        <p class="app-preview-title">${session.title}</p>
+        <p class="app-preview-meta">${session.owner} · ${session.section}</p>
+      </div>
+    `;
+
+    document.getElementById('livePreviewIndex').textContent = `${livePreviewIndex + 1} / ${livePreviewSessions.length}`;
+    document.querySelectorAll('.preview-nav-btn').forEach(b => b.disabled = livePreviewSessions.length <= 1);
+  }
+
+  function renderLiveRegistrationsChart(){
+    const wrap = document.getElementById('liveRegChartWrap');
+    const points = liveRegistrationsSeries.map(p => `${p.x},${p.y}`).join(' ');
+    wrap.innerHTML = `
+      <svg viewBox="0 0 560 160" preserveAspectRatio="none" id="liveRegSvg">
+        <polyline points="${points}" fill="none" style="stroke:var(--chart-red);" stroke-width="2.5"/>
+        <polygon points="${points} 560,160 0,160" style="fill:var(--chart-red);" opacity="0.14"/>
+        <line class="chart-guideline" id="liveRegGuideline" x1="0" y1="0" x2="0" y2="160" style="opacity:0;"/>
+        <ellipse class="chart-hover-dot" id="liveRegDot" rx="4" ry="4" cx="0" cy="0" style="opacity:0;"/>
+      </svg>
+      <div class="chart-tooltip" id="liveRegTooltip"><p class="ct-date"></p><p class="ct-value"></p></div>
+    `;
+
+    const svg = document.getElementById('liveRegSvg');
+    const guideline = document.getElementById('liveRegGuideline');
+    const dot = document.getElementById('liveRegDot');
+    const tooltip = document.getElementById('liveRegTooltip');
+
+    function showPoint(clientX){
+      const rect = svg.getBoundingClientRect();
+      const relX = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+      const svgX = (relX / rect.width) * 560;
+      const idx = Math.min(Math.max(Math.round(svgX / 40), 0), liveRegistrationsSeries.length - 1);
+      const point = liveRegistrationsSeries[idx];
+
+      guideline.setAttribute('x1', point.x); guideline.setAttribute('x2', point.x); guideline.style.opacity = '1';
+
+      // The chart is stretched non-uniformly (preserveAspectRatio="none", and
+      // now a variable rendered height since the card stretches to match the
+      // Live Preview card next to it), so a plain circle renders as an oval.
+      // Using an ellipse and counter-scaling both rx and ry by the actual
+      // current stretch on each axis keeps it a true circle at any card size.
+      const scaleX = rect.width / 560;
+      const scaleY = rect.height / 160;
+      const screenRadiusPx = 4;
+      dot.setAttribute('cx', point.x); dot.setAttribute('cy', point.y);
+      dot.setAttribute('rx', (screenRadiusPx / scaleX).toFixed(2));
+      dot.setAttribute('ry', (screenRadiusPx / scaleY).toFixed(2));
+      dot.style.opacity = '1';
+
+      const dotScreenX = rect.left + (point.x / 560) * rect.width;
+      const dotScreenY = rect.top + (point.y / 160) * rect.height;
+      const wrapRect = wrap.getBoundingClientRect();
+      tooltip.style.left = (dotScreenX - wrapRect.left) + 'px';
+      tooltip.style.top = (dotScreenY - wrapRect.top) + 'px';
+      tooltip.querySelector('.ct-date').textContent = point.date;
+      tooltip.querySelector('.ct-value').textContent = point.value.toLocaleString() + ' registrations';
+      tooltip.classList.add('visible');
+    }
+
+    svg.addEventListener('mousemove', e => showPoint(e.clientX));
+    svg.addEventListener('mouseleave', () => {
+      guideline.style.opacity = '0';
+      dot.style.opacity = '0';
+      tooltip.classList.remove('visible');
+    });
+  }
+
+  // Compact trend badge: arrow direction from the delta's sign, colour from
+  // whether that direction is actually good for this metric (an increase in
+  // Flagged content is bad even though it's "up"). `period` is a short, always-
+  // visible qualifier ("vs 30d") rather than a full Analytics-style sentence.
+  function statTrendHtml(delta, good, period){
+    if(!delta) return '';
+    const isDown = delta.trim().startsWith('-');
+    const arrow = isDown ? '▼' : '▲';
+    const suffix = period ? ` ${period}` : '';
+    return `<span class="stat-trend ${good ? 'good' : 'bad'}">${arrow} ${delta.replace(/^[+-]/, '')}${suffix}</span>`;
+  }
+
+  function goToAnalytics(tab){
+    goToPage('analytics');
+    switchAnalyticsTab(tab);
+  }
+
+  function setUiSelectValue(selectId, value, label){
+    const sel = document.getElementById(selectId);
+    if(!sel) return;
+    sel.dataset.value = value;
+    const labelEl = sel.querySelector('.ui-select-label');
+    if(labelEl) labelEl.textContent = label;
+    sel.querySelectorAll('.ui-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === value));
+  }
+
+  function goToFilteredPage(page, selectId, value, label, renderFnName){
+    goToPage(page);
+    setUiSelectValue(selectId, value, label);
+    if(typeof window[renderFnName] === 'function') window[renderFnName]();
+  }
+
+  function goToThreadsQueue(status, label){
+    goToPage('threads');
+    switchThreadTab('queue');
+    setUiSelectValue('submissionStatusFilter', status, label);
+    renderSubmissionsFeed();
+  }
+
+  // Needs Attention band: true cross-section totals (Uploads + Live + Threads).
   function renderOverviewStats(){
-    const combined = uploadsData.concat(liveData);
-    const s = computeStats(combined);
-    const liveNow = liveData.filter(x => x.status === 'active').length;
+    const uploadsPending = uploadsData.filter(x => x.status === 'pending').length;
+    const livePending = liveData.filter(x => x.status === 'pending').length;
+    const threadsPending = THREADS_STATS.pending;
+    const totalPending = uploadsPending + livePending + threadsPending;
+
+    const uploadsFlagged = uploadsData.filter(x => x.status === 'flagged').length;
+    const liveFlagged = liveData.filter(x => x.status === 'flagged').length;
+    const threadsFlagged = THREADS_STATS.flagged;
+    const totalFlagged = uploadsFlagged + liveFlagged + threadsFlagged;
+
+    // Weighted by review volume per source, rather than a flat average, so a
+    // source with a much bigger backlog carries proportionate influence.
+    const sources = [
+      { hrs:4.2, n:uploadsPending + uploadsFlagged },
+      { hrs:1.5, n:livePending + liveFlagged },
+      { hrs:THREADS_STATS.avgReviewTimeHrs, n:threadsPending + threadsFlagged }
+    ];
+    const totalWeight = sources.reduce((a, s) => a + s.n, 0);
+    const avgReviewTime = sources.reduce((a, s) => a + s.hrs * s.n, 0) / totalWeight;
+
+    // "vs 7d" is stated once in the zone caption above rather than repeated
+    // on all three badges here.
     document.getElementById('overviewStats').innerHTML = `
-      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="stat-card accent-green"><p class="label"><span class="dot live"></span>Live Now</p><p class="value">${liveNow}</p></div>
-      <div class="stat-card flagged"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
-      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">3.8h</p></div>
+      <div class="stat-card accent-amber hero clickable" onclick="goToThreadsQueue('pending','Pending')">
+        <p class="label"><span class="dot amber"></span>Pending Review</p>
+        <div class="value-row"><p class="value">${totalPending}</p><span class="stat-trend good">▼ 4</span></div>
+        <div class="stat-breakdown">
+          <a onclick="event.stopPropagation();goToFilteredPage('uploads','uploadsStatusFilter','pending','Pending Review','renderUploadsTable')">${uploadsPending} Uploads</a>
+          <a onclick="event.stopPropagation();goToFilteredPage('live','liveLogStatusFilter','pending','Pending Review','renderLiveTable')">${livePending} Live</a>
+          <a onclick="event.stopPropagation();goToThreadsQueue('pending','Pending')">${threadsPending} Threads</a>
+        </div>
+      </div>
+      <div class="stat-card flagged hero clickable" onclick="goToThreadsQueue('flagged','Flagged')">
+        <p class="label"><span class="dot red"></span>Flagged</p>
+        <div class="value-row"><p class="value">${totalFlagged}</p><span class="stat-trend bad">▲ 2</span></div>
+        <div class="stat-breakdown">
+          <a onclick="event.stopPropagation();goToFilteredPage('uploads','uploadsStatusFilter','flagged','Flagged','renderUploadsTable')">${uploadsFlagged} Uploads</a>
+          <a onclick="event.stopPropagation();goToFilteredPage('live','liveLogStatusFilter','flagged','Flagged','renderLiveTable')">${liveFlagged} Live</a>
+          <a onclick="event.stopPropagation();goToThreadsQueue('flagged','Flagged')">${threadsFlagged} Threads</a>
+        </div>
+      </div>
+      <div class="stat-card accent-teal hero">
+        <p class="label"><span class="dot gray"></span>Avg Review Time</p>
+        <div class="value-row"><p class="value">${avgReviewTime.toFixed(1)}h</p><span class="stat-trend good">▼ 0.6h</span></div>
+      </div>
+    `;
+  }
+
+  // Page header: live-status pill and a freshness stamp.
+  function renderOverviewHeader(){
+    const liveNow = liveData.filter(x => x.status === 'active').length;
+    document.getElementById('overviewLiveNowPill').innerHTML = `<span class="dot live"></span>${liveNow} Live Now`;
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    const timeStr = now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+    document.getElementById('overviewAsOf').textContent = `As of ${dateStr} · ${timeStr}`;
+  }
+
+  // Program Performance: pillar KPI rows, each card deep-linking to its Analytics tab.
+  // Each pillar's first metric is already shown in "At a Glance" above, so it's
+  // deliberately excluded here to avoid showing the same number twice.
+  function renderOverviewPillarKpis(){
+    document.getElementById('overviewLiveKpis').innerHTML = [LIVE_METRICS.registrations, LIVE_METRICS.attendance].map(m => `
+      <div class="stat-card"><p class="label">${m.label}</p><div class="value-row"><p class="value">${m.value}</p>${statTrendHtml(m.delta, m.good)}</div></div>
+    `).join('');
+    document.getElementById('overviewUploadsKpis').innerHTML = [UPLOADS_METRICS.watchTime, UPLOADS_METRICS.completion].map(m => `
+      <div class="stat-card"><p class="label">${m.label}</p><div class="value-row"><p class="value">${m.value}</p>${statTrendHtml(m.delta, m.good)}</div></div>
+    `).join('');
+    document.getElementById('overviewThreadsKpis').innerHTML = [THREADS_METRICS.viewers, THREADS_METRICS.engagement].map(m => `
+      <div class="stat-card"><p class="label">${m.label}</p><div class="value-row"><p class="value">${m.value}</p>${statTrendHtml(m.delta, m.good)}</div></div>
+    `).join('');
+  }
+
+  // At a Glance: one headline figure per pillar. Must run after
+  // renderOverviewCommunity() has set communityNetSentiment.
+  function renderOverviewGlance(){
+    document.getElementById('overviewGlance').innerHTML = `
+      <div class="stat-card">
+        <p class="summary-card-tag">Live</p>
+        <p class="label">${LIVE_METRICS.sessions.label}</p>
+        <div class="value-row"><p class="value">${LIVE_METRICS.sessions.value}</p>${statTrendHtml(LIVE_METRICS.sessions.delta, LIVE_METRICS.sessions.good)}</div>
+      </div>
+      <div class="stat-card">
+        <p class="summary-card-tag">Uploads</p>
+        <p class="label">${UPLOADS_METRICS.viewers.label}</p>
+        <div class="value-row"><p class="value">${UPLOADS_METRICS.viewers.value}</p>${statTrendHtml(UPLOADS_METRICS.viewers.delta, UPLOADS_METRICS.viewers.good)}</div>
+      </div>
+      <div class="stat-card">
+        <p class="summary-card-tag">Threads</p>
+        <p class="label">${THREADS_METRICS.activeThreads.label}</p>
+        <div class="value-row"><p class="value">${THREADS_METRICS.activeThreads.value}</p>${statTrendHtml(THREADS_METRICS.activeThreads.delta, THREADS_METRICS.activeThreads.good)}</div>
+      </div>
+      <div class="stat-card">
+        <p class="summary-card-tag">Community</p>
+        <p class="label">Net Sentiment (7d)</p>
+        <div class="value-row"><p class="value" style="color:${communityNetSentiment >= 0 ? 'var(--green-600)' : 'var(--danger-600)'}">${communityNetSentiment >= 0 ? '+' : ''}${communityNetSentiment}</p><span class="stat-trend ${communityNetSentiment >= 0 ? 'good' : 'bad'}">${communityNetSentiment >= 0 ? '▲' : '▼'} 6 pts</span></div>
+      </div>
+    `;
+  }
+
+  // Program Performance: Community pillar, sourced directly from the hotTopics
+  // array that also powers the Hot Topics page, so these numbers never drift
+  // out of sync with what a click-through actually shows.
+  function renderOverviewCommunity(){
+    const s = computeHotTopicsStats();
+    const total = s.totalMentions;
+    const bullishMentions = hotTopics.filter(t => t.sentiment === 'bullish').reduce((a, t) => a + t.mentions, 0);
+    const bearishMentions = hotTopics.filter(t => t.sentiment === 'bearish').reduce((a, t) => a + t.mentions, 0);
+    const neutralMentions = total - bullishMentions - bearishMentions;
+    const pct = n => (n / total) * 100;
+    const netSentiment = Math.round(pct(bullishMentions) - pct(bearishMentions));
+    communityNetSentiment = netSentiment; // shared with the "At a Glance" strip
+
+    document.getElementById('overviewCommunityKpis').innerHTML = `
+      <div class="stat-card"><p class="label">Trending Topics (7d)</p><div class="value-row"><p class="value">${hotTopics.length}</p><span class="stat-trend good">▲ 2</span></div></div>
+      <div class="stat-card"><p class="label">Total Mentions (7d)</p><div class="value-row"><p class="value">${total.toLocaleString()}</p><span class="stat-trend good">▲ 14%</span></div></div>
+    `;
+
+    const circumference = 345.6;
+    const bLen = (pct(bullishMentions) / 100 * circumference);
+    const brLen = (pct(bearishMentions) / 100 * circumference);
+    const nLen = (pct(neutralMentions) / 100 * circumference);
+
+    document.getElementById('communityDonut').innerHTML = `
+      <svg viewBox="0 0 160 160" width="160" height="160">
+        <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--green-600);" stroke-width="26" stroke-dasharray="${bLen.toFixed(1)} ${circumference}" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+        <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--danger-600);" stroke-width="26" stroke-dasharray="${brLen.toFixed(1)} ${circumference}" stroke-dashoffset="${(-bLen).toFixed(1)}" transform="rotate(-90 80 80)"/>
+        <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--chart-gray);" stroke-width="26" stroke-dasharray="${nLen.toFixed(1)} ${circumference}" stroke-dashoffset="${(-(bLen + brLen)).toFixed(1)}" transform="rotate(-90 80 80)"/>
+        <text x="80" y="76" text-anchor="middle" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;fill:var(--ink-900);">${total.toLocaleString()}</text>
+        <text x="80" y="92" text-anchor="middle" style="font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;fill:var(--ink-500);">Total Mentions</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="donut-legend-item"><span class="donut-legend-swatch" style="background:var(--green-600);"></span><span class="donut-legend-label">Bullish</span><span class="donut-legend-value">${bullishMentions.toLocaleString()} · ${Math.round(pct(bullishMentions))}%</span></div>
+        <div class="donut-legend-item"><span class="donut-legend-swatch" style="background:var(--danger-600);"></span><span class="donut-legend-label">Bearish</span><span class="donut-legend-value">${bearishMentions.toLocaleString()} · ${Math.round(pct(bearishMentions))}%</span></div>
+        <div class="donut-legend-item"><span class="donut-legend-swatch" style="background:var(--chart-gray);"></span><span class="donut-legend-label">Neutral</span><span class="donut-legend-value">${neutralMentions.toLocaleString()} · ${Math.round(pct(neutralMentions))}%</span></div>
+      </div>
+    `;
+
+    const top = hotTopics[0];
+    document.getElementById('communityTrendingCallout').innerHTML = `
+      <div class="tc-info">
+        <span class="tc-rank">#1 Trending</span>
+        <div>
+          <p class="tc-title">${top.title}</p>
+          <p class="tc-meta">${top.tag} · ${top.mentions.toLocaleString()} mentions</p>
+        </div>
+      </div>
+      <span class="sentiment ${top.sentiment}">${top.sentiment}</span>
     `;
   }
 
@@ -3332,7 +3775,13 @@
   }
 
   // ---- Initial render ----
+  renderOverviewHeader();
   renderOverviewStats();
+  renderOverviewPillarKpis();
+  renderLiveRegistrationsChart();
+  renderNextLiveSessionPreview();
+  renderOverviewCommunity();
+  renderOverviewGlance();
   renderUploadsStats();
   renderUploadsTable();
   renderLiveStats();
