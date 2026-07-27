@@ -3315,12 +3315,12 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Session</th>
-                  <th>Registrations</th>
-                  <th>App Access</th>
-                  <th>Attendance</th>
-                  <th>Avg Watch</th>
-                  <th>Engagement</th>
+                  <th><button class="sort-button" data-sort-type="live" data-sort-key="title" onclick="sortPerformance('live','title')">Session<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" data-sort-type="live" data-sort-key="primary" onclick="sortPerformance('live','primary')">Registrations<span class="sort-indicator">↓</span></button></th>
+                  <th><button class="sort-button" data-sort-type="live" data-sort-key="appAccess" onclick="sortPerformance('live','appAccess')">App Access<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="live" data-sort-key="rate" onclick="sortPerformance('live','rate')">Attendance<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="live" data-sort-key="watch" onclick="sortPerformance('live','watch')">Avg Watch<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="live" data-sort-key="engagement" onclick="sortPerformance('live','engagement')">Engagement<span class="sort-indicator"></span></button></th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -3423,12 +3423,12 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th><button class="sort-button" onclick="sortPerformance('uploads','title')">Upload<span class="sort-indicator"></span></button></th>
-                  <th><button class="sort-button active" onclick="sortPerformance('uploads','views')">Views<span class="sort-indicator">↓</span></button></th>
-                  <th>Avg Watch</th>
-                  <th>Completion</th>
-                  <th>Engagement</th>
-                  <th>Flag Rate</th>
+                  <th><button class="sort-button" data-sort-type="uploads" data-sort-key="title" onclick="sortPerformance('uploads','title')">Upload<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" data-sort-type="uploads" data-sort-key="views" onclick="sortPerformance('uploads','views')">Views<span class="sort-indicator">↓</span></button></th>
+                  <th><button class="sort-button" data-sort-type="uploads" data-sort-key="watch" onclick="sortPerformance('uploads','watch')">Avg Watch<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="uploads" data-sort-key="rate" onclick="sortPerformance('uploads','rate')">Completion<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="uploads" data-sort-key="engagement" onclick="sortPerformance('uploads','engagement')">Engagement<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="uploads" data-sort-key="flag" onclick="sortPerformance('uploads','flag')">Flag Rate<span class="sort-indicator"></span></button></th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -3548,12 +3548,12 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th><button class="sort-button" onclick="sortPerformance('threads','title')">Thread<span class="sort-indicator"></span></button></th>
-                  <th><button class="sort-button active" onclick="sortPerformance('threads','views')">Views<span class="sort-indicator">↓</span></button></th>
-                  <th>Replies</th>
-                  <th>Contributors</th>
-                  <th>Engagement</th>
-                  <th>Flag Rate</th>
+                  <th><button class="sort-button" data-sort-type="threads" data-sort-key="title" onclick="sortPerformance('threads','title')">Thread<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" data-sort-type="threads" data-sort-key="views" onclick="sortPerformance('threads','views')">Views<span class="sort-indicator">↓</span></button></th>
+                  <th><button class="sort-button" data-sort-type="threads" data-sort-key="replies" onclick="sortPerformance('threads','replies')">Replies<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="threads" data-sort-key="contributors" onclick="sortPerformance('threads','contributors')">Contributors<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="threads" data-sort-key="engagement" onclick="sortPerformance('threads','engagement')">Engagement<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button" data-sort-type="threads" data-sort-key="flag" onclick="sortPerformance('threads','flag')">Flag Rate<span class="sort-indicator"></span></button></th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -4803,7 +4803,11 @@
       {daysAgo:36,segment:"Returning users",status:"Dormant"},
       {daysAgo:11,segment:"New users",status:"Flagged"}
     ].forEach((meta,index)=>Object.assign(analyticsItems.threads[index],meta));
-    const performanceState = {uploads:{page:1,key:"views",dir:"desc"},threads:{page:1,key:"views",dir:"desc"}};
+    const performanceState = {
+      live:{page:1,key:"primary",dir:"desc"},
+      uploads:{page:1,key:"views",dir:"desc"},
+      threads:{page:1,key:"views",dir:"desc"}
+    };
     let analyticsDetailTrigger = null;
 
     function analyticsFilteredItems(type) {
@@ -4870,13 +4874,35 @@
     }
 
     function renderLivePerformanceTable() {
-      const rows=analyticsFilteredItems("live");
+      const state=performanceState.live;
+      const rows=analyticsFilteredItems("live").sort((a,b)=>{
+        const left=performanceSortValue(a,state.key), right=performanceSortValue(b,state.key);
+        const result=typeof left==="string"?left.localeCompare(right):left-right;
+        return state.dir==="asc"?result:-result;
+      });
       document.getElementById("livePerformanceBody").innerHTML=rows.length ? rows.map(item=>{
         const index=analyticsItems.live.indexOf(item);
         return `<tr class="event-row-link" onclick="openAnalyticsDetail('live',${index})"><td>${item.title}</td><td>${item.primary.toLocaleString()}</td><td>${item.appAccess}%</td><td>${item.rate}%</td><td>${item.watch}</td><td>${item.engagement}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',${index})">View details</button></td></tr>`;
       }).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No live sessions match the selected filters.</td></tr>`;
+      updatePerformanceSortHeaders("live");
       renderAnalyticsSummary("live",rows);
       renderLiveFunnel(rows);
+    }
+
+    function performanceSortValue(item,key) {
+      if(key!=="watch") return item[key];
+      const match=item.watch.match(/(\d+)m\s*(\d+)?s?/);
+      return Number(match?.[1]||0)*60+Number(match?.[2]||0);
+    }
+
+    function updatePerformanceSortHeaders(type) {
+      const state=performanceState[type];
+      document.querySelectorAll(`.sort-button[data-sort-type="${type}"]`).forEach(button=>{
+        const active=button.dataset.sortKey===state.key;
+        button.classList.toggle("active",active);
+        button.querySelector(".sort-indicator").textContent=active?(state.dir==="asc"?"↑":"↓"):"";
+        button.closest("th").setAttribute("aria-sort",active?(state.dir==="asc"?"ascending":"descending"):"none");
+      });
     }
 
     function renderPerformanceTable(type) {
@@ -4884,7 +4910,8 @@
       const search = document.getElementById(`${singular}PerformanceSearch`).value.toLowerCase();
       const state = performanceState[type];
       const rows = analyticsFilteredItems(type).filter(x => x.title.toLowerCase().includes(search)).sort((a,b) => {
-        const result = typeof a[state.key] === "string" ? a[state.key].localeCompare(b[state.key]) : a[state.key]-b[state.key];
+        const left=performanceSortValue(a,state.key), right=performanceSortValue(b,state.key);
+        const result = typeof left === "string" ? left.localeCompare(right) : left-right;
         return state.dir === "asc" ? result : -result;
       });
       const pages = Math.max(1,Math.ceil(rows.length/5));
@@ -4899,6 +4926,7 @@
           : `<tr class="event-row-link" onclick="openAnalyticsDetail('threads',${index})"><td>${item.title}</td><td>${item.views.toLocaleString()}</td><td>${item.replies}</td><td>${item.contributors}</td><td>${item.engagement}%</td><td>${item.flag}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('threads',${index})">View details</button></td></tr>`;
       }).join("");
       if(!visible.length) document.getElementById(`${singular}PerformanceBody`).innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No ${type} match the selected filters.</td></tr>`;
+      updatePerformanceSortHeaders(type);
       renderAnalyticsSummary(type,rows);
     }
 
@@ -4914,7 +4942,7 @@
       const state=performanceState[type];
       if(state.key===key) state.dir=state.dir==="asc"?"desc":"asc"; else {state.key=key;state.dir="asc";}
       state.page=1;
-      renderPerformanceTable(type);
+      if(type==="live") renderLivePerformanceTable(); else renderPerformanceTable(type);
     }
     function changePerformancePage(type,direction) {
       performanceState[type].page=Math.max(1,performanceState[type].page+direction);
