@@ -81,6 +81,10 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
     }
 
     .brand {
@@ -1703,22 +1707,50 @@
       border-color: var(--ink-500);
     }
 
-    /* Overview: Community pillar trending-topic callout beneath the sentiment donut */
+    /* Overview: Community pillar — donut on the left, trending topic + top
+       contributors stacked in a column to its right, instead of stacked
+       full-width below the donut (which left the space beside it empty). */
+    .community-split-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    /* Heading + donut live in their own column so the side column starts at
+       the same top edge as "Sentiment Split" — #1 Trending lines up with
+       the card title instead of sitting lower, beside just the donut. */
+    .community-main-col {
+      flex: 0 1 auto;
+    }
+
+    .community-split-layout .donut-row {
+      /* flex-shrink must stay allowed (not 0) so this can still shrink and
+         let its own internal flex-wrap drop the legend below the donut on
+         narrow screens, instead of overflowing the card uncut. */
+      flex: 0 1 auto;
+    }
+
+    .community-side-col {
+      flex: 1 1 340px;
+      min-width: 220px;
+    }
+
+    /* Stacked (rank+sentiment row, then title, then meta) rather than one
+       horizontal row — a single row cramming rank + title + meta + sentiment
+       badge together doesn't hold up once this sits in a narrower column
+       beside the donut instead of a full-width row. */
     .trending-callout {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .trending-callout .tc-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-    }
-
-    .trending-callout .tc-info {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      min-width: 0;
     }
 
     .trending-callout .tc-rank {
@@ -1736,7 +1768,6 @@
       font-size: 13px;
       font-weight: 600;
       margin: 0;
-      max-width: 280px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -1745,7 +1776,10 @@
     .trending-callout .tc-meta {
       font-size: 11.5px;
       color: var(--ink-500);
-      margin: 2px 0 0;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     /* Overview: page-header live-status pill + "as of" freshness stamp */
@@ -2106,6 +2140,86 @@
       font-size: 11.5px;
       color: var(--ink-500);
       margin: 11px 0 0;
+    }
+
+    /* Overview: Top Post preview reuses the real .feed-card component (same
+       markup the Threads > Live Feed page renders), so it looks exactly
+       like an actual in-app post — just with the hover/click affordance
+       turned off, since this is a preview, not a moderation action. */
+    #topPostPreview .feed-card {
+      cursor: default;
+    }
+
+    #topPostPreview .feed-card:hover {
+      border-color: var(--line);
+      background: var(--paper-0);
+    }
+
+    /* This card sits in a narrower half-width column (next to the donut),
+       not the full-width panel .feed-card was designed for — the name +
+       tier badge + category tag were squeezing into an unreadable wrap
+       there. Let the header wrap onto its own lines instead of forcing the
+       author's name to break mid-word to make room. */
+    #topPostPreview .feed-card-head {
+      flex-wrap: wrap;
+      row-gap: 8px;
+    }
+
+    #topPostPreview .fa-name {
+      flex-wrap: wrap;
+      row-gap: 4px;
+    }
+
+    /* Overview: Top Contributors — a short, ranked people list (distinct
+       from Top Post's single-item spotlight), kept deliberately brief. */
+    .contributor-callout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .contributor-callout-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--ink-300);
+      margin: 0 0 2px;
+    }
+
+    .contributor-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contributor-rank {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-500);
+      width: 14px;
+      flex-shrink: 0;
+    }
+
+    .contributor-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contributor-stat {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
     }
 
     /* Overview: Live Preview carousel nav — steps between currently-live and
@@ -2594,34 +2708,41 @@
 
           <div class="kpi-grid kpi-grid-2" id="overviewThreadsKpis"></div>
 
-          <div class="chart-card">
-            <h3>Submissions by Status</h3>
-            <p class="chart-sub">Approved, rejected, and flagged posts</p>
-            <div class="donut-row">
-              <svg viewBox="0 0 160 160" width="160" height="160">
-                <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--green-600);" stroke-width="26"
-                  stroke-dasharray="179.7 345.6" stroke-dashoffset="0" transform="rotate(-90 80 80)" />
-                <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--teal-600);" stroke-width="26"
-                  stroke-dasharray="110.6 345.6" stroke-dashoffset="-179.7" transform="rotate(-90 80 80)" />
-                <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--danger-600);" stroke-width="26"
-                  stroke-dasharray="55.3 345.6" stroke-dashoffset="-290.3" transform="rotate(-90 80 80)" />
-                <text x="80" y="76" text-anchor="middle"
-                  style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;fill:var(--ink-900);">3,215</text>
-                <text x="80" y="92" text-anchor="middle"
-                  style="font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;fill:var(--ink-500);">Total
-                  Submissions</text>
-              </svg>
-              <div class="donut-legend">
-                <div class="donut-legend-item"><span class="donut-legend-swatch"
-                    style="background:var(--green-600);"></span><span class="donut-legend-label">Approved</span><span
-                    class="donut-legend-value">1,672 · 52%</span></div>
-                <div class="donut-legend-item"><span class="donut-legend-swatch"
-                    style="background:var(--teal-600);"></span><span class="donut-legend-label">Rejected</span><span
-                    class="donut-legend-value">1,029 · 32%</span></div>
-                <div class="donut-legend-item"><span class="donut-legend-swatch"
-                    style="background:var(--danger-600);"></span><span class="donut-legend-label">Flagged</span><span
-                    class="donut-legend-value">514 · 16%</span></div>
+          <div class="chart-row">
+            <div class="chart-card">
+              <h3>Submissions by Status</h3>
+              <p class="chart-sub">Approved, rejected, and flagged posts</p>
+              <div class="donut-row">
+                <svg viewBox="0 0 160 160" width="160" height="160">
+                  <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--green-600);" stroke-width="26"
+                    stroke-dasharray="179.7 345.6" stroke-dashoffset="0" transform="rotate(-90 80 80)" />
+                  <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--teal-600);" stroke-width="26"
+                    stroke-dasharray="110.6 345.6" stroke-dashoffset="-179.7" transform="rotate(-90 80 80)" />
+                  <circle r="55" cx="80" cy="80" fill="transparent" style="stroke:var(--danger-600);" stroke-width="26"
+                    stroke-dasharray="55.3 345.6" stroke-dashoffset="-290.3" transform="rotate(-90 80 80)" />
+                  <text x="80" y="76" text-anchor="middle"
+                    style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;fill:var(--ink-900);">3,215</text>
+                  <text x="80" y="92" text-anchor="middle"
+                    style="font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;fill:var(--ink-500);">Total
+                    Submissions</text>
+                </svg>
+                <div class="donut-legend">
+                  <div class="donut-legend-item"><span class="donut-legend-swatch"
+                      style="background:var(--green-600);"></span><span class="donut-legend-label">Approved</span><span
+                      class="donut-legend-value">1,672 · 52%</span></div>
+                  <div class="donut-legend-item"><span class="donut-legend-swatch"
+                      style="background:var(--teal-600);"></span><span class="donut-legend-label">Rejected</span><span
+                      class="donut-legend-value">1,029 · 32%</span></div>
+                  <div class="donut-legend-item"><span class="donut-legend-swatch"
+                      style="background:var(--danger-600);"></span><span class="donut-legend-label">Flagged</span><span
+                      class="donut-legend-value">514 · 16%</span></div>
+                </div>
               </div>
+            </div>
+            <div class="chart-card">
+              <p class="live-preview-eyebrow">Top Post · As Seen In App</p>
+              <div id="topPostPreview"></div>
+              <p class="live-preview-caption">The highest-engagement post published this period.</p>
             </div>
           </div>
         </div>
@@ -2639,10 +2760,17 @@
           <div class="kpi-grid kpi-grid-2" id="overviewCommunityKpis"></div>
 
           <div class="chart-card">
-            <h3>Sentiment Split</h3>
-            <p class="chart-sub">Share of trending-topic mentions by sentiment (7d)</p>
-            <div class="donut-row" id="communityDonut"></div>
-            <div class="trending-callout" id="communityTrendingCallout"></div>
+            <div class="community-split-layout">
+              <div class="community-main-col">
+                <h3>Sentiment Split</h3>
+                <p class="chart-sub">Share of trending-topic mentions by sentiment (7d)</p>
+                <div class="donut-row" id="communityDonut"></div>
+              </div>
+              <div class="community-side-col">
+                <div class="trending-callout" id="communityTrendingCallout"></div>
+                <div class="contributor-callout" id="communityContributors"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -3283,7 +3411,8 @@
                   stroke="var(--chart-red)" stroke-width="3" />
               </svg>
               <div class="retention-labels">
-                <span>Start</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+                <span>Start</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+              </div>
             </div>
           </div>
           <div class="chart-card" style="margin-bottom:16px;">
@@ -4381,14 +4510,68 @@
 
       const top = hotTopics[0];
       document.getElementById('communityTrendingCallout').innerHTML = `
-      <div class="tc-info">
+      <div class="tc-head">
         <span class="tc-rank">#1 Trending</span>
-        <div>
-          <p class="tc-title">${top.title}</p>
-          <p class="tc-meta">${top.tag} · ${top.mentions.toLocaleString()} mentions</p>
+        <span class="sentiment ${top.sentiment}">${top.sentiment}</span>
+      </div>
+      <p class="tc-title">${top.title}</p>
+      <p class="tc-meta">${top.tag} · ${top.mentions.toLocaleString()} mentions</p>
+    `;
+
+      renderCommunityContributors();
+    }
+
+    // Top Contributors: ranked by total engagement (views + likes + comments)
+    // across their published posts, sourced from the same livePosts array
+    // that powers the Threads > Live Feed page. Deliberately short (top 2) —
+    // a ranked highlight, not a full leaderboard.
+    function renderCommunityContributors() {
+      const totals = {};
+      livePosts.forEach(p => {
+        if (!totals[p.author]) totals[p.author] = { author: p.author, initials: p.initials, tier: p.tier, engagement: 0 };
+        totals[p.author].engagement += p.views + p.likes + p.comments;
+      });
+      const top2 = Object.values(totals).sort((a, b) => b.engagement - a.engagement).slice(0, 2);
+
+      document.getElementById('communityContributors').innerHTML = `
+      <p class="contributor-callout-label">Top Contributors</p>
+      ${top2.map((c, i) => `
+        <div class="contributor-row">
+          <span class="contributor-rank">#${i + 1}</span>
+          <div class="feed-avatar" style="width:26px;height:26px;font-size:10.5px;">${c.initials}</div>
+          <p class="contributor-name">${c.author}${c.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}</p>
+          <span class="contributor-stat">${c.engagement.toLocaleString()} engagements</span>
+        </div>
+      `).join('')}
+    `;
+    }
+
+    // Top Post: highest-engagement published post, reusing the exact
+    // .feed-card markup the Threads > Live Feed page renders, so this looks
+    // like a real in-app post rather than a bespoke summary widget.
+    function renderTopPostPreview() {
+      const top = [...livePosts].sort((a, b) => (b.views + b.likes + b.comments) - (a.views + a.likes + a.comments))[0];
+      document.getElementById('topPostPreview').innerHTML = `
+      <div class="feed-card">
+        <div class="feed-card-head">
+          <div class="feed-author">
+            <div class="feed-avatar">${top.initials}</div>
+            <div>
+              <p class="fa-name">${top.author} ${top.tier === 'Verified Investor' ? '<span class="fa-tier">Verified</span>' : ''}</p>
+              <p class="fa-meta">${top.publishedAt}</p>
+            </div>
+          </div>
+          <span class="feed-tag">${top.category}</span>
+        </div>
+        <p class="feed-body">${top.content}</p>
+        <div class="feed-card-foot">
+          <div class="feed-stats">
+            <span>${top.views.toLocaleString()} views</span>
+            <span>${top.likes} likes</span>
+            <span>${top.comments} comments</span>
+          </div>
         </div>
       </div>
-      <span class="sentiment ${top.sentiment}">${top.sentiment}</span>
     `;
     }
 
@@ -5091,6 +5274,7 @@
     renderLiveRegistrationsChart();
     renderNextLiveSessionPreview();
     renderOverviewCommunity();
+    renderTopPostPreview();
     renderOverviewGlance();
     renderUploadsStats();
     renderUploadsTable();
