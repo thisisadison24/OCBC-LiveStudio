@@ -781,6 +781,20 @@
   .sync-status-item{display:flex;flex-direction:column;gap:5px;}
   .sync-status-item .info-label{font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:.04em;}
   .args-results-cell{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-500);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+  .json-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .json-card-head h3{margin:0;}
+  .json-view-toggle{display:inline-flex;padding:2px;background:var(--paper-100);border:1px solid var(--line);border-radius:8px;}
+  .json-view-toggle button{font-family:inherit;font-size:10.5px;font-weight:600;padding:5px 9px;border:0;border-radius:6px;background:transparent;color:var(--ink-500);cursor:pointer;}
+  .json-view-toggle button.active{background:var(--paper-0);color:var(--ink-900);box-shadow:0 0 0 1px var(--line-strong);}
+  .json-raw-wrap{display:none;}
+  .json-raw-wrap .btn{display:flex;margin:0 0 8px auto;}
+  .json-raw{margin:0;max-height:360px;overflow:auto;padding:14px;border:1px solid var(--line);border-radius:9px;background:var(--paper-100);color:var(--ink-700);font:11px/1.6 'JetBrains Mono',monospace;white-space:pre-wrap;word-break:break-word;}
+  .json-structured-table{width:100%;border-collapse:collapse;font-size:11.5px;}
+  .json-structured-table th,.json-structured-table td{padding:7px 9px;border-top:1px solid var(--line);text-align:left;vertical-align:top;}
+  .json-structured-table th{width:34%;color:var(--ink-500);font-size:10px;text-transform:uppercase;}
+  .json-structured-table td{color:var(--ink-700);word-break:break-word;}
+  .json-nested{margin-top:4px;border-left:2px solid var(--line-strong);padding-left:8px;}
+  .json-parse-warning{color:var(--amber-600);font-size:10.5px;margin:4px 0 0;}
   .error-cell-ok{color:var(--ink-300);}
   .error-cell-bad{color:var(--danger-600);font-weight:600;}
   .push-log-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:12.5px;}
@@ -1469,9 +1483,15 @@
                 <div id="dossierMemoryFacts"></div>
               </div>
               <div class="chart-card" style="margin-top:16px;">
-                <h3>Tool Calls</h3>
+                <div class="json-card-head">
+                  <h3>Tool Calls</h3>
+                  <div class="json-view-toggle" aria-label="Tool call display mode">
+                    <button class="active" data-json-view="tools-structured" onclick="setDossierJsonView('tools','structured')">Structured</button>
+                    <button data-json-view="tools-raw" onclick="setDossierJsonView('tools','raw')">Raw JSON</button>
+                  </div>
+                </div>
                 <p class="chart-sub">Assistant tool invocations made on behalf of, or about, this customer</p>
-                <div class="performance-table-wrap">
+                <div class="performance-table-wrap" id="dossierToolCallsStructured">
                 <table class="data-table">
                   <thead><tr>
                     <th style="text-align:left;">Time (SGT)</th><th style="text-align:left;">Portfolio</th><th style="text-align:left;">Tool</th>
@@ -1479,6 +1499,10 @@
                   </tr></thead>
                   <tbody id="dossierToolCallsBody"></tbody>
                 </table>
+                </div>
+                <div class="json-raw-wrap" id="dossierToolsRawWrap">
+                  <button class="btn btn-sm" onclick="copyDossierJson('tools')">Copy JSON</button>
+                  <pre class="json-raw" id="dossierToolsRaw"></pre>
                 </div>
               </div>
             </div>
@@ -3905,6 +3929,18 @@
       ],
       memoryFacts:["Prefers sustainable / ESG investment options over conventional funds.","Has previously mentioned saving toward a child's overseas university tuition."],
       toolCalls:[
+        {
+          time:"27 Jul, 09:03:12", portfolio:"SGD-INV-2291", tool:"get_portfolio_overview", durationMs:246, error:"-",
+          args:{cif:"C-10293847",portfolio_no:"SGD-INV-2291"},
+          results:{
+            cif:"C-10293847",portfolio_no:"SGD-INV-2291",account_status:"ACTIVE",currency:"SGD",
+            net_asset_value_sgd:1284500.75,gross_asset_value_sgd:1327000.75,unrealised_pl_sgd:68420.30,
+            unrealised_pl_pct:5.63,liabilities_sgd:42500,total_cost_sgd:1216080.45,ytd_return:72480.12,
+            ytd_return_pct:6.08,ytd_net_change_sgd:69240.18,ytd_label:"Year to date",
+            daily_nav_change_sgd:3840.26,daily_nav_change_pct:0.30,nav_date:"2026-07-27",
+            portfolio_status:"OPEN"
+          }
+        },
         {time:"25 Jul, 14:02:11", portfolio:"SGD-INV-2291", tool:"get_srs_deadline", durationMs:184, error:"-", argsResults:"{\"cif\":\"C-10293847\"} → {\"deadline\":\"2026-12-31\"}"},
         {time:"25 Jul, 14:02:40", portfolio:"SGD-INV-2291", tool:"get_premier_fee_waivers", durationMs:212, error:"-", argsResults:"{\"segment\":\"Premier\"} → 3 waivers found"},
         {time:"18 Jul, 20:11:05", portfolio:"-", tool:"summarize_live_session", durationMs:1340, error:"-", argsResults:"{\"session\":\"Fed Rate Reaction Live\"} → summary returned"}
@@ -4160,6 +4196,93 @@
   }
 
   let currentDossierCif = null;
+  const dossierJsonView = {tools:"structured"};
+
+  function escapeDossierHtml(value){
+    return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+  }
+
+  function parseDossierJson(value){
+    if(typeof value !== "string") return {value,valid:true};
+    const trimmed=value.trim();
+    if(!trimmed || !/^[{[]/.test(trimmed)) return {value,valid:false};
+    try{return {value:JSON.parse(trimmed),valid:true};}
+    catch(error){return {value,valid:false};}
+  }
+
+  function renderDossierJsonValue(value){
+    if(value===null) return '<span style="color:var(--ink-300)">null</span>';
+    if(Array.isArray(value)){
+      if(!value.length) return '<span style="color:var(--ink-300)">Empty array</span>';
+      if(value.every(item=>item && typeof item==="object" && !Array.isArray(item))){
+        const columns=[...new Set(value.flatMap(item=>Object.keys(item)))];
+        return `<div class="performance-table-wrap"><table class="json-structured-table"><thead><tr>${columns.map(column=>`<th>${escapeDossierHtml(column)}</th>`).join("")}</tr></thead><tbody>${value.map(item=>`<tr>${columns.map(column=>`<td>${renderDossierJsonValue(item[column])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+      }
+      return `<table class="json-structured-table"><thead><tr><th>#</th><th>Value</th></tr></thead><tbody>${value.map((item,index)=>`<tr><td>${index+1}</td><td>${renderDossierJsonValue(item)}</td></tr>`).join("")}</tbody></table>`;
+    }
+    if(typeof value==="object"){
+      return `<table class="json-structured-table"><tbody>${Object.entries(value).map(([key,item])=>`<tr><th>${escapeDossierHtml(key)}</th><td>${typeof item==="object"&&item!==null?`<div class="json-nested">${renderDossierJsonValue(item)}</div>`:renderDossierJsonValue(item)}</td></tr>`).join("")}</tbody></table>`;
+    }
+    return escapeDossierHtml(value===undefined?"—":value);
+  }
+
+  function splitToolArgsResults(source){
+    const parts=String(source).split(/\s*(?:→|â†’)\s*/);
+    const args=parseDossierJson(parts[0]||"");
+    const result=parseDossierJson(parts.slice(1).join(" → "));
+    return {args,result,hasResult:parts.length>1};
+  }
+
+  function renderToolArgsResults(source){
+    const parsed=splitToolArgsResults(source);
+    const warning=!parsed.args.valid || (parsed.hasResult&&!parsed.result.valid)
+      ? '<p class="json-parse-warning">Non-JSON values are shown as plain text.</p>' : "";
+    return `<div><b style="font-size:10px;color:var(--ink-500)">Arguments</b>${renderDossierJsonValue(parsed.args.value)}
+      ${parsed.hasResult?`<div style="margin-top:8px"><b style="font-size:10px;color:var(--ink-500)">Result</b>${renderDossierJsonValue(parsed.result.value)}</div>`:""}${warning}</div>`;
+  }
+
+  function renderToolCallPayload(toolCall){
+    if(Object.prototype.hasOwnProperty.call(toolCall,"args") || Object.prototype.hasOwnProperty.call(toolCall,"results")){
+      return `<div><b style="font-size:10px;color:var(--ink-500)">Arguments</b>${renderDossierJsonValue(toolCall.args??{})}
+        <div style="margin-top:8px"><b style="font-size:10px;color:var(--ink-500)">Results</b>${renderDossierJsonValue(toolCall.results??{})}</div></div>`;
+    }
+    return renderToolArgsResults(toolCall.argsResults??"");
+  }
+
+  function renderDossierConversationMemory(){
+    const d=customerDossiers[currentDossierCif];
+    if(!d)return;
+    document.getElementById("dossierMemoryFacts").innerHTML=d.memoryFacts.length
+      ? d.memoryFacts.map(f=>`<div class="audit-item"><span><span class="memory-tag">Memory</span> ${escapeDossierHtml(f)}</span></div>`).join("")
+      : '<p style="color:var(--ink-500);font-size:13px;">No durable memory facts recorded yet.</p>';
+    document.getElementById("dossierToolCallsBody").innerHTML=d.toolCalls.map(t=>`
+      <tr><td style="text-align:left;">${escapeDossierHtml(t.time)}</td><td style="text-align:left;">${escapeDossierHtml(t.portfolio)}</td><td style="text-align:left;font-family:'JetBrains Mono',monospace;">${escapeDossierHtml(t.tool)}</td>
+      <td>${t.durationMs}</td><td style="text-align:left;" class="${t.error==='-'?'error-cell-ok':'error-cell-bad'}">${escapeDossierHtml(t.error)}</td>
+      <td class="args-results-cell" style="white-space:normal;max-width:360px;">${renderToolCallPayload(t)}</td></tr>`).join("")
+      || '<tr><td colspan="6" style="text-align:center;color:var(--ink-500);padding:16px 0;">No tool calls recorded.</td></tr>';
+    document.getElementById("dossierToolsRaw").textContent=JSON.stringify(d.toolCalls,null,2);
+    applyDossierJsonView("tools");
+  }
+
+  function applyDossierJsonView(section){
+    const raw=dossierJsonView[section]==="raw";
+    document.getElementById("dossierToolCallsStructured").style.display=raw?"none":"block";
+    document.getElementById("dossierToolsRawWrap").style.display=raw?"block":"none";
+    document.querySelectorAll(`[data-json-view^="${section}-"]`).forEach(button=>{
+      button.classList.toggle("active",button.dataset.jsonView===`${section}-${dossierJsonView[section]}`);
+    });
+  }
+
+  function setDossierJsonView(section,mode){
+    dossierJsonView[section]=mode;
+    applyDossierJsonView(section);
+  }
+
+  async function copyDossierJson(section){
+    const source=document.getElementById("dossierToolsRaw").textContent;
+    try{await navigator.clipboard.writeText(source);}
+    catch(error){const range=document.createRange();range.selectNodeContents(document.getElementById("dossierToolsRaw"));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);}
+  }
 
   function openCustomerDossier(cif){
     const roster = customerRoster.find(c => c.cif === cif);
@@ -4216,14 +4339,7 @@
     `).join('') || `<tr><td colspan="8" style="text-align:center;color:var(--ink-500);padding:16px 0;">No recent sessions.</td></tr>`;
 
     // Conversations & Memory
-    document.getElementById('dossierMemoryFacts').innerHTML = d.memoryFacts.length
-      ? d.memoryFacts.map(f => `<div class="audit-item"><span><span class="memory-tag">Memory</span> ${f}</span></div>`).join('')
-      : `<p style="color:var(--ink-500);font-size:13px;">No durable memory facts recorded yet.</p>`;
-    document.getElementById('dossierToolCallsBody').innerHTML = d.toolCalls.map(t => `
-      <tr><td style="text-align:left;">${t.time}</td><td style="text-align:left;">${t.portfolio}</td><td style="text-align:left;font-family:'JetBrains Mono',monospace;">${t.tool}</td>
-      <td>${t.durationMs}</td><td style="text-align:left;" class="${t.error === '-' ? 'error-cell-ok' : 'error-cell-bad'}">${t.error}</td>
-      <td class="args-results-cell" title="${t.argsResults.replace(/"/g,'&quot;')}">${t.argsResults}</td></tr>
-    `).join('') || `<tr><td colspan="6" style="text-align:center;color:var(--ink-500);padding:16px 0;">No tool calls recorded.</td></tr>`;
+    renderDossierConversationMemory();
 
     // Content Reactions & Engagement
     document.getElementById('dossierProductIdeaBody').innerHTML = d.engagement.productIdeaReactions.map(e => `
