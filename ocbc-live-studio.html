@@ -215,130 +215,6 @@
       transition: background .12s ease, border-color .12s ease;
     }
 
-  /* Analytics page (richer detail view) */
-  .analytics-filters{
-    display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:10px;
-    padding:14px;margin-bottom:18px;background:var(--paper-0);
-    border:1px solid var(--line);border-radius:var(--radius-lg);
-  }
-  .analytics-filters label{font-size:10.5px;color:var(--ink-500);text-transform:uppercase;letter-spacing:.05em;}
-  .analytics-filters select{margin-top:6px;padding:8px 10px;font-size:12px;}
-  .kpi-delta{font-size:11px;color:var(--green-600);margin:7px 0 0;}
-  .kpi-delta.down{color:var(--danger-600);}
-  .metric-help{
-    display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;
-    border:1px solid var(--line-strong);border-radius:50%;font-size:10px;color:var(--ink-500);
-    cursor:help;
-  }
-  .section-title{font-size:16px;margin:28px 0 12px;}
-  .funnel{display:flex;align-items:stretch;gap:6px;margin-top:10px;}
-  .funnel-step{
-    flex:1;min-width:0;padding:15px 10px;text-align:center;background:var(--paper-100);
-    border:1px solid var(--line);clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%,8% 50%);
-  }
-  .funnel-step:first-child{clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%);}
-  .funnel-step b{display:block;font-family:'Sora',sans-serif;font-size:17px;margin-bottom:5px;}
-  .funnel-step span{font-size:10.5px;color:var(--ink-500);}
-  .line-chart{width:100%;height:175px;display:block;}
-  .chart-axis{stroke:var(--line);stroke-width:1;}
-  .retention-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--ink-500);margin-top:4px;}
-  .data-table{font-size:12px;width:100%;border-collapse:collapse;}
-  .data-table th{padding:9px 10px;text-align:right;color:var(--ink-500);font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--line);}
-  .data-table th:first-child,.data-table td:first-child{text-align:left;}
-  .data-table td{padding:10px;text-align:right;border-top:1px solid var(--line);}
-  .performance-table-wrap{overflow-x:auto;}
-  .performance-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;}
-  .performance-toolbar .search{width:240px;}
-  .result-count{font-size:11.5px;color:var(--ink-500);}
-  .sort-button{font:inherit;font-size:10px;text-transform:uppercase;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
-  .sort-button:hover,.sort-button.active{color:var(--ink-900);}
-  .sort-indicator{display:inline-block;width:10px;margin-left:3px;color:var(--teal-600);}
-  .top-performer{display:inline-block;margin-left:7px;padding:2px 6px;border-radius:10px;background:var(--amber-bg);color:var(--amber-600);font-size:9px;font-weight:700;text-transform:uppercase;white-space:nowrap;}
-  .view-details-btn{
-    font-family:inherit;font-size:10.5px;font-weight:600;white-space:nowrap;
-    padding:5px 9px;border:1px solid var(--line-strong);border-radius:7px;
-    color:var(--ink-700);background:transparent;cursor:pointer;
-  }
-  .view-details-btn:hover,.view-details-btn:focus-visible{color:var(--ink-900);border-color:var(--teal-600);background:var(--paper-100);outline:none;}
-  .pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:12px;}
-  .pagination-status{font-size:11px;color:var(--ink-500);min-width:92px;text-align:center;}
-  .empty-table{text-align:center!important;color:var(--ink-500);padding:24px!important;}
-  .health-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-  .health-metric{background:var(--paper-100);border:1px solid var(--line);border-radius:10px;padding:13px;}
-  .health-metric span{display:block;font-size:11px;color:var(--ink-500);margin-bottom:6px;}
-  .health-metric b{font-family:'Sora',sans-serif;font-size:18px;}
-  .performance-head,.performance-row{
-    display:grid;grid-template-columns:110px minmax(240px,1fr) 110px 110px 110px;
-    gap:14px;align-items:center;
-  }
-  .performance-head{
-    padding:0 0 9px;border-bottom:1px solid var(--line);margin-bottom:14px;
-    color:var(--ink-500);font-size:10px;text-transform:uppercase;letter-spacing:.04em;
-  }
-  .performance-row{margin-bottom:18px;font-size:11.5px;}
-  .performance-row > b{font-size:12px;}
-  .paired-bars{display:grid;gap:6px;}
-  .paired-bar{display:grid;grid-template-columns:48px 1fr 34px;gap:7px;align-items:center;}
-  .paired-bar span{color:var(--ink-500);font-size:10px;}
-  .paired-track{height:8px;background:var(--paper-100);border-radius:5px;overflow:hidden;}
-  .paired-track i{display:block;height:100%;border-radius:5px;}
-  .upload-share{background:var(--chart-gray);}
-  .view-share{background:var(--chart-red);}
-  .opportunity{font-weight:700;color:var(--green-600);}
-  .opportunity.down{color:var(--danger-600);}
-  .definition-note{
-    display:flex;align-items:flex-start;gap:8px;margin:-10px 0 18px;padding:10px 12px;
-    border:1px solid var(--line);border-radius:9px;background:var(--paper-0);
-    color:var(--ink-500);font-size:11.5px;line-height:1.5;
-  }
-  .definition-note b{color:var(--ink-700);}
-  .event-row-link{cursor:pointer;}
-  .event-row-link:hover{background:var(--paper-100);}
-  .analytics-detail-modal{max-width:1080px;}
-  .analytics-detail-meta{font-size:11.5px;color:var(--ink-500);margin:4px 0 0;}
-  .analytics-detail-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:16px;}
-  .analytics-detail-kpis{margin-bottom:16px;}
-  .analytics-detail-kpis .stat-card .value{font-size:22px;}
-  .chart-plot{position:relative;margin-top:8px;}
-  .chart-plot svg{overflow:visible;}
-  .chart-label{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--ink-500);}
-  .chart-value{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--ink-700);}
-  .detail-funnel{margin-bottom:16px;}
-  .detail-funnel .funnel-step b{font-size:15px;}
-  .detail-funnel .funnel-step small{display:block;font-size:9.5px;color:var(--teal-600);margin-top:4px;}
-  .engagement-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
-  .engagement-metric{padding:12px;background:var(--paper-100);border:1px solid var(--line);border-radius:9px;}
-  .engagement-metric span{display:block;font-size:10.5px;color:var(--ink-500);margin-bottom:5px;}
-  .engagement-metric b{font-family:'Sora',sans-serif;font-size:18px;}
-  .moment-list{display:grid;gap:0;}
-  .moment-item{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);}
-  .moment-item:first-child{border-top:0;padding-top:0;}
-  .moment-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal-600);}
-  .moment-copy b{display:block;font-size:12px;margin-bottom:2px;}
-  .moment-copy span{font-size:11px;color:var(--ink-500);line-height:1.4;}
-
-  @media (max-width:900px){
-    .app{grid-template-columns:1fr;}
-    .sidebar{display:none;}
-    .stat-grid,.kpi-grid{grid-template-columns:repeat(2,1fr);}
-    .chart-row,.detail-grid,.field-row,.field-row-3{grid-template-columns:1fr;}
-    .analytics-filters{grid-template-columns:repeat(2,1fr);}
-    .health-grid{grid-template-columns:repeat(2,1fr);}
-    .funnel{overflow-x:auto;}
-    .funnel-step{min-width:120px;}
-    .performance-head{display:none;}
-    .performance-row{grid-template-columns:90px 1fr;gap:9px;}
-    .performance-row > span{grid-column:2;}
-    .analytics-detail-grid{grid-template-columns:1fr;}
-    .analytics-detail-modal .kpi-grid{grid-template-columns:repeat(2,1fr);}
-    .performance-toolbar{align-items:stretch;flex-direction:column;}
-    .performance-toolbar .search{width:100%;}
-  }
-  @media (max-width:560px){
-    .analytics-detail-modal .kpi-grid,.engagement-grid{grid-template-columns:1fr;}
-    .analytics-detail-modal .modal-body{padding:16px;}
-  }
-</style>
     .btn:hover {
       background: var(--paper-100);
     }
@@ -2442,6 +2318,30 @@
       background: var(--paper-100);
     }
 
+    .analytics-detail-modal { max-width: 1080px; }
+    .analytics-detail-meta { font-size: 11.5px; color: var(--ink-500); margin: 4px 0 0; }
+    .analytics-detail-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .analytics-detail-kpis { margin-bottom: 16px; }
+    .performance-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0; }
+    .performance-toolbar .search { width: 240px; }
+    .performance-table-wrap { overflow-x: auto; }
+    .result-count, .pagination-status { font-size: 11.5px; color: var(--ink-500); }
+    .sort-button { font: inherit; font-size: 10px; text-transform: uppercase; color: inherit; background: none; border: 0; cursor: pointer; }
+    .sort-button.active { color: var(--ink-900); }
+    .sort-indicator { display: inline-block; width: 10px; color: var(--teal-600); }
+    .top-performer { display: inline-block; margin-left: 7px; padding: 2px 6px; border-radius: 10px; background: var(--amber-bg); color: var(--amber-600); font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .pagination { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+    .view-details-btn { font-family: inherit; font-size: 10.5px; font-weight: 600; white-space: nowrap; padding: 5px 9px; border: 1px solid var(--line-strong); border-radius: 7px; color: var(--ink-700); background: transparent; cursor: pointer; }
+    .view-details-btn:hover, .view-details-btn:focus-visible { color: var(--ink-900); border-color: var(--teal-600); outline: none; }
+    .engagement-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; }
+    .engagement-metric { padding: 12px; background: var(--paper-100); border: 1px solid var(--line); border-radius: 9px; }
+    .engagement-metric span { display: block; font-size: 10.5px; color: var(--ink-500); margin-bottom: 5px; }
+    .engagement-metric b { font-family: 'Sora',sans-serif; font-size: 18px; }
+    .moment-item { display: grid; grid-template-columns: 55px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+    .moment-time { font-family: 'JetBrains Mono',monospace; font-size: 11px; color: var(--teal-600); }
+    .moment-copy b, .moment-copy span { display: block; font-size: 11px; }
+    .moment-copy span { color: var(--ink-500); margin-top: 2px; }
+
     @media (max-width:900px) {
       .app {
         grid-template-columns: 1fr;
@@ -2491,6 +2391,10 @@
       .performance-row>span {
         grid-column: 2;
       }
+
+      .analytics-detail-grid { grid-template-columns: 1fr; }
+      .performance-toolbar { align-items: stretch; flex-direction: column; }
+      .performance-toolbar .search { width: 100%; }
 
       /* Overview only: without this, the new live-status pill + as-of stamp
        pin to the right and crush the title/description into a narrow
@@ -2574,591 +2478,6 @@
     <!-- Main -->
     <div class="main">
 
-      <div class="stat-grid" id="uploadsStats"></div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Uploads Log</h2>
-          <div class="filter-row">
-            <input class="search" type="text" id="uploadsSearch" placeholder="Search uploads..." oninput="renderUploadsTable()" />
-            <div class="ui-select filter" id="uploadsStatusFilter" data-value="all">
-              <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                <span class="ui-select-label">All Statuses</span>
-                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              <div class="ui-select-menu">
-                <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderUploadsTable')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderUploadsTable')">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderUploadsTable')">Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderUploadsTable')">Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this,'renderUploadsTable')">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this,'renderUploadsTable')">Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Title</td><td>Owner</td><td>Section</td><td>Tags</td><td>Status</td><td>Description</td>
-            </tr>
-          </thead>
-          <tbody id="uploadsTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- LIVE PAGE -->
-    <div class="page" id="page-live">
-      <div class="page-header">
-        <div>
-          <h1>Live</h1>
-          <p>Manage and moderate live streaming sessions across OCBC channels.</p>
-        </div>
-        <button class="btn btn-primary" onclick="openUploadModal('Live')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
-          New Live Session
-        </button>
-      </div>
-
-      <div class="stat-grid" id="liveStats"></div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Live Log</h2>
-          <div class="filter-row">
-            <input class="search" type="text" id="liveLogSearch" placeholder="Search live sessions..." oninput="renderLiveTable()" />
-            <div class="ui-select filter" id="liveLogStatusFilter" data-value="all">
-              <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                <span class="ui-select-label">All Statuses</span>
-                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              <div class="ui-select-menu">
-                <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderLiveTable')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderLiveTable')">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderLiveTable')">Live Now<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderLiveTable')">Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this,'renderLiveTable')">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Title</td><td>Owner</td><td>Section</td><td>Tags</td><td>Status</td><td>Description</td>
-            </tr>
-          </thead>
-          <tbody id="liveTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- THREADS PAGE -->
-    <div class="page" id="page-threads">
-      <div class="page-header">
-        <div>
-          <h1>Threads</h1>
-          <p>Coordinate market news and discussion posts submitted by app users — verify submissions, manage the live feed, and curate tags.</p>
-        </div>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card accent-amber">
-          <p class="label"><span class="dot amber"></span>Pending Review</p>
-          <p class="value">14</p>
-        </div>
-        <div class="stat-card accent-green">
-          <p class="label"><span class="dot live"></span>Live Posts</p>
-          <p class="value">486</p>
-        </div>
-        <div class="stat-card flagged">
-          <p class="label"><span class="dot red"></span>Flagged for Compliance</p>
-          <p class="value">3</p>
-        </div>
-        <div class="stat-card accent-teal">
-          <p class="label"><span class="dot gray"></span>Featured Tags</p>
-          <p class="value">2</p>
-        </div>
-      </div>
-
-      <div class="segment-tabbar" id="threadTabbar">
-        <button class="segment-btn active" data-ttab="queue" onclick="switchThreadTab('queue')">Verification Queue</button>
-        <button class="segment-btn" data-ttab="live" onclick="switchThreadTab('live')">Live Feed</button>
-        <button class="segment-btn" data-ttab="topics" onclick="switchThreadTab('topics')">Tags</button>
-      </div>
-
-      <!-- VERIFICATION QUEUE -->
-      <div class="thread-tab-pane active" id="thread-queue">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Awaiting Verification</h2>
-            <div class="filter-row">
-              <input class="search" type="text" id="submissionsSearch" placeholder="Search submissions..." oninput="renderSubmissionsFeed()" />
-              <div class="ui-select filter" id="submissionCategoryFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Categories</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderSubmissionsFeed')">All Categories<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="Market News" onclick="chooseOption(this,'renderSubmissionsFeed')">Market News<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="Discussion" onclick="chooseOption(this,'renderSubmissionsFeed')">Discussion<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="Earnings" onclick="chooseOption(this,'renderSubmissionsFeed')">Earnings<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="Personal Finance" onclick="chooseOption(this,'renderSubmissionsFeed')">Personal Finance<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                </div>
-              </div>
-              <div class="ui-select filter" id="submissionVerifiedFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Users</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderSubmissionsFeed')">All Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="verified" onclick="chooseOption(this,'renderSubmissionsFeed')">Verified Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="community" onclick="chooseOption(this,'renderSubmissionsFeed')">Non-verified Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                </div>
-              </div>
-              <div class="ui-select filter" id="submissionStatusFilter" data-value="pending">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">Pending</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option" data-value="all" onclick="chooseOption(this,'renderSubmissionsFeed')">All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option selected" data-value="pending" onclick="chooseOption(this,'renderSubmissionsFeed')">Pending<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderSubmissionsFeed')">Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this,'renderSubmissionsFeed')">Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this,'renderSubmissionsFeed')">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="feed-list" id="submissionsFeed" style="padding:14px 18px 18px;"></div>
-        </div>
-      </div>
-
-      <!-- LIVE FEED -->
-      <div class="thread-tab-pane" id="thread-live">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Published to App Feed</h2>
-            <div class="filter-row">
-              <input class="search" type="text" id="liveFeedSearch" placeholder="Search live posts..." oninput="renderLiveFeed()" />
-              <div class="ui-select filter" id="liveFeedFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Posts</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderLiveFeed')">All Posts<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="featured" onclick="chooseOption(this,'renderLiveFeed')">Featured<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="reported" onclick="chooseOption(this,'renderLiveFeed')">Reported by users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                </div>
-              </div>
-              <div class="ui-select filter" id="liveFeedVerifiedFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Users</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderLiveFeed')">All Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="verified" onclick="chooseOption(this,'renderLiveFeed')">Verified Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="ui-select-option" data-value="community" onclick="chooseOption(this,'renderLiveFeed')">Non-verified Users<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="feed-list" id="liveFeedList" style="padding:14px 18px 18px;"></div>
-        </div>
-      </div>
-
-      <!-- TOPICS -->
-      <div class="thread-tab-pane" id="thread-topics">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Tags</h2>
-            <button class="btn btn-primary btn-sm" onclick="document.getElementById('topicOverlay').classList.add('open')">+ New Tag</button>
-          </div>
-          <div class="topic-grid" id="topicsGrid"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HOT TOPICS PAGE -->
-    <div class="page" id="page-hottopics">
-      <div class="page-header">
-        <div>
-          <h1>Hot Topics</h1>
-          <p>Trending market themes surfaced from community activity — sentiment, mentions, and momentum for what app users are talking about right now.</p>
-        </div>
-      </div>
-
-      <div class="stat-grid" id="hotTopicsStats"></div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Trending Market Insights</h2>
-          <div class="filter-row">
-            <div class="ui-select filter" id="hotTopicsSentimentFilter" data-value="all">
-              <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                <span class="ui-select-label">All Sentiment</span>
-                <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-              </button>
-              <div class="ui-select-menu">
-                <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderHotTopics')">All Sentiment<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="bullish" onclick="chooseOption(this,'renderHotTopics')">Bullish<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="bearish" onclick="chooseOption(this,'renderHotTopics')">Bearish<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <div class="ui-select-option" data-value="neutral" onclick="chooseOption(this,'renderHotTopics')">Neutral<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="hot-topic-grid" id="hotTopicsGrid" style="padding:14px 18px 18px;"></div>
-      </div>
-    </div>
-
-    <!-- ANALYTICS PAGE -->
-    <div class="page" id="page-analytics">
-      <div class="page-header">
-        <div>
-          <h1>Analytics</h1>
-          <p>Performance, engagement and moderation insights across Live, Uploads and Threads — built for engineering and analytics teams.</p>
-        </div>
-      </div>
-
-      <div class="analytics-filters">
-        <label>Date range<select id="analyticsDateFilter" onchange="handleAnalyticsFilterChange()"><option value="30">Last 30 days</option><option value="7">Last 7 days</option><option value="90">Last 90 days</option></select></label>
-        <label>Content section<select id="analyticsSectionFilter" onchange="handleAnalyticsFilterChange()"><option value="all">All sections</option><option>Markets</option><option>Wealth</option><option>SME</option></select></label>
-        <label>Creator or host<select id="analyticsCreatorFilter" onchange="handleAnalyticsFilterChange()"><option value="all">All creators</option><option>OCBC Research</option><option>Wealth Insights</option><option>Business Banking</option></select></label>
-        <label>User segment<select id="analyticsSegmentFilter" onchange="handleAnalyticsFilterChange()"><option value="all">All users</option><option>New users</option><option>Returning users</option><option>Premier Banking</option></select></label>
-        <label>Content status<select id="analyticsStatusFilter" onchange="handleAnalyticsFilterChange()"><option value="all">All statuses</option><option>Upcoming</option><option>Completed</option><option>Cancelled</option></select></label>
-      </div>
-
-      <div class="segment-tabbar" id="analyticsTabbar">
-        <button class="segment-btn active" data-atab="live" onclick="switchAnalyticsTab('live')">Live</button>
-        <button class="segment-btn" data-atab="uploads" onclick="switchAnalyticsTab('uploads')">Uploads</button>
-        <button class="segment-btn" data-atab="threads" onclick="switchAnalyticsTab('threads')">Threads</button>
-      </div>
-
-      <!-- LIVE ANALYTICS -->
-      <div class="analytics-tab-pane active" id="analytics-live">
-        <div class="kpi-grid">
-          <div class="stat-card"><p class="label">Completed Live Sessions <span class="metric-help" title="Live sessions held during the selected date range">?</span></p><p class="value">18</p><p class="kpi-delta">+2 vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Total Registrations <span class="metric-help" title="Registrations for live sessions held during the selected date range">?</span></p><p class="value">12,480</p><p class="kpi-delta">+8.4% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Weighted App Access Rate <span class="metric-help" title="Total external app opens divided by total registrations across included sessions">?</span></p><p class="value">78.6%</p><p class="kpi-delta">+3.2% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Weighted Attendance Rate <span class="metric-help" title="Total confirmed attendees divided by total registrations across included sessions">?</span></p><p class="value">64.2%</p><p class="kpi-delta">+5.8% vs previous 30 days</p></div>
-        </div>
-        <div class="definition-note"><span class="metric-help">i</span><span><b>What "weighted" means:</b> rates are calculated from the combined totals across all included sessions—for example, total attendees ÷ total registrations. This gives larger sessions proportionate influence instead of treating a 100-person session the same as a 3,000-person session.</span></div>
-
-        <div class="chart-card" style="margin-bottom:16px;">
-          <h3>Registration-to-Attendance Funnel</h3>
-          <p class="chart-sub">Tracks verified movement from the website into the external app and live session</p>
-          <div class="funnel">
-            <div class="funnel-step"><b>24,860</b><span>Session Page Views</span></div>
-            <div class="funnel-step"><b>12,480</b><span>Registrations</span></div>
-            <div class="funnel-step"><b>9,809</b><span>External App Access</span></div>
-            <div class="funnel-step"><b>8,012</b><span>Live Attendance</span></div>
-            <div class="funnel-step"><b>7,146</b><span>Watched 5+ Min</span></div>
-            <div class="funnel-step"><b>3,284</b><span>Chat or Poll</span></div>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <h3>Live Session Performance</h3><p class="chart-sub">Select a session to inspect its registration timeline, viewer retention and key moments</p>
-          <table class="data-table"><thead><tr><th>Session</th><th>Registrations</th><th>App Access</th><th>Attendance</th><th>Avg Watch</th><th>Engagement</th><th>Action</th></tr></thead><tbody>
-            <tr class="event-row-link" onclick="openLiveSessionAnalytics('q3-market-outlook')"><td>Q3 Market Outlook</td><td>3,840</td><td>84%</td><td>71%</td><td>44m</td><td>38%</td><td><button class="view-details-btn" type="button" aria-label="View analytics for Q3 Market Outlook" onclick="event.stopPropagation();openLiveSessionAnalytics('q3-market-outlook')">View details</button></td></tr>
-            <tr class="event-row-link" onclick="openLiveSessionAnalytics('home-ownership-2026')"><td>Home Ownership 2026</td><td>2,960</td><td>79%</td><td>66%</td><td>39m</td><td>31%</td><td><button class="view-details-btn" type="button" aria-label="View analytics for Home Ownership 2026" onclick="event.stopPropagation();openLiveSessionAnalytics('home-ownership-2026')">View details</button></td></tr>
-            <tr class="event-row-link" onclick="openLiveSessionAnalytics('sme-growth-forum')"><td>SME Growth Forum</td><td>2,410</td><td>76%</td><td>61%</td><td>36m</td><td>29%</td><td><button class="view-details-btn" type="button" aria-label="View analytics for SME Growth Forum" onclick="event.stopPropagation();openLiveSessionAnalytics('sme-growth-forum')">View details</button></td></tr>
-          </tbody></table>
-        </div>
-      </div>
-
-      <!-- UPLOADS ANALYTICS -->
-      <div class="analytics-tab-pane" id="analytics-uploads">
-        <div class="kpi-grid">
-          <div class="stat-card"><p class="label">Unique Upload Viewers <span class="metric-help" title="Distinct users who started an uploaded video">?</span></p><p class="value">86,420</p><p class="kpi-delta">+12.1% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Average Watch Time <span class="metric-help" title="Average time watched per video play">?</span></p><p class="value">3m 48s</p><p class="kpi-delta">+4.3% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Upload Completion Rate <span class="metric-help" title="Plays that reached at least 95% of video duration">?</span></p><p class="value">58.7%</p><p class="kpi-delta">+2.6% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Upload Engagement Rate <span class="metric-help" title="Viewers who liked, commented, shared or saved">?</span></p><p class="value">9.4%</p><p class="kpi-delta down">-0.8% vs previous 30 days</p></div>
-        </div>
-        <div class="chart-row">
-          <div class="chart-card">
-            <h3>Upload Views and Engagement Trend</h3><p class="chart-sub">Unique viewers and engagement rate over the selected period</p>
-            <svg class="line-chart" viewBox="0 0 560 175" preserveAspectRatio="none"><path class="chart-axis" d="M0 145H560M0 100H560M0 55H560"/><polyline points="0,128 80,110 160,118 240,79 320,90 400,55 480,64 560,28" fill="none" stroke="var(--chart-red)" stroke-width="3"/><polyline points="0,137 80,130 160,124 240,112 320,116 400,93 480,101 560,82" fill="none" stroke="var(--chart-teal)" stroke-width="3"/></svg>
-            <div class="legend"><span class="legend-item"><i class="legend-swatch" style="background:var(--chart-red)"></i>Unique viewers</span><span class="legend-item"><i class="legend-swatch" style="background:var(--chart-teal)"></i>Engagement rate</span></div>
-          </div>
-          <div class="chart-card">
-            <h3>Upload Retention Curve</h3><p class="chart-sub">Percentage of viewers remaining by video progress</p>
-            <svg class="line-chart" viewBox="0 0 400 175" preserveAspectRatio="none"><path class="chart-axis" d="M0 145H400M0 100H400M0 55H400"/><polygon points="0,18 50,29 100,46 150,62 200,79 250,94 300,110 350,121 400,130 400,155 0,155" fill="var(--chart-red)" opacity=".14"/><polyline points="0,18 50,29 100,46 150,62 200,79 250,94 300,110 350,121 400,130" fill="none" stroke="var(--chart-red)" stroke-width="3"/></svg>
-            <div class="retention-labels"><span>Start</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-          </div>
-        </div>
-        <div class="chart-card" style="margin-bottom:16px;">
-          <h3>Upload Performance</h3><p class="chart-sub">All uploads matching the selected analytics filters</p>
-          <div class="performance-toolbar"><span class="result-count" id="uploadPerformanceCount"></span><input class="search" id="uploadPerformanceSearch" type="search" placeholder="Search uploads..." oninput="resetAndRenderPerformance('uploads')" /></div>
-          <div class="performance-table-wrap"><table class="data-table"><thead><tr>
-            <th><button class="sort-button" data-upload-sort="title" onclick="sortPerformance('uploads','title')">Upload<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button active" data-upload-sort="views" onclick="sortPerformance('uploads','views')">Views<span class="sort-indicator">↓</span></button></th>
-            <th><button class="sort-button" data-upload-sort="avgWatchSeconds" onclick="sortPerformance('uploads','avgWatchSeconds')">Avg Watch<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-upload-sort="completion" onclick="sortPerformance('uploads','completion')">Completion<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-upload-sort="engagement" onclick="sortPerformance('uploads','engagement')">Engagement<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-upload-sort="flagRate" onclick="sortPerformance('uploads','flagRate')">Flag Rate<span class="sort-indicator"></span></button></th>
-            <th>Action</th>
-          </tr></thead><tbody id="uploadPerformanceBody"></tbody></table></div>
-          <div class="pagination"><button class="btn btn-sm" id="uploadPerformancePrev" onclick="changePerformancePage('uploads',-1)">Previous</button><span class="pagination-status" id="uploadPerformancePage"></span><button class="btn btn-sm" id="uploadPerformanceNext" onclick="changePerformancePage('uploads',1)">Next</button></div>
-        </div>
-        <div class="chart-card">
-          <h3>Upload Performance by Section</h3>
-          <p class="chart-sub">Compare how much content each section publishes with the audience share it attracts</p>
-          <div class="performance-head"><span>Section</span><span>Published vs Watched</span><span>View Opportunity</span><span>Completion Rate</span><span>Engagement Rate</span></div>
-          <div class="performance-row">
-            <b>Markets</b>
-            <div class="paired-bars">
-              <div class="paired-bar"><span>Uploads</span><div class="paired-track"><i class="upload-share" style="width:32%"></i></div><b>32%</b></div>
-              <div class="paired-bar"><span>Views</span><div class="paired-track"><i class="view-share" style="width:48%"></i></div><b>48%</b></div>
-            </div>
-            <span class="opportunity">+16 points</span><span>64% completed</span><span>11% engaged</span>
-          </div>
-          <div class="performance-row">
-            <b>Wealth</b>
-            <div class="paired-bars">
-              <div class="paired-bar"><span>Uploads</span><div class="paired-track"><i class="upload-share" style="width:38%"></i></div><b>38%</b></div>
-              <div class="paired-bar"><span>Views</span><div class="paired-track"><i class="view-share" style="width:27%"></i></div><b>27%</b></div>
-            </div>
-            <span class="opportunity down">−11 points</span><span>59% completed</span><span>9% engaged</span>
-          </div>
-          <div class="performance-row">
-            <b>SME</b>
-            <div class="paired-bars">
-              <div class="paired-bar"><span>Uploads</span><div class="paired-track"><i class="upload-share" style="width:18%"></i></div><b>18%</b></div>
-              <div class="paired-bar"><span>Views</span><div class="paired-track"><i class="view-share" style="width:16%"></i></div><b>16%</b></div>
-            </div>
-            <span class="opportunity down">−2 points</span><span>53% completed</span><span>7% engaged</span>
-          </div>
-          <div class="definition-note" style="margin:4px 0 0;"><span class="metric-help">i</span><span><b>View opportunity</b> is view share minus upload share. A positive number means the section attracts a larger share of views than the amount of content published; a negative number means it attracts a smaller share.</span></div>
-        </div>
-      </div>
-
-      <!-- THREADS ANALYTICS -->
-      <div class="analytics-tab-pane" id="analytics-threads">
-        <div class="kpi-grid">
-          <div class="stat-card"><p class="label">Active Thread Viewers <span class="metric-help" title="Distinct users who viewed an active thread">?</span></p><p class="value">34,860</p><p class="kpi-delta">+9.2% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Active Threads <span class="metric-help" title="A thread that received at least one new reply during the selected period">?</span></p><p class="value">486</p><p class="kpi-delta">+6.4% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Thread Engagement Rate <span class="metric-help" title="Viewers who replied, reacted, shared or followed">?</span></p><p class="value">18.6%</p><p class="kpi-delta">+2.1% vs previous 30 days</p></div>
-          <div class="stat-card"><p class="label">Average Replies per Thread <span class="metric-help" title="New replies divided by active threads">?</span></p><p class="value">12.4</p><p class="kpi-delta down">-1.2% vs previous 30 days</p></div>
-        </div>
-
-        <div class="chart-row">
-          <div class="chart-card">
-            <h3>Thread Activity Trend</h3><p class="chart-sub">New threads, replies and engaged users</p>
-            <svg class="line-chart" viewBox="0 0 560 175" preserveAspectRatio="none"><path class="chart-axis" d="M0 145H560M0 100H560M0 55H560"/><polyline points="0,132 80,122 160,126 240,101 320,108 400,88 480,94 560,75" fill="none" stroke="var(--chart-gold)" stroke-width="3"/><polyline points="0,117 80,105 160,112 240,83 320,91 400,60 480,70 560,42" fill="none" stroke="var(--chart-red)" stroke-width="3"/><polyline points="0,140 80,130 160,125 240,112 320,102 400,89 480,78 560,58" fill="none" stroke="var(--chart-teal)" stroke-width="3"/></svg>
-            <div class="legend"><span class="legend-item"><i class="legend-swatch" style="background:var(--chart-gold)"></i>New threads</span><span class="legend-item"><i class="legend-swatch" style="background:var(--chart-red)"></i>New replies</span><span class="legend-item"><i class="legend-swatch" style="background:var(--chart-teal)"></i>Engaged users</span></div>
-          </div>
-          <div class="chart-card">
-            <h3>Thread Lifecycle</h3><p class="chart-sub">Activity-based status of discussion threads</p>
-            <div id="threadLifecycleChart"></div>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <h3>Thread Performance</h3><p class="chart-sub">All discussion threads matching the selected analytics filters</p>
-          <div class="performance-toolbar"><span class="result-count" id="threadPerformanceCount"></span><input class="search" id="threadPerformanceSearch" type="search" placeholder="Search threads..." oninput="resetAndRenderPerformance('threads')" /></div>
-          <div class="performance-table-wrap"><table class="data-table"><thead><tr>
-            <th><button class="sort-button" data-thread-sort="title" onclick="sortPerformance('threads','title')">Thread<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-thread-sort="views" onclick="sortPerformance('threads','views')">Views<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button active" data-thread-sort="replies" onclick="sortPerformance('threads','replies')">Replies<span class="sort-indicator">↓</span></button></th>
-            <th><button class="sort-button" data-thread-sort="contributors" onclick="sortPerformance('threads','contributors')">Contributors<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-thread-sort="engagement" onclick="sortPerformance('threads','engagement')">Engagement<span class="sort-indicator"></span></button></th>
-            <th><button class="sort-button" data-thread-sort="flagRate" onclick="sortPerformance('threads','flagRate')">Flag Rate<span class="sort-indicator"></span></button></th>
-            <th>Action</th>
-          </tr></thead><tbody id="threadPerformanceBody"></tbody></table></div>
-          <div class="pagination"><button class="btn btn-sm" id="threadPerformancePrev" onclick="changePerformancePage('threads',-1)">Previous</button><span class="pagination-status" id="threadPerformancePage"></span><button class="btn btn-sm" id="threadPerformanceNext" onclick="changePerformancePage('threads',1)">Next</button></div>
-        </div>
-      </div>
-
-      <h2 class="section-title">Content Health and Moderation</h2>
-      <div class="chart-card">
-        <p class="chart-sub">Secondary operational and safety signals across the selected content type</p>
-        <div class="health-grid">
-          <div class="health-metric"><span>Flag Rate</span><b>1.2%</b></div>
-          <div class="health-metric"><span>Reports per 1,000 Views</span><b>3.8</b></div>
-          <div class="health-metric"><span>Average Response Time</span><b>1.4h</b></div>
-          <div class="health-metric"><span>Average Resolution Time</span><b>5.2h</b></div>
-          <div class="health-metric"><span>Pending Review Backlog</span><b>14</b></div>
-          <div class="health-metric"><span>Misleading Information</span><b>42%</b></div>
-          <div class="health-metric"><span>Repeat Offender Rate</span><b>2.1%</b></div>
-          <div class="health-metric"><span>Resolved Within SLA</span><b>93%</b></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- LIVE SESSION ANALYTICS DETAIL -->
-<div class="overlay" id="liveSessionAnalyticsOverlay" role="presentation">
-  <div class="modal analytics-detail-modal" role="dialog" aria-modal="true" aria-labelledby="liveSessionAnalyticsTitle" aria-describedby="liveSessionAnalyticsMeta">
-    <div class="modal-head">
-      <div>
-        <h2 id="liveSessionAnalyticsTitle"></h2>
-        <p class="analytics-detail-meta" id="liveSessionAnalyticsMeta"></p>
-      </div>
-      <button class="modal-close" type="button" aria-label="Close session analytics" onclick="closeLiveSessionAnalytics()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="modal-body" id="liveSessionAnalyticsBody"></div>
-  </div>
-</div>
-
-<!-- UPLOAD / THREAD ANALYTICS DETAIL -->
-<div class="overlay" id="contentPerformanceOverlay" role="presentation">
-  <div class="modal analytics-detail-modal" role="dialog" aria-modal="true" aria-labelledby="contentPerformanceTitle" aria-describedby="contentPerformanceMeta">
-    <div class="modal-head">
-      <div>
-        <h2 id="contentPerformanceTitle"></h2>
-        <p class="analytics-detail-meta" id="contentPerformanceMeta"></p>
-      </div>
-      <button class="modal-close" type="button" aria-label="Close content analytics" onclick="closeContentPerformanceAnalytics()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="modal-body" id="contentPerformanceBody"></div>
-  </div>
-</div>
-
-<!-- UPLOAD MODAL -->
-<div class="overlay" id="uploadOverlay">
-  <div class="modal">
-    <div class="modal-head">
-      <h2 id="uploadModalTitle">New Upload</h2>
-      <button class="modal-close" onclick="closeModal('uploadOverlay')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="segment-tabbar" id="uploadTabbar">
-        <button class="segment-btn active" data-utab="content" onclick="switchUploadTab('content')">Content</button>
-        <button class="segment-btn" data-utab="visibility" onclick="switchUploadTab('visibility')">Visibility &amp; Comments</button>
-        <button class="segment-btn" data-utab="schedule" onclick="switchUploadTab('schedule')">Schedule</button>
-      </div>
-
-      <!-- CONTENT TAB -->
-      <div class="upload-tab-pane active" id="uploadtab-content">
-      <div class="dropzone">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
-        <p class="dz-title">Drag a video or image here</p>
-        <p class="dz-sub">MP4, MOV, JPG, PNG up to 2GB</p>
-        <button class="btn btn-sm">Browse files</button>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Thumbnail</label>
-        <div class="thumb-row">
-          <div class="thumb-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>
-          </div>
-          <div class="thumb-actions">
-            <p>Upload a custom thumbnail, or one will be auto-generated from the video.</p>
-            <div class="thumb-btns">
-              <button class="btn btn-sm">Upload thumbnail</button>
-              <button class="btn btn-sm btn-ghost">Auto-generate</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Title</label>
-        <input type="text" placeholder="e.g. Weekly Market Wrap" />
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Description</label>
-        <textarea placeholder="Add a summary of this content..."></textarea>
-      </div>
-
-      <div class="field-row field-group">
-        <div>
-          <label class="field-label">Owner</label>
-          <div class="ui-select" data-value="J. Tan">
-            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-              <span class="ui-select-label">J. Tan</span>
-              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="ui-select-menu">
-              <div class="ui-select-option selected" data-value="J. Tan" onclick="chooseOption(this)">J. Tan<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="M. Lee" onclick="chooseOption(this)">M. Lee<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="A. Kumar" onclick="chooseOption(this)">A. Kumar<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="S. Wong" onclick="chooseOption(this)">S. Wong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="R. Ong" onclick="chooseOption(this)">R. Ong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label class="field-label">Section</label>
-          <div class="ui-select" data-value="Markets">
-            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-              <span class="ui-select-label">Markets</span>
-              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="ui-select-menu">
-              <div class="ui-select-option selected" data-value="Markets" onclick="chooseOption(this)">Markets<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Wealth" onclick="chooseOption(this)">Wealth<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Personal banking" onclick="chooseOption(this)">Personal banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="SME Banking" onclick="chooseOption(this)">SME Banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Corporate banking" onclick="chooseOption(this)">Corporate banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Tags</label>
-        <input type="text" placeholder="e.g. Equities, SG, Rates" />
-      </div>
-
-      <div class="field-row field-group">
-        <div>
-          <label class="field-label">Region</label>
-          <div class="ui-select" data-value="Singapore">
-            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-              <span class="ui-select-label">Singapore</span>
-              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="ui-select-menu">
-              <div class="ui-select-option selected" data-value="Singapore" onclick="chooseOption(this)">Singapore<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Hong Kong" onclick="chooseOption(this)">Hong Kong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Malaysia" onclick="chooseOption(this)">Malaysia<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="All regions" onclick="chooseOption(this)">All regions<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label class="field-label">Language</label>
-          <div class="ui-select" data-value="English">
-            <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-              <span class="ui-select-label">English</span>
-              <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="ui-select-menu">
-              <div class="ui-select-option selected" data-value="English" onclick="chooseOption(this)">English<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Mandarin" onclick="chooseOption(this)">Mandarin<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <div class="ui-select-option" data-value="Malay" onclick="chooseOption(this)">Malay<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <!-- VISIBILITY & COMMENTS TAB -->
-      <div class="upload-tab-pane" id="uploadtab-visibility">
-
-      <p class="subsection-label">Publish</p>
-      <div class="vis-options" id="visOptions">
-        <div class="radio-card checked" data-vis="public" onclick="selectVisOption(this)">
-          <input type="radio" name="pubvis" checked />
       <!-- OVERVIEW PAGE -->
       <div class="page active" id="page-overview">
         <div class="page-header">
@@ -3778,30 +3097,31 @@
         </div>
 
         <div class="analytics-filters">
-          <label>Date range<select>
-              <option>Last 30 days</option>
-              <option>Last 7 days</option>
-              <option>Last 90 days</option>
+          <label>Date range<select id="analyticsDateFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="30">Last 30 days</option>
+              <option value="7">Last 7 days</option>
+              <option value="90">Last 90 days</option>
             </select></label>
-          <label>Content section<select>
-              <option>All sections</option>
+          <label>Content section<select id="analyticsSectionFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All sections</option>
               <option>Markets</option>
               <option>Wealth</option>
               <option>SME</option>
             </select></label>
-          <label>Creator or host<select>
-              <option>All creators</option>
+          <label>Creator or host<select id="analyticsCreatorFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All creators</option>
               <option>OCBC Research</option>
               <option>Wealth Insights</option>
+              <option>Business Banking</option>
             </select></label>
-          <label>User segment<select>
-              <option>All users</option>
+          <label>User segment<select id="analyticsSegmentFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All users</option>
               <option>New users</option>
               <option>Returning users</option>
               <option>Premier Banking</option>
             </select></label>
-          <label>Content status<select id="analyticsStatusFilter">
-              <option>All statuses</option>
+          <label>Content status<select id="analyticsStatusFilter" onchange="handleAnalyticsFilterChange()">
+              <option value="all">All statuses</option>
               <option>Upcoming</option>
               <option>Completed</option>
               <option>Cancelled</option>
@@ -3873,32 +3193,36 @@
                   <th>Attendance</th>
                   <th>Avg Watch</th>
                   <th>Engagement</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>Q3 Market Outlook →</td>
+              <tbody id="livePerformanceBody">
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',0)">
+                  <td>Q3 Market Outlook</td>
                   <td>3,840</td>
                   <td>84%</td>
                   <td>71%</td>
                   <td>44m</td>
                   <td>38%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',0)">View details</button></td>
                 </tr>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>Home Ownership 2026 →</td>
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',1)">
+                  <td>Home Ownership 2026</td>
                   <td>2,960</td>
                   <td>79%</td>
                   <td>66%</td>
                   <td>39m</td>
                   <td>31%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',1)">View details</button></td>
                 </tr>
-                <tr class="event-row-link" title="Open session analytics">
-                  <td>SME Growth Forum →</td>
+                <tr class="event-row-link" onclick="openAnalyticsDetail('live',2)">
+                  <td>SME Growth Forum</td>
                   <td>2,410</td>
                   <td>76%</td>
                   <td>61%</td>
                   <td>36m</td>
                   <td>29%</td>
+                  <td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',2)">View details</button></td>
                 </tr>
               </tbody>
             </table>
@@ -3963,46 +3287,26 @@
             </div>
           </div>
           <div class="chart-card" style="margin-bottom:16px;">
-            <h3>Top Uploads</h3>
-            <p class="chart-sub">Sortable performance context for uploaded videos</p>
+            <h3>Upload Performance</h3>
+            <p class="chart-sub">All uploads matching the selected analytics filters</p>
+            <div class="performance-toolbar"><span class="result-count" id="uploadPerformanceCount"></span><input class="search" id="uploadPerformanceSearch" placeholder="Search uploads..." oninput="renderPerformanceTable('uploads')" /></div>
+            <div class="performance-table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Upload</th>
-                  <th>Views</th>
+                  <th><button class="sort-button" onclick="sortPerformance('uploads','title')">Upload<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" onclick="sortPerformance('uploads','views')">Views<span class="sort-indicator">↓</span></button></th>
                   <th>Avg Watch</th>
                   <th>Completion</th>
                   <th>Engagement</th>
                   <th>Flag Rate</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Q2 earnings roundup</td>
-                  <td>41,300</td>
-                  <td>5m 12s</td>
-                  <td>68%</td>
-                  <td>12.4%</td>
-                  <td>0.3%</td>
-                </tr>
-                <tr>
-                  <td>FX morning brief</td>
-                  <td>28,900</td>
-                  <td>3m 44s</td>
-                  <td>61%</td>
-                  <td>8.7%</td>
-                  <td>0.2%</td>
-                </tr>
-                <tr>
-                  <td>Rate hike explainer</td>
-                  <td>22,150</td>
-                  <td>4m 08s</td>
-                  <td>64%</td>
-                  <td>10.1%</td>
-                  <td>0.5%</td>
-                </tr>
-              </tbody>
+              <tbody id="uploadPerformanceBody"></tbody>
             </table>
+            </div>
+            <div class="pagination"><button class="btn btn-sm" onclick="changePerformancePage('uploads',-1)">Previous</button><span class="pagination-status" id="uploadPerformancePage"></span><button class="btn btn-sm" onclick="changePerformancePage('uploads',1)">Next</button></div>
           </div>
           <div class="chart-card">
             <h3>Upload Performance by Section</h3>
@@ -4108,46 +3412,26 @@
           </div>
 
           <div class="chart-card">
-            <h3>Most Discussed Threads</h3>
-            <p class="chart-sub">Engagement and safety context for leading conversations</p>
+            <h3>Thread Performance</h3>
+            <p class="chart-sub">All threads matching the selected analytics filters</p>
+            <div class="performance-toolbar"><span class="result-count" id="threadPerformanceCount"></span><input class="search" id="threadPerformanceSearch" placeholder="Search threads..." oninput="renderPerformanceTable('threads')" /></div>
+            <div class="performance-table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Thread</th>
-                  <th>Views</th>
+                  <th><button class="sort-button" onclick="sortPerformance('threads','title')">Thread<span class="sort-indicator"></span></button></th>
+                  <th><button class="sort-button active" onclick="sortPerformance('threads','views')">Views<span class="sort-indicator">↓</span></button></th>
                   <th>Replies</th>
                   <th>Contributors</th>
                   <th>Engagement</th>
                   <th>Flag Rate</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Where are rates heading next?</td>
-                  <td>8,420</td>
-                  <td>214</td>
-                  <td>126</td>
-                  <td>24.8%</td>
-                  <td>0.8%</td>
-                </tr>
-                <tr>
-                  <td>Q2 bank earnings discussion</td>
-                  <td>6,980</td>
-                  <td>186</td>
-                  <td>104</td>
-                  <td>22.1%</td>
-                  <td>0.5%</td>
-                </tr>
-                <tr>
-                  <td>CPF LIFE plan comparison</td>
-                  <td>5,740</td>
-                  <td>142</td>
-                  <td>88</td>
-                  <td>19.7%</td>
-                  <td>0.3%</td>
-                </tr>
-              </tbody>
+              <tbody id="threadPerformanceBody"></tbody>
             </table>
+            </div>
+            <div class="pagination"><button class="btn btn-sm" onclick="changePerformancePage('threads',-1)">Previous</button><span class="pagination-status" id="threadPerformancePage"></span><button class="btn btn-sm" onclick="changePerformancePage('threads',1)">Next</button></div>
           </div>
         </div>
 
@@ -4167,6 +3451,19 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ANALYTICS DETAIL MODAL -->
+  <div class="overlay" id="analyticsDetailOverlay">
+    <div class="modal analytics-detail-modal" role="dialog" aria-modal="true" aria-labelledby="analyticsDetailTitle">
+      <div class="modal-head">
+        <div><h2 id="analyticsDetailTitle"></h2><p class="analytics-detail-meta" id="analyticsDetailMeta"></p></div>
+        <button class="modal-close" aria-label="Close analytics details" onclick="closeAnalyticsDetail()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="analyticsDetailBody"></div>
     </div>
   </div>
 
@@ -4654,56 +3951,6 @@
       { title: "Old Promo Reel", owner: "M. Lee", section: "Personal banking", tags: ["Promo"], status: "rejected", description: "Legacy promotional video referencing a since-discontinued account pricing tier." }
     ];
 
-  const liveSessionAnalytics = {
-    "q3-market-outlook": {
-      title:"Q3 Market Outlook", host:"OCBC Research", section:"Markets", date:"18 Jul 2026", duration:"62 min", status:"Completed",
-      registrations:3840, appAccess:84, attendance:71, avgWatch:"44m", engagementRate:38,
-      deltas:{registrations:"+12.4%", appAccess:"+5.1 pts", attendance:"+6.3 pts", avgWatch:"+7m"},
-      registrationTimeline:[{label:"14d",value:420},{label:"10d",value:890},{label:"7d",value:1460},{label:"3d",value:2470},{label:"1d",value:3290},{label:"Live",value:3840}],
-      funnel:[{label:"Page Views",value:7210},{label:"Registrations",value:3840},{label:"App Access",value:3226},{label:"Attendance",value:2726},{label:"Watched 5+ Min",value:2510},{label:"Chat or Poll",value:1036}],
-      retention:[100,91,83,72,61], engagement:{chats:1460,polls:2128,reactions:3280,questions:184},
-      moments:[
-        {time:"08:42",title:"Viewer peak",detail:"2,614 concurrent viewers as the regional equity outlook began."},
-        {time:"17:10",title:"Poll launched",detail:"2,128 responses on the expected direction of interest rates."},
-        {time:"31:26",title:"Chat spike",detail:"FX outlook prompted 286 messages in three minutes."},
-        {time:"49:18",title:"Notable drop-off",detail:"Audience declined 9% during the extended Q&A transition."}
-      ]
-    },
-    "home-ownership-2026": {
-      title:"Home Ownership 2026", host:"Wealth Insights", section:"Wealth", date:"11 Jul 2026", duration:"55 min", status:"Completed",
-      registrations:2960, appAccess:79, attendance:66, avgWatch:"39m", engagementRate:31,
-      deltas:{registrations:"+8.7%", appAccess:"+2.4 pts", attendance:"+3.8 pts", avgWatch:"+4m"},
-      registrationTimeline:[{label:"14d",value:310},{label:"10d",value:680},{label:"7d",value:1190},{label:"3d",value:1870},{label:"1d",value:2540},{label:"Live",value:2960}],
-      funnel:[{label:"Page Views",value:5980},{label:"Registrations",value:2960},{label:"App Access",value:2338},{label:"Attendance",value:1954},{label:"Watched 5+ Min",value:1740},{label:"Chat or Poll",value:606}],
-      retention:[100,88,78,67,55], engagement:{chats:824,polls:1394,reactions:1860,questions:246},
-      moments:[
-        {time:"06:15",title:"Poll launched",detail:"1,394 viewers shared their intended home-buying horizon."},
-        {time:"19:48",title:"Viewer peak",detail:"1,886 concurrent viewers during the affordability walkthrough."},
-        {time:"34:02",title:"Question spike",detail:"CPF usage segment generated 92 questions in five minutes."},
-        {time:"43:30",title:"Notable drop-off",detail:"Audience declined 7% after the case-study segment ended."}
-      ]
-    },
-    "sme-growth-forum": {
-      title:"SME Growth Forum", host:"Business Banking", section:"SME", date:"4 Jul 2026", duration:"58 min", status:"Completed",
-      registrations:2410, appAccess:76, attendance:61, avgWatch:"36m", engagementRate:29,
-      deltas:{registrations:"+4.2%", appAccess:"+1.8 pts", attendance:"-1.2 pts", avgWatch:"+2m"},
-      registrationTimeline:[{label:"14d",value:260},{label:"10d",value:540},{label:"7d",value:930},{label:"3d",value:1510},{label:"1d",value:2070},{label:"Live",value:2410}],
-      funnel:[{label:"Page Views",value:4860},{label:"Registrations",value:2410},{label:"App Access",value:1832},{label:"Attendance",value:1470},{label:"Watched 5+ Min",value:1264},{label:"Chat or Poll",value:426}],
-      retention:[100,86,74,60,48], engagement:{chats:612,polls:980,reactions:1425,questions:208},
-      moments:[
-        {time:"10:05",title:"Viewer peak",detail:"1,408 concurrent viewers during the grants overview."},
-        {time:"22:44",title:"Chat spike",detail:"Cross-border expansion prompted 174 messages in four minutes."},
-        {time:"36:12",title:"Poll launched",detail:"980 responses on the greatest near-term growth constraint."},
-        {time:"46:50",title:"Notable drop-off",detail:"Audience declined 12% during the panel handover."}
-      ]
-    }
-  };
-
-  const typeIcon = {
-    Upload:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>',
-    Live:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>'
-  };
-  const statusLabel = {pending:"Pending Review", active:"Active", flagged:"Flagged", approved:"Approved", rejected:"Rejected"};
     const liveData = [
       {
         title: "Fed Rate Reaction Live", owner: "M. Lee", section: "Markets", tags: ["Macro", "FX"], status: "flagged", description: "Live reaction segment following the Fed's rate decision, covering FX and rates market impact.",
@@ -5320,375 +4567,232 @@
       document.getElementById('submissionOverlay').classList.add('open');
     }
 
-  const uploadPerformanceData = [
-    {title:"Q2 Earnings Roundup",views:41300,avgWatchSeconds:312,completion:68,engagement:12.4,flagRate:.3,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Published",daysAgo:3},
-    {title:"FX Morning Brief",views:28900,avgWatchSeconds:224,completion:61,engagement:8.7,flagRate:.2,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Published",daysAgo:5},
-    {title:"Rate Hike Explainer",views:22150,avgWatchSeconds:248,completion:64,engagement:10.1,flagRate:.5,section:"Wealth",creator:"Wealth Insights",segment:"Premier Banking",status:"Published",daysAgo:8},
-    {title:"First Home Budget Guide",views:18420,avgWatchSeconds:286,completion:72,engagement:11.8,flagRate:.1,section:"Wealth",creator:"Wealth Insights",segment:"New users",status:"Published",daysAgo:12},
-    {title:"SME Cash Flow Essentials",views:15880,avgWatchSeconds:338,completion:59,engagement:9.6,flagRate:.4,section:"SME",creator:"Business Banking",segment:"Returning users",status:"Published",daysAgo:16},
-    {title:"Regional Markets Weekly",views:13640,avgWatchSeconds:198,completion:57,engagement:7.9,flagRate:.2,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Published",daysAgo:21},
-    {title:"Retirement Income Basics",views:11920,avgWatchSeconds:264,completion:66,engagement:10.7,flagRate:.1,section:"Wealth",creator:"Wealth Insights",segment:"Premier Banking",status:"Published",daysAgo:27},
-    {title:"Digital Payments for SMEs",views:9740,avgWatchSeconds:216,completion:54,engagement:8.2,flagRate:.3,section:"SME",creator:"Business Banking",segment:"New users",status:"Published",daysAgo:34},
-    {title:"Understanding Bond Yields",views:8160,avgWatchSeconds:241,completion:63,engagement:9.1,flagRate:.2,section:"Markets",creator:"OCBC Research",segment:"Premier Banking",status:"Published",daysAgo:48},
-    {title:"Building an Emergency Fund",views:7350,avgWatchSeconds:189,completion:70,engagement:8.8,flagRate:.1,section:"Wealth",creator:"Wealth Insights",segment:"New users",status:"Published",daysAgo:62},
-    {title:"Trade Finance Walkthrough",views:0,avgWatchSeconds:0,completion:0,engagement:0,flagRate:0,section:"SME",creator:"Business Banking",segment:"Returning users",status:"Draft",daysAgo:6},
-    {title:"Legacy Mortgage Update",views:3280,avgWatchSeconds:174,completion:49,engagement:5.6,flagRate:.7,section:"Wealth",creator:"Wealth Insights",segment:"Returning users",status:"Archived",daysAgo:74}
-  ];
-
-  const threadPerformanceData = [
-    {title:"Where are rates heading next?",views:8420,replies:214,contributors:126,engagement:24.8,flagRate:.8,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Active",daysAgo:2},
-    {title:"Q2 bank earnings discussion",views:6980,replies:186,contributors:104,engagement:22.1,flagRate:.5,section:"Markets",creator:"OCBC Research",segment:"Premier Banking",status:"Active",daysAgo:4},
-    {title:"CPF LIFE plan comparison",views:5740,replies:142,contributors:88,engagement:19.7,flagRate:.3,section:"Wealth",creator:"Wealth Insights",segment:"Returning users",status:"Active",daysAgo:7},
-    {title:"First home affordability check",views:4880,replies:118,contributors:76,engagement:21.4,flagRate:.2,section:"Wealth",creator:"Wealth Insights",segment:"New users",status:"Active",daysAgo:10},
-    {title:"Managing FX risk for exporters",views:4210,replies:96,contributors:61,engagement:18.9,flagRate:.4,section:"SME",creator:"Business Banking",segment:"Premier Banking",status:"Active",daysAgo:14},
-    {title:"STI outlook for the next quarter",views:3760,replies:84,contributors:58,engagement:17.6,flagRate:.6,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Active",daysAgo:19},
-    {title:"How much emergency cash is enough?",views:3190,replies:73,contributors:49,engagement:20.2,flagRate:.2,section:"Wealth",creator:"Wealth Insights",segment:"New users",status:"Active",daysAgo:25},
-    {title:"SME grants application experiences",views:2860,replies:68,contributors:43,engagement:18.4,flagRate:.3,section:"SME",creator:"Business Banking",segment:"Returning users",status:"Active",daysAgo:32},
-    {title:"Bond ladder strategies",views:2390,replies:51,contributors:37,engagement:16.8,flagRate:.2,section:"Wealth",creator:"Wealth Insights",segment:"Premier Banking",status:"Dormant",daysAgo:43},
-    {title:"Regional currency watch",views:1980,replies:44,contributors:32,engagement:15.9,flagRate:.5,section:"Markets",creator:"OCBC Research",segment:"Returning users",status:"Dormant",daysAgo:57},
-    {title:"Digital asset allocation debate",views:4520,replies:109,contributors:69,engagement:23.6,flagRate:3.2,section:"Markets",creator:"OCBC Research",segment:"Premier Banking",status:"Flagged",daysAgo:11},
-    {title:"Supplier financing options",views:1640,replies:38,contributors:27,engagement:14.7,flagRate:.4,section:"SME",creator:"Business Banking",segment:"New users",status:"Dormant",daysAgo:81}
-  ];
-
-  const performanceState = {
-    uploads:{page:1,pageSize:5,sortKey:"views",sortDirection:"desc"},
-    threads:{page:1,pageSize:5,sortKey:"replies",sortDirection:"desc"}
-  };
-
-  function analyticsFilteredRows(type){
-    const rows = type === 'uploads' ? uploadPerformanceData : threadPerformanceData;
-    const days = Number(document.getElementById('analyticsDateFilter').value);
-    const section = document.getElementById('analyticsSectionFilter').value;
-    const creator = document.getElementById('analyticsCreatorFilter').value;
-    const segment = document.getElementById('analyticsSegmentFilter').value;
-    const status = document.getElementById('analyticsStatusFilter').value;
-    const search = document.getElementById(type === 'uploads' ? 'uploadPerformanceSearch' : 'threadPerformanceSearch').value.trim().toLowerCase();
-    return rows.filter(row =>
-      row.daysAgo <= days &&
-      (section === 'all' || row.section === section) &&
-      (creator === 'all' || row.creator === creator) &&
-      (segment === 'all' || row.segment === segment) &&
-      (status === 'all' || row.status === status) &&
-      (!search || row.title.toLowerCase().includes(search))
-    );
-  }
-
-  function formatWatchTime(seconds){
-    if(!seconds) return '—';
-    return `${Math.floor(seconds/60)}m ${String(seconds%60).padStart(2,'0')}s`;
-  }
-
-  function renderPerformanceTable(type){
-    const state = performanceState[type];
-    const singular = type === 'uploads' ? 'upload' : 'thread';
-    const rows = analyticsFilteredRows(type);
-    const topMetric = type === 'uploads' ? 'views' : 'replies';
-    const topValue = rows.length ? Math.max(...rows.map(row => row[topMetric])) : null;
-    rows.sort((a,b) => {
-      const left = a[state.sortKey], right = b[state.sortKey];
-      const result = typeof left === 'string' ? left.localeCompare(right) : left - right;
-      return state.sortDirection === 'asc' ? result : -result;
-    });
-    const totalPages = Math.max(1, Math.ceil(rows.length/state.pageSize));
-    state.page = Math.min(state.page,totalPages);
-    const visible = rows.slice((state.page-1)*state.pageSize,state.page*state.pageSize);
-    const body = document.getElementById(`${singular}PerformanceBody`);
-    body.innerHTML = visible.length ? visible.map(row => {
-      const itemIndex = (type === 'uploads' ? uploadPerformanceData : threadPerformanceData).indexOf(row);
-      const activation = `class="event-row-link" onclick="openContentPerformanceAnalytics('${type}',${itemIndex})"`;
-      const action = `<td><button class="view-details-btn" type="button" aria-label="View analytics for ${row.title}" onclick="event.stopPropagation();openContentPerformanceAnalytics('${type}',${itemIndex})">View details</button></td>`;
-      return type === 'uploads' ? `
-      <tr ${activation}><td>${row.title}${topValue > 0 && row.views === topValue ? '<span class="top-performer">Top performer</span>' : ''}</td><td>${row.views.toLocaleString()}</td><td>${formatWatchTime(row.avgWatchSeconds)}</td><td>${row.completion}%</td><td>${row.engagement}%</td><td>${row.flagRate}%</td>${action}</tr>` : `
-      <tr ${activation}><td>${row.title}${topValue > 0 && row.replies === topValue ? '<span class="top-performer">Top performer</span>' : ''}</td><td>${row.views.toLocaleString()}</td><td>${row.replies.toLocaleString()}</td><td>${row.contributors.toLocaleString()}</td><td>${row.engagement}%</td><td>${row.flagRate}%</td>${action}</tr>`;
-    }).join('') :
-      `<tr><td class="empty-table" colspan="7">No ${type} match the selected filters.</td></tr>`;
-    document.getElementById(`${singular}PerformanceCount`).textContent = `${rows.length} ${rows.length === 1 ? singular : type} in selected period`;
-    document.getElementById(`${singular}PerformancePage`).textContent = rows.length ? `Page ${state.page} of ${totalPages}` : 'No results';
-    document.getElementById(`${singular}PerformancePrev`).disabled = state.page <= 1;
-    document.getElementById(`${singular}PerformanceNext`).disabled = state.page >= totalPages;
-    document.querySelectorAll(`[data-${singular}-sort]`).forEach(button => {
-      const active = button.dataset[`${singular}Sort`] === state.sortKey;
-      button.classList.toggle('active',active);
-      button.querySelector('.sort-indicator').textContent = active ? (state.sortDirection === 'asc' ? '↑' : '↓') : '';
-    });
-  }
-
-  function sortPerformance(type,key){
-    const state = performanceState[type];
-    if(state.sortKey === key) state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
-    else {
-      state.sortKey = key;
-      state.sortDirection = 'asc';
-    }
-    state.page = 1;
-    renderPerformanceTable(type);
-  }
-
-  function changePerformancePage(type,direction){
-    performanceState[type].page += direction;
-    renderPerformanceTable(type);
-  }
-
-  function resetAndRenderPerformance(type){
-    performanceState[type].page = 1;
-    renderPerformanceTable(type);
-  }
-
-  function handleAnalyticsFilterChange(){
-    performanceState.uploads.page = 1;
-    performanceState.threads.page = 1;
-    renderPerformanceTable('uploads');
-    renderPerformanceTable('threads');
-  }
-
-  function switchAnalyticsTab(tab){
-    document.querySelectorAll('#analyticsTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.atab === tab));
-    document.querySelectorAll('.analytics-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'analytics-' + tab));
-    const status = document.getElementById('analyticsStatusFilter');
-    const options = {
-      live:['Upcoming','Completed','Cancelled'],
-      uploads:['Published','Draft','Archived'],
-      threads:['Active','Dormant','Flagged']
-    };
-    status.innerHTML = `<option value="all">All statuses</option>${options[tab].map(label => `<option>${label}</option>`).join('')}`;
-    handleAnalyticsFilterChange();
-  }
-
-  let liveSessionAnalyticsTrigger = null;
-
-  function chartPoints(values, width, height, padX, padY){
-    const max = Math.max(...values);
-    const min = Math.min(...values);
-    const range = max - min || 1;
-    return values.map((value, index) => ({
-      x:padX + (index * (width - padX * 2) / Math.max(values.length - 1, 1)),
-      y:padY + ((max - value) * (height - padY * 2) / range),
-      value
-    }));
-  }
-
-  function renderLineChart(items, ariaLabel, color){
-    const width = 520, height = 170;
-    const points = chartPoints(items.map(item => item.value), width, height, 34, 28);
-    const stroke = color || 'var(--chart-red)';
-    return `<div class="chart-plot"><svg class="line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${ariaLabel || 'Registration timeline'}">
-      <path class="chart-axis" d="M34 142H500M34 84H500M34 28H500"/>
-      <polyline points="${points.map(point => `${point.x},${point.y}`).join(' ')}" fill="none" stroke="${stroke}" stroke-width="3"/>
-      ${points.map((point,index) => `<circle cx="${point.x}" cy="${point.y}" r="4" fill="${stroke}"/><text class="chart-value" x="${point.x}" y="${point.y-9}" text-anchor="middle">${items[index].value.toLocaleString()}</text><text class="chart-label" x="${point.x}" y="163" text-anchor="middle">${items[index].label}</text>`).join('')}
-    </svg></div>`;
-  }
-
-  function renderRetentionChart(values){
-    const labels = ["Start","25%","50%","75%","100%"];
-    const width = 520, height = 170;
-    const points = chartPoints(values, width, height, 34, 28);
-    return `<div class="chart-plot"><svg class="line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Viewer retention by session progress">
-      <path class="chart-axis" d="M34 142H500M34 84H500M34 28H500"/>
-      <polygon points="${points.map(point => `${point.x},${point.y}`).join(' ')} 500,142 34,142" fill="var(--chart-teal)" opacity=".14"/>
-      <polyline points="${points.map(point => `${point.x},${point.y}`).join(' ')}" fill="none" stroke="var(--chart-teal)" stroke-width="3"/>
-      ${points.map((point,index) => `<circle cx="${point.x}" cy="${point.y}" r="4" fill="var(--chart-teal)"/><text class="chart-value" x="${point.x}" y="${point.y-9}" text-anchor="middle">${point.value}%</text><text class="chart-label" x="${point.x}" y="163" text-anchor="middle">${labels[index]}</text>`).join('')}
-    </svg></div>`;
-  }
-
-  function renderLiveSessionAnalytics(session){
-    document.getElementById('liveSessionAnalyticsTitle').textContent = session.title;
-    document.getElementById('liveSessionAnalyticsMeta').textContent = `${session.host} · ${session.section} · ${session.date} · ${session.duration} · ${session.status}`;
-    const funnelStart = session.funnel[0].value;
-    document.getElementById('liveSessionAnalyticsBody').innerHTML = `
-      <div class="kpi-grid analytics-detail-kpis">
-        <div class="stat-card"><p class="label">Registrations</p><p class="value">${session.registrations.toLocaleString()}</p><p class="kpi-delta">${session.deltas.registrations} vs recent average</p></div>
-        <div class="stat-card"><p class="label">App Access</p><p class="value">${session.appAccess}%</p><p class="kpi-delta">${session.deltas.appAccess} vs recent average</p></div>
-        <div class="stat-card"><p class="label">Attendance</p><p class="value">${session.attendance}%</p><p class="kpi-delta ${session.deltas.attendance.startsWith('-') ? 'down' : ''}">${session.deltas.attendance} vs recent average</p></div>
-        <div class="stat-card"><p class="label">Average Watch</p><p class="value">${session.avgWatch}</p><p class="kpi-delta">${session.deltas.avgWatch} vs recent average</p></div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card"><h3>Registration Timeline</h3><p class="chart-sub">Cumulative registrations leading up to the live session</p>${renderLineChart(session.registrationTimeline)}</div>
-        <div class="chart-card"><h3>Viewer Retention</h3><p class="chart-sub">Audience remaining through the session</p>${renderRetentionChart(session.retention)}</div>
-      </div>
-      <div class="chart-card detail-funnel">
-        <h3>Registration-to-Attendance Funnel</h3><p class="chart-sub">Movement from discovery through meaningful participation</p>
-        <div class="funnel">${session.funnel.map((step,index) => `<div class="funnel-step"><b>${step.value.toLocaleString()}</b><span>${step.label}</span><small>${index === 0 ? '100%' : Math.round(step.value/funnelStart*100) + '% of views'}</small></div>`).join('')}</div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card">
-          <h3>Engagement Breakdown</h3><p class="chart-sub">${session.engagementRate}% of attendees interacted during the session</p>
-          <div class="engagement-grid">
-            <div class="engagement-metric"><span>Chat Messages</span><b>${session.engagement.chats.toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>Poll Responses</span><b>${session.engagement.polls.toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>Reactions</span><b>${session.engagement.reactions.toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>Questions</span><b>${session.engagement.questions.toLocaleString()}</b></div>
-          </div>
-        </div>
-        <div class="chart-card">
-          <h3>Key Moments</h3><p class="chart-sub">Notable audience and engagement events</p>
-          <div class="moment-list">${session.moments.map(moment => `<div class="moment-item"><span class="moment-time">${moment.time}</span><div class="moment-copy"><b>${moment.title}</b><span>${moment.detail}</span></div></div>`).join('')}</div>
-        </div>
-      </div>`;
-  }
-
-  function openLiveSessionAnalytics(sessionId){
-    const session = liveSessionAnalytics[sessionId];
-    if(!session) return;
-    liveSessionAnalyticsTrigger = document.activeElement;
-    renderLiveSessionAnalytics(session);
-    const overlay = document.getElementById('liveSessionAnalyticsOverlay');
-    overlay.classList.add('open');
-    overlay.querySelector('.modal-close').focus();
-  }
-
-  function closeLiveSessionAnalytics(){
-    document.getElementById('liveSessionAnalyticsOverlay').classList.remove('open');
-    if(liveSessionAnalyticsTrigger && typeof liveSessionAnalyticsTrigger.focus === 'function') liveSessionAnalyticsTrigger.focus();
-    liveSessionAnalyticsTrigger = null;
-  }
-
-  document.getElementById('liveSessionAnalyticsOverlay').addEventListener('click', event => {
-    if(event.target === event.currentTarget) closeLiveSessionAnalytics();
-  });
-  document.addEventListener('keydown', event => {
-    if(event.key === 'Escape' && document.getElementById('liveSessionAnalyticsOverlay').classList.contains('open')) closeLiveSessionAnalytics();
-  });
-
-  let contentPerformanceTrigger = null;
-
-  function performanceTrend(total,index,labels){
-    const weights = [0.08,0.14,0.19,0.22,0.2,0.17];
-    return labels.map((label,point) => ({label,value:Math.round(total * Math.max(.04,weights[(point+index)%weights.length]))}));
-  }
-
-  function renderUploadPerformanceAnalytics(item,index){
-    if(item.status === 'Draft'){
-      return `<div class="definition-note" style="margin:0 0 16px;"><span class="metric-help">i</span><span><b>Performance data is not available yet.</b> This upload is still a draft. Analytics will begin after publication.</span></div>
-        <div class="chart-card"><h3>Publishing Readiness</h3><p class="chart-sub">Operational checks before analytics collection begins</p><div class="health-grid">
-          <div class="health-metric"><span>Metadata</span><b>Complete</b></div><div class="health-metric"><span>Transcript</span><b>Ready</b></div>
-          <div class="health-metric"><span>Compliance Review</span><b>Pending</b></div><div class="health-metric"><span>Audience Rules</span><b>Set</b></div>
-        </div></div>`;
-    }
-    const uniqueViewers = Math.round(item.views * (.78 + (index%4)*.03));
-    const retention = [100,Math.min(94,item.completion+25),Math.min(86,item.completion+15),Math.min(78,item.completion+8),item.completion];
-    const likes = Math.round(item.views*item.engagement/140);
-    const comments = Math.round(likes*.28), shares = Math.round(likes*.18), saves = Math.round(likes*.34);
-    const delta = ((index%5)-1)*2.3;
-    return `
-      <div class="kpi-grid analytics-detail-kpis">
-        <div class="stat-card"><p class="label">Unique Viewers</p><p class="value">${uniqueViewers.toLocaleString()}</p><p class="kpi-delta">${delta >= 0 ? '+' : ''}${delta.toFixed(1)}% vs recent average</p></div>
-        <div class="stat-card"><p class="label">Average Watch</p><p class="value">${formatWatchTime(item.avgWatchSeconds)}</p><p class="kpi-delta">${index%2 ? '+18s' : '+32s'} vs recent average</p></div>
-        <div class="stat-card"><p class="label">Completion</p><p class="value">${item.completion}%</p><p class="kpi-delta ${item.completion < 55 ? 'down' : ''}">${item.completion < 55 ? '-3.1' : '+4.2'} pts vs recent average</p></div>
-        <div class="stat-card"><p class="label">Engagement</p><p class="value">${item.engagement}%</p><p class="kpi-delta">${item.engagement >= 9 ? '+1.8' : '+0.4'} pts vs recent average</p></div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card"><h3>Views After Publication</h3><p class="chart-sub">Daily views during the first six reporting intervals</p>${renderLineChart(performanceTrend(item.views,index,['Day 1','Day 2','Day 3','Day 4','Day 5','Day 6']),'Views after publication')}</div>
-        <div class="chart-card"><h3>Viewer Retention</h3><p class="chart-sub">Viewers remaining by video progress</p>${renderRetentionChart(retention)}</div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card"><h3>Engagement Breakdown</h3><p class="chart-sub">Actions taken by viewers</p><div class="engagement-grid">
-          <div class="engagement-metric"><span>Likes</span><b>${likes.toLocaleString()}</b></div><div class="engagement-metric"><span>Comments</span><b>${comments.toLocaleString()}</b></div>
-          <div class="engagement-metric"><span>Shares</span><b>${shares.toLocaleString()}</b></div><div class="engagement-metric"><span>Saves</span><b>${saves.toLocaleString()}</b></div>
-        </div></div>
-        <div class="chart-card"><h3>Playback Insights</h3><p class="chart-sub">Meaningful moments in viewer behavior</p><div class="moment-list">
-          <div class="moment-item"><span class="moment-time">00:18</span><div class="moment-copy"><b>Early drop-off</b><span>${Math.max(4,12-index)}% left before the introduction ended.</span></div></div>
-          <div class="moment-item"><span class="moment-time">${Math.max(1,Math.floor(item.avgWatchSeconds/120))}:24</span><div class="moment-copy"><b>Most replayed</b><span>The core explainer segment received repeated views.</span></div></div>
-          <div class="moment-item"><span class="moment-time">${Math.max(2,Math.floor(item.avgWatchSeconds/75))}:05</span><div class="moment-copy"><b>Engagement spike</b><span>Comments and saves peaked around this point.</span></div></div>
-        </div></div>
-      </div>
-      <div class="chart-card"><h3>Audience and Moderation Health</h3><p class="chart-sub">Balanced audience-quality and operational signals</p><div class="health-grid">
-        <div class="health-metric"><span>Returning Viewers</span><b>${58+(index%5)*4}%</b></div><div class="health-metric"><span>Premier Banking</span><b>${22+(index%4)*5}%</b></div>
-        <div class="health-metric"><span>Flag Rate</span><b>${item.flagRate}%</b></div><div class="health-metric"><span>Estimated Reports</span><b>${Math.round(item.views*item.flagRate/100).toLocaleString()}</b></div>
-        <div class="health-metric"><span>Review Status</span><b>${item.flagRate >= 1 ? 'Reviewing' : 'Clear'}</b></div><div class="health-metric"><span>Resolved Within SLA</span><b>${item.flagRate >= 1 ? '88%' : '97%'}</b></div>
-      </div></div>`;
-  }
-
-  function renderThreadPerformanceAnalytics(item,index){
-    const reactions = Math.round(item.views*item.engagement/115);
-    const shares = Math.round(reactions*.16), follows = Math.round(reactions*.29);
-    const returning = Math.min(item.contributors,Math.round(item.contributors*(.38+(index%3)*.08)));
-    const delta = ((index%5)-1)*2.1;
-    return `
-      <div class="kpi-grid analytics-detail-kpis">
-        <div class="stat-card"><p class="label">Views</p><p class="value">${item.views.toLocaleString()}</p><p class="kpi-delta">${delta >= 0 ? '+' : ''}${delta.toFixed(1)}% vs similar threads</p></div>
-        <div class="stat-card"><p class="label">Replies</p><p class="value">${item.replies.toLocaleString()}</p><p class="kpi-delta">+${4+(index%4)*3} vs similar threads</p></div>
-        <div class="stat-card"><p class="label">Contributors</p><p class="value">${item.contributors.toLocaleString()}</p><p class="kpi-delta">${returning} returning contributors</p></div>
-        <div class="stat-card"><p class="label">Engagement</p><p class="value">${item.engagement}%</p><p class="kpi-delta ${item.engagement < 16 ? 'down' : ''}">${item.engagement < 16 ? '-1.2' : '+2.4'} pts vs similar threads</p></div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card"><h3>Conversation Activity</h3><p class="chart-sub">Replies across the first six reporting intervals</p>${renderLineChart(performanceTrend(item.replies,index,['Day 1','Day 2','Day 3','Day 4','Day 5','Day 6']),'Thread reply activity','var(--chart-gold)')}</div>
-        <div class="chart-card"><h3>Conversation Health</h3><p class="chart-sub">Signals of depth and responsiveness</p><div class="health-grid" style="grid-template-columns:repeat(2,1fr);">
-          <div class="health-metric"><span>Average Reply Time</span><b>${1+(index%4)}.${index%6}h</b></div><div class="health-metric"><span>Reply Depth</span><b>${2+(index%4)}.${index%3}</b></div>
-          <div class="health-metric"><span>Returning Contributors</span><b>${Math.round(returning/item.contributors*100)}%</b></div><div class="health-metric"><span>Unanswered Questions</span><b>${3+(index%7)}</b></div>
-        </div></div>
-      </div>
-      <div class="analytics-detail-grid">
-        <div class="chart-card"><h3>Engagement Breakdown</h3><p class="chart-sub">Ways readers participated in the conversation</p><div class="engagement-grid">
-          <div class="engagement-metric"><span>Replies</span><b>${item.replies.toLocaleString()}</b></div><div class="engagement-metric"><span>Reactions</span><b>${reactions.toLocaleString()}</b></div>
-          <div class="engagement-metric"><span>Shares</span><b>${shares.toLocaleString()}</b></div><div class="engagement-metric"><span>Follows</span><b>${follows.toLocaleString()}</b></div>
-        </div></div>
-        <div class="chart-card"><h3>Key Moments</h3><p class="chart-sub">Notable conversation and moderation events</p><div class="moment-list">
-          <div class="moment-item"><span class="moment-time">Day 1</span><div class="moment-copy"><b>Reply spike</b><span>${Math.round(item.replies*.31)} replies followed the opening question.</span></div></div>
-          <div class="moment-item"><span class="moment-time">Day ${2+(index%3)}</span><div class="moment-copy"><b>Featured response</b><span>A detailed community response drove new follows.</span></div></div>
-          <div class="moment-item"><span class="moment-time">Day ${4+(index%2)}</span><div class="moment-copy"><b>${item.flagRate >= 1 ? 'Moderation review' : 'Activity slowed'}</b><span>${item.flagRate >= 1 ? 'Reported replies were queued for compliance review.' : 'Reply volume returned to the section baseline.'}</span></div></div>
-        </div></div>
-      </div>
-      <div class="chart-card"><h3>Participation and Moderation Health</h3><p class="chart-sub">Contributor mix and operational safety signals</p><div class="health-grid">
-        <div class="health-metric"><span>Frequent Contributors</span><b>${18+(index%5)*3}%</b></div><div class="health-metric"><span>One-time Contributors</span><b>${42-(index%4)*4}%</b></div>
-        <div class="health-metric"><span>Flag Rate</span><b>${item.flagRate}%</b></div><div class="health-metric"><span>Reported Replies</span><b>${Math.max(1,Math.round(item.replies*item.flagRate/100))}</b></div>
-        <div class="health-metric"><span>Moderation Status</span><b>${item.status === 'Flagged' ? 'Reviewing' : 'Healthy'}</b></div><div class="health-metric"><span>Resolution Time</span><b>${item.status === 'Flagged' ? '3.8h' : '1.2h'}</b></div>
-      </div></div>`;
-  }
-
-  function openContentPerformanceAnalytics(type,index){
-    const item = (type === 'uploads' ? uploadPerformanceData : threadPerformanceData)[index];
-    if(!item) return;
-    contentPerformanceTrigger = document.activeElement;
-    document.getElementById('contentPerformanceTitle').textContent = item.title;
-    document.getElementById('contentPerformanceMeta').textContent = `${type === 'uploads' ? 'Upload' : 'Thread'} · ${item.creator} · ${item.section} · ${item.status} · ${item.daysAgo} days ago`;
-    document.getElementById('contentPerformanceBody').innerHTML = type === 'uploads' ? renderUploadPerformanceAnalytics(item,index) : renderThreadPerformanceAnalytics(item,index);
-    const overlay = document.getElementById('contentPerformanceOverlay');
-    overlay.classList.add('open');
-    overlay.querySelector('.modal-close').focus();
-  }
-
-  function closeContentPerformanceAnalytics(){
-    document.getElementById('contentPerformanceOverlay').classList.remove('open');
-    if(contentPerformanceTrigger && typeof contentPerformanceTrigger.focus === 'function') contentPerformanceTrigger.focus();
-    contentPerformanceTrigger = null;
-  }
-
-  document.getElementById('contentPerformanceOverlay').addEventListener('click', event => {
-    if(event.target === event.currentTarget) closeContentPerformanceAnalytics();
-  });
-  document.addEventListener('keydown', event => {
-    if(event.key === 'Escape' && document.getElementById('contentPerformanceOverlay').classList.contains('open')) closeContentPerformanceAnalytics();
-  });
-
-  const livePosts = [
-    {author:"C. Yeo", initials:"CY", tier:"Verified Investor", category:"Personal Finance", publishedAt:"3h ago",
-      content:"Sharing my CPF LIFE payout breakdown after finally understanding the Basic vs Escalating plans — happy to answer questions if anyone's deciding.",
-      views:1204, likes:86, comments:19, featured:true, reported:false},
-    {author:"V. Krishnan", initials:"VK", tier:"Community", category:"Market News", publishedAt:"5h ago",
-      content:"Good recap from the treasury desk session earlier on the rate outlook for the next two quarters — worth a read if you missed the live segment.",
-      views:842, likes:41, comments:7, featured:false, reported:false},
-    {author:"J. Tan", initials:"JT", tier:"Verified Investor", category:"Market News", publishedAt:"1d ago",
-      content:"Weekly wrap: STI up 1.2%, led by financials. Full round-up of the week's key equity moves across the region.",
-      hasChart:true, views:2310, likes:154, comments:33, featured:true, reported:false},
-    {author:"A. Koh", initials:"AK", tier:"Community", category:"Discussion", publishedAt:"2d ago",
-      content:"Does anyone else feel like everyone piling into the same 3 tech names is getting risky? Curious what the diversification play is here.",
-      views:566, likes:22, comments:41, featured:false, reported:true, reportReason:"Reported by 3 users as potentially misleading."}
-  ];
     function switchThreadTab(tab) {
       document.querySelectorAll('#threadTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.ttab === tab));
       document.querySelectorAll('.thread-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'thread-' + tab));
     }
+
+    const analyticsItems = {
+      live: [
+        {title:"Q3 Market Outlook",owner:"OCBC Research",section:"Markets",views:7210,primary:3840,primaryLabel:"Registrations",rate:71,rateLabel:"Attendance",engagement:38,watch:"44m",flag:.3},
+        {title:"Home Ownership 2026",owner:"Wealth Insights",section:"Wealth",views:5980,primary:2960,primaryLabel:"Registrations",rate:66,rateLabel:"Attendance",engagement:31,watch:"39m",flag:.2},
+        {title:"SME Growth Forum",owner:"Business Banking",section:"SME",views:4860,primary:2410,primaryLabel:"Registrations",rate:61,rateLabel:"Attendance",engagement:29,watch:"36m",flag:.4}
+      ],
+      uploads: [
+        {title:"Q2 Earnings Roundup",owner:"OCBC Research",section:"Markets",views:41300,watch:"5m 12s",rate:68,engagement:12.4,flag:.3},
+        {title:"FX Morning Brief",owner:"OCBC Research",section:"Markets",views:28900,watch:"3m 44s",rate:61,engagement:8.7,flag:.2},
+        {title:"Rate Hike Explainer",owner:"Wealth Insights",section:"Wealth",views:22150,watch:"4m 08s",rate:64,engagement:10.1,flag:.5},
+        {title:"First Home Budget Guide",owner:"Wealth Insights",section:"Wealth",views:18420,watch:"4m 46s",rate:72,engagement:11.8,flag:.1},
+        {title:"SME Cash Flow Essentials",owner:"Business Banking",section:"SME",views:15880,watch:"5m 38s",rate:59,engagement:9.6,flag:.4},
+        {title:"Regional Markets Weekly",owner:"OCBC Research",section:"Markets",views:13640,watch:"3m 18s",rate:57,engagement:7.9,flag:.2},
+        {title:"Retirement Income Basics",owner:"Wealth Insights",section:"Wealth",views:11920,watch:"4m 24s",rate:66,engagement:10.7,flag:.1}
+      ],
+      threads: [
+        {title:"Where are rates heading next?",owner:"OCBC Research",section:"Markets",views:8420,replies:214,contributors:126,engagement:24.8,flag:.8},
+        {title:"Q2 bank earnings discussion",owner:"OCBC Research",section:"Markets",views:6980,replies:186,contributors:104,engagement:22.1,flag:.5},
+        {title:"CPF LIFE plan comparison",owner:"Wealth Insights",section:"Wealth",views:5740,replies:142,contributors:88,engagement:19.7,flag:.3},
+        {title:"First home affordability check",owner:"Wealth Insights",section:"Wealth",views:4880,replies:118,contributors:76,engagement:21.4,flag:.2},
+        {title:"Managing FX risk for exporters",owner:"Business Banking",section:"SME",views:4210,replies:96,contributors:61,engagement:18.9,flag:.4},
+        {title:"STI outlook for next quarter",owner:"OCBC Research",section:"Markets",views:3760,replies:84,contributors:58,engagement:17.6,flag:.6},
+        {title:"SME grants experiences",owner:"Business Banking",section:"SME",views:2860,replies:68,contributors:43,engagement:18.4,flag:.3}
+      ]
+    };
+    [
+      {daysAgo:5,segment:"Returning users",status:"Completed",appAccess:84},
+      {daysAgo:12,segment:"Premier Banking",status:"Completed",appAccess:79},
+      {daysAgo:24,segment:"New users",status:"Completed",appAccess:76}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.live[index],meta));
+    [
+      {daysAgo:3,segment:"Returning users",status:"Published"},
+      {daysAgo:5,segment:"Returning users",status:"Published"},
+      {daysAgo:8,segment:"Premier Banking",status:"Published"},
+      {daysAgo:12,segment:"New users",status:"Published"},
+      {daysAgo:16,segment:"Returning users",status:"Published"},
+      {daysAgo:34,segment:"Returning users",status:"Archived"},
+      {daysAgo:62,segment:"Premier Banking",status:"Published"}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.uploads[index],meta));
+    [
+      {daysAgo:2,segment:"Returning users",status:"Active"},
+      {daysAgo:4,segment:"Premier Banking",status:"Active"},
+      {daysAgo:7,segment:"Returning users",status:"Active"},
+      {daysAgo:10,segment:"New users",status:"Active"},
+      {daysAgo:14,segment:"Premier Banking",status:"Active"},
+      {daysAgo:36,segment:"Returning users",status:"Dormant"},
+      {daysAgo:11,segment:"New users",status:"Flagged"}
+    ].forEach((meta,index)=>Object.assign(analyticsItems.threads[index],meta));
+    const performanceState = {uploads:{page:1,key:"views",dir:"desc"},threads:{page:1,key:"views",dir:"desc"}};
+    let analyticsDetailTrigger = null;
+
+    function analyticsFilteredItems(type) {
+      const days=Number(document.getElementById("analyticsDateFilter").value);
+      const section=document.getElementById("analyticsSectionFilter").value;
+      const creator=document.getElementById("analyticsCreatorFilter").value;
+      const segment=document.getElementById("analyticsSegmentFilter").value;
+      const status=document.getElementById("analyticsStatusFilter").value;
+      return analyticsItems[type].filter(item =>
+        item.daysAgo<=days &&
+        (section==="all" || item.section===section) &&
+        (creator==="all" || item.owner===creator) &&
+        (segment==="all" || item.segment===segment) &&
+        (status==="all" || item.status===status)
+      );
+    }
+
+    function renderAnalyticsSummary(type,rows) {
+      const pane=document.getElementById(`analytics-${type}`);
+      const values=pane.querySelectorAll(".kpi-grid .stat-card .value");
+      const deltas=pane.querySelectorAll(".kpi-grid .stat-card .kpi-delta");
+      const average=key=>rows.length ? rows.reduce((sum,item)=>sum+Number(item[key]||0),0)/rows.length : 0;
+      if(type==="live") {
+        const registrations=rows.reduce((sum,item)=>sum+item.primary,0);
+        const weighted=key=>registrations ? rows.reduce((sum,item)=>sum+item.primary*item[key],0)/registrations : 0;
+        values[0].textContent=rows.length.toLocaleString();
+        values[1].textContent=registrations.toLocaleString();
+        values[2].textContent=`${weighted("appAccess").toFixed(1)}%`;
+        values[3].textContent=`${weighted("rate").toFixed(1)}%`;
+      } else if(type==="uploads") {
+        const totalViews=rows.reduce((sum,item)=>sum+item.views,0);
+        const watchSeconds=rows.length ? rows.reduce((sum,item)=>{
+          const match=item.watch.match(/(\d+)m\s*(\d+)?s?/); return sum+(Number(match?.[1]||0)*60+Number(match?.[2]||0));
+        },0)/rows.length : 0;
+        values[0].textContent=Math.round(totalViews*.84).toLocaleString();
+        values[1].textContent=`${Math.floor(watchSeconds/60)}m ${String(Math.round(watchSeconds%60)).padStart(2,"0")}s`;
+        values[2].textContent=`${average("rate").toFixed(1)}%`;
+        values[3].textContent=`${average("engagement").toFixed(1)}%`;
+      } else {
+        values[0].textContent=rows.reduce((sum,item)=>sum+item.views,0).toLocaleString();
+        values[1].textContent=rows.filter(item=>item.status==="Active").length.toLocaleString();
+        values[2].textContent=`${average("engagement").toFixed(1)}%`;
+        values[3].textContent=average("replies").toFixed(1);
+      }
+      deltas.forEach(delta=>{delta.textContent=rows.length ? `${rows.length} matching ${rows.length===1?"item":"items"}` : "No matching data";delta.classList.toggle("down",rows.length===0)});
+    }
+
+    function renderLiveFunnel(rows) {
+      const totals=rows.reduce((result,item)=>{
+        const appAccess=Math.round(item.primary*item.appAccess/100);
+        const attendance=Math.round(item.primary*item.rate/100);
+        result.views+=item.views;
+        result.registrations+=item.primary;
+        result.appAccess+=appAccess;
+        result.attendance+=attendance;
+        result.watched+=Math.round(attendance*.89);
+        result.engaged+=Math.round(attendance*item.engagement/100);
+        return result;
+      },{views:0,registrations:0,appAccess:0,attendance:0,watched:0,engaged:0});
+      const values=[totals.views,totals.registrations,totals.appAccess,totals.attendance,totals.watched,totals.engaged];
+      document.querySelectorAll("#analytics-live .funnel-step b").forEach((element,index)=>{
+        element.textContent=(values[index]||0).toLocaleString();
+      });
+    }
+
+    function renderLivePerformanceTable() {
+      const rows=analyticsFilteredItems("live");
+      document.getElementById("livePerformanceBody").innerHTML=rows.length ? rows.map(item=>{
+        const index=analyticsItems.live.indexOf(item);
+        return `<tr class="event-row-link" onclick="openAnalyticsDetail('live',${index})"><td>${item.title}</td><td>${item.primary.toLocaleString()}</td><td>${item.appAccess}%</td><td>${item.rate}%</td><td>${item.watch}</td><td>${item.engagement}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('live',${index})">View details</button></td></tr>`;
+      }).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No live sessions match the selected filters.</td></tr>`;
+      renderAnalyticsSummary("live",rows);
+      renderLiveFunnel(rows);
+    }
+
+    function renderPerformanceTable(type) {
+      const singular = type === "uploads" ? "upload" : "thread";
+      const search = document.getElementById(`${singular}PerformanceSearch`).value.toLowerCase();
+      const state = performanceState[type];
+      const rows = analyticsFilteredItems(type).filter(x => x.title.toLowerCase().includes(search)).sort((a,b) => {
+        const result = typeof a[state.key] === "string" ? a[state.key].localeCompare(b[state.key]) : a[state.key]-b[state.key];
+        return state.dir === "asc" ? result : -result;
+      });
+      const pages = Math.max(1,Math.ceil(rows.length/5));
+      state.page = Math.min(state.page,pages);
+      const visible = rows.slice((state.page-1)*5,state.page*5);
+      document.getElementById(`${singular}PerformanceCount`).textContent = `${rows.length} ${type} in selected period`;
+      document.getElementById(`${singular}PerformancePage`).textContent = `Page ${state.page} of ${pages}`;
+      document.getElementById(`${singular}PerformanceBody`).innerHTML = visible.map(item => {
+        const index = analyticsItems[type].indexOf(item);
+        return type === "uploads"
+          ? `<tr class="event-row-link" onclick="openAnalyticsDetail('uploads',${index})"><td>${item.title}</td><td>${item.views.toLocaleString()}</td><td>${item.watch}</td><td>${item.rate}%</td><td>${item.engagement}%</td><td>${item.flag}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('uploads',${index})">View details</button></td></tr>`
+          : `<tr class="event-row-link" onclick="openAnalyticsDetail('threads',${index})"><td>${item.title}</td><td>${item.views.toLocaleString()}</td><td>${item.replies}</td><td>${item.contributors}</td><td>${item.engagement}%</td><td>${item.flag}%</td><td><button class="view-details-btn" onclick="event.stopPropagation();openAnalyticsDetail('threads',${index})">View details</button></td></tr>`;
+      }).join("");
+      if(!visible.length) document.getElementById(`${singular}PerformanceBody`).innerHTML=`<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No ${type} match the selected filters.</td></tr>`;
+      renderAnalyticsSummary(type,rows);
+    }
+
+    function handleAnalyticsFilterChange() {
+      performanceState.uploads.page=1;
+      performanceState.threads.page=1;
+      renderLivePerformanceTable();
+      renderPerformanceTable("uploads");
+      renderPerformanceTable("threads");
+    }
+
+    function sortPerformance(type,key) {
+      const state=performanceState[type];
+      if(state.key===key) state.dir=state.dir==="asc"?"desc":"asc"; else {state.key=key;state.dir="asc";}
+      state.page=1;
+      renderPerformanceTable(type);
+    }
+    function changePerformancePage(type,direction) {
+      performanceState[type].page=Math.max(1,performanceState[type].page+direction);
+      renderPerformanceTable(type);
+    }
+
+    function detailTrend(item) {
+      const values=[.12,.18,.24,.2,.15,.11].map(x=>Math.round(item.views*x));
+      const max=Math.max(...values);
+      return `<div style="display:flex;align-items:flex-end;gap:10px;height:150px;margin-top:18px">${values.map((v,i)=>`<div style="flex:1;text-align:center"><div style="height:${Math.max(8,v/max*115)}px;background:var(--chart-red);border-radius:5px 5px 0 0"></div><small style="color:var(--ink-500)">Day ${i+1}</small></div>`).join("")}</div>`;
+    }
+    function openAnalyticsDetail(type,index) {
+      const item=analyticsItems[type][index]; if(!item)return;
+      analyticsDetailTrigger=document.activeElement;
+      document.getElementById("analyticsDetailTitle").textContent=item.title;
+      document.getElementById("analyticsDetailMeta").textContent=`${type==="live"?"Live session":type==="uploads"?"Upload":"Thread"} · ${item.owner} · ${item.section}`;
+      const secondValue=type==="threads"?item.replies.toLocaleString():type==="live"?item.primary.toLocaleString():item.watch;
+      const secondLabel=type==="threads"?"Replies":type==="live"?item.primaryLabel:"Average Watch";
+      const thirdValue=type==="threads"?item.contributors.toLocaleString():`${item.rate}%`;
+      const thirdLabel=type==="threads"?"Contributors":type==="live"?item.rateLabel:"Completion";
+      document.getElementById("analyticsDetailBody").innerHTML=`
+        <div class="kpi-grid analytics-detail-kpis">
+          <div class="stat-card"><p class="label">Views</p><p class="value">${item.views.toLocaleString()}</p><p class="kpi-delta">+8.4% vs recent average</p></div>
+          <div class="stat-card"><p class="label">${secondLabel}</p><p class="value">${secondValue}</p><p class="kpi-delta">+4.2% vs recent average</p></div>
+          <div class="stat-card"><p class="label">${thirdLabel}</p><p class="value">${thirdValue}</p><p class="kpi-delta">+2.1 pts vs recent average</p></div>
+          <div class="stat-card"><p class="label">Engagement</p><p class="value">${item.engagement}%</p><p class="kpi-delta">+1.6 pts vs recent average</p></div>
+        </div>
+        <div class="analytics-detail-grid">
+          <div class="chart-card"><h3>${type==="threads"?"Conversation Activity":"Performance Over Time"}</h3><p class="chart-sub">Activity across the first six reporting intervals</p>${detailTrend(item)}</div>
+          <div class="chart-card"><h3>${type==="threads"?"Conversation Health":"Engagement Breakdown"}</h3><p class="chart-sub">Quality and participation signals</p><div class="engagement-grid">
+            <div class="engagement-metric"><span>${type==="threads"?"Reactions":"Comments"}</span><b>${Math.round(item.views*item.engagement/140).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>Shares</span><b>${Math.round(item.views*item.engagement/600).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>${type==="threads"?"Follows":"Saves"}</span><b>${Math.round(item.views*item.engagement/450).toLocaleString()}</b></div>
+            <div class="engagement-metric"><span>Returning Users</span><b>62%</b></div>
+          </div></div>
+        </div>
+        <div class="analytics-detail-grid">
+          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
+          <div class="chart-card"><h3>Moderation Health</h3><div class="health-grid" style="grid-template-columns:repeat(2,1fr)"><div class="health-metric"><span>Flag Rate</span><b>${item.flag}%</b></div><div class="health-metric"><span>Status</span><b>${item.flag>1?"Reviewing":"Healthy"}</b></div><div class="health-metric"><span>Resolution SLA</span><b>96%</b></div><div class="health-metric"><span>Response Time</span><b>1.4h</b></div></div></div>
+        </div>`;
+      document.getElementById("analyticsDetailOverlay").classList.add("open");
+      document.querySelector("#analyticsDetailOverlay .modal-close").focus();
+    }
+    function closeAnalyticsDetail() {
+      document.getElementById("analyticsDetailOverlay").classList.remove("open");
+      if(analyticsDetailTrigger&&analyticsDetailTrigger.focus)analyticsDetailTrigger.focus();
+    }
+    document.getElementById("analyticsDetailOverlay").addEventListener("click",e=>{if(e.target===e.currentTarget)closeAnalyticsDetail()});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.getElementById("analyticsDetailOverlay").classList.contains("open"))closeAnalyticsDetail()});
 
     function switchAnalyticsTab(tab) {
       document.querySelectorAll('#analyticsTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.atab === tab));
       document.querySelectorAll('.analytics-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'analytics-' + tab));
       const status = document.getElementById('analyticsStatusFilter');
       const options = {
-        live: ['All statuses', 'Upcoming', 'Completed', 'Cancelled'],
-        uploads: ['All statuses', 'Published', 'Draft', 'Archived'],
-        threads: ['All statuses', 'Active', 'Dormant', 'Flagged']
+        live: ['Upcoming', 'Completed', 'Cancelled'],
+        uploads: ['Published', 'Draft', 'Archived'],
+        threads: ['Active', 'Dormant', 'Flagged']
       };
-      status.innerHTML = options[tab].map(label => `<option>${label}</option>`).join('');
+      status.innerHTML = `<option value="all">All statuses</option>${options[tab].map(label => `<option>${label}</option>`).join('')}`;
+      handleAnalyticsFilterChange();
     }
 
     const livePosts = [
@@ -5980,22 +5084,6 @@
     </div>
   `).join('');
 
-  // ---- Initial render ----
-  renderOverviewStats();
-  renderUploadsStats();
-  renderUploadsTable();
-  renderLiveStats();
-  renderLiveTable();
-  renderSubmissionsFeed();
-  renderLiveFeed();
-  renderTopics();
-  renderHotTopicsStats();
-  renderHotTopics();
-  renderPerformanceTable('uploads');
-  renderPerformanceTable('threads');
-</script>
-</body>
-</html>
     // ---- Initial render ----
     renderOverviewHeader();
     renderOverviewStats();
@@ -6013,6 +5101,9 @@
     renderTopics();
     renderHotTopicsStats();
     renderHotTopics();
+    renderLivePerformanceTable();
+    renderPerformanceTable('uploads');
+    renderPerformanceTable('threads');
   </script>
 </body>
 
