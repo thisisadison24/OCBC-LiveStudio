@@ -95,6 +95,7 @@
     :root[data-theme="wow"] .segment-btn.active { color: var(--ink-900); }
     :root[data-theme="wow"] .dossier-rail-item.active { color: var(--ink-900); }
     :root[data-theme="wow"] .app-preview-cover .app-preview-mark { color: var(--ink-900); }
+    :root[data-theme="wow"] .calendar-day-cell.today .calendar-day-number { color: var(--ink-900); }
 
     .theme-toggle {
       position: fixed;
@@ -250,6 +251,12 @@
       width: 100%;
     }
 
+    .main:has(> #page-contentcalendar.active) {
+      max-width: 100%;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
     .page {
       display: none;
     }
@@ -350,6 +357,14 @@
 
     .stat-grid.cols-6 {
       grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .stat-grid.cols-7 {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .stat-grid.cols-8 {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
     }
 
     .stat-card {
@@ -1170,6 +1185,48 @@
       display: flex;
     }
 
+    .overlay.slide-overlay {
+      justify-content: flex-end;
+      align-items: stretch;
+      padding: 0;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .modal.slide-panel {
+      max-width: 560px;
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      overflow-y: auto;
+      animation: slideInRight .2s ease;
+      pointer-events: auto;
+      border-left: 1px solid var(--line);
+      box-shadow: -16px 0 40px -12px rgba(0, 0, 0, 0.35);
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .slide-panel .detail-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .slide-panel .modal-head {
+      position: sticky;
+      top: 0;
+      background: var(--paper-0);
+      z-index: 2;
+    }
+
+    .slide-panel .modal-foot {
+      position: sticky;
+      bottom: 0;
+      background: var(--paper-0);
+    }
+
     .modal {
       background: var(--paper-0);
       border-radius: var(--radius-lg);
@@ -1385,15 +1442,48 @@
 
     .stat-card.clickable-stat {
       cursor: pointer;
-      transition: box-shadow .12s ease;
+      transition: box-shadow .12s ease, border-color .12s ease;
     }
 
     .stat-card.clickable-stat:hover {
       box-shadow: 0 0 0 1px var(--line-strong);
     }
 
+    /* Fallback only — every real stat-card carries its own accent-* class below,
+       which wins on specificity and supplies the matching border + glow. */
     .stat-card.clickable-stat.stat-active {
-      box-shadow: 0 0 0 2px var(--red-600) inset;
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1.5px var(--line-strong);
+    }
+
+    .stat-card.clickable-stat.accent-gray.stat-active {
+      border-color: var(--ink-300);
+      box-shadow: 0 0 0 1.5px var(--ink-300), 0 0 16px -3px var(--ink-300);
+    }
+
+    .stat-card.clickable-stat.accent-amber.stat-active {
+      border-color: var(--amber-600);
+      box-shadow: 0 0 0 1.5px var(--amber-600), 0 0 16px -3px var(--amber-600);
+    }
+
+    .stat-card.clickable-stat.accent-green.stat-active {
+      border-color: var(--green-600);
+      box-shadow: 0 0 0 1.5px var(--green-600), 0 0 16px -3px var(--green-600);
+    }
+
+    .stat-card.clickable-stat.accent-info.stat-active {
+      border-color: var(--info-600);
+      box-shadow: 0 0 0 1.5px var(--info-600), 0 0 16px -3px var(--info-600);
+    }
+
+    .stat-card.clickable-stat.accent-teal.stat-active {
+      border-color: var(--teal-600);
+      box-shadow: 0 0 0 1.5px var(--teal-600), 0 0 16px -3px var(--teal-600);
+    }
+
+    .stat-card.clickable-stat.flagged.stat-active {
+      border-color: var(--danger-600);
+      box-shadow: 0 0 0 1.5px var(--danger-600), 0 0 16px -3px var(--danger-600);
     }
 
     .content-library-grid {
@@ -1506,6 +1596,107 @@
       font-size: 11.5px;
       color: var(--ink-500);
       margin: 2px 0 0;
+    }
+
+    .calendar-month-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .calendar-month-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .calendar-month-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      margin-bottom: 4px;
+    }
+
+    .calendar-month-weekdays span {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-500);
+      text-align: center;
+      padding: 6px 0;
+      display: block;
+    }
+
+    .calendar-month-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .calendar-day-cell {
+      background: var(--paper-0);
+      min-height: 168px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .calendar-day-cell.outside {
+      background: var(--paper-100);
+    }
+
+    .calendar-day-number {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-500);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-day-cell.outside .calendar-day-number {
+      color: var(--ink-300);
+    }
+
+    .calendar-day-cell.today .calendar-day-number {
+      background: var(--red-600);
+      color: #fff;
+      border-radius: 50%;
+    }
+
+    .calendar-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--paper-100);
+      color: var(--ink-900);
+      border-left: 3px solid var(--ink-300);
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .calendar-chip.pending {
+      border-left-color: var(--amber-600);
+    }
+
+    .calendar-chip-more {
+      font-size: 10px;
+      color: var(--ink-500);
     }
 
     .upload-tab-pane {
@@ -3582,6 +3773,9 @@
       .info-grid {
         grid-template-columns: 1fr;
       }
+      .modal.slide-panel {
+        max-width: 100%;
+      }
     }
 
     @media (max-width:900px) {
@@ -3589,7 +3783,9 @@
       .stat-grid,
       .kpi-grid,
       .stat-grid.cols-5,
-      .stat-grid.cols-6 {
+      .stat-grid.cols-6,
+      .stat-grid.cols-7,
+      .stat-grid.cols-8 {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -3935,53 +4131,65 @@
           </button>
         </div>
 
-        <div class="view-tabbar" id="uploadsViewTabbar">
-          <button class="view-tab-btn active" data-view="log" onclick="switchUploadsView('log')">Log</button>
-          <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Content Library</button>
-        </div>
-
-        <div class="view-pane active" id="uploadsView-log">
-          <div class="stat-grid cols-6" id="uploadsStats"></div>
-
-          <div class="panel">
-            <div class="bulk-bar" id="uploadsBulkBar">
-              <span class="bulk-bar-count" id="uploadsBulkCount">0 selected</span>
-              <div class="bulk-bar-actions">
-                <button class="btn btn-sm" onclick="clearUploadSelection()">Clear</button>
-                <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectUploads()">Reject</button>
-                <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteUploads()">Delete</button>
-                <button class="btn btn-sm btn-primary" onclick="bulkApproveUploads()">Approve</button>
-              </div>
-            </div>
-            <div class="panel-head">
-              <h2>Uploads Log</h2>
-              <div class="filter-row">
-                <input class="search" type="text" id="uploadsSearch" placeholder="Search uploads..."
-                  oninput="renderUploadsTable()" />
-              </div>
-              <div id="uploadsStatusFilter" data-value="all" style="display:none;"></div>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
-                      onchange="toggleSelectAllUploads(this)" /></td>
-                  <td>Title</td>
-                  <td>Owner</td>
-                  <td>Section</td>
-                  <td>Tags</td>
-                  <td>Status</td>
-                  <td>Expires</td>
-                  <td>Description</td>
-                </tr>
-              </thead>
-              <tbody id="uploadsTableBody"></tbody>
-            </table>
+        <div class="dossier-body">
+          <div class="dossier-rail" id="uploadsSourceRail">
+            <button class="dossier-rail-item active" data-source="all" onclick="filterUploadsBySource('all')">All Sources</button>
+            <button class="dossier-rail-item" data-source="local" onclick="filterUploadsBySource('local')">Local Uploads</button>
+            <button class="dossier-rail-item" data-source="youtube" onclick="filterUploadsBySource('youtube')">Embedded Videos</button>
+            <button class="dossier-rail-item" data-source="spotify" onclick="filterUploadsBySource('spotify')">Podcasts</button>
           </div>
-        </div>
 
-        <div class="view-pane" id="uploadsView-library">
-          <div class="content-library-grid" id="uploadsLibraryGrid"></div>
+          <div class="dossier-content">
+            <div class="view-tabbar" id="uploadsViewTabbar">
+              <button class="view-tab-btn active" data-view="log" onclick="switchUploadsView('log')">Log</button>
+              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Content Library</button>
+            </div>
+
+            <div class="view-pane active" id="uploadsView-log">
+              <div class="stat-grid cols-8" id="uploadsStats"></div>
+
+              <div class="panel">
+                <div class="bulk-bar" id="uploadsBulkBar">
+                  <span class="bulk-bar-count" id="uploadsBulkCount">0 selected</span>
+                  <div class="bulk-bar-actions">
+                    <button class="btn btn-sm" onclick="clearUploadSelection()">Clear</button>
+                    <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectUploads()">Reject</button>
+                    <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteUploads()">Delete</button>
+                    <button class="btn btn-sm btn-primary" onclick="bulkApproveUploads()">Approve</button>
+                  </div>
+                </div>
+                <div class="panel-head">
+                  <h2>Uploads Log</h2>
+                  <div class="filter-row">
+                    <input class="search" type="text" id="uploadsSearch" placeholder="Search uploads..."
+                      oninput="renderUploadsTable()" />
+                  </div>
+                  <div id="uploadsStatusFilter" data-value="all" style="display:none;"></div>
+                  <div id="uploadsSourceFilter" data-value="all" style="display:none;"></div>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
+                          onchange="toggleSelectAllUploads(this)" /></td>
+                      <td>Title</td>
+                      <td>Owner</td>
+                      <td>Section</td>
+                      <td>Tags</td>
+                      <td>Status</td>
+                      <td>Expires</td>
+                      <td>Description</td>
+                    </tr>
+                  </thead>
+                  <tbody id="uploadsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="view-pane" id="uploadsView-library">
+              <div class="content-library-grid" id="uploadsLibraryGrid"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4006,7 +4214,7 @@
         </div>
 
         <div class="view-pane active" id="liveView-log">
-          <div class="stat-grid cols-5" id="liveStats"></div>
+          <div class="stat-grid cols-7" id="liveStats"></div>
 
           <div class="panel">
             <div class="bulk-bar" id="liveBulkBar">
@@ -4756,8 +4964,29 @@
             <p>Upcoming content across Uploads and Live — scheduled launches and pending releases, in order.</p>
           </div>
         </div>
-        <div class="panel">
-          <div id="contentCalendarList"></div>
+
+        <div class="view-tabbar" id="calendarViewTabbar">
+          <button class="view-tab-btn active" data-view="month" onclick="switchCalendarView('month')">Month</button>
+          <button class="view-tab-btn" data-view="agenda" onclick="switchCalendarView('agenda')">Agenda</button>
+        </div>
+
+        <div class="view-pane active" id="calendarView-month">
+          <div class="calendar-month-head">
+            <button class="btn btn-sm" onclick="shiftCalendarMonth(-1)" aria-label="Previous month">‹</button>
+            <button class="btn btn-sm" onclick="goToCalendarToday()">Today</button>
+            <h2 id="calendarMonthLabel"></h2>
+            <button class="btn btn-sm" onclick="shiftCalendarMonth(1)" aria-label="Next month">›</button>
+          </div>
+          <div class="calendar-month-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-month-grid" id="calendarMonthGrid"></div>
+        </div>
+
+        <div class="view-pane" id="calendarView-agenda">
+          <div class="panel">
+            <div id="contentCalendarList"></div>
+          </div>
         </div>
       </div>
 
@@ -5826,8 +6055,8 @@
   </div>
 
   <!-- CONTENT DETAIL MODAL (opens for any row, regardless of status) -->
-  <div class="overlay" id="contentOverlay">
-    <div class="modal" style="max-width:820px;">
+  <div class="overlay slide-overlay" id="contentOverlay">
+    <div class="modal slide-panel">
       <div class="modal-head">
         <div>
           <h2 id="contentTitle">Fed Rate Reaction Live</h2>
@@ -6074,7 +6303,16 @@
       { id: 9, title: "ESG Investing Basics", owner: "S. Wong", section: "Wealth", tags: ["ESG", "Investing"], status: "published", description: "Introductory overview of ESG investing principles and how they apply to fund selection.", expiresOn: daysFromNow(60) },
       { id: 10, title: "FX Hedging for SMEs", owner: "R. Ong", section: "SME banking", tags: ["FX", "Hedging"], status: "active", description: "Practical guide for SME treasurers on hedging currency exposure using forward contracts.", expiresOn: daysFromNow(21) },
       { id: 11, title: "Retail Banking App Walkthrough", owner: "M. Lee", section: "Personal banking", tags: ["App", "Onboarding"], status: "published", description: "Step-by-step walkthrough of the OCBC retail banking app's key features for new customers.", expiresOn: daysFromNow(90) },
-      { id: 12, title: "Markets Wrap: Rate Cut Special", owner: "J. Tan", section: "Markets", tags: ["Rates", "Macro"], status: "active", description: "Special edition market wrap covering the implications of the latest rate cut decision.", expiresOn: daysFromNow(14) }
+      { id: 12, title: "Markets Wrap: Rate Cut Special", owner: "J. Tan", section: "Markets", tags: ["Rates", "Macro"], status: "active", description: "Special edition market wrap covering the implications of the latest rate cut decision.", expiresOn: daysFromNow(14) },
+      { id: 13, title: "Q3 Outlook Webinar Recap", owner: "J. Tan", section: "Markets", tags: ["Outlook"], status: "pending", description: "Recap of the Q3 markets outlook webinar, edited down for on-demand viewing.", scheduledFor: daysFromNow(12) },
+      { id: 14, title: "CPF Retirement Sums Explained", owner: "S. Wong", section: "Wealth", tags: ["CPF", "Retirement"], status: "draft", description: "Explainer on the CPF Basic, Full, and Enhanced Retirement Sums and how they affect payouts.", scheduledFor: daysFromNow(16) },
+      { id: 15, title: "Business Loan Fast Track", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "pending", description: "Overview of the fast-track approval process for eligible SME business loans.", scheduledFor: daysFromNow(20) },
+      { id: 16, title: "Cross-Border Payments 101", owner: "A. Kumar", section: "Corporate banking", tags: ["Payments"], status: "draft", description: "Introductory explainer on cross-border payment rails and settlement timing for corporate clients.", scheduledFor: daysFromNow(28) },
+      { id: 17, title: "Year-End Tax Planning Tips", owner: "S. Wong", section: "Wealth", tags: ["Tax", "Planning"], status: "pending", description: "Seasonal explainer covering common year-end tax planning moves for Premier clients.", scheduledFor: daysFromNow(35) },
+      { id: 18, title: "SG Budget 2026: What It Means for Savers", owner: "J. Tan", section: "Markets", tags: ["Budget", "Policy"], status: "published", description: "Embedded explainer video breaking down the SG Budget 2026 announcements relevant to retail savers.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=sgbudget2026", expiresOn: daysFromNow(75) },
+      { id: 19, title: "Rate Hike Ripple Effects", owner: "A. Kumar", section: "Markets", tags: ["Rates"], status: "active", description: "Embedded video walking through how a rate hike flows through mortgages, savings, and business loans.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=ratehikeripple", expiresOn: daysFromNow(40) },
+      { id: 20, title: "Market Minute: This Week in Rates", owner: "M. Lee", section: "Markets", tags: ["Podcast"], status: "published", description: "Weekly audio round-up covering the past week's key rate moves and what to watch next.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/marketminute", expiresOn: daysFromNow(30) },
+      { id: 21, title: "Wealth Unpacked: Retirement Myths", owner: "S. Wong", section: "Wealth", tags: ["Podcast", "Retirement"], status: "pending", description: "Podcast episode debunking common retirement planning myths, awaiting review before publishing.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/wealthunpacked" }
     ];
 
     let liveIdCounter = 100;
@@ -6089,7 +6327,11 @@
       { id: 4, title: "Treasury Desk AMA", owner: "R. Ong", section: "Wealth", tags: ["Treasury", "Q&A"], status: "published", description: "Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast." },
       { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled.", scheduledFor: daysFromNow(6) },
       { id: 6, title: "SME Growth Clinic", owner: "R. Ong", section: "SME banking", tags: ["Growth", "Q&A"], status: "published", description: "Live clinic session helping SME owners plan for expansion financing and cashflow." },
-      { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", description: "Live audience Q&A addressing client concerns around recent market volatility." }
+      { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", description: "Live audience Q&A addressing client concerns around recent market volatility." },
+      { id: 8, title: "Markets Outlook: August Preview", owner: "P. Sharma", section: "Markets", tags: ["Outlook"], status: "pending", description: "Live preview of key market events and data releases expected in August.", scheduledFor: daysFromNow(8) },
+      { id: 9, title: "Wealth Webinar: Legacy Planning", owner: "S. Wong", section: "Wealth", tags: ["Legacy", "Planning"], status: "draft", description: "Live webinar on legacy and estate planning considerations for Premier Banking clients.", scheduledFor: daysFromNow(25) },
+      { id: 10, title: "SME Digitalisation Grants Briefing", owner: "R. Ong", section: "SME banking", tags: ["Grants"], status: "pending", description: "Live briefing on available government digitalisation grants for SME clients.", scheduledFor: daysFromNow(18) },
+      { id: 11, title: "Corporate Treasury Roundtable", owner: "A. Kumar", section: "Corporate banking", tags: ["Treasury"], status: "draft", description: "Live roundtable discussion with corporate treasury clients on liquidity management.", scheduledFor: daysFromNow(32) }
     ];
 
     const typeIcon = {
@@ -6652,14 +6894,30 @@
       renderUploadsTable();
     }
 
+    function filterUploadsBySource(value) {
+      document.getElementById('uploadsSourceFilter').dataset.value = value;
+      document.querySelectorAll('#uploadsSourceRail .dossier-rail-item').forEach(b => b.classList.toggle('active', b.dataset.source === value));
+      renderUploadsStats();
+      renderUploadsTable();
+      renderUploadsLibrary();
+    }
+
+    function itemSourceType(item) {
+      return item.sourceType || 'local';
+    }
+
     function renderUploadsStats() {
-      const s = computeStats(uploadsData);
-      const expiringSoon = uploadsData.filter(x => expiryInfo(x).cls === 'expiring').length;
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
+      const scoped = sourceFilter === 'all' ? uploadsData : uploadsData.filter(x => itemSourceType(x) === sourceFilter);
+      const s = computeStats(scoped);
+      const expiringSoon = scoped.filter(x => expiryInfo(x).cls === 'expiring').length;
       const active = document.getElementById('uploadsStatusFilter').dataset.value;
       const cls = (v) => 'stat-card clickable-stat' + (active === v ? ' stat-active' : '');
       document.getElementById('uploadsStats').innerHTML = `
+      <div class="${cls('all')} accent-teal" onclick="filterUploadsByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${scoped.length}</p></div>
       <div class="${cls('draft')} accent-gray" onclick="filterUploadsByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterUploadsByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterUploadsByStatus('active')"><p class="label"><span class="dot green"></span>Active</p><p class="value">${s.active}</p></div>
       <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterUploadsByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="${cls('expiring')} accent-amber" onclick="filterUploadsByStatus('expiring')"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
@@ -6668,12 +6926,14 @@
     }
     function renderUploadsTable() {
       const filter = document.getElementById('uploadsStatusFilter').dataset.value;
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
       const query = document.getElementById('uploadsSearch').value.trim().toLowerCase();
       const body = document.getElementById('uploadsTableBody');
       body.innerHTML = '';
       let visibleCount = 0;
       const visibleIds = new Set();
       uploadsData.forEach(item => {
+        if (sourceFilter !== 'all' && itemSourceType(item) !== sourceFilter) return;
         if (filter === 'expiring') { if (expiryInfo(item).cls !== 'expiring') return; }
         else if (filter !== 'all' && item.status !== filter) return;
         if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
@@ -6704,11 +6964,85 @@
     }
 
     // ---- Content Calendar: upcoming/scheduled content across Uploads and Live ----
-    function renderContentCalendar() {
-      const entries = [
+    function contentCalendarEntries() {
+      return [
         ...uploadsData.filter(x => x.scheduledFor).map(x => Object.assign({}, x, { kind: 'Upload' })),
         ...liveData.filter(x => x.scheduledFor).map(x => Object.assign({}, x, { kind: 'Live' }))
-      ].sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor));
+      ];
+    }
+
+    function switchCalendarView(view) {
+      document.querySelectorAll('#calendarViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+      document.getElementById('calendarView-agenda').classList.toggle('active', view === 'agenda');
+      document.getElementById('calendarView-month').classList.toggle('active', view === 'month');
+      if (view === 'month') renderCalendarMonth();
+    }
+
+    let calendarMonthCursor = new Date();
+    calendarMonthCursor.setDate(1);
+    calendarMonthCursor.setHours(0, 0, 0, 0);
+
+    function shiftCalendarMonth(delta) {
+      calendarMonthCursor.setMonth(calendarMonthCursor.getMonth() + delta);
+      renderCalendarMonth();
+    }
+
+    function goToCalendarToday() {
+      calendarMonthCursor = new Date();
+      calendarMonthCursor.setDate(1);
+      calendarMonthCursor.setHours(0, 0, 0, 0);
+      renderCalendarMonth();
+    }
+
+    function renderCalendarMonth() {
+      const byDate = {};
+      contentCalendarEntries().forEach(item => {
+        (byDate[item.scheduledFor] = byDate[item.scheduledFor] || []).push(item);
+      });
+
+      const year = calendarMonthCursor.getFullYear();
+      const month = calendarMonthCursor.getMonth();
+      document.getElementById('calendarMonthLabel').textContent = calendarMonthCursor.toLocaleDateString('en-SG', { month: 'long', year: 'numeric' });
+
+      const firstOfMonth = new Date(year, month, 1);
+      const startWeekday = firstOfMonth.getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const pad = (n) => String(n).padStart(2, '0');
+      const todayStr = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+      const cells = [];
+      for (let i = startWeekday - 1; i >= 0; i--) {
+        cells.push({ day: daysInPrevMonth - i, outside: true });
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${pad(month + 1)}-${pad(d)}`;
+        cells.push({ day: d, outside: false, dateStr, isToday: dateStr === todayStr });
+      }
+      let trailDay = 1;
+      while (cells.length % 7 !== 0) {
+        cells.push({ day: trailDay++, outside: true });
+      }
+
+      document.getElementById('calendarMonthGrid').innerHTML = cells.map(cell => {
+        if (cell.outside) {
+          return `<div class="calendar-day-cell outside"><span class="calendar-day-number">${cell.day}</span></div>`;
+        }
+        const items = byDate[cell.dateStr] || [];
+        const visible = items.slice(0, 4);
+        const extra = items.length - visible.length;
+        return `<div class="calendar-day-cell${cell.isToday ? ' today' : ''}">
+          <span class="calendar-day-number">${cell.day}</span>
+          ${visible.map(item => `<div class="calendar-chip ${item.status}" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})" title="${item.title}">${item.title}</div>`).join('')}
+          ${extra > 0 ? `<div class="calendar-chip-more">+${extra} more</div>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    function renderContentCalendar() {
+      const entries = contentCalendarEntries().sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor));
 
       const list = document.getElementById('contentCalendarList');
       if (!entries.length) {
@@ -6772,7 +7106,8 @@
     }
 
     function renderUploadsLibrary() {
-      const items = uploadsData.filter(x => x.status === 'active' || x.status === 'published');
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
+      const items = uploadsData.filter(x => (x.status === 'active' || x.status === 'published') && (sourceFilter === 'all' || itemSourceType(x) === sourceFilter));
       document.getElementById('uploadsLibraryGrid').innerHTML = items.length
         ? items.map(item => renderLibraryCard(item, 'uploads')).join('')
         : `<p style="color:var(--ink-500);font-size:13px;">No approved uploads yet.</p>`;
@@ -6800,9 +7135,11 @@
       const active = document.getElementById('liveLogStatusFilter').dataset.value;
       const cls = (v) => 'stat-card clickable-stat' + (active === v ? ' stat-active' : '');
       document.getElementById('liveStats').innerHTML = `
+      <div class="${cls('all')} accent-teal" onclick="filterLiveByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${liveData.length}</p></div>
       <div class="${cls('draft')} accent-gray" onclick="filterLiveByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Live Now</p><p class="value">${s.active}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterLiveByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterLiveByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
@@ -7546,7 +7883,7 @@
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
       if (page === 'customer360') closeCustomerDossier();
-      if (page === 'contentcalendar') renderContentCalendar();
+      if (page === 'contentcalendar') { renderCalendarMonth(); renderContentCalendar(); }
     }
 
     function openUploadModal() {
@@ -8566,6 +8903,46 @@
     renderHotTopics();
     renderC360RosterStats();
     renderC360Roster();
+    renderCalendarMonth();
+    renderContentCalendar();
+    renderLivePerformanceTable();
+    renderPerformanceTable('uploads');
+    renderPerformanceTable('threads');
+  </script>
+</body>
+
+</html>ction closeCustomerDossier() {
+      currentDossierCif = null;
+      document.getElementById('c360-dossier').classList.remove('active');
+      document.getElementById('c360-roster').classList.add('active');
+    }
+
+    function switchDossierTab(tab) {
+      document.querySelectorAll('#dossierTabbar .dossier-rail-item').forEach(b => b.classList.toggle('active', b.dataset.dtab === tab));
+      document.querySelectorAll('.dossier-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'dossier-' + tab));
+    }
+
+    // ---- Initial render ----
+    renderOverviewHeader();
+    renderOverviewStats();
+    renderOverviewPillarKpis();
+    renderLiveRegistrationsChart();
+    renderNextLiveSessionPreview();
+    renderOverviewCommunity();
+    renderTopPostPreview();
+    renderOverviewGlance();
+    renderUploadsStats();
+    renderUploadsTable();
+    renderLiveStats();
+    renderLiveTable();
+    renderSubmissionsFeed();
+    renderLiveFeed();
+    renderTopics();
+    renderHotTopicsStats();
+    renderHotTopics();
+    renderC360RosterStats();
+    renderC360Roster();
+    renderCalendarMonth();
     renderContentCalendar();
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
