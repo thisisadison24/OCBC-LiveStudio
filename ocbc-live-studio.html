@@ -32,6 +32,8 @@
       --teal-bg: rgba(14, 118, 109, 0.22);
       --danger-600: #FF7A6B;
       --danger-bg: rgba(185, 58, 46, 0.22);
+      --info-600: #5B9EFF;
+      --info-bg: rgba(43, 100, 200, 0.24);
       --chart-red: #D42B41;
       --chart-teal: #2FA89D;
       --chart-gold: #D99A2B;
@@ -40,6 +42,127 @@
       --radius-lg: 16px;
       --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
     }
+
+    :root[data-theme="wow"] {
+      --red-900: #9C7F2E;
+      --red-700: #F0D690;
+      --red-600: #D5B360;
+      --red-50: rgba(213, 179, 96, 0.18);
+      --ink-900: #2B2013;
+      --ink-700: #5B4C3D;
+      --ink-500: #4A4030;
+      --ink-300: #BBA97D;
+      --paper-100: #F7EEDA;
+      --paper-0: #FFFFFF;
+      --line: #EDE0BE;
+      --line-strong: #DFCB94;
+      --amber-600: #C08A1E;
+      --amber-bg: rgba(192, 138, 30, 0.16);
+      --green-600: #1E7A49;
+      --green-bg: rgba(30, 122, 73, 0.14);
+      --teal-600: #0E766D;
+      --teal-bg: rgba(14, 118, 109, 0.14);
+      --danger-600: #B93A2E;
+      --danger-bg: rgba(185, 58, 46, 0.14);
+      --info-600: #2B5FA3;
+      --info-bg: rgba(43, 95, 163, 0.14);
+      --chart-red: #D5B360;
+      --chart-teal: #0E766D;
+      --chart-gold: #C08A1E;
+      --chart-gray: #4A4030;
+      --shadow-modal: 0 20px 60px rgba(80, 60, 20, 0.18);
+    }
+
+    :root[data-theme="wow"] .feed-avatar,
+    :root[data-theme="wow"] .avatar,
+    :root[data-theme="wow"] .dossier-avatar {
+      color: var(--ink-900);
+    }
+
+    :root[data-theme="wow"] .topbar {
+      background: var(--paper-0);
+      color: var(--ink-900);
+      border-bottom: 1px solid var(--line);
+    }
+
+    :root[data-theme="wow"] .brand-text .name { color: var(--ink-900); }
+    :root[data-theme="wow"] .brand-text .sub { color: var(--ink-500); }
+    :root[data-theme="wow"] .brand-mark { color: var(--ink-900); }
+    :root[data-theme="wow"] .nav-item { color: var(--ink-500); }
+    :root[data-theme="wow"] .nav-item:hover { background: var(--paper-100); color: var(--ink-900); }
+    :root[data-theme="wow"] .nav-item.active { color: var(--ink-900); }
+    :root[data-theme="wow"] .btn-primary { color: var(--ink-900); }
+    :root[data-theme="wow"] .segment-btn.active { color: var(--ink-900); }
+    :root[data-theme="wow"] .dossier-rail-item.active { color: var(--ink-900); }
+    :root[data-theme="wow"] .app-preview-cover .app-preview-mark { color: var(--ink-900); }
+    :root[data-theme="wow"] .calendar-day-cell.today .calendar-day-number { color: var(--ink-900); }
+
+    :root[data-theme="noir"] {
+      --red-900: #A9863C;
+      --red-700: #E8CE8F;
+      --red-600: #D5B360;
+      --red-50: rgba(213, 179, 96, 0.16);
+      --ink-900: #F2E9D8;
+      --ink-700: #D8CBA9;
+      --ink-500: #B0A183;
+      --ink-300: #6B5F45;
+      --paper-100: #0A0908;
+      --paper-0: #17140F;
+      --line: #2A241A;
+      --line-strong: #3D3423;
+      --amber-600: #F0B84B;
+      --amber-bg: rgba(169, 112, 15, 0.22);
+      --green-600: #4ED495;
+      --green-bg: rgba(30, 122, 73, 0.22);
+      --teal-600: #4FD9CC;
+      --teal-bg: rgba(14, 118, 109, 0.22);
+      --danger-600: #FF7A6B;
+      --danger-bg: rgba(185, 58, 46, 0.22);
+      --info-600: #5B9EFF;
+      --info-bg: rgba(43, 100, 200, 0.24);
+      --chart-red: #D5B360;
+      --chart-teal: #2FA89D;
+      --chart-gold: #D99A2B;
+      --chart-gray: #8F8B82;
+      --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    :root[data-theme="noir"] .nav-item.active,
+    :root[data-theme="noir"] .btn-primary,
+    :root[data-theme="noir"] .segment-btn.active,
+    :root[data-theme="noir"] .dossier-rail-item.active,
+    :root[data-theme="noir"] .calendar-day-cell.today .calendar-day-number,
+    :root[data-theme="noir"] .brand-mark {
+      color: #241A0B;
+    }
+
+    :root[data-theme="noir"] .app-preview-cover .app-preview-mark {
+      color: #241A0B;
+    }
+
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--paper-0);
+      color: var(--ink-900);
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-modal);
+    }
+
+    .theme-toggle:hover { background: var(--paper-100); }
+    .theme-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dot-gradient, var(--red-600)); flex-shrink: 0; }
 
     * {
       box-sizing: border-box;
@@ -99,7 +222,7 @@
       width: 30px;
       height: 30px;
       border-radius: 8px;
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -155,7 +278,7 @@
     }
 
     .nav-item.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       color: #fff;
     }
 
@@ -170,6 +293,20 @@
       max-width: 1240px;
       margin: 0 auto;
       width: 100%;
+      transition: margin-right .2s ease;
+    }
+
+    body.detail-panel-open .main {
+      width: calc(100% - 440px);
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .main:has(> #page-contentcalendar.active) {
+      max-width: 100%;
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
     .page {
@@ -221,7 +358,7 @@
     }
 
     .btn-primary {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       border-color: var(--red-600);
       color: #fff;
     }
@@ -274,6 +411,14 @@
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
+    .stat-grid.cols-7 {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .stat-grid.cols-8 {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+
     .stat-card {
       background: var(--paper-0);
       border: 1px solid var(--line);
@@ -313,6 +458,10 @@
       background: var(--ink-300);
     }
 
+    .stat-card.accent-info::before {
+      background: var(--info-600);
+    }
+
     .stat-card .label {
       font-size: 12px;
       color: var(--ink-500);
@@ -321,6 +470,9 @@
       align-items: center;
       gap: 6px;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stat-card .value {
@@ -363,6 +515,10 @@
       background: var(--ink-300);
     }
 
+    .dot.info {
+      background: var(--info-600);
+    }
+
     @keyframes pulse {
 
       0%,
@@ -401,6 +557,7 @@
       display: flex;
       gap: 8px;
     }
+
 
     select.filter,
     input.search {
@@ -593,6 +750,7 @@
       border-radius: 20px;
       margin: 0 4px 4px 0;
       border: 1px solid var(--line);
+      text-transform: capitalize;
     }
 
     .badge {
@@ -602,6 +760,7 @@
       border-radius: 20px;
       display: inline-block;
       white-space: nowrap;
+      text-transform: capitalize;
     }
 
     .badge.pending {
@@ -622,6 +781,11 @@
     .badge.approved {
       background: var(--teal-bg);
       color: var(--teal-600);
+    }
+
+    .badge.published {
+      background: var(--info-bg);
+      color: var(--info-600);
     }
 
     .badge.rejected {
@@ -1076,6 +1240,50 @@
       display: flex;
     }
 
+    .overlay.slide-overlay {
+      top: var(--topbar-h, 57px);
+      justify-content: flex-end;
+      align-items: stretch;
+      padding: 0;
+      background: transparent;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .modal.slide-panel {
+      max-width: 440px;
+      width: 100%;
+      height: calc(100vh - var(--topbar-h, 57px));
+      border-radius: 0;
+      overflow-y: auto;
+      animation: slideInRight .2s ease;
+      pointer-events: auto;
+      border-left: 1px solid var(--line);
+      box-shadow: -16px 0 40px -12px rgba(0, 0, 0, 0.35);
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .slide-panel .detail-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .slide-panel .modal-head {
+      position: sticky;
+      top: 0;
+      background: var(--paper-0);
+      z-index: 2;
+    }
+
+    .slide-panel .modal-foot {
+      position: sticky;
+      bottom: 0;
+      background: var(--paper-0);
+    }
+
     .modal {
       background: var(--paper-0);
       border-radius: var(--radius-lg);
@@ -1246,9 +1454,329 @@
     }
 
     .segment-btn.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       border-color: var(--red-600);
       color: #fff;
+    }
+
+    .view-tabbar {
+      display: flex;
+      gap: 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .view-tab-btn {
+      background: none;
+      border: none;
+      padding: 0 0 10px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink-500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color .12s ease, border-color .12s ease;
+    }
+
+    .view-tab-btn:hover {
+      color: var(--ink-900);
+    }
+
+    .view-tab-btn.active {
+      color: var(--ink-900);
+      border-bottom-color: var(--red-600);
+    }
+
+    .view-pane {
+      display: none;
+    }
+
+    .view-pane.active {
+      display: block;
+    }
+
+    .stat-card.clickable-stat {
+      cursor: pointer;
+      transition: box-shadow .12s ease, border-color .12s ease;
+    }
+
+    .stat-card.clickable-stat:hover {
+      box-shadow: 0 0 0 1px var(--line-strong);
+    }
+
+    /* Fallback only — every real stat-card carries its own accent-* class below,
+       which wins on specificity and supplies the matching border + glow. */
+    .stat-card.clickable-stat.stat-active {
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1.5px var(--line-strong);
+    }
+
+    .stat-card.clickable-stat.accent-gray.stat-active {
+      border-color: var(--ink-300);
+      box-shadow: 0 0 0 1.5px var(--ink-300), 0 0 16px -3px var(--ink-300);
+    }
+
+    .stat-card.clickable-stat.accent-amber.stat-active {
+      border-color: var(--amber-600);
+      box-shadow: 0 0 0 1.5px var(--amber-600), 0 0 16px -3px var(--amber-600);
+    }
+
+    .stat-card.clickable-stat.accent-green.stat-active {
+      border-color: var(--green-600);
+      box-shadow: 0 0 0 1.5px var(--green-600), 0 0 16px -3px var(--green-600);
+    }
+
+    .stat-card.clickable-stat.accent-info.stat-active {
+      border-color: var(--info-600);
+      box-shadow: 0 0 0 1.5px var(--info-600), 0 0 16px -3px var(--info-600);
+    }
+
+    .stat-card.clickable-stat.accent-teal.stat-active {
+      border-color: var(--teal-600);
+      box-shadow: 0 0 0 1.5px var(--teal-600), 0 0 16px -3px var(--teal-600);
+    }
+
+    .stat-card.clickable-stat.flagged.stat-active {
+      border-color: var(--danger-600);
+      box-shadow: 0 0 0 1.5px var(--danger-600), 0 0 16px -3px var(--danger-600);
+    }
+
+    .content-library-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .library-card {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .library-thumb {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, var(--paper-100), var(--line));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-300);
+    }
+
+    .library-card-open {
+      cursor: pointer;
+    }
+
+    .library-card-body {
+      padding: 12px 14px 4px;
+    }
+
+    .library-card-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+
+    .library-card-meta {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .library-card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px 12px;
+    }
+
+    .library-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .library-toggle-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-500);
+    }
+
+    .library-expiry {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .calendar-group {
+      padding: 16px 18px;
+    }
+
+    .calendar-group + .calendar-group {
+      border-top: 1px solid var(--line);
+    }
+
+    .calendar-group-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-500);
+      margin: 0 0 10px;
+    }
+
+    .calendar-entry {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+
+    .calendar-entry + .calendar-entry {
+      border-top: 1px solid var(--line);
+    }
+
+    .calendar-entry-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--paper-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+
+    .calendar-entry-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .calendar-entry-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .calendar-entry-meta {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin: 2px 0 0;
+    }
+
+    .calendar-entry-expiry {
+      font-size: 11px;
+      color: var(--danger-600);
+      margin: 3px 0 0;
+    }
+
+    .calendar-month-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .calendar-month-head h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .calendar-month-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      margin-bottom: 4px;
+    }
+
+    .calendar-month-weekdays span {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-500);
+      text-align: center;
+      padding: 6px 0;
+      display: block;
+    }
+
+    .calendar-month-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .calendar-day-cell {
+      background: var(--paper-0);
+      min-height: 168px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .calendar-day-cell.outside {
+      background: var(--paper-100);
+    }
+
+    .calendar-day-number {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-500);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-day-cell.outside .calendar-day-number {
+      color: var(--ink-300);
+    }
+
+    .calendar-day-cell.today .calendar-day-number {
+      background: var(--gold-gradient, var(--red-600));
+      color: #fff;
+      border-radius: 50%;
+    }
+
+    .calendar-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--paper-100);
+      color: var(--ink-900);
+      border-left: 3px solid var(--ink-300);
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .calendar-chip.pending {
+      border-left-color: var(--amber-600);
+    }
+
+    .calendar-chip-more {
+      font-size: 10px;
+      color: var(--ink-500);
+    }
+
+    .calendar-chip-time {
+      font-weight: 700;
+      opacity: .75;
     }
 
     .upload-tab-pane {
@@ -1257,6 +1785,60 @@
 
     .upload-tab-pane.active {
       display: block;
+    }
+
+    .upload-source-pane {
+      display: none;
+    }
+
+    .upload-source-pane.active {
+      display: block;
+    }
+
+    .embed-url-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .embed-url-row input {
+      flex: 1;
+    }
+
+    .embed-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper-100);
+    }
+
+    .embed-preview-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--paper-0);
+      border: 1px solid var(--line-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red-600);
+      flex-shrink: 0;
+    }
+
+    .embed-preview-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-900);
+      margin: 0 0 2px;
+    }
+
+    .embed-preview-sub {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin: 0;
     }
 
     /* Live session scheduling (TikTok-style: single flow, time-first) */
@@ -1496,6 +2078,11 @@
 
     .side-block {
       margin-bottom: 18px;
+    }
+
+    .content-edit-fields {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
     }
 
     .side-block h3 {
@@ -2820,7 +3407,7 @@
     }
 
     .dossier-rail-item.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       color: #fff;
     }
 
@@ -3266,6 +3853,9 @@
       .info-grid {
         grid-template-columns: 1fr;
       }
+      .modal.slide-panel {
+        max-width: 100%;
+      }
     }
 
     @media (max-width:900px) {
@@ -3273,7 +3863,9 @@
       .stat-grid,
       .kpi-grid,
       .stat-grid.cols-5,
-      .stat-grid.cols-6 {
+      .stat-grid.cols-6,
+      .stat-grid.cols-7,
+      .stat-grid.cols-8 {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -3342,6 +3934,10 @@
 
 <body>
 
+  <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">
+    <span class="dot"></span><span id="themeToggleLabel">Wow Mode</span>
+  </button>
+
   <div class="app">
     <!-- Top bar -->
     <div class="topbar">
@@ -3396,6 +3992,13 @@
             <circle cx="12" cy="7" r="4" />
           </svg>
           Customer 360
+        </div>
+        <div class="nav-item" data-page="contentcalendar" onclick="goToPage('contentcalendar')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          Content Calendar
         </div>
         <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3608,87 +4211,65 @@
           </button>
         </div>
 
-        <div class="stat-grid cols-6" id="uploadsStats"></div>
-
-        <div class="panel">
-          <div class="bulk-bar" id="uploadsBulkBar">
-            <span class="bulk-bar-count" id="uploadsBulkCount">0 selected</span>
-            <div class="bulk-bar-actions">
-              <button class="btn btn-sm" onclick="clearUploadSelection()">Clear</button>
-              <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectUploads()">Reject</button>
-              <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteUploads()">Delete</button>
-              <button class="btn btn-sm btn-primary" onclick="bulkApproveUploads()">Approve</button>
-            </div>
+        <div class="dossier-body">
+          <div class="dossier-rail" id="uploadsSourceRail">
+            <button class="dossier-rail-item active" data-source="all" onclick="filterUploadsBySource('all')">All Sources</button>
+            <button class="dossier-rail-item" data-source="local" onclick="filterUploadsBySource('local')">Local Uploads</button>
+            <button class="dossier-rail-item" data-source="youtube" onclick="filterUploadsBySource('youtube')">Embedded Videos</button>
+            <button class="dossier-rail-item" data-source="spotify" onclick="filterUploadsBySource('spotify')">Podcasts</button>
           </div>
-          <div class="panel-head">
-            <h2>Uploads Log</h2>
-            <div class="filter-row">
-              <input class="search" type="text" id="uploadsSearch" placeholder="Search uploads..."
-                oninput="renderUploadsTable()" />
-              <div class="ui-select filter" id="uploadsStatusFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Statuses</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2.4">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all"
-                    onclick="chooseOption(this,'renderUploadsTable')">All Statuses<svg class="check" width="14"
-                      height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="draft" onclick="chooseOption(this,'renderUploadsTable')">
-                    Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderUploadsTable')">
-                    Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderUploadsTable')">
-                    Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderUploadsTable')">
-                    Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this,'renderUploadsTable')">
-                    Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this,'renderUploadsTable')">
-                    Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
+
+          <div class="dossier-content">
+            <div class="view-tabbar" id="uploadsViewTabbar">
+              <button class="view-tab-btn active" data-view="log" onclick="switchUploadsView('log')">Log</button>
+              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Content Library</button>
+            </div>
+
+            <div class="view-pane active" id="uploadsView-log">
+              <div class="stat-grid cols-8" id="uploadsStats"></div>
+
+              <div class="panel">
+                <div class="bulk-bar" id="uploadsBulkBar">
+                  <span class="bulk-bar-count" id="uploadsBulkCount">0 selected</span>
+                  <div class="bulk-bar-actions">
+                    <button class="btn btn-sm" onclick="clearUploadSelection()">Clear</button>
+                    <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectUploads()">Reject</button>
+                    <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteUploads()">Delete</button>
+                    <button class="btn btn-sm btn-primary" onclick="bulkApproveUploads()">Approve</button>
+                  </div>
                 </div>
+                <div class="panel-head">
+                  <h2>Uploads Log</h2>
+                  <div class="filter-row">
+                    <input class="search" type="text" id="uploadsSearch" placeholder="Search uploads..."
+                      oninput="renderUploadsTable()" />
+                  </div>
+                  <div id="uploadsStatusFilter" data-value="all" style="display:none;"></div>
+                  <div id="uploadsSourceFilter" data-value="all" style="display:none;"></div>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
+                          onchange="toggleSelectAllUploads(this)" /></td>
+                      <td>Title</td>
+                      <td>Owner</td>
+                      <td>Section</td>
+                      <td>Tags</td>
+                      <td>Status</td>
+                      <td>Expires</td>
+                      <td>Description</td>
+                    </tr>
+                  </thead>
+                  <tbody id="uploadsTableBody"></tbody>
+                </table>
               </div>
             </div>
+
+            <div class="view-pane" id="uploadsView-library">
+              <div class="content-library-grid" id="uploadsLibraryGrid"></div>
+            </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
-                    onchange="toggleSelectAllUploads(this)" /></td>
-                <td>Title</td>
-                <td>Owner</td>
-                <td>Section</td>
-                <td>Tags</td>
-                <td>Status</td>
-                <td>Expires</td>
-                <td>Description</td>
-              </tr>
-            </thead>
-            <tbody id="uploadsTableBody"></tbody>
-          </table>
         </div>
       </div>
 
@@ -3707,81 +4288,52 @@
           </button>
         </div>
 
-        <div class="stat-grid cols-5" id="liveStats"></div>
+        <div class="view-tabbar" id="liveViewTabbar">
+          <button class="view-tab-btn active" data-view="log" onclick="switchLiveView('log')">Log</button>
+          <button class="view-tab-btn" data-view="library" onclick="switchLiveView('library')">Content Library</button>
+        </div>
 
-        <div class="panel">
-          <div class="bulk-bar" id="liveBulkBar">
-            <span class="bulk-bar-count" id="liveBulkCount">0 selected</span>
-            <div class="bulk-bar-actions">
-              <button class="btn btn-sm" onclick="clearLiveSelection()">Clear</button>
-              <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectLive()">Reject</button>
-              <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteLive()">Delete</button>
-              <button class="btn btn-sm btn-primary" onclick="bulkApproveLive()">Approve</button>
-            </div>
-          </div>
-          <div class="panel-head">
-            <h2>Live Log</h2>
-            <div class="filter-row">
-              <input class="search" type="text" id="liveLogSearch" placeholder="Search live sessions..."
-                oninput="renderLiveTable()" />
-              <div class="ui-select filter" id="liveLogStatusFilter" data-value="all">
-                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                  <span class="ui-select-label">All Statuses</span>
-                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2.4">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                <div class="ui-select-menu">
-                  <div class="ui-select-option selected" data-value="all"
-                    onclick="chooseOption(this,'renderLiveTable')">All Statuses<svg class="check" width="14" height="14"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="draft" onclick="chooseOption(this,'renderLiveTable')">
-                    Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="pending" onclick="chooseOption(this,'renderLiveTable')">
-                    Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this,'renderLiveTable')">Live
-                    Now<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="approved" onclick="chooseOption(this,'renderLiveTable')">
-                    Approved<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                  <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this,'renderLiveTable')">
-                    Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2.6">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg></div>
-                </div>
+        <div class="view-pane active" id="liveView-log">
+          <div class="stat-grid cols-7" id="liveStats"></div>
+
+          <div class="panel">
+            <div class="bulk-bar" id="liveBulkBar">
+              <span class="bulk-bar-count" id="liveBulkCount">0 selected</span>
+              <div class="bulk-bar-actions">
+                <button class="btn btn-sm" onclick="clearLiveSelection()">Clear</button>
+                <button class="btn btn-sm btn-danger-outline" onclick="bulkRejectLive()">Reject</button>
+                <button class="btn btn-sm btn-danger-outline" onclick="bulkDeleteLive()">Delete</button>
+                <button class="btn btn-sm btn-primary" onclick="bulkApproveLive()">Approve</button>
               </div>
             </div>
+            <div class="panel-head">
+              <h2>Live Log</h2>
+              <div class="filter-row">
+                <input class="search" type="text" id="liveLogSearch" placeholder="Search live sessions..."
+                  oninput="renderLiveTable()" />
+              </div>
+              <div id="liveLogStatusFilter" data-value="all" style="display:none;"></div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll"
+                      onchange="toggleSelectAllLive(this)" /></td>
+                  <td>Title</td>
+                  <td>Owner</td>
+                  <td>Section</td>
+                  <td>Tags</td>
+                  <td>Status</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+              <tbody id="liveTableBody"></tbody>
+            </table>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll"
-                    onchange="toggleSelectAllLive(this)" /></td>
-                <td>Title</td>
-                <td>Owner</td>
-                <td>Section</td>
-                <td>Tags</td>
-                <td>Status</td>
-                <td>Description</td>
-              </tr>
-            </thead>
-            <tbody id="liveTableBody"></tbody>
-          </table>
+        </div>
+
+        <div class="view-pane" id="liveView-library">
+          <div class="content-library-grid" id="liveLibraryGrid"></div>
         </div>
       </div>
 
@@ -4484,6 +5036,40 @@
         </div>
       </div>
 
+      <!-- CONTENT CALENDAR PAGE -->
+      <div class="page" id="page-contentcalendar">
+        <div class="page-header">
+          <div>
+            <h1>Content Calendar</h1>
+            <p>Upcoming content across Uploads and Live — scheduled launches and pending releases, in order.</p>
+          </div>
+        </div>
+
+        <div class="view-tabbar" id="calendarViewTabbar">
+          <button class="view-tab-btn active" data-view="month" onclick="switchCalendarView('month')">Month</button>
+          <button class="view-tab-btn" data-view="agenda" onclick="switchCalendarView('agenda')">Agenda</button>
+        </div>
+
+        <div class="view-pane active" id="calendarView-month">
+          <div class="calendar-month-head">
+            <button class="btn btn-sm" onclick="shiftCalendarMonth(-1)" aria-label="Previous month">‹</button>
+            <button class="btn btn-sm" onclick="goToCalendarToday()">Today</button>
+            <h2 id="calendarMonthLabel"></h2>
+            <button class="btn btn-sm" onclick="shiftCalendarMonth(1)" aria-label="Next month">›</button>
+          </div>
+          <div class="calendar-month-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-month-grid" id="calendarMonthGrid"></div>
+        </div>
+
+        <div class="view-pane" id="calendarView-agenda">
+          <div class="panel">
+            <div id="contentCalendarList"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ANALYTICS PAGE -->
       <div class="page" id="page-analytics">
         <div class="page-header">
@@ -4903,41 +5489,94 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="segment-tabbar" id="uploadTabbar">
-          <button class="segment-btn active" data-utab="content" onclick="switchUploadTab('content')">Content</button>
-          <button class="segment-btn" data-utab="visibility" onclick="switchUploadTab('visibility')">Visibility &amp;
+        <div class="view-tabbar" id="uploadTabbar">
+          <button class="view-tab-btn active" data-utab="content" onclick="switchUploadTab('content')">Content</button>
+          <button class="view-tab-btn" data-utab="visibility" onclick="switchUploadTab('visibility')">Visibility &amp;
             Comments</button>
-          <button class="segment-btn" data-utab="schedule" onclick="switchUploadTab('schedule')">Schedule</button>
+          <button class="view-tab-btn" data-utab="schedule" onclick="switchUploadTab('schedule')">Schedule</button>
         </div>
 
         <!-- CONTENT TAB -->
         <div class="upload-tab-pane active" id="uploadtab-content">
-          <div class="dropzone">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
-              <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" />
-            </svg>
-            <p class="dz-title">Drag a video or image here</p>
-            <p class="dz-sub">MP4, MOV, JPG, PNG up to 2GB</p>
-            <button class="btn btn-sm">Browse files</button>
-          </div>
 
           <div class="field-group">
-            <label class="field-label">Thumbnail</label>
-            <div class="thumb-row">
-              <div class="thumb-box">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="3" y="4" width="18" height="16" rx="2" />
-                  <circle cx="9" cy="10" r="2" />
-                  <path d="M21 16l-5-5-9 9" />
-                </svg>
-              </div>
-              <div class="thumb-actions">
-                <p>Upload a custom thumbnail, or one will be auto-generated from the video.</p>
-                <div class="thumb-btns">
-                  <button class="btn btn-sm">Upload thumbnail</button>
-                  <button class="btn btn-sm btn-ghost">Auto-generate</button>
+            <label class="field-label">Source</label>
+            <div class="view-tabbar" id="uploadSourceTabbar">
+              <button class="view-tab-btn active" data-usource="local" onclick="switchUploadSourceType('local')">Local Upload</button>
+              <button class="view-tab-btn" data-usource="youtube" onclick="switchUploadSourceType('youtube')">Embedded Video</button>
+              <button class="view-tab-btn" data-usource="spotify" onclick="switchUploadSourceType('spotify')">Podcast</button>
+            </div>
+          </div>
+
+          <!-- LOCAL FILE SOURCE -->
+          <div class="upload-source-pane active" id="uploadsource-local">
+            <div class="dropzone">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
+                <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" />
+              </svg>
+              <p class="dz-title">Drag a video or image here</p>
+              <p class="dz-sub">MP4, MOV, JPG, PNG up to 2GB</p>
+              <button class="btn btn-sm">Browse files</button>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Thumbnail</label>
+              <div class="thumb-row">
+                <div class="thumb-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <circle cx="9" cy="10" r="2" />
+                    <path d="M21 16l-5-5-9 9" />
+                  </svg>
                 </div>
+                <div class="thumb-actions">
+                  <p>Upload a custom thumbnail, or one will be auto-generated from the video.</p>
+                  <div class="thumb-btns">
+                    <button class="btn btn-sm">Upload thumbnail</button>
+                    <button class="btn btn-sm btn-ghost">Auto-generate</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- YOUTUBE SOURCE -->
+          <div class="upload-source-pane" id="uploadsource-youtube">
+            <div class="field-group">
+              <label class="field-label">YouTube URL</label>
+              <div class="embed-url-row">
+                <input type="text" id="youtubeUrlInput" placeholder="https://www.youtube.com/watch?v=..." />
+                <button class="btn btn-sm" onclick="fetchEmbedPreview('youtube')">Fetch preview</button>
+              </div>
+            </div>
+            <div class="embed-preview" id="youtubePreview" style="display:none;">
+              <div class="embed-preview-thumb">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="embed-preview-meta">
+                <p class="embed-preview-title" id="youtubePreviewTitle"></p>
+                <p class="embed-preview-sub" id="youtubePreviewSub"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SPOTIFY SOURCE -->
+          <div class="upload-source-pane" id="uploadsource-spotify">
+            <div class="field-group">
+              <label class="field-label">Spotify URL</label>
+              <div class="embed-url-row">
+                <input type="text" id="spotifyUrlInput" placeholder="https://open.spotify.com/episode/..." />
+                <button class="btn btn-sm" onclick="fetchEmbedPreview('spotify')">Fetch preview</button>
+              </div>
+            </div>
+            <div class="embed-preview" id="spotifyPreview" style="display:none;">
+              <div class="embed-preview-thumb">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M7.5 10c3-1 6.5-1 9.5.7M8 13.2c2.4-.8 5.2-.8 7.6.6M8.5 16c1.8-.6 3.9-.5 5.6.5" stroke-linecap="round"/></svg>
+              </div>
+              <div class="embed-preview-meta">
+                <p class="embed-preview-title" id="spotifyPreviewTitle"></p>
+                <p class="embed-preview-sub" id="spotifyPreviewSub"></p>
               </div>
             </div>
           </div>
@@ -5496,8 +6135,8 @@
   </div>
 
   <!-- CONTENT DETAIL MODAL (opens for any row, regardless of status) -->
-  <div class="overlay" id="contentOverlay">
-    <div class="modal" style="max-width:820px;">
+  <div class="overlay slide-overlay" id="contentOverlay">
+    <div class="modal slide-panel">
       <div class="modal-head">
         <div>
           <h2 id="contentTitle">Fed Rate Reaction Live</h2>
@@ -5510,6 +6149,70 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="side-block content-edit-fields">
+          <h3>Entry Details</h3>
+          <div class="field-row field-group">
+            <div>
+              <label class="field-label">Title</label>
+              <input type="text" id="contentEditTitle" />
+            </div>
+            <div>
+              <label class="field-label">Status</label>
+              <div class="ui-select" id="contentEditStatusSelect" data-value="draft">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">Draft</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="draft" onclick="chooseOption(this)">Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="pending" onclick="chooseOption(this)">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this)">Live<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="published" onclick="chooseOption(this)">Published<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this)">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this)">Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field-row field-group">
+            <div>
+              <label class="field-label">Section</label>
+              <div class="ui-select" id="contentEditSectionSelect" data-value="Markets">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">Markets</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="Markets" onclick="chooseOption(this)">Markets<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="Wealth" onclick="chooseOption(this)">Wealth<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="Personal banking" onclick="chooseOption(this)">Personal banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="SME Banking" onclick="chooseOption(this)">SME Banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="Corporate banking" onclick="chooseOption(this)">Corporate banking<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="field-label">Owner</label>
+              <div class="ui-select" id="contentEditOwnerSelect" data-value="J. Tan">
+                <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
+                  <span class="ui-select-label">J. Tan</span>
+                  <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <div class="ui-select-menu">
+                  <div class="ui-select-option selected" data-value="J. Tan" onclick="chooseOption(this)">J. Tan<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="M. Lee" onclick="chooseOption(this)">M. Lee<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="A. Kumar" onclick="chooseOption(this)">A. Kumar<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="S. Wong" onclick="chooseOption(this)">S. Wong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="R. Ong" onclick="chooseOption(this)">R. Ong<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tags</label>
+            <input type="text" id="contentEditTags" placeholder="Comma-separated, e.g. Equities, SG, Rates" />
+          </div>
+        </div>
         <div class="detail-grid">
           <div>
             <div class="video-box">
@@ -5547,9 +6250,10 @@
         </div>
       </div>
       <div class="modal-foot">
-        <button class="btn" id="contentSecondaryBtn" onclick="closeModal('contentOverlay')">Edit</button>
-        <button class="btn btn-primary" id="contentPrimaryBtn" onclick="closeModal('contentOverlay')">Mark
-          Complete</button>
+        <button class="btn" onclick="closeModal('contentOverlay')">Close</button>
+        <button class="btn btn-danger-outline" id="contentRejectBtn" style="display:none;">Reject</button>
+        <button class="btn" id="contentApproveBtn" style="display:none;">Approve</button>
+        <button class="btn btn-primary" id="contentSaveBtn">Save Changes</button>
       </div>
     </div>
   </div>
@@ -5643,21 +6347,63 @@
       return d.toISOString().slice(0, 10);
     }
 
+    function toggleTheme(){
+      const current = document.documentElement.dataset.theme || 'dark';
+      const order = { dark: 'wow', wow: 'noir', noir: 'dark' };
+      const next = order[current];
+      applyTheme(next);
+      localStorage.setItem('liveStudioTheme', next);
+    }
+
+    function applyTheme(theme){
+      const labels = { dark: 'Wow Mode', wow: 'Noir Mode', noir: 'Dark Mode' };
+      if(theme === 'wow' || theme === 'noir'){
+        document.documentElement.dataset.theme = theme;
+      } else {
+        delete document.documentElement.dataset.theme;
+        theme = 'dark';
+      }
+      document.getElementById('themeToggleLabel').textContent = labels[theme];
+    }
+
+    applyTheme(['wow', 'noir'].includes(localStorage.getItem('liveStudioTheme')) ? localStorage.getItem('liveStudioTheme') : 'dark');
+
+    function updateTopbarHeightVar() {
+      const tb = document.querySelector('.topbar');
+      if (tb) document.documentElement.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    }
+    updateTopbarHeightVar();
+    window.addEventListener('resize', updateTopbarHeightVar);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateTopbarHeightVar);
+
     let uploadIdCounter = 100;
 
     // ---- Content data: split into the two categories, Upload and Live ----
     const uploadsData = [
-      { id: 1, title: "Weekly Market Wrap", owner: "J. Tan", section: "Markets", tags: ["Equities", "SG"], status: "approved", description: "A round-up of the week's key equity market moves across the region, with commentary on rate expectations.", expiresOn: daysFromNow(-5) },
+      { id: 1, title: "Weekly Market Wrap", owner: "J. Tan", section: "Markets", tags: ["Equities", "SG"], status: "published", description: "A round-up of the week's key equity market moves across the region, with commentary on rate expectations.", expiresOn: daysFromNow(-5) },
       { id: 2, title: "Q2 Earnings Roundup", owner: "A. Kumar", section: "Markets", tags: ["Earnings"], status: "active", description: "Summary of Q2 earnings across major regional banks and how results compare to consensus estimates.", expiresOn: daysFromNow(3) },
-      { id: 3, title: "Wealth Planning 101", owner: "S. Wong", section: "Wealth", tags: ["Retirement"], status: "pending", description: "Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups." },
-      { id: 4, title: "SME Loan Explainer", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "approved", description: "Walkthrough of the SME working capital loan application process and eligibility criteria.", expiresOn: daysFromNow(45) },
+      { id: 3, title: "Wealth Planning 101", owner: "S. Wong", section: "Wealth", tags: ["Retirement"], status: "pending", description: "Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups.", scheduledFor: daysFromNow(4), scheduledTime: "9:00 AM", expiresOn: daysFromNow(18) },
+      { id: 4, title: "SME Loan Explainer", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "published", description: "Walkthrough of the SME working capital loan application process and eligibility criteria.", expiresOn: daysFromNow(45) },
       {
         id: 5, title: "Digital Assets Briefing", owner: "L. Ibrahim", section: "Markets", tags: ["Digital Assets"], status: "flagged", description: "Overview of digital asset market trends and OCBC's current stance on custody services.",
         transcript: '"...given the momentum, clients should <mark class="flagmark">allocate a portion of their portfolio into crypto now</mark> before the next leg up..."'
       },
-      { id: 6, title: "Premier Client Welcome", owner: "S. Wong", section: "Wealth", tags: ["Onboarding"], status: "pending", description: "Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support." },
+      { id: 6, title: "Premier Client Welcome", owner: "S. Wong", section: "Wealth", tags: ["Onboarding"], status: "pending", description: "Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support.", scheduledFor: daysFromNow(2), scheduledTime: "11:30 AM", expiresOn: daysFromNow(62) },
       { id: 7, title: "Old Promo Reel", owner: "M. Lee", section: "Personal banking", tags: ["Promo"], status: "rejected", description: "Legacy promotional video referencing a since-discontinued account pricing tier." },
-      { id: 8, title: "Untitled Upload", owner: "A. Kumar", section: "Markets", tags: [], status: "draft", description: "Draft — not yet submitted for review." }
+      { id: 8, title: "Untitled Upload", owner: "A. Kumar", section: "Markets", tags: [], status: "draft", description: "Draft — not yet submitted for review.", scheduledFor: daysFromNow(9), scheduledTime: "2:00 PM" },
+      { id: 9, title: "ESG Investing Basics", owner: "S. Wong", section: "Wealth", tags: ["ESG", "Investing"], status: "published", description: "Introductory overview of ESG investing principles and how they apply to fund selection.", expiresOn: daysFromNow(60) },
+      { id: 10, title: "FX Hedging for SMEs", owner: "R. Ong", section: "SME banking", tags: ["FX", "Hedging"], status: "active", description: "Practical guide for SME treasurers on hedging currency exposure using forward contracts.", expiresOn: daysFromNow(21) },
+      { id: 11, title: "Retail Banking App Walkthrough", owner: "M. Lee", section: "Personal banking", tags: ["App", "Onboarding"], status: "published", description: "Step-by-step walkthrough of the OCBC retail banking app's key features for new customers.", expiresOn: daysFromNow(90) },
+      { id: 12, title: "Markets Wrap: Rate Cut Special", owner: "J. Tan", section: "Markets", tags: ["Rates", "Macro"], status: "active", description: "Special edition market wrap covering the implications of the latest rate cut decision.", expiresOn: daysFromNow(14) },
+      { id: 13, title: "Q3 Outlook Webinar Recap", owner: "J. Tan", section: "Markets", tags: ["Outlook"], status: "pending", description: "Recap of the Q3 markets outlook webinar, edited down for on-demand viewing.", scheduledFor: daysFromNow(12), scheduledTime: "9:00 AM", expiresOn: daysFromNow(57) },
+      { id: 14, title: "CPF Retirement Sums Explained", owner: "S. Wong", section: "Wealth", tags: ["CPF", "Retirement"], status: "draft", description: "Explainer on the CPF Basic, Full, and Enhanced Retirement Sums and how they affect payouts.", scheduledFor: daysFromNow(16), scheduledTime: "3:30 PM" },
+      { id: 15, title: "Business Loan Fast Track", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "pending", description: "Overview of the fast-track approval process for eligible SME business loans.", scheduledFor: daysFromNow(20), scheduledTime: "10:00 AM", expiresOn: daysFromNow(50) },
+      { id: 16, title: "Cross-Border Payments 101", owner: "A. Kumar", section: "Corporate banking", tags: ["Payments"], status: "draft", description: "Introductory explainer on cross-border payment rails and settlement timing for corporate clients.", scheduledFor: daysFromNow(28), scheduledTime: "1:00 PM" },
+      { id: 17, title: "Year-End Tax Planning Tips", owner: "S. Wong", section: "Wealth", tags: ["Tax", "Planning"], status: "pending", description: "Seasonal explainer covering common year-end tax planning moves for Premier clients.", scheduledFor: daysFromNow(35), scheduledTime: "9:00 AM", expiresOn: daysFromNow(95) },
+      { id: 18, title: "SG Budget 2026: What It Means for Savers", owner: "J. Tan", section: "Markets", tags: ["Budget", "Policy"], status: "published", description: "Embedded explainer video breaking down the SG Budget 2026 announcements relevant to retail savers.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=sgbudget2026", expiresOn: daysFromNow(75) },
+      { id: 19, title: "Rate Hike Ripple Effects", owner: "A. Kumar", section: "Markets", tags: ["Rates"], status: "active", description: "Embedded video walking through how a rate hike flows through mortgages, savings, and business loans.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=ratehikeripple", expiresOn: daysFromNow(40) },
+      { id: 20, title: "Market Minute: This Week in Rates", owner: "M. Lee", section: "Markets", tags: ["Podcast"], status: "published", description: "Weekly audio round-up covering the past week's key rate moves and what to watch next.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/marketminute", expiresOn: daysFromNow(30) },
+      { id: 21, title: "Wealth Unpacked: Retirement Myths", owner: "S. Wong", section: "Wealth", tags: ["Podcast", "Retirement"], status: "pending", description: "Podcast episode debunking common retirement planning myths, awaiting review before publishing.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/wealthunpacked" }
     ];
 
     let liveIdCounter = 100;
@@ -5668,23 +6414,32 @@
         transcript: '"...this is a great time to <mark class="flagmark">buy into tech names before the next rally</mark>, especially with rates likely to ease..."'
       },
       { id: 2, title: "Interest Rate Outlook Live", owner: "P. Sharma", section: "Markets", tags: ["Rates"], status: "active", description: "Live discussion on the interest rate outlook for the next two quarters with the treasury desk." },
-      { id: 3, title: "Morning Market Open", owner: "P. Sharma", section: "Markets", tags: ["Equities"], status: "pending", description: "Daily market-open segment awaiting compliance sign-off before this morning's broadcast." },
-      { id: 4, title: "Treasury Desk AMA", owner: "R. Ong", section: "Wealth", tags: ["Treasury", "Q&A"], status: "approved", description: "Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast." },
-      { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled." }
+      { id: 3, title: "Morning Market Open", owner: "P. Sharma", section: "Markets", tags: ["Equities"], status: "pending", description: "Daily market-open segment awaiting compliance sign-off before this morning's broadcast.", scheduledFor: daysFromNow(1), scheduledTime: "8:30 AM" },
+      { id: 4, title: "Treasury Desk AMA", owner: "R. Ong", section: "Wealth", tags: ["Treasury", "Q&A"], status: "published", description: "Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast." },
+      { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled.", scheduledFor: daysFromNow(6), scheduledTime: "4:00 PM" },
+      { id: 6, title: "SME Growth Clinic", owner: "R. Ong", section: "SME banking", tags: ["Growth", "Q&A"], status: "published", description: "Live clinic session helping SME owners plan for expansion financing and cashflow." },
+      { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", description: "Live audience Q&A addressing client concerns around recent market volatility." },
+      { id: 8, title: "Markets Outlook: August Preview", owner: "P. Sharma", section: "Markets", tags: ["Outlook"], status: "pending", description: "Live preview of key market events and data releases expected in August.", scheduledFor: daysFromNow(8), scheduledTime: "9:00 AM" },
+      { id: 9, title: "Wealth Webinar: Legacy Planning", owner: "S. Wong", section: "Wealth", tags: ["Legacy", "Planning"], status: "draft", description: "Live webinar on legacy and estate planning considerations for Premier Banking clients.", scheduledFor: daysFromNow(25), scheduledTime: "2:00 PM" },
+      { id: 10, title: "SME Digitalisation Grants Briefing", owner: "R. Ong", section: "SME banking", tags: ["Grants"], status: "pending", description: "Live briefing on available government digitalisation grants for SME clients.", scheduledFor: daysFromNow(18), scheduledTime: "11:00 AM" },
+      { id: 11, title: "Corporate Treasury Roundtable", owner: "A. Kumar", section: "Corporate banking", tags: ["Treasury"], status: "draft", description: "Live roundtable discussion with corporate treasury clients on liquidity management.", scheduledFor: daysFromNow(32), scheduledTime: "3:00 PM" }
     ];
 
     const typeIcon = {
       Upload: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3"/></svg>',
-      Live: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>'
+      Live: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M4.9 4.9a10 10 0 000 14.2M19.1 4.9a10 10 0 010 14.2"/></svg>',
+      YouTube: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>',
+      Spotify: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M7.5 10c3-1 6.5-1 9.5.7M8 13.2c2.4-.8 5.2-.8 7.6.6M8.5 16c1.8-.6 3.9-.5 5.6.5" stroke-linecap="round"/></svg>'
     };
-    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Active", flagged: "Flagged", approved: "Approved", rejected: "Rejected" };
+    const sourceTypeLabel = { local: null, youtube: 'YouTube', spotify: 'Spotify' };
+    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Live", flagged: "Flagged", published: "Published", rejected: "Rejected" };
 
     function computeStats(arr) {
       return {
         draft: arr.filter(x => x.status === 'draft').length,
         pending: arr.filter(x => x.status === 'pending').length,
         active: arr.filter(x => x.status === 'active').length,
-        approved: arr.filter(x => x.status === 'approved').length,
+        published: arr.filter(x => x.status === 'published').length,
         flagged: arr.filter(x => x.status === 'flagged').length,
         rejected: arr.filter(x => x.status === 'rejected').length
       };
@@ -5718,9 +6473,11 @@
       const expiryCell = opts.expiry
         ? (() => { const info = expiryInfo(item); return `<td><span class="expiry-chip ${info.cls}">${info.label}</span></td>`; })()
         : '';
+      const rowIcon = item.sourceType && typeIcon[sourceTypeLabel[item.sourceType]] ? typeIcon[sourceTypeLabel[item.sourceType]] : icon;
+      const sourceTag = item.sourceType && sourceTypeLabel[item.sourceType] ? `<span class="table-source-tag">${sourceTypeLabel[item.sourceType]}</span>` : '';
       tr.innerHTML = `
       ${checkboxCell}
-      <td><div class="title-cell"><div class="type-icon">${icon}</div>${item.title}</div></td>
+      <td><div class="title-cell"><div class="type-icon">${rowIcon}</div>${item.title}${sourceTag}</div></td>
       <td>${item.owner}</td>
       <td>${item.section}</td>
       <td>${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</td>
@@ -5743,7 +6500,9 @@
       const isDraft = item.status === 'draft';
 
       document.getElementById('contentTitle').textContent = item.title;
-      document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${kind === 'Live' ? 'Live session' : 'Upload'}`;
+      const sourceLabel = item.sourceType && sourceTypeLabel[item.sourceType] ? sourceTypeLabel[item.sourceType] + ' embed' : (kind === 'Live' ? 'Live session' : 'Local upload');
+      const scheduleLabel = item.scheduledFor ? ` · Scheduled ${new Date(item.scheduledFor + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}${item.scheduledTime ? ' at ' + item.scheduledTime : ''}` : '';
+      document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${sourceLabel}${item.sourceUrl ? ' · ' + item.sourceUrl : ''}${scheduleLabel}`;
 
       const transcriptHeading = document.getElementById('contentTranscriptHeading');
       const transcriptBox = document.getElementById('contentTranscript');
@@ -5776,10 +6535,14 @@
         audit.push('Assigned to <span class="a-name">Compliance</span>');
         audit.push('<span class="a-name">R. Fernandez</span> left a comment');
       }
-      if (item.status === 'approved') audit.push(item.reviewedBy ? `Approved by <span class="a-name">${item.reviewedBy}</span>` : 'Reviewed and approved');
-      if (item.status === 'active') audit.push(kind === 'Live' ? 'Currently live' : 'Published and available on demand');
+      if (item.status === 'published') audit.push(item.reviewedBy ? `Approved by <span class="a-name">${item.reviewedBy}</span>` : 'Reviewed and published');
+      if (item.status === 'active') audit.push(kind === 'Live' ? 'Currently live' : 'Live and available on demand');
       if (item.status === 'rejected') audit.push(item.reviewedBy ? `Rejected by <span class="a-name">${item.reviewedBy}</span>` : 'Rejected during review');
       if (item.reviewNote) audit.push(`Reviewer note: "${item.reviewNote}"`);
+      if (item.scheduledFor) {
+        const schedDate = new Date(item.scheduledFor + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
+        audit.push(`Scheduled to go live on ${schedDate}${item.scheduledTime ? ' at ' + item.scheduledTime : ''}`);
+      }
       if (item.expiresOn) {
         const info = expiryInfo(item);
         audit.push(info.cls === 'expired'
@@ -5788,23 +6551,43 @@
       }
       document.getElementById('contentAuditTrail').innerHTML = audit.map(a => `<div class="audit-item"><span>${a}</span></div>`).join('');
 
-      const secondaryBtn = document.getElementById('contentSecondaryBtn');
-      const primaryBtn = document.getElementById('contentPrimaryBtn');
-      secondaryBtn.classList.remove('btn-danger-outline');
-      if (isPending) {
-        secondaryBtn.textContent = 'Reject';
-        secondaryBtn.classList.add('btn-danger-outline');
-        secondaryBtn.onclick = () => rejectContentItem(item, kind);
-        primaryBtn.textContent = 'Approve';
-        primaryBtn.onclick = () => approveContentItem(item, kind);
-      } else {
-        secondaryBtn.textContent = 'Edit';
-        secondaryBtn.onclick = () => closeModal('contentOverlay');
-        primaryBtn.textContent = isFlagged ? 'Mark Complete' : (isDraft ? 'Continue Editing' : 'Close');
-        primaryBtn.onclick = () => closeModal('contentOverlay');
-      }
+      // Editable entry fields — back office can amend title/status/section/owner/tags on any item.
+      document.getElementById('contentEditTitle').value = item.title;
+      document.getElementById('contentEditTags').value = item.tags.join(', ');
+      setUiSelectValue('contentEditStatusSelect', item.status, statusLabel[item.status]);
+      setUiSelectValue('contentEditSectionSelect', item.section, item.section);
+      setUiSelectValue('contentEditOwnerSelect', item.owner, item.owner);
+
+      const rejectBtn = document.getElementById('contentRejectBtn');
+      const approveBtn = document.getElementById('contentApproveBtn');
+      rejectBtn.style.display = isPending ? 'inline-flex' : 'none';
+      approveBtn.style.display = isPending ? 'inline-flex' : 'none';
+      rejectBtn.onclick = () => rejectContentItem(item, kind);
+      approveBtn.onclick = () => approveContentItem(item, kind);
+      document.getElementById('contentSaveBtn').onclick = () => saveContentEdits(item, kind);
 
       document.getElementById('contentOverlay').classList.add('open');
+      document.body.classList.add('detail-panel-open');
+    }
+
+    function capitalizeWords(str) {
+      return str.replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function saveContentEdits(item, kind) {
+      item.title = document.getElementById('contentEditTitle').value.trim() || item.title;
+      item.owner = document.getElementById('contentEditOwnerSelect').dataset.value;
+      item.section = document.getElementById('contentEditSectionSelect').dataset.value;
+      item.tags = document.getElementById('contentEditTags').value.split(',').map(t => capitalizeWords(t.trim())).filter(Boolean);
+      const newStatus = document.getElementById('contentEditStatusSelect').dataset.value;
+      if (newStatus !== item.status) {
+        item.status = newStatus;
+        item.reviewedBy = REVIEWER_TEAM;
+        const note = document.getElementById('contentReviewNoteInput').value.trim();
+        if (note) item.reviewNote = note;
+      }
+      if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+      closeModal('contentOverlay');
     }
 
     // ---- Overview page ----
@@ -5859,7 +6642,7 @@
     // next, sourced straight from liveData so it can't show a session that
     // doesn't exist. Upcoming (approved) items don't carry a real scheduled
     // datetime yet (liveData has no datetime field) — that one value is a placeholder.
-    const livePreviewSessions = liveData.filter(x => x.status === 'active' || x.status === 'approved');
+    const livePreviewSessions = liveData.filter(x => x.status === 'active' || x.status === 'published');
     let livePreviewIndex = 0;
 
     function cycleLivePreview(delta) {
@@ -6197,51 +6980,59 @@
 
     // ---- Uploads page ----
     // Status order used to keep filter dropdowns in a sensible, consistent sequence.
-    const STATUS_ORDER = ['draft', 'pending', 'active', 'approved', 'flagged', 'rejected'];
+    const STATUS_ORDER = ['draft', 'pending', 'active', 'published', 'flagged', 'rejected'];
 
     // Rebuilds a status filter's option list to only the statuses actually present
     // in `data`, so the dropdown never offers a status with zero matching entries.
-    function syncStatusFilterOptions(filterId, data, callbackName, labelOverrides) {
-      labelOverrides = labelOverrides || {};
-      const wrap = document.getElementById(filterId);
-      const menu = wrap.querySelector('.ui-select-menu');
-      const present = STATUS_ORDER.filter(s => data.some(item => item.status === s));
-      const values = ['all', ...present];
-      if (!values.includes(wrap.dataset.value)) wrap.dataset.value = 'all';
-      const activeValue = wrap.dataset.value;
+    function filterUploadsByStatus(value) {
+      const wrap = document.getElementById('uploadsStatusFilter');
+      wrap.dataset.value = (wrap.dataset.value === value) ? 'all' : value;
+      renderUploadsStats();
+      renderUploadsTable();
+    }
 
-      menu.innerHTML = values.map(val => {
-        const label = val === 'all' ? 'All Statuses' : (labelOverrides[val] || statusLabel[val]);
-        const selectedClass = val === activeValue ? ' selected' : '';
-        return `<div class="ui-select-option${selectedClass}" data-value="${val}" onclick="chooseOption(this,'${callbackName}')">${label}<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg></div>`;
-      }).join('');
+    function filterUploadsBySource(value) {
+      document.getElementById('uploadsSourceFilter').dataset.value = value;
+      document.querySelectorAll('#uploadsSourceRail .dossier-rail-item').forEach(b => b.classList.toggle('active', b.dataset.source === value));
+      renderUploadsStats();
+      renderUploadsTable();
+      renderUploadsLibrary();
+    }
 
-      const label = activeValue === 'all' ? 'All Statuses' : (labelOverrides[activeValue] || statusLabel[activeValue]);
-      wrap.querySelector('.ui-select-label').textContent = label;
+    function itemSourceType(item) {
+      return item.sourceType || 'local';
     }
 
     function renderUploadsStats() {
-      const s = computeStats(uploadsData);
-      const expiringSoon = uploadsData.filter(x => expiryInfo(x).cls === 'expiring').length;
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
+      const scoped = sourceFilter === 'all' ? uploadsData : uploadsData.filter(x => itemSourceType(x) === sourceFilter);
+      const s = computeStats(scoped);
+      const expiringSoon = scoped.filter(x => expiryInfo(x).cls === 'expiring').length;
+      const active = document.getElementById('uploadsStatusFilter').dataset.value;
+      const cls = (v) => 'stat-card clickable-stat' + (active === v ? ' stat-active' : '');
       document.getElementById('uploadsStats').innerHTML = `
-      <div class="stat-card accent-gray"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
-      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="stat-card accent-green"><p class="label"><span class="dot green"></span>Published</p><p class="value">${s.active + s.approved}</p></div>
-      <div class="stat-card flagged"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
-      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
-      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
+      <div class="${cls('all')} accent-teal" onclick="filterUploadsByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${scoped.length}</p></div>
+      <div class="${cls('draft')} accent-gray" onclick="filterUploadsByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
+      <div class="${cls('pending')} accent-amber" onclick="filterUploadsByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterUploadsByStatus('active')"><p class="label"><span class="dot green"></span>Live</p><p class="value">${s.active}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('flagged')} flagged" onclick="filterUploadsByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
+      <div class="${cls('expiring')} accent-amber" onclick="filterUploadsByStatus('expiring')"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
+      <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
     `;
-      syncStatusFilterOptions('uploadsStatusFilter', uploadsData, 'renderUploadsTable');
     }
     function renderUploadsTable() {
       const filter = document.getElementById('uploadsStatusFilter').dataset.value;
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
       const query = document.getElementById('uploadsSearch').value.trim().toLowerCase();
       const body = document.getElementById('uploadsTableBody');
       body.innerHTML = '';
       let visibleCount = 0;
       const visibleIds = new Set();
       uploadsData.forEach(item => {
-        if (filter !== 'all' && item.status !== filter) return;
+        if (sourceFilter !== 'all' && itemSourceType(item) !== sourceFilter) return;
+        if (filter === 'expiring') { if (expiryInfo(item).cls !== 'expiring') return; }
+        else if (filter !== 'all' && item.status !== filter) return;
         if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
         visibleCount++;
         visibleIds.add(item.id);
@@ -6255,17 +7046,209 @@
       updateUploadsBulkBar();
     }
 
+    function switchUploadsView(view) {
+      document.querySelectorAll('#uploadsViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+      document.getElementById('uploadsView-log').classList.toggle('active', view === 'log');
+      document.getElementById('uploadsView-library').classList.toggle('active', view === 'library');
+      if (view === 'library') renderUploadsLibrary();
+    }
+
+    function openLibraryItem(kind, id) {
+      const arr = kind === 'uploads' ? uploadsData : liveData;
+      const item = arr.find(x => x.id === id);
+      if (!item) return;
+      openContentModal(item, kind === 'uploads' ? 'Upload' : 'Live');
+    }
+
+    // ---- Content Calendar: upcoming/scheduled content across Uploads and Live ----
+    function contentCalendarEntries() {
+      return [
+        ...uploadsData.filter(x => x.scheduledFor).map(x => Object.assign({}, x, { kind: 'Upload' })),
+        ...liveData.filter(x => x.scheduledFor).map(x => Object.assign({}, x, { kind: 'Live' }))
+      ];
+    }
+
+    function switchCalendarView(view) {
+      document.querySelectorAll('#calendarViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+      document.getElementById('calendarView-agenda').classList.toggle('active', view === 'agenda');
+      document.getElementById('calendarView-month').classList.toggle('active', view === 'month');
+      if (view === 'month') renderCalendarMonth();
+    }
+
+    let calendarMonthCursor = new Date();
+    calendarMonthCursor.setDate(1);
+    calendarMonthCursor.setHours(0, 0, 0, 0);
+
+    function shiftCalendarMonth(delta) {
+      calendarMonthCursor.setMonth(calendarMonthCursor.getMonth() + delta);
+      renderCalendarMonth();
+    }
+
+    function goToCalendarToday() {
+      calendarMonthCursor = new Date();
+      calendarMonthCursor.setDate(1);
+      calendarMonthCursor.setHours(0, 0, 0, 0);
+      renderCalendarMonth();
+    }
+
+    function renderCalendarMonth() {
+      const byDate = {};
+      contentCalendarEntries().forEach(item => {
+        (byDate[item.scheduledFor] = byDate[item.scheduledFor] || []).push(item);
+      });
+
+      const year = calendarMonthCursor.getFullYear();
+      const month = calendarMonthCursor.getMonth();
+      document.getElementById('calendarMonthLabel').textContent = calendarMonthCursor.toLocaleDateString('en-SG', { month: 'long', year: 'numeric' });
+
+      const firstOfMonth = new Date(year, month, 1);
+      const startWeekday = firstOfMonth.getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const pad = (n) => String(n).padStart(2, '0');
+      const todayStr = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+      const cells = [];
+      for (let i = startWeekday - 1; i >= 0; i--) {
+        cells.push({ day: daysInPrevMonth - i, outside: true });
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${pad(month + 1)}-${pad(d)}`;
+        cells.push({ day: d, outside: false, dateStr, isToday: dateStr === todayStr });
+      }
+      let trailDay = 1;
+      while (cells.length % 7 !== 0) {
+        cells.push({ day: trailDay++, outside: true });
+      }
+
+      document.getElementById('calendarMonthGrid').innerHTML = cells.map(cell => {
+        if (cell.outside) {
+          return `<div class="calendar-day-cell outside"><span class="calendar-day-number">${cell.day}</span></div>`;
+        }
+        const items = byDate[cell.dateStr] || [];
+        const visible = items.slice(0, 4);
+        const extra = items.length - visible.length;
+        const chipTooltip = (item) => {
+          let t = item.scheduledTime ? `${item.scheduledTime} · ${item.title}` : item.title;
+          if (item.expiresOn) t += ` · Expires ${new Date(item.expiresOn + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+          return t;
+        };
+        return `<div class="calendar-day-cell${cell.isToday ? ' today' : ''}">
+          <span class="calendar-day-number">${cell.day}</span>
+          ${visible.map(item => `<div class="calendar-chip ${item.status}" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})" title="${chipTooltip(item)}">${item.scheduledTime ? `<span class="calendar-chip-time">${item.scheduledTime}</span> ` : ''}${item.title}</div>`).join('')}
+          ${extra > 0 ? `<div class="calendar-chip-more">+${extra} more</div>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    function renderContentCalendar() {
+      const entries = contentCalendarEntries().sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor));
+
+      const list = document.getElementById('contentCalendarList');
+      if (!entries.length) {
+        list.innerHTML = `<p style="padding:20px;color:var(--ink-500);font-size:13px;">No scheduled or upcoming content right now.</p>`;
+        return;
+      }
+
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const groups = [];
+      const groupIndex = {};
+      entries.forEach(item => {
+        const d = new Date(item.scheduledFor + 'T00:00:00');
+        const diffDays = Math.round((d - today) / 86400000);
+        let label;
+        if (diffDays < 0) label = 'Overdue';
+        else if (diffDays === 0) label = 'Today';
+        else if (diffDays === 1) label = 'Tomorrow';
+        else label = d.toLocaleDateString('en-SG', { weekday: 'long', day: 'numeric', month: 'short' });
+        if (!(label in groupIndex)) { groupIndex[label] = groups.length; groups.push({ label, items: [] }); }
+        groups[groupIndex[label]].items.push(item);
+      });
+
+      list.innerHTML = groups.map(g => `
+        <div class="calendar-group">
+          <p class="calendar-group-label">${g.label}</p>
+          ${g.items.map(item => `
+            <div class="calendar-entry" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})">
+              <div class="calendar-entry-icon">${typeIcon[item.kind]}</div>
+              <div class="calendar-entry-body">
+                <p class="calendar-entry-title">${item.title}</p>
+                <p class="calendar-entry-meta">${item.owner} · ${item.section}${item.scheduledTime ? ` · ${item.scheduledTime}` : ''}</p>
+                ${item.expiresOn ? `<p class="calendar-entry-expiry">Expires ${new Date(item.expiresOn + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}</p>` : ''}
+              </div>
+              <span class="badge ${item.status}">${statusLabel[item.status]}</span>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function renderLibraryCard(item, kind) {
+      const isActive = item.status === 'active';
+      const expiryLabel = kind === 'uploads' ? expiryInfo(item).label : '—';
+      return `<div class="library-card">
+        <div class="library-card-open" onclick="openLibraryItem('${kind}', ${item.id})">
+          <div class="library-thumb">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="library-card-body">
+            <p class="library-card-title">${item.title}</p>
+            <p class="library-card-meta">${item.owner} · ${item.section}</p>
+          </div>
+        </div>
+        <div class="library-card-foot">
+          <div class="library-toggle-group">
+            <label class="switch" onclick="event.stopPropagation()">
+              <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleLibraryActive('${kind}', ${item.id}, this.checked)" />
+              <span class="slider"></span>
+            </label>
+            <span class="library-toggle-label">Live</span>
+          </div>
+          <span class="library-expiry">${expiryLabel}</span>
+        </div>
+      </div>`;
+    }
+
+    function renderUploadsLibrary() {
+      const sourceFilter = document.getElementById('uploadsSourceFilter').dataset.value;
+      const items = uploadsData.filter(x => (x.status === 'active' || x.status === 'published') && (sourceFilter === 'all' || itemSourceType(x) === sourceFilter));
+      document.getElementById('uploadsLibraryGrid').innerHTML = items.length
+        ? items.map(item => renderLibraryCard(item, 'uploads')).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;">No approved uploads yet.</p>`;
+    }
+
+    function toggleLibraryActive(kind, id, checked) {
+      const arr = kind === 'uploads' ? uploadsData : liveData;
+      const item = arr.find(x => x.id === id);
+      if (!item) return;
+      item.status = checked ? 'active' : 'published';
+      if (kind === 'uploads') { renderUploadsStats(); renderUploadsTable(); renderUploadsLibrary(); }
+      else { renderLiveStats(); renderLiveTable(); renderLiveLibrary(); }
+    }
+
     // ---- Live page ----
+    function filterLiveByStatus(value) {
+      const wrap = document.getElementById('liveLogStatusFilter');
+      wrap.dataset.value = (wrap.dataset.value === value) ? 'all' : value;
+      renderLiveStats();
+      renderLiveTable();
+    }
+
     function renderLiveStats() {
       const s = computeStats(liveData);
+      const active = document.getElementById('liveLogStatusFilter').dataset.value;
+      const cls = (v) => 'stat-card clickable-stat' + (active === v ? ' stat-active' : '');
       document.getElementById('liveStats').innerHTML = `
-      <div class="stat-card accent-gray"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
-      <div class="stat-card accent-green"><p class="label"><span class="dot live"></span>Live Now</p><p class="value">${s.active}</p></div>
-      <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="stat-card flagged"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
-      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
+      <div class="${cls('all')} accent-teal" onclick="filterLiveByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${liveData.length}</p></div>
+      <div class="${cls('draft')} accent-gray" onclick="filterLiveByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Live</p><p class="value">${s.active}</p></div>
+      <div class="${cls('pending')} accent-amber" onclick="filterLiveByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('flagged')} flagged" onclick="filterLiveByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
+      <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
-      syncStatusFilterOptions('liveLogStatusFilter', liveData, 'renderLiveTable', { active: 'Live Now' });
     }
     function renderLiveTable() {
       const filter = document.getElementById('liveLogStatusFilter').dataset.value;
@@ -6286,6 +7269,20 @@
       }
       Array.from(selectedLiveIds).forEach(id => { if (!visibleIds.has(id)) selectedLiveIds.delete(id); });
       updateLiveBulkBar();
+    }
+
+    function switchLiveView(view) {
+      document.querySelectorAll('#liveViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+      document.getElementById('liveView-log').classList.toggle('active', view === 'log');
+      document.getElementById('liveView-library').classList.toggle('active', view === 'library');
+      if (view === 'library') renderLiveLibrary();
+    }
+
+    function renderLiveLibrary() {
+      const items = liveData.filter(x => x.status === 'active' || x.status === 'published');
+      document.getElementById('liveLibraryGrid').innerHTML = items.length
+        ? items.map(item => renderLibraryCard(item, 'live')).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;">No approved live sessions yet.</p>`;
     }
 
     const submissions = [
@@ -6987,15 +7984,22 @@
     }
 
     function goToPage(page) {
+      closeModal('contentOverlay');
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + page).classList.add('active');
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
       if (page === 'customer360') closeCustomerDossier();
+      if (page === 'contentcalendar') { renderCalendarMonth(); renderContentCalendar(); }
     }
 
     function openUploadModal() {
       switchUploadTab('content');
+      switchUploadSourceType('local');
+      document.getElementById('youtubeUrlInput').value = '';
+      document.getElementById('spotifyUrlInput').value = '';
+      document.getElementById('youtubePreview').style.display = 'none';
+      document.getElementById('spotifyPreview').style.display = 'none';
       document.getElementById('uploadOverlay').classList.add('open');
     }
 
@@ -7003,12 +8007,18 @@
       document.getElementById('liveScheduleOverlay').classList.add('open');
     }
 
+    function currentUploadSourceUrl() {
+      if (currentUploadSourceType === 'youtube') return document.getElementById('youtubeUrlInput').value.trim() || null;
+      if (currentUploadSourceType === 'spotify') return document.getElementById('spotifyUrlInput').value.trim() || null;
+      return null;
+    }
+
     function saveUploadDraft() {
       const title = document.getElementById('uploadTitleInput').value.trim() || 'Untitled Upload';
       const owner = document.getElementById('uploadOwnerSelect').dataset.value;
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
-      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet submitted for review.', expiresOn });
+      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -7019,7 +8029,7 @@
       const owner = document.getElementById('uploadOwnerSelect').dataset.value;
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
-      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn });
+      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -7027,7 +8037,7 @@
 
     // ---- Content Detail modal: single-item approve/reject for Pending Review items ----
     function approveContentItem(item, kind) {
-      item.status = 'approved';
+      item.status = 'published';
       item.reviewedBy = REVIEWER_TEAM;
       const note = document.getElementById('contentReviewNoteInput').value.trim();
       if (note) item.reviewNote = note;
@@ -7077,7 +8087,7 @@
     }
 
     function bulkApproveUploads() {
-      uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'approved'; });
+      uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'published'; });
       selectedUploadIds.clear();
       renderUploadsStats();
       renderUploadsTable();
@@ -7129,7 +8139,7 @@
     }
 
     function bulkApproveLive() {
-      liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'approved'; });
+      liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'published'; });
       selectedLiveIds.clear();
       renderLiveStats();
       renderLiveTable();
@@ -7162,11 +8172,35 @@
     }
 
     function switchUploadTab(tab) {
-      document.querySelectorAll('#uploadTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.utab === tab));
+      document.querySelectorAll('#uploadTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.utab === tab));
       document.querySelectorAll('.upload-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'uploadtab-' + tab));
+    }
+
+    let currentUploadSourceType = 'local';
+    const embedMockTitles = {
+      youtube: { title: "SG Budget 2026: What It Means for Savers", sub: "Fetched from YouTube · 8:42" },
+      spotify: { title: "Market Minute: This Week in Rates", sub: "Fetched from Spotify · Episode · 12:05" }
+    };
+
+    function switchUploadSourceType(type) {
+      currentUploadSourceType = type;
+      document.querySelectorAll('#uploadSourceTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.usource === type));
+      document.querySelectorAll('.upload-source-pane').forEach(p => p.classList.toggle('active', p.id === 'uploadsource-' + type));
+    }
+
+    function fetchEmbedPreview(type) {
+      const urlInput = document.getElementById(type === 'youtube' ? 'youtubeUrlInput' : 'spotifyUrlInput');
+      if (!urlInput.value.trim()) return;
+      const mock = embedMockTitles[type];
+      document.getElementById(type + 'PreviewTitle').textContent = mock.title;
+      document.getElementById(type + 'PreviewSub').textContent = mock.sub;
+      document.getElementById(type + 'Preview').style.display = 'flex';
+      const titleInput = document.getElementById('uploadTitleInput');
+      if (!titleInput.value.trim()) titleInput.value = mock.title;
     }
     function closeModal(id) {
       document.getElementById(id).classList.remove('open');
+      if (id === 'contentOverlay') document.body.classList.remove('detail-panel-open');
     }
     document.querySelectorAll('.overlay').forEach(ov => {
       ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('open'); });
@@ -7891,7 +8925,7 @@
 
       // Live Studio
       document.getElementById('liveStudioCif').textContent = roster.cif;
-      const eligibleSessions = liveData.filter(x => x.status === 'active' || x.status === 'approved');
+      const eligibleSessions = liveData.filter(x => x.status === 'active' || x.status === 'published');
       document.getElementById('liveStudioSessionSelect').innerHTML = eligibleSessions.length
         ? eligibleSessions.map(s => `<option value="${s.id}">${s.title} · ${s.section}</option>`).join('')
         : `<option value="">No eligible live sessions right now</option>`;
@@ -7977,6 +9011,8 @@
     renderHotTopics();
     renderC360RosterStats();
     renderC360Roster();
+    renderCalendarMonth();
+    renderContentCalendar();
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
     renderPerformanceTable('threads');
