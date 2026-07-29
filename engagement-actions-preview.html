@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Engagement Actions Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #0b0c0e;
+      --card: #151719;
+      --card-soft: #1b1e21;
+      --line: #303338;
+      --ink: #f4f5f6;
+      --muted: #aeb3b9;
+      --teal: #78bcb5;
+      --teal-soft: rgba(120, 188, 181, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    }
+
+    .preview {
+      width: min(1180px, 100%);
+      padding: 28px 30px 30px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, .24);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -.02em;
+    }
+
+    .subtitle {
+      margin: 7px 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .baseline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card-soft);
+    }
+
+    .baseline span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .baseline strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 26px;
+      letter-spacing: -.03em;
+    }
+
+    .baseline .period {
+      text-align: right;
+    }
+
+    .actions {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .action {
+      display: grid;
+      grid-template-columns: 100px minmax(180px, 1fr) 100px 70px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .action-name {
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .track {
+      height: 11px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #24272b;
+    }
+
+    .track i {
+      display: block;
+      height: 100%;
+      min-width: 5px;
+      border-radius: inherit;
+      background: var(--teal);
+    }
+
+    .count {
+      text-align: right;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .rate {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: #9bd5cf;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .note {
+      display: flex;
+      gap: 8px;
+      margin: 24px 0 0;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .note b {
+      color: var(--ink);
+    }
+
+    @media (max-width: 680px) {
+      .preview {
+        padding: 22px 18px;
+      }
+
+      .action {
+        grid-template-columns: 82px 1fr;
+        gap: 8px 12px;
+      }
+
+      .track {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .count {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .rate {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview">
+    <h1>Engagement Actions</h1>
+    <p class="subtitle">How viewers interacted with uploads during the selected period</p>
+
+    <section class="baseline" aria-label="Total upload views">
+      <div>
+        <span>Total views</span>
+        <strong>126,650</strong>
+      </div>
+      <div class="period">
+        <span>Selected period</span>
+        <strong style="font-size:15px">Last 30 days</strong>
+      </div>
+    </section>
+
+    <section class="actions" aria-label="Engagement actions compared with likes">
+      <div class="action">
+        <span class="action-name">Likes</span>
+        <div class="track" role="img" aria-label="13,571 likes, highest engagement action"><i style="width:100%"></i></div>
+        <span class="count">13,571</span>
+        <span class="rate">10.7%</span>
+      </div>
+      <div class="action">
+        <span class="action-name">Comments</span>
+        <div class="track" role="img" aria-label="2,850 comments, 21 percent of the likes count"><i style="width:21%"></i></div>
+        <span class="count">2,850</span>
+        <span class="rate">2.3%</span>
+      </div>
+      <div class="action">
+        <span class="action-name">Shares</span>
+        <div class="track" role="img" aria-label="1,221 shares, 9 percent of the likes count"><i style="width:9%"></i></div>
+        <span class="count">1,221</span>
+        <span class="rate">1.0%</span>
+      </div>
+    </section>
+
+    <p class="note"><b>How to read this:</b> Rates show each action as a percentage of total views. Bar lengths compare action volume with Likes, the most frequent action—not progress toward a target.</p>
+  </main>
+</body>
+</html>
