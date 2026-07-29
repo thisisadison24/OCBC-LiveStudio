@@ -34,10 +34,20 @@
       --danger-bg: rgba(185, 58, 46, 0.22);
       --info-600: #5B9EFF;
       --info-bg: rgba(43, 100, 200, 0.24);
-      --chart-red: #D42B41;
-      --chart-teal: #2FA89D;
-      --chart-gold: #D99A2B;
+      /* Categorical chart hues. Validated for CVD separation against --paper-0;
+         keep any edits above ΔE 15 for normal vision (see the dataviz validator). */
+      --chart-red: #E05A50;
+      --chart-teal: #3BBCAD;
+      --chart-gold: #DCA92F;
       --chart-gray: #8F8B82;
+      /* Sequential ramp (single hue, dark -> light) for magnitude encodings. */
+      --chart-seq-1: #14403C;
+      --chart-seq-2: #1D6A62;
+      --chart-seq-3: #2A9A8D;
+      --chart-seq-4: #3BBCAD;
+      /* Diverging pair for signed values measured from a zero baseline. */
+      --chart-pos: #4ED495;
+      --chart-neg: #FF7A6B;
       --radius: 10px;
       --radius-lg: 16px;
       --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
@@ -66,10 +76,18 @@
       --danger-bg: rgba(185, 58, 46, 0.14);
       --info-600: #2B5FA3;
       --info-bg: rgba(43, 95, 163, 0.14);
-      --chart-red: #D5B360;
-      --chart-teal: #0E766D;
+      /* --chart-red was #D5B360, only ΔE 11 from --chart-gold — the two series
+         were indistinguishable. Re-stepped onto a true red. */
+      --chart-red: #B5322A;
+      --chart-teal: #0E8F9E;
       --chart-gold: #C08A1E;
       --chart-gray: #4A4030;
+      --chart-seq-1: #CFE9E6;
+      --chart-seq-2: #86C9C1;
+      --chart-seq-3: #3C9A92;
+      --chart-seq-4: #0E6F6A;
+      --chart-pos: #1E7A49;
+      --chart-neg: #B93A2E;
       --shadow-modal: 0 20px 60px rgba(80, 60, 20, 0.18);
     }
 
@@ -120,10 +138,17 @@
       --danger-bg: rgba(185, 58, 46, 0.22);
       --info-600: #5B9EFF;
       --info-bg: rgba(43, 100, 200, 0.24);
-      --chart-red: #D5B360;
-      --chart-teal: #2FA89D;
-      --chart-gold: #D99A2B;
+      /* Same clash as wow: #D5B360 vs #D99A2B was ΔE 6.3 — well under the floor. */
+      --chart-red: #E05A50;
+      --chart-teal: #3BBCAD;
+      --chart-gold: #DCA92F;
       --chart-gray: #8F8B82;
+      --chart-seq-1: #14403C;
+      --chart-seq-2: #1D6A62;
+      --chart-seq-3: #2A9A8D;
+      --chart-seq-4: #3BBCAD;
+      --chart-pos: #4ED495;
+      --chart-neg: #FF7A6B;
       --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.7);
     }
 
@@ -2158,7 +2183,142 @@
       font-weight: 500;
     }
 
+    /* Trend chip for an insight card. Deliberately small and parked on the footer
+       row — as a full-width block it competed with the sentence it supports. */
+    .insight-spark {
+      display: block;
+      flex: 0 0 auto;
+      width: 56px;
+      height: 16px;
+      overflow: visible;
+    }
+
+    /* Ranked comparison bars, used for the modal's evidence chart and the
+       Threads insight visual. */
+    .evidence-bars {
+      display: grid;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .evidence-bar {
+      display: grid;
+      grid-template-columns: 120px 1fr 62px;
+      gap: 9px;
+      align-items: center;
+      font-size: 11.5px;
+    }
+
+    .evidence-bar span:first-child {
+      color: var(--ink-500);
+    }
+
+    .evidence-track {
+      height: 8px;
+      border-radius: 5px;
+      background: var(--paper-100);
+      overflow: hidden;
+    }
+
+    .evidence-track i {
+      display: block;
+      height: 100%;
+      border-radius: 5px;
+      min-width: 2px;
+      background: var(--chart-seq-3);
+    }
+
+    .evidence-bar b {
+      text-align: right;
+      font-size: 11.5px;
+    }
+
     /* Analytics / overview sections */
+    .insights-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .insight-card {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    .insight-card:hover {
+      border-color: var(--line-strong);
+      background: var(--paper-100);
+      transform: translateY(-1px);
+    }
+
+    .insight-card:focus-visible {
+      outline: 2px solid var(--info-600);
+      outline-offset: 2px;
+    }
+
+    .insight-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .insight-icon.up {
+      background: var(--green-bg);
+      color: var(--green-600);
+    }
+
+    .insight-icon.down {
+      background: var(--danger-bg);
+      color: var(--danger-600);
+    }
+
+    .insight-icon.info {
+      background: var(--info-bg);
+      color: var(--info-600);
+    }
+
+    .insight-text {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--ink-700);
+    }
+
+    .insight-text b {
+      color: var(--ink-900);
+      font-weight: 700;
+    }
+
+    .insight-foot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    .insight-more {
+      color: var(--info-600);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -3062,56 +3222,192 @@
       margin: 28px 0 12px;
     }
 
-    .funnel {
-      display: flex;
+    /* Shared funnel. Stages are centred on one axis and joined by tapers with no
+       vertical gap, so the outline reads as a continuous funnel rather than a
+       stack of bars. Width still encodes value; every stage stays directly
+       labelled, which is what keeps the centred form readable. */
+    .funnel-chart {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: minmax(150px, 210px) minmax(280px, 1fr) 250px;
+      column-gap: 14px;
       align-items: stretch;
-      gap: 6px;
-      margin-top: 10px;
     }
 
-    .funnel-step {
-      flex: 1;
-      min-width: 0;
-      padding: 15px 10px;
-      text-align: center;
-      background: var(--paper-100);
-      border: 1px solid var(--line);
-      clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 8% 50%);
+    .funnel-row {
+      display: contents;
     }
 
-    .funnel-step:first-child {
-      clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+    .funnel-step-label {
+      font-size: 11.5px;
+      color: var(--ink-700);
+      text-align: right;
+      align-self: center;
     }
 
-    .funnel-step b {
+    .funnel-band,
+    .funnel-taper-svg {
       display: block;
-      font-family: 'Sora', sans-serif;
-      font-size: 17px;
-      margin-bottom: 5px;
+      width: 100%;
     }
 
-    .funnel-step span {
+    .funnel-band {
+      height: 36px;
+    }
+
+    .funnel-taper-svg {
+      height: 26px;
+    }
+
+    /* The taper row carries the step-to-step conversion, so the silhouette and
+       the number that explains it occupy the same place. */
+    .funnel-taper {
+      display: contents;
+    }
+
+    .funnel-taper-figures {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+      min-width: 130px;
       font-size: 10.5px;
       color: var(--ink-500);
+      align-self: center;
+      white-space: nowrap;
     }
 
-    .line-chart {
-      width: 100%;
-      height: 175px;
-      display: block;
-    }
-
-    .chart-axis {
-      stroke: var(--line);
-      stroke-width: 1;
-    }
-
-    .retention-labels {
+    .funnel-figures {
       display: flex;
-      justify-content: space-between;
-      font-size: 10px;
+      align-items: baseline;
+      gap: 8px;
+      justify-content: flex-end;
+      min-width: 130px;
+      align-self: center;
+    }
+
+    .funnel-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+    }
+
+    .funnel-share {
+      font-size: 11px;
       color: var(--ink-500);
-      margin-top: 4px;
+      min-width: 44px;
+      text-align: right;
+    }
+
+    .funnel-drop {
+      color: var(--chart-neg);
+    }
+
+    .funnel-empty {
+      font-size: 12px;
+      color: var(--ink-500);
+      padding: 18px 0;
+      text-align: center;
+    }
+
+    .action-comparison {
+      margin-top: 16px;
+    }
+
+    .action-baseline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 0 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .action-comparison-note {
+      color: var(--ink-500);
+      font-size: 11px;
+    }
+
+    .action-baseline-copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .action-baseline-copy span {
+      color: var(--ink-500);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .action-baseline-copy strong {
+      color: var(--ink-700);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .action-baseline b {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      letter-spacing: -.02em;
+    }
+
+    .action-comparison-rows {
+      display: grid;
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .action-comparison-row {
+      display: grid;
+      grid-template-columns: 130px minmax(160px, 1fr) 90px 58px;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .action-comparison-label {
+      color: var(--ink-700);
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .action-comparison-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--paper-100);
+    }
+
+    .action-comparison-track i {
+      display: block;
+      height: 100%;
+      min-width: 3px;
+      border-radius: inherit;
+      background: var(--chart-seq-3);
+    }
+
+    .action-comparison-count {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-900);
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .action-comparison-rate {
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: var(--teal-bg);
+      color: var(--teal-600);
+      text-align: center;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .action-comparison-note {
+      margin: 16px 0 0;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+      line-height: 1.5;
     }
 
     .data-table {
@@ -3164,6 +3460,63 @@
       font-family: 'Sora', sans-serif;
       font-size: 18px;
     }
+
+    .health-figure {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* Value as a fill, target as a tick on the same scale, so "93%" can be seen
+       falling short of its 95% target instead of just being asserted. */
+    .health-track {
+      position: relative;
+      height: 6px;
+      margin-top: 9px;
+      border-radius: 3px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .health-fill {
+      display: block;
+      height: 100%;
+      border-radius: 3px;
+      min-width: 2px;
+    }
+
+    .health-target {
+      position: absolute;
+      top: -3px;
+      width: 2px;
+      height: 12px;
+      border-radius: 1px;
+      background: var(--ink-500);
+    }
+
+    .health-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 10.5px;
+      color: var(--ink-500);
+    }
+
+    /* Status is icon + word as well as colour — never colour alone. */
+    .health-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .health-status.good { color: var(--chart-pos); }
+    .health-status.warn { color: var(--amber-600); }
+    .health-status.bad { color: var(--chart-neg); }
 
     .performance-head,
     .performance-row {
@@ -3230,13 +3583,52 @@
       background: var(--chart-red);
     }
 
-    .opportunity {
-      font-weight: 700;
-      color: var(--green-600);
+    /* Inline bars are reserved for percentage metrics with a meaningful
+       zero-to-100 scale. Average reach uses an exact value and rank. */
+    .rate-cell {
+      display: grid;
+      gap: 5px;
     }
 
-    .opportunity.down {
-      color: var(--danger-600);
+    .rate-cell span {
+      font-size: 11px;
+    }
+
+    .average-rank-cell {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+    }
+
+    .average-rank-cell > span:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-900);
+      font-weight: 700;
+    }
+
+    .section-rank {
+      padding: 2px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      white-space: nowrap;
+    }
+
+    .rate-track {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--paper-100);
+      overflow: hidden;
+    }
+
+    .rate-track i {
+      display: block;
+      height: 100%;
+      border-radius: 3px;
+      min-width: 2px;
+      background: var(--chart-seq-3);
     }
 
     .definition-note {
@@ -3281,9 +3673,16 @@
     .format-bar-row b small{display:block;font-size:9px;color:var(--ink-500);font-weight:500;}
     .metric-selectable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
     .metric-selectable:hover{border-color:var(--line-strong);}
-    .metric-selectable.selected{border-color:var(--teal-600);background:linear-gradient(180deg,var(--teal-bg),var(--paper-0) 48%);}
+    .metric-selectable.selected{background:var(--paper-100);}
     .metric-selectable:focus-visible{outline:2px solid var(--teal-600);outline-offset:2px;}
-    .primary-analytics-chart{margin:-6px 0 16px;}
+    .visual-kpi-strip{grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:0;border:1px solid var(--line-strong);border-bottom:0;border-radius:16px 16px 0 0;overflow:hidden;background:var(--paper-0);}
+    .visual-kpi-strip .stat-card{border:0;border-right:1px solid var(--line-strong);border-radius:0;background:var(--paper-0);padding:18px 20px;}
+    .visual-kpi-strip .stat-card:last-child{border-right:0;}
+    .visual-kpi-strip .stat-card::before{display:none;}
+    .visual-kpi-strip .stat-card .label{justify-content:center;margin-bottom:7px;}
+    .visual-kpi-strip .stat-card .value{text-align:center;font-size:24px;}
+    .visual-kpi-strip .stat-card .kpi-delta{text-align:center;margin-top:5px;color:var(--ink-500);}
+    .primary-analytics-chart{margin:0 0 16px;border-radius:0 0 16px 16px;border-color:var(--line-strong);padding:22px 26px 18px;background:var(--paper-0);}
     .primary-chart-summary{display:flex;align-items:baseline;gap:9px;margin-top:8px;}
     .primary-chart-summary b{font-family:'Sora',sans-serif;font-size:22px;}
     .primary-chart-summary span{font-size:11px;color:var(--green-600);}
@@ -3294,6 +3693,9 @@
     .visual-support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
     .audience-stacked{display:flex;height:22px;border-radius:7px;overflow:hidden;margin:14px 0 12px;}
     .audience-stacked i{display:block;height:100%;}
+    .audience-donut-layout{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:22px;margin-top:14px;}
+    .audience-donut{width:132px;height:132px;border-radius:50%;position:relative;margin:auto;}
+    .audience-donut::after{content:"Audience";position:absolute;inset:27px;border-radius:50%;background:var(--paper-0);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-500);font-size:11px;}
     .audience-legend{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
     .audience-legend-item{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--ink-500);}
     .audience-legend-item span{display:flex;align-items:center;gap:6px;}
@@ -3302,6 +3704,26 @@
     .visual-insight{padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper-100);}
     .visual-insight b{display:block;font-size:11.5px;margin-bottom:3px;}
     .visual-insight span{font-size:10.5px;color:var(--ink-500);line-height:1.45;}
+    .studio-chart-title{font-size:15px;margin:0 0 3px;}
+    .studio-chart-sub{font-size:11px;color:var(--ink-500);margin:0;}
+    .studio-chart-grid{stroke:var(--line);stroke-width:1;}
+    .studio-chart-axis{stroke:var(--line-strong);stroke-width:1;}
+    .studio-chart-line{fill:none;stroke:var(--chart-teal);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;}
+    .studio-chart-compare{fill:none;stroke:var(--ink-300);stroke-width:1.2;stroke-dasharray:5 5;}
+    .studio-chart-tick{font-family:'Inter',sans-serif;font-size:10px;fill:var(--ink-500);}
+    .studio-chart-end{fill:var(--chart-teal);stroke:var(--paper-0);stroke-width:3;}
+    .studio-chart-wrap{position:relative;}
+    .studio-chart-hit{fill:transparent;cursor:crosshair;}
+    .studio-chart-hover-point{fill:var(--chart-teal);stroke:var(--paper-0);stroke-width:3;opacity:0;pointer-events:none;}
+    .studio-chart-tooltip{display:none;position:absolute;z-index:4;min-width:112px;padding:9px 11px;border:1px solid var(--line-strong);border-radius:8px;background:var(--paper-0);box-shadow:0 8px 24px rgba(0,0,0,.24);pointer-events:none;transform:translate(-50%,-100%);}
+    .studio-chart-tooltip.visible{display:block;}
+    .studio-chart-tooltip span{display:block;font-size:10px;color:var(--ink-500);margin-bottom:3px;}
+    .studio-chart-tooltip b{display:block;font-family:'Sora',sans-serif;font-size:14px;color:var(--ink-900);}
+    .studio-chart-tooltip .tooltip-series{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:5px;font-size:11px;color:var(--ink-700);}
+    .studio-chart-tooltip .tooltip-series i{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:6px;}
+    .studio-chart-tooltip .tooltip-series strong{font-family:'JetBrains Mono',monospace;color:var(--ink-900);}
+    .studio-chart-guideline{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none;}
+    .studio-chart-hit:focus{outline:none;stroke:var(--info-600);stroke-width:1.5;}
 
     /* Customer 360 */
     .sync-flag {
@@ -3899,6 +4321,7 @@
     @media (max-width:900px) {
 
       .stat-grid,
+      .insights-strip,
       .kpi-grid,
       .stat-grid.cols-5,
       .stat-grid.cols-6,
@@ -3922,12 +4345,49 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .funnel {
-        overflow-x: auto;
+      /* Narrow screens: drop the fixed label gutter so the funnel keeps its full
+         width, and move the stage label above its band. The taper's blank first
+         column has to collapse in step, or the two rows stop lining up and the
+         silhouette shears. */
+      .funnel-chart {
+        display: block;
       }
 
-      .funnel-step {
-        min-width: 120px;
+      .funnel-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 10px;
+        align-items: center;
+      }
+
+      .funnel-taper {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 10px;
+      }
+
+      .funnel-taper > span:first-child {
+        display: none;
+      }
+
+      .funnel-step-label {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+
+      .funnel-figures,
+      .funnel-taper-figures {
+        min-width: 0;
+      }
+
+      .funnel-taper-figures {
+        white-space: normal;
+        flex-wrap: wrap;
+      }
+
+      .action-comparison-row {
+        grid-template-columns: 105px minmax(100px, 1fr) 72px 52px;
+        gap: 9px;
       }
 
       .performance-head {
@@ -3969,6 +4429,10 @@
 
       .format-comparison-grid,
       .visual-support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-donut-layout {
         grid-template-columns: 1fr;
       }
     }
@@ -5163,48 +5627,19 @@
 
         <!-- LIVE ANALYTICS -->
         <div class="analytics-tab-pane active" id="analytics-live">
-          <div class="kpi-grid">
-            <div class="stat-card">
-              <p class="label">Completed Live Sessions <span class="metric-help"
-                  title="Live sessions held during the selected date range">?</span></p>
-              <p class="value">18</p>
-              <p class="kpi-delta">+2 vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Total Registrations <span class="metric-help"
-                  title="Registrations for live sessions held during the selected date range">?</span></p>
-              <p class="value">12,480</p>
-              <p class="kpi-delta">+8.4% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Weighted App Access Rate <span class="metric-help"
-                  title="Total external app opens divided by total registrations across included sessions">?</span></p>
-              <p class="value">78.6%</p>
-              <p class="kpi-delta">+3.2% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Weighted Attendance Rate <span class="metric-help"
-                  title="Total confirmed attendees divided by total registrations across included sessions">?</span></p>
-              <p class="value">64.2%</p>
-              <p class="kpi-delta">+5.8% vs previous 30 days</p>
-            </div>
-          </div>
-          <div class="definition-note"><span class="metric-help">i</span><span><b>What "weighted" means:</b> rates are
-              calculated from the combined totals across all included sessions—for example, total attendees ÷ total
-              registrations. This gives larger sessions proportionate influence instead of treating a 100-person session
-              the same as a 3,000-person session.</span></div>
+          <div class="insights-strip" id="insightsStrip-live"></div>
+          <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
+          <div class="kpi-grid"></div>
 
           <div class="chart-card" style="margin-bottom:16px;">
             <h3>Registration-to-Attendance Funnel</h3>
-            <p class="chart-sub">Tracks verified movement from the website into the external app and live session</p>
-            <div class="funnel">
-              <div class="funnel-step"><b>24,860</b><span>Session Page Views</span></div>
-              <div class="funnel-step"><b>12,480</b><span>Registrations</span></div>
-              <div class="funnel-step"><b>9,809</b><span>External App Access</span></div>
-              <div class="funnel-step"><b>8,012</b><span>Live Attendance</span></div>
-              <div class="funnel-step"><b>7,146</b><span>Watched 5+ Min</span></div>
-              <div class="funnel-step"><b>3,284</b><span>Chat or Poll</span></div>
-            </div>
+            <p class="chart-sub">Verified movement from the website into the external app and the live session</p>
+            <div id="liveFunnelChart"></div>
+          </div>
+          <div class="chart-card" style="margin-bottom:16px;">
+            <h3>Live Participation</h3>
+            <p class="chart-sub">Parallel participation signals among people who attended the live session</p>
+            <div id="liveParticipationActions"></div>
           </div>
 
           <div class="chart-card">
@@ -5240,65 +5675,23 @@
               </table>
             </div>
           </div>
+          <div class="chart-card" style="margin-top:16px;">
+            <h3>Live Performance by Section</h3>
+            <p class="chart-sub">How much each section publishes, against the audience share it attracts</p>
+            <div id="liveSectionPerformance"></div>
+          </div>
         </div>
 
         <!-- UPLOADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-uploads">
-          <div class="kpi-grid">
-            <div class="stat-card">
-              <p class="label">Unique Upload Viewers <span class="metric-help"
-                  title="Distinct users who started an uploaded video">?</span></p>
-              <p class="value">86,420</p>
-              <p class="kpi-delta">+12.1% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Average Watch Time <span class="metric-help"
-                  title="Average time watched per video play">?</span></p>
-              <p class="value">3m 48s</p>
-              <p class="kpi-delta">+4.3% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Upload Completion Rate <span class="metric-help"
-                  title="Plays that reached at least 95% of video duration">?</span></p>
-              <p class="value">58.7%</p>
-              <p class="kpi-delta">+2.6% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Upload Engagement Rate <span class="metric-help"
-                  title="Viewers who liked, commented, shared or saved">?</span></p>
-              <p class="value">9.4%</p>
-              <p class="kpi-delta down">-0.8% vs previous 30 days</p>
-            </div>
-          </div>
-          <div class="chart-row">
-            <div class="chart-card">
-              <h3>Upload Views and Engagement Trend</h3>
-              <p class="chart-sub">Unique viewers and engagement rate over the selected period</p>
-              <svg class="line-chart" viewBox="0 0 560 175" preserveAspectRatio="none">
-                <path class="chart-axis" d="M0 145H560M0 100H560M0 55H560" />
-                <polyline points="0,128 80,110 160,118 240,79 320,90 400,55 480,64 560,28" fill="none"
-                  stroke="var(--chart-red)" stroke-width="3" />
-                <polyline points="0,137 80,130 160,124 240,112 320,116 400,93 480,101 560,82" fill="none"
-                  stroke="var(--chart-teal)" stroke-width="3" />
-              </svg>
-              <div class="legend"><span class="legend-item"><i class="legend-swatch"
-                    style="background:var(--chart-red)"></i>Unique viewers</span><span class="legend-item"><i
-                    class="legend-swatch" style="background:var(--chart-teal)"></i>Engagement rate</span></div>
-            </div>
-            <div class="chart-card">
-              <h3>Upload Retention Curve</h3>
-              <p class="chart-sub">Percentage of viewers remaining by video progress</p>
-              <svg class="line-chart" viewBox="0 0 400 175" preserveAspectRatio="none">
-                <path class="chart-axis" d="M0 145H400M0 100H400M0 55H400" />
-                <polygon points="0,18 50,29 100,46 150,62 200,79 250,94 300,110 350,121 400,130 400,155 0,155"
-                  fill="var(--chart-red)" opacity=".14" />
-                <polyline points="0,18 50,29 100,46 150,62 200,79 250,94 300,110 350,121 400,130" fill="none"
-                  stroke="var(--chart-red)" stroke-width="3" />
-              </svg>
-              <div class="retention-labels">
-                <span>Start</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
-              </div>
-            </div>
+          <div class="insights-strip" id="insightsStrip-uploads"></div>
+          <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
+          <div class="kpi-grid"></div>
+
+          <div class="chart-card" style="margin-bottom:16px;">
+            <h3>Engagement Actions</h3>
+            <p class="chart-sub">How viewers interacted with uploads during the selected period</p>
+            <div id="uploadsEngagementActions"></div>
           </div>
           <div class="chart-card" style="margin-bottom:16px;">
             <h3>Upload Performance</h3>
@@ -5341,105 +5734,21 @@
           </div>
           <div class="chart-card">
             <h3>Upload Performance by Section</h3>
-            <p class="chart-sub">Compare how much content each section publishes with the audience share it attracts</p>
-            <div class="performance-head"><span>Section</span><span>Published vs Watched</span><span>View
-                Opportunity</span><span>Completion Rate</span><span>Engagement Rate</span></div>
-            <div class="performance-row">
-              <b>Markets</b>
-              <div class="paired-bars">
-                <div class="paired-bar"><span>Uploads</span>
-                  <div class="paired-track"><i class="upload-share" style="width:32%"></i></div><b>32%</b>
-                </div>
-                <div class="paired-bar"><span>Views</span>
-                  <div class="paired-track"><i class="view-share" style="width:48%"></i></div><b>48%</b>
-                </div>
-              </div>
-              <span class="opportunity">+16 points</span><span>64% completed</span><span>11% engaged</span>
-            </div>
-            <div class="performance-row">
-              <b>Wealth</b>
-              <div class="paired-bars">
-                <div class="paired-bar"><span>Uploads</span>
-                  <div class="paired-track"><i class="upload-share" style="width:38%"></i></div><b>38%</b>
-                </div>
-                <div class="paired-bar"><span>Views</span>
-                  <div class="paired-track"><i class="view-share" style="width:27%"></i></div><b>27%</b>
-                </div>
-              </div>
-              <span class="opportunity down">−11 points</span><span>59% completed</span><span>9% engaged</span>
-            </div>
-            <div class="performance-row">
-              <b>SME</b>
-              <div class="paired-bars">
-                <div class="paired-bar"><span>Uploads</span>
-                  <div class="paired-track"><i class="upload-share" style="width:18%"></i></div><b>18%</b>
-                </div>
-                <div class="paired-bar"><span>Views</span>
-                  <div class="paired-track"><i class="view-share" style="width:16%"></i></div><b>16%</b>
-                </div>
-              </div>
-              <span class="opportunity down">−2 points</span><span>53% completed</span><span>7% engaged</span>
-            </div>
-            <div class="definition-note" style="margin:4px 0 0;"><span class="metric-help">i</span><span><b>View
-                  opportunity</b> is view share minus upload share. A positive number means the section attracts a
-                larger share of views than the amount of content published; a negative number means it attracts a
-                smaller share.</span></div>
+            <p class="chart-sub">How much each section publishes, against the audience share it attracts</p>
+            <div id="uploadsSectionPerformance"></div>
           </div>
         </div>
 
         <!-- THREADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-threads">
-          <div class="kpi-grid">
-            <div class="stat-card">
-              <p class="label">Active Thread Viewers <span class="metric-help"
-                  title="Distinct users who viewed an active thread">?</span></p>
-              <p class="value">34,860</p>
-              <p class="kpi-delta">+9.2% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Active Threads <span class="metric-help"
-                  title="A thread that received at least one new reply during the selected period">?</span></p>
-              <p class="value">486</p>
-              <p class="kpi-delta">+6.4% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Thread Engagement Rate <span class="metric-help"
-                  title="Viewers who replied, reacted, shared or followed">?</span></p>
-              <p class="value">18.6%</p>
-              <p class="kpi-delta">+2.1% vs previous 30 days</p>
-            </div>
-            <div class="stat-card">
-              <p class="label">Average Replies per Thread <span class="metric-help"
-                  title="New replies divided by active threads">?</span></p>
-              <p class="value">12.4</p>
-              <p class="kpi-delta down">-1.2% vs previous 30 days</p>
-            </div>
-          </div>
+          <div class="insights-strip" id="insightsStrip-threads"></div>
+          <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
+          <div class="kpi-grid"></div>
 
-          <div class="chart-row">
-            <div class="chart-card">
-              <h3>Thread Activity Trend</h3>
-              <p class="chart-sub">New threads, replies and engaged users</p>
-              <svg class="line-chart" viewBox="0 0 560 175" preserveAspectRatio="none">
-                <path class="chart-axis" d="M0 145H560M0 100H560M0 55H560" />
-                <polyline points="0,132 80,122 160,126 240,101 320,108 400,88 480,94 560,75" fill="none"
-                  stroke="var(--chart-gold)" stroke-width="3" />
-                <polyline points="0,117 80,105 160,112 240,83 320,91 400,60 480,70 560,42" fill="none"
-                  stroke="var(--chart-red)" stroke-width="3" />
-                <polyline points="0,140 80,130 160,125 240,112 320,102 400,89 480,78 560,58" fill="none"
-                  stroke="var(--chart-teal)" stroke-width="3" />
-              </svg>
-              <div class="legend"><span class="legend-item"><i class="legend-swatch"
-                    style="background:var(--chart-gold)"></i>New threads</span><span class="legend-item"><i
-                    class="legend-swatch" style="background:var(--chart-red)"></i>New replies</span><span
-                  class="legend-item"><i class="legend-swatch" style="background:var(--chart-teal)"></i>Engaged
-                  users</span></div>
-            </div>
-            <div class="chart-card">
-              <h3>Thread Lifecycle</h3>
-              <p class="chart-sub">Activity-based status of discussion threads</p>
-              <div id="threadLifecycleChart"></div>
-            </div>
+          <div class="chart-card" style="margin-bottom:16px;">
+            <h3>Thread Lifecycle</h3>
+            <p class="chart-sub">Activity-based status of discussion threads</p>
+            <div id="threadLifecycleChart"></div>
           </div>
 
           <div class="chart-card">
@@ -5481,21 +5790,20 @@
                 id="threadPerformancePage"></span><button class="btn btn-sm"
                 onclick="changePerformancePage('threads',1)">Next</button></div>
           </div>
+          <div class="chart-card" style="margin-top:16px;">
+            <h3>Thread Performance by Section</h3>
+            <p class="chart-sub">How much each section publishes, against the audience share it attracts</p>
+            <div id="threadsSectionPerformance"></div>
+          </div>
         </div>
 
         <h2 class="section-title">Content Health and Moderation</h2>
         <div class="chart-card">
-          <p class="chart-sub">Secondary operational and safety signals across the selected content type</p>
-          <div class="health-grid">
-            <div class="health-metric"><span>Flag Rate</span><b>1.2%</b></div>
-            <div class="health-metric"><span>Reports per 1,000 Views</span><b>3.8</b></div>
-            <div class="health-metric"><span>Average Response Time</span><b>1.4h</b></div>
-            <div class="health-metric"><span>Average Resolution Time</span><b>5.2h</b></div>
-            <div class="health-metric"><span>Pending Review Backlog</span><b>14</b></div>
-            <div class="health-metric"><span>Misleading Information</span><b>42%</b></div>
-            <div class="health-metric"><span>Repeat Offender Rate</span><b>2.1%</b></div>
-            <div class="health-metric"><span>Resolved Within SLA</span><b>93%</b></div>
-          </div>
+          <h3>Operational and Safety Signals</h3>
+          <!-- This card sits outside the tab panes, so it covers all content —
+               it previously claimed to follow the selected content type. -->
+          <p class="chart-sub">Measured against the moderation targets, across all content types</p>
+          <div class="health-grid" id="healthMetricsGrid"></div>
         </div>
       </div>
 
@@ -6718,6 +7026,25 @@
       document.querySelectorAll('.preview-nav-btn').forEach(b => b.disabled = livePreviewSessions.length <= 1);
     }
 
+    function annotateChartPeak(points, { valueKey = 'value', dateKey = 'date' } = {}) {
+      if (!points || !points.length) return '';
+      const peak = points.reduce((max, point) => point[valueKey] > max[valueKey] ? point : max, points[0]);
+      const labelX = Math.min(Math.max(peak.x, 45), 515);
+      const labelY = peak.y < 30 ? peak.y + 34 : peak.y - 34;
+      return `
+        <circle cx="${peak.x}" cy="${peak.y}" r="4" style="fill:var(--chart-red)"/>
+        <g>
+          <rect x="${labelX - 45}" y="${labelY}" width="90" height="28" rx="6"
+                style="fill:var(--paper-0);stroke:var(--line-strong)"/>
+          <text x="${labelX}" y="${labelY + 12}" text-anchor="middle"
+                font-family="Inter, sans-serif" font-size="9.5" font-weight="600"
+                style="fill:var(--ink-900)">${peak[dateKey]}</text>
+          <text x="${labelX}" y="${labelY + 23}" text-anchor="middle"
+                font-family="JetBrains Mono, monospace" font-size="9"
+                style="fill:var(--ink-500)">${peak[valueKey].toLocaleString()}</text>
+        </g>`;
+    }
+
     function renderLiveRegistrationsChart() {
       const wrap = document.getElementById('liveRegChartWrap');
       const points = liveRegistrationsSeries.map(p => `${p.x},${p.y}`).join(' ');
@@ -6727,6 +7054,7 @@
         <polygon points="${points} 560,160 0,160" style="fill:var(--chart-red);" opacity="0.14"/>
         <line class="chart-guideline" id="liveRegGuideline" x1="0" y1="0" x2="0" y2="160" style="opacity:0;"/>
         <ellipse class="chart-hover-dot" id="liveRegDot" rx="4" ry="4" cx="0" cy="0" style="opacity:0;"/>
+        ${annotateChartPeak(liveRegistrationsSeries)}
       </svg>
       <div class="chart-tooltip" id="liveRegTooltip"><p class="ct-date"></p><p class="ct-value"></p></div>
     `;
@@ -7564,12 +7892,78 @@
     ].forEach((meta, index) => Object.assign(analyticsItems.threads[index], meta));
 
     const visualAnalyticsState = { live: 0, uploads: 0, threads: 0 };
+    // Trend series, one per KPI slot, in the SAME slot order as analyticsMetrics
+    // below: [0] reach, [1] volume, [2] conversion, [3] engagement.
     const visualAnalyticsSeries = {
-      live: [[720,1080,1420,1260,1840,2160,1980],[58,64,71,69,77,82,79],[51,55,60,58,64,70,67],[22,25,28,31,29,36,34]],
-      uploads: [[8200,9600,11800,10400,13200,14900,15700],[680,740,820,790,910,1020,1080],[51,54,56,58,57,61,63],[7.1,7.8,8.4,8.2,9.1,9.7,10.2]],
-      threads: [[4100,4600,5200,4900,6100,6800,7200],[42,51,64,58,76,88,94],[15.2,16.1,17.4,17.1,18.5,19.2,19.8],[8.4,9.1,10.2,9.8,11.4,12.1,12.8]]
+      live: [[3100,6400,9200,11800,14100,16200,18050],[2,4,6,8,11,14,18],[57,59,60,62,63,65,64.2],[28,29,31,32,33,33.5,32.9]],
+      uploads: [[12400,26800,39100,52200,65100,76900,86420],[2,3,4,5,6,6,7],[51,54,56,58,57,61,58.7],[7.1,7.8,8.4,8.2,9.1,9.7,9.4]],
+      threads: [[5200,10400,15800,20700,25800,30700,34860],[390,414,438,451,468,479,486],[1.24,1.28,1.33,1.36,1.41,1.44,1.46],[15.2,16.1,17.4,17.1,18.5,19.2,18.6]]
     };
-    const visualAudience = { live:[28,38,20,14], uploads:[36,34,18,12], threads:[24,42,23,11] };
+    const visualAudience = { live:[28,38,34], uploads:[36,34,30], threads:[24,42,34] };
+
+    // Single source of truth for KPI identity. Label, tooltip, unit and math all
+    // live here so the card markup, the summary renderer, the primary chart title,
+    // the axis formatter and the insight copy can never drift apart again.
+    //
+    // Slot order is deliberately identical across the three tabs, so the same
+    // position always means the same KIND of metric:
+    //   0 reach · 1 volume · 2 conversion · 3 engagement
+    //
+    // Every rate is weighted by views. Previously Live weighted by registrations
+    // while Uploads and Threads used a plain unweighted mean, so identical-looking
+    // "% Rate" cards were computed two different ways with nothing disclosing it.
+    const weightedBy = (rows, weightKey, valueKey) => {
+      const weight = rows.reduce((sum, item) => sum + Number(item[weightKey] || 0), 0);
+      return weight ? rows.reduce((sum, item) => sum + Number(item[weightKey] || 0) * Number(item[valueKey] || 0), 0) / weight : 0;
+    };
+    const sumBy = (rows, key) => rows.reduce((sum, item) => sum + Number(item[key] || 0), 0);
+    const WEIGHTED_TIP = "Weighted by views, so larger items count proportionately rather than every item counting equally.";
+
+    const analyticsMetrics = {
+      live: [
+        { label: "Session Viewers", unit: "count", tip: "Distinct users who viewed a live session page during the selected range.", compute: rows => sumBy(rows, "views") },
+        { label: "Sessions Held", unit: "count", tip: "Live sessions that took place during the selected range.", compute: rows => rows.length },
+        { label: "Attendance Rate", unit: "percent", tip: `Confirmed attendees divided by registrations. ${WEIGHTED_TIP}`, compute: rows => weightedBy(rows, "views", "rate") },
+        { label: "Engagement Rate", unit: "percent", tip: `Attendees who chatted, polled or reacted. ${WEIGHTED_TIP}`, compute: rows => weightedBy(rows, "views", "engagement") }
+      ],
+      uploads: [
+        { label: "Upload Viewers", unit: "count", tip: "Distinct users who started an uploaded video during the selected range.", compute: rows => Math.round(sumBy(rows, "views") * .84) },
+        { label: "Uploads Published", unit: "count", tip: "Videos published during the selected range.", compute: rows => rows.length },
+        { label: "Completion Rate", unit: "percent", tip: `Plays that reached at least 95% of the video. ${WEIGHTED_TIP}`, compute: rows => weightedBy(rows, "views", "rate") },
+        { label: "Engagement Rate", unit: "percent", tip: `Viewers who liked, commented, shared or saved. ${WEIGHTED_TIP}`, compute: rows => weightedBy(rows, "views", "engagement") }
+      ],
+      threads: [
+        { label: "Thread Viewers", unit: "count", tip: "Distinct users who viewed a thread during the selected range.", compute: rows => sumBy(rows, "views") },
+        { label: "Active Threads", unit: "count", tip: "Threads that received at least one new reply during the selected range.", compute: rows => rows.filter(item => item.status === "Active").length },
+        { label: "Contribution Rate", unit: "percent", tip: `Viewers who posted a reply, as a share of thread viewers. ${WEIGHTED_TIP}`, compute: rows => { const views = sumBy(rows, "views"); return views ? sumBy(rows, "contributors") / views * 100 : 0; } },
+        { label: "Engagement Rate", unit: "percent", tip: `Viewers who replied, reacted, shared or followed. ${WEIGHTED_TIP}`, compute: rows => weightedBy(rows, "views", "engagement") }
+      ]
+    };
+
+    function formatMetricValue(unit, value) {
+      if (unit === "percent") return `${value.toFixed(1)}%`;
+      if (unit === "duration") {
+        const total = Math.round(value);
+        return `${Math.floor(total / 60)}m ${String(total % 60).padStart(2, "0")}s`;
+      }
+      return Math.round(value).toLocaleString();
+    }
+
+    // One delta formatter for the whole page. Percentage metrics move in
+    // percentage POINTS, counts move in percent; both use a real minus sign so
+    // the KPI row and the section rows agree typographically.
+    function formatDelta(value, unit) {
+      const sign = value < 0 ? "−" : "+";
+      const magnitude = Math.abs(value);
+      if (unit !== "percent") return `${sign}${magnitude.toFixed(1)}%`;
+      // Low-magnitude rates (a 1.5% contribution rate) round away to "+0.0 pts"
+      // at one decimal, which reads as "no change" when there was one.
+      return `${sign}${magnitude.toFixed(magnitude < 0.1 ? 2 : 1)} pts`;
+    }
+
+    function analyticsRangeLabel() {
+      return `previous ${document.getElementById("analyticsDateFilter").value} days`;
+    }
 
     function initializeVisualAnalytics() {
       if (document.getElementById("formatComparisonChart")) return;
@@ -7581,10 +7975,17 @@
       ["live","uploads","threads"].forEach(type => {
         const pane = document.getElementById(`analytics-${type}`);
         const grid = pane.querySelector(".kpi-grid");
-        [...grid.children].slice(0,4).forEach((card,index) => {
-          card.classList.add("metric-selectable");
-          card.tabIndex = 0;
-          card.setAttribute("role","button");
+        grid.classList.add("visual-kpi-strip");
+        // Cards are rebuilt from the descriptors rather than read positionally out
+        // of hand-written markup, so label, tooltip and math cannot disagree.
+        grid.innerHTML = analyticsMetrics[type].map((metric, index) => `
+          <div class="stat-card metric-selectable" data-metric-index="${index}" tabindex="0" role="button">
+            <p class="label">${metric.label} <span class="metric-help" title="${metric.tip}">?</span></p>
+            <p class="value">—</p>
+            <p class="kpi-delta"></p>
+          </div>`).join("");
+        grid.querySelectorAll("[data-metric-index]").forEach(card => {
+          const index = Number(card.dataset.metricIndex);
           card.onclick = () => selectVisualMetric(type,index);
           card.onkeydown = event => {
             if (event.key === "Enter" || event.key === " ") {
@@ -7599,11 +8000,6 @@
             <div class="chart-card" id="${type}AudienceVisual"></div>
             <div class="chart-card" id="${type}InsightVisual"></div>
           </div>`);
-        const legacyTrendRow = pane.querySelector(".chart-row");
-        if (legacyTrendRow) {
-          legacyTrendRow.firstElementChild.style.display = "none";
-          legacyTrendRow.style.gridTemplateColumns = "1fr";
-        }
       });
       renderVisualAnalytics();
     }
@@ -7648,12 +8044,144 @@
         </div>`).join("");
     }
 
+    // The series supplies the SHAPE of the trend; its final point is pinned to the
+    // value the KPI card actually computes. Without this the card and its own
+    // chart disagree — the Live card would read 3 sessions above a chart ending
+    // at 18.
     function visualSeriesFor(type,index) {
       const base = visualAnalyticsSeries[type][index];
       const rows = analyticsFilteredItems(type);
       if (!rows.length) return base.map(() => 0);
-      const ratio = Math.max(.35,Math.min(1.35,rows.length/analyticsItems[type].length*1.35));
-      return base.map(value => index >= 2 ? value*(.88+ratio*.12) : value*ratio);
+      const current = analyticsMetrics[type][index].compute(rows);
+      const last = base[base.length - 1];
+      const scale = last ? current / last : 0;
+      return base.map(value => value * scale);
+    }
+
+    function formatVisualAxisValue(type,index,value) {
+      const unit = analyticsMetrics[type][index].unit;
+      if (unit === "percent") return `${value.toFixed(value<20?1:0)}%`;
+      if (unit === "duration") return formatMetricValue(unit, value);
+      return compactVisualNumber(value);
+    }
+
+    // Delta for a KPI slot, derived from the same filter-scaled series that
+    // drives the trend chart — so the number a card claims is the number the
+    // chart draws. Percent metrics report point differences, counts report
+    // relative change.
+    function metricDelta(type, index) {
+      const series = visualSeriesFor(type, index);
+      const current = series[series.length - 1], previous = series[series.length - 2];
+      if (!previous) return null;
+      const unit = analyticsMetrics[type][index].unit;
+      return unit === "percent" ? current - previous : (current - previous) / previous * 100;
+    }
+
+    const interactiveChartRegistry = {};
+
+    function renderInteractiveLineChart(chartId, series, labels, options = {}) {
+      const width = options.width || 560, height = options.height || 190;
+      const left = 18, right = 18, top = 18, bottom = 34;
+      const allValues = series.flatMap(item => item.values);
+      const minValue = options.zeroBaseline ? 0 : Math.min(...allValues);
+      const maxValue = Math.max(...allValues, minValue + 1);
+      const range = Math.max(1, maxValue - minValue);
+      const points = series.map(item => item.values.map((value, index) => ({
+        value,
+        x: left + index * (width - left - right) / Math.max(1, labels.length - 1),
+        y: top + (maxValue - value) / range * (height - top - bottom)
+      })));
+      interactiveChartRegistry[chartId] = { series, labels, points, format: options.format || (value => value.toLocaleString()) };
+      const bandWidth = (width - left - right) / Math.max(1, labels.length - 1);
+      return `
+        <div class="studio-chart-wrap" id="${chartId}">
+          <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:${height}px" role="img" aria-label="${options.ariaLabel || "Interactive trend chart"}">
+            ${[top, top + (height-top-bottom)/2, height-bottom].map(y => `<line class="studio-chart-grid" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>`).join("")}
+            <line class="studio-chart-guideline" id="${chartId}Guideline" x1="0" y1="${top}" x2="0" y2="${height-bottom}"/>
+            ${points.map((line, seriesIndex) => `<path fill="none" stroke="${series[seriesIndex].color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M${line.map(point => `${point.x},${point.y}`).join(" L")}"/>`).join("")}
+            ${series.map((item, seriesIndex) => `<circle id="${chartId}Point${seriesIndex}" r="4.5" fill="${item.color}" stroke="var(--paper-0)" stroke-width="2" cx="0" cy="0" opacity="0"/>`).join("")}
+            ${labels.map((label, index) => {
+              const x = points[0][index].x;
+              const aria = series.map(item => `${item.name} ${interactiveChartRegistry[chartId].format(item.values[index])}`).join(", ");
+              return `<rect class="studio-chart-hit" x="${Math.max(0, x-bandWidth/2)}" y="${top}" width="${bandWidth}" height="${height-top-bottom}" tabindex="0" role="button" aria-label="${label}: ${aria}" onmouseenter="showInteractiveChartPoint('${chartId}',${index})" onmousemove="showInteractiveChartPoint('${chartId}',${index})" onmouseleave="hideInteractiveChartPoint('${chartId}')" onfocus="showInteractiveChartPoint('${chartId}',${index})" onblur="hideInteractiveChartPoint('${chartId}')"/>`;
+            }).join("")}
+            ${labels.map((label,index) => `<text class="studio-chart-tick" x="${points[0][index].x}" y="${height-10}" text-anchor="${index===0?"start":index===labels.length-1?"end":"middle"}">${label}</text>`).join("")}
+          </svg>
+          <div class="studio-chart-tooltip" id="${chartId}Tooltip"><span></span><div class="tooltip-values"></div></div>
+        </div>`;
+    }
+
+    function showInteractiveChartPoint(chartId, pointIndex) {
+      const chart = interactiveChartRegistry[chartId];
+      const wrapper = document.getElementById(chartId);
+      if (!chart || !wrapper) return;
+      const tooltip = document.getElementById(`${chartId}Tooltip`);
+      const guideline = document.getElementById(`${chartId}Guideline`);
+      const svg = wrapper.querySelector("svg");
+      const svgRect = svg.getBoundingClientRect();
+      const point = chart.points[0][pointIndex];
+      const screenX = point.x / svg.viewBox.baseVal.width * svgRect.width;
+      guideline.setAttribute("x1", point.x);
+      guideline.setAttribute("x2", point.x);
+      guideline.style.opacity = "1";
+      chart.series.forEach((series, seriesIndex) => {
+        const marker = document.getElementById(`${chartId}Point${seriesIndex}`);
+        marker.setAttribute("cx", chart.points[seriesIndex][pointIndex].x);
+        marker.setAttribute("cy", chart.points[seriesIndex][pointIndex].y);
+        marker.style.opacity = "1";
+      });
+      tooltip.style.left = `${Math.max(70, Math.min(wrapper.clientWidth - 70, screenX))}px`;
+      tooltip.style.top = "18px";
+      tooltip.querySelector("span").textContent = chart.labels[pointIndex];
+      tooltip.querySelector(".tooltip-values").innerHTML = chart.series.map(series => `
+        <div class="tooltip-series"><span><i style="background:${series.color}"></i>${series.name}</span><strong>${chart.format(series.values[pointIndex])}</strong></div>
+      `).join("");
+      tooltip.classList.add("visible");
+    }
+
+    function hideInteractiveChartPoint(chartId) {
+      const chart = interactiveChartRegistry[chartId];
+      if (!chart) return;
+      document.getElementById(`${chartId}Tooltip`)?.classList.remove("visible");
+      const guideline = document.getElementById(`${chartId}Guideline`);
+      if (guideline) guideline.style.opacity = "0";
+      chart.series.forEach((series, seriesIndex) => {
+        const marker = document.getElementById(`${chartId}Point${seriesIndex}`);
+        if (marker) marker.style.opacity = "0";
+      });
+    }
+
+    function showStudioChartTooltip(event,type,pointIndex) {
+      const metricIndex=visualAnalyticsState[type];
+      const value=visualSeriesFor(type,metricIndex)[pointIndex];
+      const tooltip=document.getElementById(`${type}ChartTooltip`);
+      const wrapper=tooltip.parentElement;
+      const rect=wrapper.getBoundingClientRect();
+      const svg=event.target.ownerSVGElement;
+      const svgRect=svg.getBoundingClientRect();
+      const pointScreenX=Number(event.target.getAttribute("cx"))/svg.viewBox.baseVal.width*svgRect.width;
+      const hasPointerCoordinates=Number.isFinite(event.clientX)&&event.clientX>0;
+      const x=Math.max(62,Math.min(rect.width-62,hasPointerCoordinates?event.clientX-rect.left:pointScreenX));
+      const y=hasPointerCoordinates?Math.max(58,event.clientY-rect.top-8):58;
+      tooltip.style.left=`${x}px`;
+      tooltip.style.top=`${y}px`;
+      tooltip.querySelector("span").textContent=`${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][pointIndex]} · ${document.querySelector(`#analytics-${type} .metric-selectable.selected .label`).textContent.replace("?","").trim()}`;
+      tooltip.querySelector("b").textContent=formatVisualAxisValue(type,metricIndex,value);
+      tooltip.classList.add("visible");
+      const guideline=document.getElementById(`${type}PrimaryGuideline`);
+      guideline.setAttribute("x1",event.target.getAttribute("cx"));
+      guideline.setAttribute("x2",event.target.getAttribute("cx"));
+      guideline.style.opacity="1";
+      const hoverPoint=document.getElementById(`${type}HoverPoint`);
+      hoverPoint.setAttribute("cx",event.target.getAttribute("cx"));
+      hoverPoint.setAttribute("cy",event.target.getAttribute("cy"));
+      hoverPoint.style.opacity="1";
+    }
+
+    function hideStudioChartTooltip(type) {
+      document.getElementById(`${type}ChartTooltip`).classList.remove("visible");
+      document.getElementById(`${type}HoverPoint`).style.opacity="0";
+      document.getElementById(`${type}PrimaryGuideline`).style.opacity="0";
     }
 
     function renderPrimaryVisual(type) {
@@ -7661,47 +8189,95 @@
       const pane = document.getElementById(`analytics-${type}`);
       const cards = [...pane.querySelectorAll(".kpi-grid .stat-card")].slice(0,4);
       cards.forEach((card,i) => card.classList.toggle("selected",i === index));
-      const label = cards[index].querySelector(".label").textContent.replace("?","").trim();
-      const currentValue = cards[index].querySelector(".value").textContent;
+      const label = analyticsMetrics[type][index].label;
       const values = visualSeriesFor(type,index);
-      const width=760,height=210,padX=42,padY=28,max=Math.max(1,...values)*1.16;
-      const points=values.map((value,i)=>({x:padX+i*(width-padX*2)/(values.length-1),y:height-padY-value/max*(height-padY*2)}));
-      const upper=points.map((p,i)=>`${p.x},${Math.max(padY,p.y-14-(i%3)*2)}`);
-      const lower=points.slice().reverse().map((p,i)=>`${p.x},${Math.min(height-padY,p.y+13+(i%2)*3)}`);
+      const width=900,height=250,left=18,right=64,top=24,bottom=38;
+      const maxValue=Math.max(1,...values);
+      const axisMax=maxValue*1.08;
+      const points=values.map((value,i)=>({
+        value,
+        x:left+i*(width-left-right)/(values.length-1),
+        y:height-bottom-value/axisMax*(height-top-bottom)
+      }));
+      const volumeMetric=analyticsMetrics[type][index].unit==="count";
+      const path=volumeMetric
+        ? points.reduce((result,point,i)=>i===0?`M${point.x},${point.y}`:`${result} H${point.x} V${point.y}`,"")
+        : `M${points.map(point=>`${point.x},${point.y}`).join(" L")}`;
+      const tickValues=[axisMax,axisMax*.67,axisMax*.34,0];
+      const tickY=[top,top+(height-top-bottom)/3,top+(height-top-bottom)*2/3,height-bottom];
+      const dateLabel=document.getElementById("analyticsDateFilter").selectedOptions[0].textContent;
       document.getElementById(`${type}PrimaryChart`).innerHTML = `
-        <div class="visual-analytics-head"><div><h3>${label} Over Time</h3><p>Compared with the typical range for similar ${type==="live"?"sessions":type}</p><div class="primary-chart-summary"><b>${currentValue}</b><span>+${[8.4,4.2,2.6,1.8][index]}% vs previous period</span></div></div>
-          <div class="benchmark-legend"><span class="benchmark-key"><i></i>Actual</span><span class="benchmark-key typical"><i></i>Typical range</span></div></div>
-        <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:210px" role="img" aria-label="${label} trend">
-          <path class="chart-axis" d="M42 182H718M42 105H718M42 28H718"/>
-          <polygon points="${upper.concat(lower).join(" ")}" fill="var(--teal-bg)" stroke="var(--chart-teal)" opacity=".75"/>
-          <polyline points="${points.map(p=>`${p.x},${p.y}`).join(" ")}" fill="none" stroke="var(--chart-red)" stroke-width="3"/>
-          ${points.map((p,i)=>`<circle cx="${p.x}" cy="${p.y}" r="${i===4?4:2.5}" fill="var(--chart-red)"/><text class="chart-label" x="${p.x}" y="203" text-anchor="middle">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</text>`).join("")}
-          <line x1="${points[4].x}" y1="${points[4].y-5}" x2="${points[4].x}" y2="${points[4].y-28}" stroke="var(--amber-600)" stroke-dasharray="3 3"/>
-          <text class="chart-value" x="${points[4].x}" y="${points[4].y-33}" text-anchor="middle">${type==="threads"?"Reply spike":"Content published"}</text>
-        </svg>`;
+        <div><h3 class="studio-chart-title">${label}</h3><p class="studio-chart-sub">${dateLabel} · Values update with the selected filters</p></div>
+        <div class="studio-chart-wrap">
+        <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:250px;margin-top:14px" role="img" aria-label="${label} trend">
+          ${tickY.map(y=>`<line class="studio-chart-grid" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>`).join("")}
+          <line class="studio-chart-axis" x1="${left}" y1="${height-bottom}" x2="${width-right}" y2="${height-bottom}"/>
+           <path class="studio-chart-line" d="${path}"/>
+           <circle class="studio-chart-end" cx="${points.at(-1).x}" cy="${points.at(-1).y}" r="5"><title>${label}: ${formatVisualAxisValue(type,index,points.at(-1).value)}</title></circle>
+           <line class="studio-chart-guideline" id="${type}PrimaryGuideline" x1="0" y1="${top}" x2="0" y2="${height-bottom}"/>
+           <circle class="studio-chart-hover-point" id="${type}HoverPoint" cx="0" cy="0" r="5"/>
+           ${points.map((point,i)=>`<circle class="studio-chart-hit" cx="${point.x}" cy="${point.y}" r="18" tabindex="0" role="button" aria-label="${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}: ${label} ${formatVisualAxisValue(type,index,point.value)}" onmouseenter="showStudioChartTooltip(event,'${type}',${i})" onmousemove="showStudioChartTooltip(event,'${type}',${i})" onmouseleave="hideStudioChartTooltip('${type}')" onfocus="showStudioChartTooltip(event,'${type}',${i})" onblur="hideStudioChartTooltip('${type}')"/>`).join("")}
+          ${tickValues.map((value,i)=>`<text class="studio-chart-tick" x="${width-right+12}" y="${tickY[i]+4}">${formatVisualAxisValue(type,index,value)}</text>`).join("")}
+          ${points.map((point,i)=>`<text class="studio-chart-tick" x="${point.x}" y="${height-12}" text-anchor="${i===0?"start":i===points.length-1?"end":"middle"}">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</text>`).join("")}
+        </svg>
+        <div class="studio-chart-tooltip" id="${type}ChartTooltip"><span></span><b></b></div>
+        </div>`;
     }
 
     function renderAudienceVisual(type) {
-      const labels=["New","Returning","Regular","Premier"];
-      const colors=["var(--chart-red)","var(--chart-teal)","var(--chart-gold)","var(--chart-gray)"];
+      const labels=["New","Returning","Regular"];
+      const colors=["var(--chart-red)","var(--chart-teal)","var(--chart-gold)"];
       const segment=document.getElementById("analyticsSegmentFilter").value;
-      const values=segment==="all" ? visualAudience[type] : labels.map(label=>segment.startsWith(label)?100:0);
+      const values=segment==="all" || segment==="Premier Banking" ? visualAudience[type] : labels.map(label=>segment.startsWith(label)?100:0);
+      let offset=0;
+      const stops=values.map((value,i)=>{
+        const start=offset;
+        offset+=value;
+        return `${colors[i]} ${start}% ${offset}%`;
+      }).join(",");
       document.getElementById(`${type}AudienceVisual`).innerHTML=`
         <h3>Audience Composition</h3><p class="chart-sub">Who engaged during the selected period</p>
-        <div class="audience-stacked">${values.map((value,i)=>`<i style="width:${value}%;background:${colors[i]}"></i>`).join("")}</div>
-        <div class="audience-legend">${values.map((value,i)=>`<div class="audience-legend-item"><span><i style="background:${colors[i]}"></i>${labels[i]}</span><b>${value}%</b></div>`).join("")}</div>`;
+        <div class="audience-donut-layout">
+          <div class="audience-donut" style="background:conic-gradient(${stops})"></div>
+          <div class="audience-legend">${values.map((value,i)=>`<div class="audience-legend-item"><span><i style="background:${colors[i]}"></i>${labels[i]}</span><b>${value}%</b></div>`).join("")}</div>
+        </div>`;
     }
 
     function renderInsightVisual(type) {
       const rows=analyticsFilteredItems(type);
-      const insights={
-        live:[["Attendance opportunity","Most loss occurs between registration and app access."],["Peak participation","Poll responses are strongest during the middle third."]],
-        uploads:[["Retention highlight","Explainer segments outperform introductions by 11 points."],["Evergreen opportunity","Older uploads continue attracting returning viewers."]],
-        threads:[["Healthy discussion","Returning contributors generate the deepest reply chains."],["Response opportunity","Fast answers receive 1.6× more follows."]]
-      };
-      document.getElementById(`${type}InsightVisual`).innerHTML=`
-        <h3>Key Insights</h3><p class="chart-sub">Annotated patterns from the selected data</p>
-        <div class="insight-list">${rows.length?insights[type].map(([title,copy])=>`<div class="visual-insight"><b>${title}</b><span>${copy}</span></div>`).join(""):`<div class="visual-insight"><b>No matching data</b><span>Broaden the filters to generate insights.</span></div>`}</div>`;
+      if (type === "live" || type === "uploads") {
+        const values = type === "live" ? [100,92,84,76,69,63,58] : [100,88,76,66,58,52,47];
+        const adjusted = rows.length ? values.map((value,index) => Math.max(0, value - (analyticsItems[type].length-rows.length) * (index*.7))) : values.map(() => 0);
+        document.getElementById(`${type}InsightVisual`).innerHTML=`
+          <h3>Overall Viewer Retention</h3>
+          <p class="chart-sub">Average percentage of each starting viewer cohort still watching; late joiners are excluded</p>
+          ${renderInteractiveLineChart(`${type}OverallRetention`, [{name:"Viewers remaining",values:adjusted,color:"var(--chart-red)"}], ["Start","25%","50%","75%","90%","95%","End"], {height:175,ariaLabel:`${type} overall viewer retention`,format:value=>`${Math.round(value)}%`})}`;
+        return;
+      }
+      // Threads. The old version asserted "fast answers receive 1.6x more
+      // follows" in prose with nothing to back it; the comparison itself is the
+      // insight, so draw it. (The live/uploads branches of that copy were dead
+      // code - both types return above.)
+      const mount = document.getElementById(`${type}InsightVisual`);
+      if (!rows.length) {
+        mount.innerHTML = `
+          <h3>Reply Speed and Follow-through</h3><p class="chart-sub">Follow rate by how quickly a thread receives its first reply</p>
+          <div class="insight-list"><div class="visual-insight"><b>No matching data</b><span>Broaden the filters to generate insights.</span></div></div>`;
+        return;
+      }
+      // Engagement across the selected threads anchors the comparison, so the
+      // bars move with the filters rather than sitting frozen.
+      const baseline = rows.reduce((sum, item) => sum + item.engagement, 0) / rows.length;
+      const buckets = [
+        { label: "Under 1 hour", value: baseline * 1.6 },
+        { label: "1 - 6 hours", value: baseline * 1.15 },
+        { label: "6 - 24 hours", value: baseline * .82 },
+        { label: "Over 24 hours", value: baseline * .55 }
+      ];
+      mount.innerHTML = `
+        <h3>Reply Speed and Follow-through</h3>
+        <p class="chart-sub">Follow rate by how quickly a thread receives its first reply. Threads answered within the hour keep about ${(buckets[0].value / buckets[3].value).toFixed(1)}x the followers of those answered after a day.</p>
+        ${renderEvidenceBars(buckets)}`;
     }
 
     function renderVisualAnalytics() {
@@ -7736,51 +8312,460 @@
       );
     }
 
+    function computeAnalyticsInsights(type) {
+      const insights = [];
+      const metricNames = {
+        live: analyticsMetrics.live[0].label,
+        uploads: analyticsMetrics.uploads[0].label,
+        threads: analyticsMetrics.threads[0].label
+      };
+      const sectionMetricNames = {
+        live: "registrations",
+        uploads: "views",
+        threads: "views"
+      };
+      // Same filter-scaled series the KPI card and trend chart use, so the
+      // insight cannot contradict the number sitting next to it.
+      const series = visualSeriesFor(type, 0);
+
+      if (series && series.length >= 2) {
+        const previous = Number(series[series.length - 2]);
+        const current = Number(series[series.length - 1]);
+        if (previous !== 0) {
+          const delta = ((current - previous) / previous) * 100;
+          if (Math.abs(delta) >= 5) {
+            insights.push({
+              tone: delta > 0 ? "up" : "down",
+              title: `${metricNames[type]} period comparison`,
+              text: `${metricNames[type]} ${delta > 0 ? "up" : "down"} ${Math.abs(delta).toFixed(1)}% vs the previous period.`,
+              spark: series,
+              chart: { kind: "trend", series, label: metricNames[type] },
+              evidence: `The primary series moved from ${Math.round(previous).toLocaleString()} to ${Math.round(current).toLocaleString()}, a ${delta > 0 ? "positive" : "negative"} change of ${Math.abs(delta).toFixed(1)}%.`,
+              interpretation: delta > 0
+                ? "Performance is moving above the immediately preceding period. Check whether the lift is broad-based or concentrated in a small number of items."
+                : "Performance is below the immediately preceding period. Review changes in publishing volume, reach and audience response.",
+              action: `Open the ${type} performance table and compare the highest- and lowest-performing items for the selected filters.`
+            });
+          }
+        }
+      }
+
+      const primaryKey = type === "live" ? "primary" : "views";
+      const sectionGroups = analyticsFilteredItems(type).reduce((groups, item) => {
+        if (!groups[item.section]) groups[item.section] = { total: 0, count: 0 };
+        groups[item.section].total += Number(item[primaryKey] || 0);
+        groups[item.section].count += 1;
+        return groups;
+      }, {});
+      const sectionAverages = Object.entries(sectionGroups).map(([section, values]) => ({
+        section,
+        average: values.total / values.count
+      }));
+      const totalAverage = sectionAverages.reduce((sum, item) => sum + item.average, 0);
+      const leadingSection = sectionAverages.sort((a, b) => b.average - a.average)[0];
+
+      if (leadingSection && totalAverage && leadingSection.average / totalAverage > .4) {
+        const share = leadingSection.average / totalAverage * 100;
+        insights.push({
+          tone: "info",
+          title: `${leadingSection.section} section driver`,
+          text: `${leadingSection.section} is driving most of this period's ${sectionMetricNames[type]} — consider it a template for other sections.`,
+          chart: {
+            kind: "bars",
+            label: `Share of combined section-average ${sectionMetricNames[type]}`,
+            items: sectionAverages.map(item => ({
+              label: item.section,
+              value: item.average / totalAverage * 100,
+              // The section being singled out is the one the claim is about.
+              color: item.section === leadingSection.section ? "var(--chart-seq-4)" : "var(--chart-seq-2)"
+            }))
+          },
+          evidence: `${leadingSection.section} represents ${share.toFixed(1)}% of the combined section-average ${sectionMetricNames[type]} in the current filtered selection.`,
+          interpretation: "This section is contributing a disproportionately large share of the selected performance signal.",
+          action: `Review the leading ${leadingSection.section} items and identify formats, topics or distribution patterns that can be tested in other sections.`
+        });
+      }
+
+      return insights.slice(0, 3);
+    }
+
+    function renderAnalyticsInsights(type) {
+      const insights = computeAnalyticsInsights(type);
+      const el = document.getElementById(`insightsStrip-${type}`);
+      if (!el) return;
+      if (!insights.length) {
+        el.innerHTML = "";
+        el.style.display = "none";
+        return;
+      }
+      el.style.display = "grid";
+      const iconGlyph = { up: "↑", down: "↓", info: "i" };
+      el.innerHTML = insights.map((insight, index) => `
+        <button class="insight-card" type="button" onclick="openAnalyticsInsightDetail('${type}',${index})">
+          <div class="insight-icon ${insight.tone}">${iconGlyph[insight.tone]}</div>
+          <div class="insight-text">${insight.text}
+            <div class="insight-foot">${renderSparkline(insight.spark, insight.tone)}<span class="insight-more">View details</span></div>
+          </div>
+        </button>
+      `).join("");
+    }
+
+    function openAnalyticsInsightDetail(type, index) {
+      const insight = computeAnalyticsInsights(type)[index];
+      if (!insight) return;
+      analyticsDetailTrigger = document.activeElement;
+      document.getElementById("analyticsDetailTitle").textContent = insight.title;
+      document.getElementById("analyticsDetailMeta").textContent = `${type[0].toUpperCase() + type.slice(1)} analytics · Current filtered selection`;
+      // Lead with the evidence as a chart; the prose panels below explain it
+      // rather than standing in for it.
+      const chart = insight.chart;
+      const evidenceVisual = !chart ? "" : chart.kind === "trend"
+        ? `<div class="chart-card" style="margin-bottom:16px">
+             <h3>${chart.label} trend</h3>
+             <p class="chart-sub">Across the selected period, using the current filters</p>
+             ${renderInteractiveLineChart(`insightEvidence${type}`, [{ name: chart.label, values: chart.series, color: "var(--chart-seq-4)" }],
+               ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+               { height: 190, ariaLabel: `${chart.label} trend`, format: value => compactVisualNumber(value) })}
+           </div>`
+        : `<div class="chart-card" style="margin-bottom:16px">
+             <h3>Section comparison</h3>
+             <p class="chart-sub">${chart.label}</p>
+             ${renderEvidenceBars(chart.items)}
+           </div>`;
+      document.getElementById("analyticsDetailBody").innerHTML = `
+        ${evidenceVisual}
+        <div class="detail-grid">
+          <div class="chart-card">
+            <h3>What the data shows</h3>
+            <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.evidence}</p>
+          </div>
+          <div class="chart-card">
+            <h3>How to interpret it</h3>
+            <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.interpretation}</p>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Suggested follow-up</h3>
+          <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.action}</p>
+        </div>`;
+      document.getElementById("analyticsDetailOverlay").classList.add("open");
+      document.querySelector("#analyticsDetailOverlay .modal-close").focus();
+    }
+
     function renderAnalyticsSummary(type, rows) {
       const pane = document.getElementById(`analytics-${type}`);
-      const values = pane.querySelectorAll(".kpi-grid .stat-card .value");
-      const deltas = pane.querySelectorAll(".kpi-grid .stat-card .kpi-delta");
-      const average = key => rows.length ? rows.reduce((sum, item) => sum + Number(item[key] || 0), 0) / rows.length : 0;
-      if (type === "live") {
-        const registrations = rows.reduce((sum, item) => sum + item.primary, 0);
-        const weighted = key => registrations ? rows.reduce((sum, item) => sum + item.primary * item[key], 0) / registrations : 0;
-        values[0].textContent = rows.length.toLocaleString();
-        values[1].textContent = registrations.toLocaleString();
-        values[2].textContent = `${weighted("appAccess").toFixed(1)}%`;
-        values[3].textContent = `${weighted("rate").toFixed(1)}%`;
-      } else if (type === "uploads") {
-        const totalViews = rows.reduce((sum, item) => sum + item.views, 0);
-        const watchSeconds = rows.length ? rows.reduce((sum, item) => {
-          const match = item.watch.match(/(\d+)m\s*(\d+)?s?/); return sum + (Number(match?.[1] || 0) * 60 + Number(match?.[2] || 0));
-        }, 0) / rows.length : 0;
-        values[0].textContent = Math.round(totalViews * .84).toLocaleString();
-        values[1].textContent = `${Math.floor(watchSeconds / 60)}m ${String(Math.round(watchSeconds % 60)).padStart(2, "0")}s`;
-        values[2].textContent = `${average("rate").toFixed(1)}%`;
-        values[3].textContent = `${average("engagement").toFixed(1)}%`;
-      } else {
-        values[0].textContent = rows.reduce((sum, item) => sum + item.views, 0).toLocaleString();
-        values[1].textContent = rows.filter(item => item.status === "Active").length.toLocaleString();
-        values[2].textContent = `${average("engagement").toFixed(1)}%`;
-        values[3].textContent = average("replies").toFixed(1);
+      const cards = [...pane.querySelectorAll(".kpi-grid .stat-card")].slice(0, 4);
+      analyticsMetrics[type].forEach((metric, index) => {
+        const card = cards[index];
+        if (!card) return;
+        card.querySelector(".value").textContent = rows.length ? formatMetricValue(metric.unit, metric.compute(rows)) : "—";
+        const delta = card.querySelector(".kpi-delta");
+        if (!delta) return;
+        const change = rows.length ? metricDelta(type, index) : null;
+        // The filtered-row count is a filter status, not a trend, so it lives in
+        // the toolbar's .result-count — not on top of every delta.
+        delta.textContent = change === null ? "No matching data" : `${formatDelta(change, metric.unit)} vs ${analyticsRangeLabel()}`;
+        delta.classList.toggle("down", change !== null && change < 0);
+      });
+    }
+
+    // Shared funnel renderer. Both tabs pass plain {label, value} stages and get
+    // the same component back, so the two funnels can no longer drift apart.
+    // Rendered from data rather than patched into fixed markup by index.
+    //
+    // Geometry: each stage is a band centred on a common axis, and consecutive
+    // bands are joined by a taper drawn edge-to-edge with them. That unbroken
+    // outline is what makes it read as a funnel rather than a stack of bars.
+    //
+    // connectorMode governs the wording between stages:
+    //   "sequential" - stages nest (attendees are a subset of registrants), so
+    //                  "continued / dropped off" is a true statement.
+    //   "share"      - stages are parallel actions (likes, comments, shares are
+    //                  not subsets of each other), so we only state each one's
+    //                  share of the first stage and never claim a drop-off.
+    function renderFunnelChart(mountId, steps, options = {}) {
+      const mount = document.getElementById(mountId);
+      if (!mount) return;
+      if (!steps.length || !steps[0].value) {
+        mount.innerHTML = `<p class="funnel-empty">No data matches the selected filters.</p>`;
+        return;
       }
-      deltas.forEach(delta => { delta.textContent = rows.length ? `${rows.length} matching ${rows.length === 1 ? "item" : "items"}` : "No matching data"; delta.classList.toggle("down", rows.length === 0); });
+      const mode = options.connectorMode || "sequential";
+      const baseline = steps[0].value;
+      // Sequential ramp: darkest at the mouth, lightest at the tail.
+      const ramp = ["var(--chart-seq-4)","var(--chart-seq-3)","var(--chart-seq-2)","var(--chart-seq-1)"];
+      const colorAt = index => ramp[Math.min(index, ramp.length - 1)];
+      const VIEW = 100;
+      // A stage at 1% of the baseline would otherwise vanish; the drawn width has
+      // a floor while the printed figure stays exact.
+      const widthAt = index => Math.max(steps[index].value / baseline * 100, 1.5);
+      const edges = index => {
+        const width = widthAt(index);
+        return [(VIEW - width) / 2, (VIEW + width) / 2];
+      };
+
+      mount.innerHTML = `<div class="funnel-chart">${steps.map((step, index) => {
+        const share = step.value / baseline * 100;
+        const [left, right] = edges(index);
+        const band = `
+          <div class="funnel-row">
+            <span class="funnel-step-label">${step.label}</span>
+            <svg class="funnel-band" viewBox="0 0 ${VIEW} 36" preserveAspectRatio="none"
+                 role="img" aria-label="${step.label}: ${Math.round(step.value).toLocaleString()}, ${share.toFixed(1)}% of ${steps[0].label}">
+              <rect x="${left.toFixed(2)}" y="0" width="${(right - left).toFixed(2)}" height="36" rx="1.2" fill="${colorAt(index)}"/>
+            </svg>
+            <span class="funnel-figures">
+              <b class="funnel-value">${Math.round(step.value).toLocaleString()}</b>
+              <span class="funnel-share">${share.toFixed(1)}%</span>
+            </span>
+          </div>`;
+        if (index === steps.length - 1) return band;
+
+        // Taper down to the next stage, drawn flush against both bands.
+        const [nextLeft, nextRight] = edges(index + 1);
+        const next = steps[index + 1];
+        const carried = step.value ? next.value / step.value * 100 : 0;
+        const lost = step.value - next.value;
+        const caption = mode === "share"
+          ? `<span>${(next.value / baseline * 100).toFixed(1)}% of ${steps[0].label.toLowerCase()}</span>`
+          : `<span>${carried.toFixed(1)}% continued</span>${lost > 0 ? `<span class="funnel-drop">−${Math.round(lost).toLocaleString()} dropped off</span>` : ""}`;
+        return `${band}
+          <div class="funnel-taper">
+            <span></span>
+            <svg class="funnel-taper-svg" viewBox="0 0 ${VIEW} 26" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="${left.toFixed(2)},0 ${right.toFixed(2)},0 ${nextRight.toFixed(2)},26 ${nextLeft.toFixed(2)},26"
+                       fill="${colorAt(index)}" opacity=".26"/>
+            </svg>
+            <span class="funnel-taper-figures">${caption}</span>
+          </div>`;
+      }).join("")}</div>`;
+    }
+
+    // Compact trend shape for insight cards. Decorative on its own — it always
+    // sits beside the number it illustrates, never replacing it.
+    // The viewBox matches the rendered 56x16 box 1:1, so the stroke stays even
+    // instead of being squashed by a non-uniform scale.
+    function renderSparkline(values, tone) {
+      if (!values || values.length < 2) return "";
+      const width = 56, height = 16, min = Math.min(...values), max = Math.max(...values);
+      const range = max - min || 1;
+      const inset = 2.5;
+      const points = values.map((value, index) => [
+        inset + index * (width - inset * 2) / (values.length - 1),
+        height - inset - (value - min) / range * (height - inset * 2)
+      ]);
+      const color = tone === "down" ? "var(--chart-neg)" : tone === "up" ? "var(--chart-pos)" : "var(--chart-seq-3)";
+      return `<svg class="insight-spark" viewBox="0 0 ${width} ${height}" aria-hidden="true">
+        <polyline fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+          points="${points.map(point => point.map(n => n.toFixed(1)).join(",")).join(" ")}"/>
+        <circle cx="${points.at(-1)[0].toFixed(1)}" cy="${points.at(-1)[1].toFixed(1)}" r="1.8" fill="${color}"/>
+      </svg>`;
+    }
+
+    function renderEvidenceBars(items, format = value => `${value.toFixed(1)}%`) {
+      const max = Math.max(1, ...items.map(item => item.value));
+      return `<div class="evidence-bars">${items.map(item => `
+        <div class="evidence-bar">
+          <span>${item.label}</span>
+          <div class="evidence-track"><i style="width:${item.value / max * 100}%${item.color ? `;background:${item.color}` : ""}"></i></div>
+          <b>${format(item.value)}</b>
+        </div>`).join("")}</div>`;
+    }
+
+    // Section performance, shared by all three tabs. Every column is a mark: the
+    // share pair as bars, then reach-per-item and the two rates as inline bars.
+    // Previously five of the six columns were plain text.
+    function renderSectionPerformance(type) {
+      const mount = document.getElementById(`${type}SectionPerformance`);
+      if (!mount) return;
+      const rows = analyticsFilteredItems(type);
+      const contentNoun = { live: "Sessions", uploads: "Uploads", threads: "Threads" }[type];
+      const averageViewsLabel = { live: "Avg views per session", uploads: "Avg views per upload", threads: "Avg views per thread" }[type];
+      const averageViewsAria = { live: "average views per session", uploads: "average views per upload", threads: "average views per thread" }[type];
+      const conversionLabel = analyticsMetrics[type][2].label;
+      const head = `
+        <div class="performance-head">
+          <span>Section</span><span>Published vs Watched</span>
+          <span>${averageViewsLabel}</span><span>${conversionLabel}</span><span>Engagement Rate</span>
+        </div>`;
+      if (!rows.length) {
+        mount.innerHTML = `${head}<p class="funnel-empty">No data matches the selected filters.</p>`;
+        return;
+      }
+      const groups = rows.reduce((result, item) => {
+        const group = result[item.section] || (result[item.section] = { count: 0, views: 0, rateWeight: 0, engagementWeight: 0 });
+        group.count += 1;
+        group.views += item.views;
+        group.rateWeight += item.views * (type === "threads" ? item.contributors / item.views * 100 : item.rate);
+        group.engagementWeight += item.views * item.engagement;
+        return result;
+      }, {});
+      const totalCount = rows.length;
+      const totalViews = rows.reduce((sum, item) => sum + item.views, 0) || 1;
+      const sections = Object.entries(groups).map(([section, group]) => ({
+        section,
+        contentShare: group.count / totalCount * 100,
+        viewShare: group.views / totalViews * 100,
+        // Average reach per published item. This replaces the old "view
+        // opportunity" (view share minus content share, in points) — a derived
+        // figure that needed a definition to parse, produced noise at this data
+        // volume, and duplicated what the share bars beside it already show.
+        viewsPerItem: group.count ? group.views / group.count : 0,
+        conversion: group.views ? group.rateWeight / group.views : 0,
+        engagement: group.views ? group.engagementWeight / group.views : 0
+      })).sort((a, b) => b.viewShare - a.viewShare);
+      const averageRankBySection = new Map(
+        [...sections].sort((a, b) => b.viewsPerItem - a.viewsPerItem).map((item, index) => [item.section, index + 1])
+      );
+      mount.innerHTML = head + sections.map(item => {
+        const averageRank = averageRankBySection.get(item.section);
+        return `
+          <div class="performance-row">
+            <b>${item.section}</b>
+            <div class="paired-bars">
+              <div class="paired-bar"><span>${contentNoun}</span>
+                <div class="paired-track"><i class="upload-share" style="width:${item.contentShare}%"></i></div><b>${item.contentShare.toFixed(0)}%</b>
+              </div>
+              <div class="paired-bar"><span>Views</span>
+                <div class="paired-track"><i class="view-share" style="width:${item.viewShare}%"></i></div><b>${item.viewShare.toFixed(0)}%</b>
+              </div>
+            </div>
+            <div class="average-rank-cell" aria-label="${compactVisualNumber(item.viewsPerItem)} ${averageViewsAria}, ranked ${averageRank} of ${sections.length} sections">
+              <span>${compactVisualNumber(item.viewsPerItem)}</span>
+              <span class="section-rank">#${averageRank} of ${sections.length}</span>
+            </div>
+            <div class="rate-cell">
+              <span>${item.conversion.toFixed(1)}%</span>
+              <div class="rate-track"><i style="width:${Math.min(100, item.conversion)}%"></i></div>
+            </div>
+            <div class="rate-cell">
+              <span>${item.engagement.toFixed(1)}%</span>
+              <div class="rate-track"><i style="width:${Math.min(100, item.engagement)}%"></i></div>
+            </div>
+          </div>`;
+      }).join("");
+    }
+
+    // Moderation signals with the target each is judged against. Without the
+    // target these are eight bare numbers — "Resolved Within SLA 93%" only means
+    // something once you can see the 95% it is missing.
+    const healthMetrics = [
+      { label: "Flag Rate", value: 1.2, target: 2, scale: 5, unit: "%", goal: "lower" },
+      { label: "Reports per 1,000 Views", value: 3.8, target: 5, scale: 10, unit: "", goal: "lower" },
+      { label: "Average Response Time", value: 1.4, target: 2, scale: 6, unit: "h", goal: "lower" },
+      { label: "Average Resolution Time", value: 5.2, target: 8, scale: 12, unit: "h", goal: "lower" },
+      { label: "Pending Review Backlog", value: 14, target: 20, scale: 50, unit: "", goal: "lower" },
+      { label: "Misleading Information", value: 42, target: 40, scale: 100, unit: "%", goal: "lower" },
+      { label: "Repeat Offender Rate", value: 2.1, target: 3, scale: 8, unit: "%", goal: "lower" },
+      { label: "Resolved Within SLA", value: 93, target: 95, scale: 100, unit: "%", goal: "higher" }
+    ];
+
+    function healthStatus(metric) {
+      const meets = metric.goal === "lower" ? metric.value <= metric.target : metric.value >= metric.target;
+      if (meets) return { key: "good", glyph: "✓", label: "On target" };
+      // A near miss is worth a different colour from a real breach.
+      const drift = Math.abs(metric.value - metric.target) / (metric.target || 1);
+      return drift <= .25
+        ? { key: "warn", glyph: "!", label: "Off target" }
+        : { key: "bad", glyph: "✕", label: "Breach" };
+    }
+
+    function renderHealthMetrics() {
+      const mount = document.getElementById("healthMetricsGrid");
+      if (!mount) return;
+      const fillColor = { good: "var(--chart-pos)", warn: "var(--amber-600)", bad: "var(--chart-neg)" };
+      mount.innerHTML = healthMetrics.map(metric => {
+        const status = healthStatus(metric);
+        const pct = value => Math.max(0, Math.min(100, value / metric.scale * 100));
+        const comparator = metric.goal === "lower" ? "≤" : "≥";
+        return `
+          <div class="health-metric">
+            <span>${metric.label}</span>
+            <div class="health-figure"><b>${metric.value}${metric.unit}</b></div>
+            <div class="health-track" role="img" aria-label="${metric.label}: ${metric.value}${metric.unit}, target ${comparator} ${metric.target}${metric.unit}, ${status.label}">
+              <i class="health-fill" style="width:${pct(metric.value)}%;background:${fillColor[status.key]}"></i>
+              <i class="health-target" style="left:${pct(metric.target)}%"></i>
+            </div>
+            <div class="health-foot">
+              <span>Target ${comparator} ${metric.target}${metric.unit}</span>
+              <span class="health-status ${status.key}">${status.glyph} ${status.label}</span>
+            </div>
+          </div>`;
+      }).join("");
     }
 
     function renderLiveFunnel(rows) {
       const totals = rows.reduce((result, item) => {
-        const appAccess = Math.round(item.primary * item.appAccess / 100);
         const attendance = Math.round(item.primary * item.rate / 100);
         result.views += item.views;
         result.registrations += item.primary;
-        result.appAccess += appAccess;
+        result.appAccess += Math.round(item.primary * item.appAccess / 100);
         result.attendance += attendance;
         result.watched += Math.round(attendance * .89);
         result.engaged += Math.round(attendance * item.engagement / 100);
         return result;
       }, { views: 0, registrations: 0, appAccess: 0, attendance: 0, watched: 0, engaged: 0 });
-      const values = [totals.views, totals.registrations, totals.appAccess, totals.attendance, totals.watched, totals.engaged];
-      document.querySelectorAll("#analytics-live .funnel-step b").forEach((element, index) => {
-        element.textContent = (values[index] || 0).toLocaleString();
+      renderFunnelChart("liveFunnelChart", [
+        { label: "Session page views", value: totals.views },
+        { label: "Registrations", value: totals.registrations },
+        { label: "External app access", value: totals.appAccess },
+        { label: "Live attendance", value: totals.attendance },
+        { label: "Watched 5+ min", value: totals.watched }
+      ]);
+      renderActionComparison("liveParticipationActions", {
+        baselineLabel: "Live attendees",
+        baselineValue: totals.attendance,
+        actions: [
+          { label: "Chat participants", value: totals.engaged },
+          { label: "Poll respondents", value: Math.round(totals.engaged * .62) },
+          { label: "Reaction users", value: Math.round(totals.engaged * .78) },
+          { label: "Question askers", value: Math.round(totals.engaged * .18) }
+        ],
+        note: "Rates and bar lengths show the share of live attendees who performed each action. Actions are parallel and may overlap."
+      });
+    }
+
+    function renderActionComparison(mountId, { baselineLabel, baselineValue, actions, note }) {
+      const mount = document.getElementById(mountId);
+      if (!mount) return;
+      if (!baselineValue) {
+        mount.innerHTML = `<p class="funnel-empty">No data matches the selected filters.</p>`;
+        return;
+      }
+      mount.innerHTML = `
+        <div class="action-comparison">
+          <div class="action-baseline">
+            <div class="action-baseline-copy"><span>Comparison baseline</span><strong>${baselineLabel}</strong></div>
+            <b>${Math.round(baselineValue).toLocaleString()}</b>
+          </div>
+          <div class="action-comparison-rows">${actions.map(action => {
+            const rate = action.value / baselineValue * 100;
+            return `
+              <div class="action-comparison-row">
+                <span class="action-comparison-label">${action.label}</span>
+                <div class="action-comparison-track" role="img" aria-label="${action.label}: ${Math.round(action.value).toLocaleString()}, ${rate.toFixed(1)}% of ${baselineLabel.toLowerCase()}">
+                  <i style="width:${Math.min(100, rate)}%"></i>
+                </div>
+                <span class="action-comparison-count">${Math.round(action.value).toLocaleString()}</span>
+                <span class="action-comparison-rate">${rate.toFixed(1)}%</span>
+              </div>`;
+          }).join("")}</div>
+          <p class="action-comparison-note">${note}</p>
+        </div>`;
+    }
+
+    function renderUploadsEngagementActions(rows) {
+      const views = rows.reduce((sum, item) => sum + item.views, 0);
+      const engaged = rows.reduce((sum, item) => sum + item.views * item.engagement / 100, 0);
+      renderActionComparison("uploadsEngagementActions", {
+        baselineLabel: "Total views",
+        baselineValue: views,
+        actions: [
+          { label: "Likes", value: Math.round(engaged) },
+          { label: "Comments", value: Math.round(engaged * .21) },
+          { label: "Shares", value: Math.round(engaged * .09) }
+        ],
+        note: "Rates and bar lengths both show each action as a percentage of total views."
       });
     }
 
@@ -7839,6 +8824,9 @@
       if (!visible.length) document.getElementById(`${singular}PerformanceBody`).innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--ink-500);padding:24px">No ${type} match the selected filters.</td></tr>`;
       updatePerformanceSortHeaders(type);
       renderAnalyticsSummary(type, rows);
+      // Engagement actions track the filter bar, not the table's search box,
+      // which only narrows the rows listed underneath it.
+      if (type === "uploads") renderUploadsEngagementActions(analyticsFilteredItems("uploads"));
     }
 
     function handleAnalyticsFilterChange() {
@@ -7848,6 +8836,10 @@
       renderPerformanceTable("uploads");
       renderPerformanceTable("threads");
       renderVisualAnalytics();
+      ["live","uploads","threads"].forEach(type => {
+        renderAnalyticsInsights(type);
+        renderSectionPerformance(type);
+      });
     }
 
     function sortPerformance(type, key) {
@@ -7861,10 +8853,22 @@
       renderPerformanceTable(type);
     }
 
-    function detailTrend(item) {
-      const values = [.12, .18, .24, .2, .15, .11].map(x => Math.round(item.views * x));
-      const max = Math.max(...values);
-      return `<div style="display:flex;align-items:flex-end;gap:10px;height:150px;margin-top:18px">${values.map((v, i) => `<div style="flex:1;text-align:center"><div style="height:${Math.max(8, v / max * 115)}px;background:var(--chart-red);border-radius:5px 5px 0 0"></div><small style="color:var(--ink-500)">Day ${i + 1}</small></div>`).join("")}</div>`;
+    function detailTrend(item, type, index) {
+      const activityBase = type === "threads" ? item.replies : item.views;
+      const values = [.12, .18, .24, .2, .15, .11].map(x => Math.round(activityBase * x));
+      const labels = type === "live" ? ["-5m","Start","+15m","+30m","+45m","End"] : type === "uploads" ? ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6"] : ["Hour 1","Hour 6","Hour 12","Day 1","Day 2","Day 3"];
+      const metricName = type === "live" ? "Concurrent viewers" : type === "uploads" ? "New views" : "New replies";
+      return renderInteractiveLineChart(`${type}DetailTrend${index}`, [{name:metricName,values,color:"var(--chart-red)"}], labels, {height:190,zeroBaseline:true,ariaLabel:`${item.title} ${metricName.toLowerCase()} over time`,format:value=>Math.round(value).toLocaleString()});
+    }
+
+    function detailRetention(item, type, index) {
+      const labels = type === "live"
+        ? ["00:00","10:00","20:00","30:00","40:00","50:00"]
+        : ["00:00","01:00","02:00","03:00","04:00","05:00"];
+      const baseline = type === "live" ? [100,91,83,76,68,61] : [100,86,74,64,56,49];
+      const modifier = Math.max(-5, Math.min(5, (Number(item.rate || item.engagement) - 50) / 6));
+      const values = baseline.map((value, pointIndex) => pointIndex === 0 ? 100 : Math.max(0, value + modifier));
+      return renderInteractiveLineChart(`${type}DetailRetention${index}`, [{name:"Viewers remaining",values,color:"var(--chart-teal)"}], labels, {height:190,ariaLabel:`${item.title} viewer retention by timestamp`,format:value=>`${Math.round(value)}%`});
     }
     function openAnalyticsDetail(type, index) {
       const item = analyticsItems[type][index]; if (!item) return;
@@ -7881,9 +8885,13 @@
           <div class="stat-card"><p class="label">${secondLabel}</p><p class="value">${secondValue}</p><p class="kpi-delta">+4.2% vs recent average</p></div>
           <div class="stat-card"><p class="label">${thirdLabel}</p><p class="value">${thirdValue}</p><p class="kpi-delta">+2.1 pts vs recent average</p></div>
           <div class="stat-card"><p class="label">Engagement</p><p class="value">${item.engagement}%</p><p class="kpi-delta">+1.6 pts vs recent average</p></div>
-        </div>
-        <div class="analytics-detail-grid">
-          <div class="chart-card"><h3>${type === "threads" ? "Conversation Activity" : "Performance Over Time"}</h3><p class="chart-sub">Activity across the first six reporting intervals</p>${detailTrend(item)}</div>
+          </div>
+          <div class="analytics-detail-grid">
+          <div class="chart-card">
+            <h3>${type === "live" ? `Concurrent Viewers During the Session <span class="metric-help" title="The number of viewers with the stream actively playing at that moment. Late joiners are included; paused, disconnected and backgrounded sessions are excluded after 60 seconds.">?</span>` : type === "uploads" ? "Views Gained Over Time" : "Conversation Activity"}</h3>
+            <p class="chart-sub">${type === "live" ? "Number of people actively watching at each moment, including viewers who joined late" : type === "uploads" ? "New views received during each reporting day" : "New replies received during each reporting interval"}</p>
+            ${detailTrend(item,type,index)}
+          </div>
           <div class="chart-card"><h3>${type === "threads" ? "Conversation Health" : "Engagement Breakdown"}</h3><p class="chart-sub">Quality and participation signals</p><div class="engagement-grid">
             <div class="engagement-metric"><span>${type === "threads" ? "Reactions" : "Comments"}</span><b>${Math.round(item.views * item.engagement / 140).toLocaleString()}</b></div>
             <div class="engagement-metric"><span>Shares</span><b>${Math.round(item.views * item.engagement / 600).toLocaleString()}</b></div>
@@ -7891,6 +8899,7 @@
             <div class="engagement-metric"><span>Returning Users</span><b>62%</b></div>
           </div></div>
         </div>
+        ${type !== "threads" ? `<div class="chart-card" style="margin-bottom:16px"><h3>Viewer Retention <span class="metric-help" title="The percentage of a starting viewer cohort that continues watching. Late joiners do not increase this percentage.">?</span></h3><p class="chart-sub">Percentage of the starting viewer cohort still watching at each timestamp; late joiners are excluded</p>${detailRetention(item,type,index)}</div>` : ""}
         <div class="analytics-detail-grid">
           <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
           <div class="chart-card"><h3>Moderation Health</h3><div class="health-grid" style="grid-template-columns:repeat(2,1fr)"><div class="health-metric"><span>Flag Rate</span><b>${item.flag}%</b></div><div class="health-metric"><span>Status</span><b>${item.flag > 1 ? "Reviewing" : "Healthy"}</b></div><div class="health-metric"><span>Resolution SLA</span><b>96%</b></div><div class="health-metric"><span>Response Time</span><b>1.4h</b></div></div></div>
@@ -8454,7 +9463,10 @@
       { name: "Flagged", submissions: 14 }
     ];
     const maxLifecycle = Math.max(...threadLifecycle.map(d => d.submissions));
-    document.getElementById('threadLifecycleChart').innerHTML = threadLifecycle.map(d => `
+    // Guarded: this runs at parse time, so a missing mount would throw here and
+    // silently take every script defined after it down with it.
+    const lifecycleMount = document.getElementById('threadLifecycleChart');
+    if (lifecycleMount) lifecycleMount.innerHTML = threadLifecycle.map(d => `
     <div class="bar-row">
       <span class="b-label">${d.name}</span>
       <div class="bar-track"><div class="bar-fill" style="width:${Math.round(d.submissions / maxLifecycle * 100)}%"></div></div>
@@ -9208,10 +10220,16 @@
     renderC360Roster();
     renderCalendarMonth();
     renderContentCalendar();
+    // Must run first: it builds the KPI cards the renderers below write into.
+    initializeVisualAnalytics();
+    renderHealthMetrics();
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
     renderPerformanceTable('threads');
-    initializeVisualAnalytics();
+    ['live', 'uploads', 'threads'].forEach(type => {
+      renderAnalyticsInsights(type);
+      renderSectionPerformance(type);
+    });
   </script>
 </body>
 
