@@ -1,0 +1,372 @@
+PROMPT — REPLICATE THE "OCBC LIVE STUDIO" UI THEME ACROSS THE ENTIRE BACK OFFICE
+
+CONTEXT
+I have an existing back office application with many tabs/pages/features already built.
+I also have a reference UI (OCBC Live Studio) whose visual design system I want you to
+replicate and apply GLOBALLY across every existing tab, page, and feature in the back
+office — not just one section. Do not change any existing functionality, data, routes,
+or page structure. This is a re-skin / design-system pass: same features, same layout
+hierarchy, new consistent visual language.
+
+Do this by introducing a shared set of design tokens (CSS variables) and shared component
+classes, then applying them everywhere, rather than hand-styling each page individually.
+Every existing page should end up looking like it was always built with this system.
+
+====================================================================
+1. DESIGN TOKENS (CSS custom properties — define once, use everywhere)
+====================================================================
+THREE themes must be supported, switched via a `data-theme` attribute on the root
+element, cycled by a single control in the top bar (see section 5):
+  - default (no attribute) — a dark, near-black theme with a red brand accent.
+  - `data-theme="wow"` — a light, cream-paper theme with a muted gold brand accent.
+  - `data-theme="noir"` — a black theme with the SAME gold brand accent as "wow".
+Every color in the app must be referenced via these variables — no hardcoded hex values
+in component CSS (a few structural exceptions are called out below, e.g. the top bar and
+brand-text colors, which are intentionally hardcoded because they don't change between
+the default and noir themes — only "wow" needs to override them).
+
+:root {
+  --red-900: #5C0F1C;
+  --red-700: #FF8FA0;
+  --red-600: #D42B41;      /* primary brand accent — active nav, primary buttons, tab underline */
+  --red-50: rgba(212, 43, 65, 0.18);
+
+  --ink-900: #F5F3EE;      /* primary text on dark surfaces */
+  --ink-700: #D9D6CE;
+  --ink-500: #B3AFA4;      /* secondary/muted text */
+  --ink-300: #68655B;      /* tertiary/disabled text */
+
+  --paper-100: #0A0B0D;    /* app background (darkest) */
+  --paper-0: #141517;      /* card/panel/table surface */
+  --line: #232529;         /* subtle hairline border */
+  --line-strong: #33363B;  /* stronger border, hover states */
+
+  --amber-600: #F0B84B;   --amber-bg: rgba(169, 112, 15, 0.22);
+  --green-600: #4ED495;   --green-bg: rgba(30, 122, 73, 0.22);
+  --teal-600: #4FD9CC;    --teal-bg: rgba(14, 118, 109, 0.22);
+  --danger-600: #FF7A6B;  --danger-bg: rgba(185, 58, 46, 0.22);
+  --info-600: #5B9EFF;    --info-bg: rgba(43, 100, 200, 0.24);
+
+  --chart-red: #D42B41;
+  --chart-teal: #2FA89D;
+  --chart-gold: #D99A2B;
+  --chart-gray: #8F8B82;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme="wow"] {
+  --red-900: #9C7F2E;
+  --red-700: #F0D690;
+  --red-600: #D5B360;      /* muted, LIGHT gold — deliberately flat, no gradient (see note below) */
+  --red-50: rgba(213, 179, 96, 0.18);
+  --ink-900: #2B2013;
+  --ink-700: #5B4C3D;
+  --ink-500: #4A4030;
+  --ink-300: #BBA97D;
+  --paper-100: #F7EEDA;    /* soft cream page background — not stark white, not overly saturated */
+  --paper-0: #FFFFFF;
+  --line: #EDE0BE;
+  --line-strong: #DFCB94;
+  --amber-600: #C08A1E;   --amber-bg: rgba(192, 138, 30, 0.16);
+  --green-600: #1E7A49;   --green-bg: rgba(30, 122, 73, 0.14);
+  --teal-600: #0E766D;    --teal-bg: rgba(14, 118, 109, 0.14);
+  --danger-600: #B93A2E;  --danger-bg: rgba(185, 58, 46, 0.14);
+  --info-600: #2B5FA3;    --info-bg: rgba(43, 95, 163, 0.14);
+  --chart-red: #D5B360;
+  --chart-teal: #0E766D;
+  --chart-gold: #C08A1E;
+  --chart-gray: #4A4030;
+  --shadow-modal: 0 20px 60px rgba(80, 60, 20, 0.18);
+}
+
+:root[data-theme="noir"] {
+  --red-900: #A9863C;
+  --red-700: #E8CE8F;
+  --red-600: #D5B360;      /* identical gold hue to "wow", now on black — same brand gold everywhere */
+  --red-50: rgba(213, 179, 96, 0.16);
+  --ink-900: #F2E9D8;      /* warm ivory, not cool white — keeps the black+gold feel warm */
+  --ink-700: #D8CBA9;
+  --ink-500: #B0A183;
+  --ink-300: #6B5F45;
+  --paper-100: #0A0908;    /* true black page background, warm-tinted (not blue-black) */
+  --paper-0: #17140F;      /* slightly-lifted warm black for cards/panels */
+  --line: #2A241A;
+  --line-strong: #3D3423;
+  --amber-600: #F0B84B;   --amber-bg: rgba(169, 112, 15, 0.22);
+  --green-600: #4ED495;   --green-bg: rgba(30, 122, 73, 0.22);
+  --teal-600: #4FD9CC;    --teal-bg: rgba(14, 118, 109, 0.22);
+  --danger-600: #FF7A6B;  --danger-bg: rgba(185, 58, 46, 0.22);
+  --info-600: #5B9EFF;    --info-bg: rgba(43, 100, 200, 0.24);
+  --chart-red: #D5B360;
+  --chart-teal: #2FA89D;
+  --chart-gold: #D99A2B;
+  --chart-gray: #8F8B82;
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+IMPORTANT — gold is FLAT, not a gradient. An earlier iteration tried a metallic gradient
+on gold-filled elements (nav pill, primary buttons, etc.) to make the gold feel less
+"cheap" than a flat saturated yellow. It was reverted: the person explicitly disliked the
+gradient and preferred a flat, lighter, more muted gold instead. Use a single flat color
+(--red-600 as defined above) for every gold fill in both "wow" and "noir" — no
+linear-gradient/radial-gradient on brand-accent fills anywhere.
+
+TEXT-ON-GOLD CONTRAST: because the gold in both "wow" and "noir" sits in a similar
+mid-lightness range, text/icons placed ON a gold fill (active nav pill, primary buttons,
+active pill-tabs, active dossier-rail items, the "today" marker in the calendar, the
+brand-mark logo tile) need a fixed DARK color in both themes, not the theme's own
+--ink-900 (which flips to a light color in "noir"). Use a hardcoded dark brown/black
+(e.g. #241A0B) for text-on-gold specifically in "noir", and var(--ink-900) in "wow"
+(where ink-900 is already dark). In the default dark theme, gold isn't used, so on-brand
+fills there just use white text as normal.
+
+STRUCTURAL EXCEPTIONS (deliberately NOT theme-variable-driven):
+- The top bar's background/text color are hardcoded dark (#08090A / #EFEDE8) because
+  both the default theme AND "noir" want a black top bar — only "wow" overrides it to a
+  white top bar with dark text via a `:root[data-theme="wow"] .topbar {...}` rule. Don't
+  make the base topbar rule theme-variable-driven; override it only for "wow".
+- Brand wordmark text (.brand-text .name, .brand-text .sub) is hardcoded light-on-dark
+  for the same reason — only "wow" needs an override (to dark text, since its top bar is
+  light).
+
+TYPOGRAPHY
+- Headings, KPI numbers, brand wordmark: 'Sora', sans-serif — weights 400/600/700/800,
+  tight letter-spacing (-0.01em) on large numerals.
+- Body copy, labels, table text, buttons, inputs: 'Inter', sans-serif — weights
+  400/500/600/700.
+- Timestamps, log/audit metadata, IDs: 'JetBrains Mono', monospace — weight 500, small
+  size (11px), used sparingly for anything that reads like a system-generated value.
+Load via Google Fonts:
+  Sora:wght@400;600;700;800 / Inter:wght@400;500;600;700 / JetBrains+Mono:wght@500
+
+====================================================================
+2. GLOBAL LAYOUT & CHROME
+====================================================================
+- Top bar (sticky, full width, z-index above page content but below full-screen modals):
+  brand mark (small square logo tile + wordmark + subtitle) on the left, a horizontal
+  nav-item list, and a theme-toggle control on the right (see section 5). Any panel or
+  overlay that isn't a full-screen modal (see the slide-in detail panel in section 3)
+  must sit BELOW the top bar, not overlap or hide it — measure the top bar's real
+  rendered height with JS (element.offsetHeight) into a CSS custom property (e.g.
+  --topbar-h) on load and on resize, and use top: var(--topbar-h) /
+  height: calc(100vh - var(--topbar-h)) for anything that needs to dock below it. Don't
+  hardcode a pixel guess for the top bar's height — it drifts with font-loading and
+  content changes, and a hardcoded value will eventually clip or hide content again.
+- Nav items are flat, rounded (8px), muted text color by default; on hover a faint white
+  wash (rgba(255,255,255,0.06)); the active nav item gets a solid brand-accent fill
+  (var(--red-600) — red by default, gold in "wow"/"noir") with contrasting text (see the
+  text-on-gold rule above). Icons are small inline SVGs at ~90% opacity.
+- Main content area: centered column, max-width ~1240px, generous side padding
+  (28px 34px 48px), auto horizontal margins. Wide/dense pages (e.g. calendars, large
+  grids) may opt into a wider or full-width container as an explicit, intentional
+  per-page exception — don't force every page into the 1240px cap if its content
+  genuinely needs more room.
+- Every page opens with a page-header: an h1 + one-line description paragraph on the
+  left, optional primary action button on the right (e.g. "+ New X").
+- Pages are simple show/hide containers (one active at a time) driven by the nav; no
+  page transition beyond instant show/hide.
+
+====================================================================
+3. CORE COMPONENTS (implement as reusable, shared classes)
+====================================================================
+
+BUTTONS
+- .btn: neutral bordered button (paper-0 background, line-strong border, ink text),
+  small radius, hover = line-strong border + faint background lift.
+- .btn-primary: filled with the brand accent (var(--red-600)), contrasting text per the
+  text-on-gold rule above, slightly darker fill on hover (var(--red-900)).
+- .btn-ghost: transparent, text-only, hover = faint background.
+- .btn-danger-outline: outlined in --danger-600, text in --danger-600.
+- .btn-sm: compact padding variant. .btn-block: full width.
+
+STATUS DOTS & BADGES
+- Small 7px colored .dot (amber / green / "live" pulsing green / red / gray / info) used
+  inline before labels to indicate status at a glance. The "live" dot pulses (opacity
+  1 -> 0.35 -> 1, 1.6s loop).
+- .badge for status pills in tables (draft, pending, live, published, flagged, rejected —
+  note the "live"/active status is labeled "Live" everywhere in the UI, not "Active";
+  keep status vocabulary consistent between table badges, filter-chip labels, and any
+  dropdown that lets you change status — don't let one surface say "Active" while
+  another says "Live" for the same underlying value).
+- .expiry-chip for content lifecycle (none / scheduled / expiring / expired) — same
+  soft-tint-pill pattern, distinct from status badges.
+- .tag-chip for freeform tags — neutral small pill.
+
+KPI / STAT CARDS (the signature component of this system)
+- .stat-card: paper-0 surface, 1px line border, radius-lg, a 3px colored top accent bar
+  (::before) whose color depends on an accent-* modifier class: accent-amber,
+  accent-green, accent-teal, accent-gray, accent-info, and .flagged (danger/red). Default
+  (no accent class) top bar is neutral line-strong.
+- Label row (small muted text + a matching .dot) above a large Sora/800 value. The label
+  MUST be single-line (white-space: nowrap; overflow: hidden; text-overflow: ellipsis) —
+  a wrapping label on one card in a row (e.g. "Pending Review" wrapping to two lines)
+  pushes that card's value down and breaks the row's vertical alignment with its
+  neighbors. Never let label length determine row height.
+- Don't give a purely informational card (e.g. an "Avg Review Time" card that sits next
+  to filterable status tiles) the same accent color as a nearby filter tile like "All" —
+  it reads as if the two are related/grouped when they aren't. Non-interactive summary
+  cards next to a row of colored filter chips should default to no accent (neutral top
+  bar) unless the color is semantically theirs.
+- .stat-card.clickable-stat: used when a KPI card doubles as a filter control. On select
+  (.stat-active class toggled by the page's filter state), the card's border AND a soft
+  outer glow both switch to THAT CARD'S OWN accent color — never a single shared color
+  for all cards. E.g. an amber card gets an amber border + amber glow when selected; a
+  green one gets green; only the "flagged" card is red/danger, because that's its real
+  meaning. Concretely:
+    .stat-card.clickable-stat.stat-active            -> neutral fallback (line-strong)
+    .stat-card.clickable-stat.accent-amber.stat-active -> border-color + box-shadow in amber-600
+    .stat-card.clickable-stat.accent-green.stat-active -> ...in green-600
+    .stat-card.clickable-stat.accent-teal.stat-active  -> ...in teal-600
+    .stat-card.clickable-stat.accent-info.stat-active  -> ...in info-600
+    .stat-card.clickable-stat.accent-gray.stat-active  -> ...in ink-300
+    .stat-card.clickable-stat.flagged.stat-active      -> ...in danger-600
+  Glow recipe: box-shadow: 0 0 0 1.5px <accent>, 0 0 16px -3px <accent>. This is the rule
+  to apply to ANY future clickable/selectable colored tile in the back office — the
+  selected-state border/glow must always derive from that tile's own accent, never a
+  single hardcoded brand color.
+- Plain (non-clickable) .stat-card "hero" variants can include a trend badge
+  (up/down arrow + delta, colored good/bad) and an expandable breakdown of sub-figures.
+
+TABS — two distinct patterns, used for different purposes. Pick the right one; don't use
+pill-style tabs by default just because it's available — reserve pills for page-level
+section switches, and use the underline style for in-form/in-modal navigation and for
+picking between a small set of sibling options (e.g. a source-type picker inside a
+creation form). If in doubt, prefer the underline style — it reads as lighter-weight and
+less "busy" inside dense forms and modals.
+- .segment-btn / .segment-tabbar: pill-shaped buttons in a row, used for switching
+  between sibling *page-level sections* (e.g. Verification Queue / Live Feed / Tags,
+  or Live / Uploads / Threads in Analytics). Inactive = outlined, muted text. Active =
+  solid brand-accent fill, contrasting text.
+- .view-tab-btn / .view-tabbar: plain text tabs with a bottom border, used for switching
+  between *display modes* of the same data (e.g. Log / Library, Month / Agenda) AND for
+  navigation/option-picking inside modals and forms (e.g. a multi-step creation modal's
+  own internal tabs, or a small source-type picker like Local Upload / Embedded Video /
+  Podcast). Inactive = muted text, transparent underline. Active = ink-900 text + a 2px
+  brand-accent underline.
+- Both patterns are neutral/brand-colored by design (they are generic navigation, not
+  status indicators) — do NOT apply the per-accent KPI-card rule to these; that rule is
+  specifically for status-colored filter tiles.
+
+PANELS & TABLES
+- .panel: paper-0 surface, line border, radius-lg, used to wrap any table or list block,
+  with a .panel-head (title + inline filter controls) above the content.
+- Tables: sortable-looking header row, hover-highlight rows, a leading checkbox column
+  (.row-check-cell/.row-check) for multi-select, a .bulk-bar that appears above the table
+  when rows are selected (shows count + contextual actions like Approve/Reject/Delete).
+- Custom dropdown (.ui-select): a styled trigger button with a chevron that rotates when
+  open, and an absolutely-positioned menu of .ui-select-option rows, each with a checkmark
+  icon shown only when .selected. Used everywhere instead of native <select> for visual
+  consistency. A .ui-select.filter variant is used inline in table filter bars.
+- Grid cards (e.g. a "library" grid view of content items): a thumbnail + title/meta open
+  the item on click; any secondary control on the card (like a status toggle switch)
+  needs its OWN small visible text label next to it — an unlabeled switch on a card is a
+  usability gap, not a compact design choice. Keep the label small and muted (11px,
+  ink-500) so it doesn't compete with the card's title.
+
+MODALS — two distinct patterns
+- Centered modal (.overlay + .modal): classic dialog — fixed, full-viewport dark scrim
+  (rgba(0,0,0,0.7)), content centered/near-top, max-width ~720px, radius-lg, shadow-modal.
+  Used for creation/edit forms that fully interrupt the flow (New Upload, Schedule Live,
+  confirmations). z-index above the top bar (these are meant to block everything).
+- Slide-in side panel (.overlay.slide-overlay + .modal.slide-panel): used for viewing/
+  editing a single record's details without blocking the rest of the screen. It slides
+  in from the right (max-width 440px, animation: slideInRight 0.2s ease). Unlike the
+  centered modal, it must NOT dim or block the rest of the page, and it must dock BELOW
+  the top bar rather than covering it:
+    .overlay.slide-overlay {
+      top: var(--topbar-h);              /* not 0 -- see section 2 on measuring this */
+      background: transparent;
+      pointer-events: none;               /* let clicks pass through the empty area */
+      z-index: 30;                        /* below the top bar and below full-screen modals */
+    }
+    .modal.slide-panel {
+      height: calc(100vh - var(--topbar-h));
+      pointer-events: auto;               /* the panel itself stays fully interactive */
+      border-left: 1px solid var(--line);
+      box-shadow: -16px 0 40px -12px rgba(0,0,0,.35);
+    }
+  This lets the user keep scrolling/clicking the underlying list while the detail panel
+  stays open on the right. In addition, the underlying page content must actually reflow
+  to make room — don't just float the panel on top of a fixed-width page. When the panel
+  opens, the main content area should shrink to exactly (100% minus panel width) via a
+  direct width calc, NOT via a margin trick combined with auto-centering (margin:auto
+  plus a fixed opposing margin only works out to a non-overlapping layout above a
+  specific viewport width; below that width the two will visually overlap). Concretely:
+    body.detail-panel-open .main {
+      width: calc(100% - 440px);
+      max-width: none;
+      margin: 0;
+    }
+  This guarantees the table and the panel are both fully visible side by side at any
+  window size, not just above some implicit breakpoint.
+- The panel must close automatically whenever the user navigates to a different page/tab
+  (e.g. Live -> Uploads, Uploads -> Analytics) -- route every page-switch through one
+  function and close the detail panel there, rather than leaving it open (and the main
+  content still shrunk) behind a page the user has since navigated away from.
+- Modal internals: sticky .modal-head (title + close X) and sticky .modal-foot (right-
+  aligned actions) so long forms/content scroll independently between them.
+
+FORMS
+- .field-group / .field-row (2-col) / .field-row-3 (3-col) grids for form layout,
+  collapsing to 1 column under 900px.
+- .section-divider + .section-heading for grouping long forms into labeled sections.
+- Inputs/textareas: paper-0 background, line-strong border, radius, focus state should
+  lift border to the brand accent.
+
+EMPTY / LOADING STATES
+- Centered muted text row inside the panel/table body ("No X match these filters."),
+  never a jarring blank space.
+
+====================================================================
+4. INTERACTION & MOTION CONVENTIONS
+====================================================================
+- Transitions are short and functional only: 0.12s ease on background/color/border-color/
+  box-shadow; 0.2s ease for the slide-panel's entrance and for the main content's width
+  reflow when it opens. No decorative animation beyond that and the "live" dot's 1.6s
+  pulse. No gradients/shimmer on brand-accent fills (see section 1).
+- Hover states are subtle (border or background shift, never color-inversion) except for
+  primary buttons and active tab/nav fills.
+- Selected/active states always carry a visual identity consistent with what they
+  represent (see the per-accent stat-card rule above) -- avoid a single "selected = one
+  color" fallback anywhere in the app.
+
+====================================================================
+5. THEME TOGGLE
+====================================================================
+- A single control in the top bar cycles through all three themes in order: default
+  (dark/red) -> "wow" (light/gold) -> "noir" (black/gold) -> back to default. Persist the
+  choice (e.g. localStorage) and re-apply it on load. The control's label should show
+  the name of the theme the NEXT click will switch TO (not the current theme) -- e.g.
+  while in the default theme it reads "Wow Mode"; once in "wow" it reads "Noir Mode";
+  once in "noir" it reads "Dark Mode". This was a deliberate choice -- keep it consistent
+  if you add a fourth theme (extend the cycle order and the label map together, don't
+  special-case only the toggle logic).
+- All tokens above must re-resolve instantly everywhere with no per-component overrides
+  needed when the theme changes -- this is the acceptance test for whether the token
+  system was implemented correctly.
+- Sanity check before shipping any new component: after writing a CSS rule, make sure the
+  selector line itself is actually present (not just the declaration block) -- a dropped
+  selector still parses as "valid enough" for a browser to silently discard the whole
+  orphaned block, which is a real, easy-to-miss failure mode (it happened once in this
+  exact codebase to the theme-toggle button's own styles, and the button silently lost
+  all its positioning/appearance until it was caught). Diff CSS edits carefully rather
+  than assuming a block applied just because the properties look right.
+
+====================================================================
+6. WHAT TO DELIVER
+====================================================================
+1. A single shared stylesheet (or design-tokens file + component stylesheet, matching
+   however this back office's build is organized -- plain CSS, CSS-in-JS, Tailwind
+   config, or a component library layer) implementing everything above.
+2. Apply it across every existing tab/page/feature currently in the back office --
+   re-skin only, preserve all existing functionality, data bindings, routes, and page-
+   specific layout structure exactly as-is.
+3. Do not introduce new pages, features, or nav items as part of this pass -- that is
+   handled separately. This pass is strictly: tokens + shared components + consistent
+   application everywhere.
+4. Flag any existing component that doesn't map cleanly onto one of the patterns above
+   (e.g. a page-specific widget with no equivalent here) rather than guessing -- ask, or
+   propose the closest match and note the assumption.

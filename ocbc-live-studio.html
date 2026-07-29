@@ -760,7 +760,14 @@
 
     .desc-cell {
       color: var(--ink-500);
-      max-width: 260px;
+      max-width: 420px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .group-cell {
+      max-width: 90px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -772,7 +779,7 @@
       background: var(--paper-100);
       color: var(--ink-700);
       padding: 2px 8px;
-      border-radius: 20px;
+      border-radius: 4px;
       margin: 0 4px 4px 0;
       border: 1px solid var(--line);
       text-transform: capitalize;
@@ -782,7 +789,7 @@
       font-size: 11.5px;
       font-weight: 500;
       padding: 3px 10px;
-      border-radius: 20px;
+      border-radius: 4px;
       display: inline-block;
       white-space: nowrap;
       text-transform: capitalize;
@@ -1799,6 +1806,286 @@
       color: var(--ink-500);
     }
 
+    .groups-view {
+      display: none;
+    }
+
+    .groups-view.active {
+      display: block;
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .group-card {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .group-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+    }
+
+    .group-card-avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .group-card-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .group-card-meta {
+      font-size: 12px;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .groups-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .groups-back-link:hover {
+      color: var(--ink-900);
+    }
+
+    .group-hero {
+      border-radius: var(--radius-lg);
+      padding: 48px 32px 32px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.28) 60%),
+        var(--hero-image, none) center/cover no-repeat,
+        linear-gradient(160deg, var(--hero-color, var(--red-600)) 0%, var(--hero-color, var(--red-600)) 55%, var(--paper-100) 140%);
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .group-hero-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.18);
+      margin-bottom: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .group-hero-content h1 {
+      font-size: 32px;
+      margin: 0 0 6px;
+      color: #fff;
+    }
+
+    .group-hero-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    .group-recent-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .group-recent-rank {
+      width: 20px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+
+    .group-recent-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--paper-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+
+    .group-recent-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .group-recent-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .group-recent-meta {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin: 2px 0 0;
+    }
+
+    .group-recent-views {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-500);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+
+    .playlist-tile {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      cursor: pointer;
+      transition: border-color .12s ease, box-shadow .12s ease;
+    }
+
+    .playlist-tile:hover {
+      border-color: var(--line-strong);
+    }
+
+    .playlist-tile.active {
+      border-color: var(--red-600);
+      box-shadow: 0 0 0 1px var(--red-600);
+    }
+
+    .playlist-tile-art {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .playlist-tile-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      margin: 0 0 2px;
+      text-transform: capitalize;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .playlist-tile-count {
+      font-size: 11px;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .group-about-card {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+    }
+
+    .group-about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .group-about-stat-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .group-about-stat-label {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .group-about-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-500);
+      margin: 0 0 10px;
+    }
+
+    .group-about-team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 5px 12px 5px 5px;
+      margin: 0 8px 8px 0;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .group-about-team-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--red-600);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
     .calendar-chip-time {
       font-weight: 700;
       opacity: .75;
@@ -2110,6 +2397,266 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .workflow-dept-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--paper-100);
+      color: var(--ink-700);
+      margin-bottom: 14px;
+    }
+
+    .workflow-stepper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      position: relative;
+      padding-bottom: 18px;
+    }
+
+    .workflow-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .workflow-step:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: var(--line-strong);
+    }
+
+    .workflow-step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      border: 2px solid var(--line-strong);
+      z-index: 1;
+    }
+
+    .workflow-step.done .workflow-step-dot {
+      background: var(--green-600);
+      border-color: var(--green-600);
+      color: #fff;
+    }
+
+    .workflow-step.current .workflow-step-dot {
+      background: var(--amber-600);
+      border-color: var(--amber-600);
+      color: #fff;
+    }
+
+    .workflow-step.rejected .workflow-step-dot {
+      background: var(--danger-600);
+      border-color: var(--danger-600);
+      color: #fff;
+    }
+
+    .workflow-step.rejected .workflow-step-label {
+      color: var(--danger-600);
+    }
+
+    .workflow-step.flagged .workflow-step-dot {
+      background: var(--amber-600);
+      border-color: var(--danger-600);
+      color: #fff;
+    }
+
+    .workflow-step.flagged .workflow-step-label {
+      color: var(--danger-600);
+    }
+
+    .workflow-step-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 3px;
+    }
+
+    .workflow-step-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-900);
+    }
+
+    .workflow-step-approvers {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-step.upcoming .workflow-step-label {
+      color: var(--ink-500);
+      font-weight: 500;
+    }
+
+    .workflow-dept-editor {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-dept-editor:first-child {
+      padding-top: 0;
+    }
+
+    .workflow-dept-editor:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .workflow-dept-editor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .workflow-dept-editor-head h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .workflow-dept-count {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-stage-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .workflow-stage-index {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      font-size: 10.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .workflow-stage-row input {
+      flex: 1;
+    }
+
+    .workflow-stage-remove {
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      cursor: pointer;
+      padding: 4px;
+      flex-shrink: 0;
+      border-radius: 6px;
+    }
+
+    .workflow-stage-remove:hover {
+      color: var(--danger-600);
+      background: var(--danger-bg);
+    }
+
+    .workflow-stage-remove:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .workflow-stage-editor-row {
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-stage-editor-row:last-of-type {
+      border-bottom: none;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+    }
+
+    .workflow-approvers-row {
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .workflow-approvers-label {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-approver-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .workflow-approver-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 4px 6px 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .workflow-approver-chip button {
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      border-radius: 50%;
+    }
+
+    .workflow-approver-chip button:hover {
+      color: var(--danger-600);
+      background: var(--danger-bg);
+    }
+
+    .workflow-approvers-empty {
+      font-size: 12px;
+      color: var(--ink-500);
+      font-style: italic;
+    }
+
+    .workflow-approver-select {
+      align-self: flex-start;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      border: 1px solid var(--line-strong);
+      background: var(--paper-0);
+      color: var(--ink-700);
+    }
+
     .side-block h3 {
       font-size: 12px;
       font-weight: 600;
@@ -2183,8 +2730,28 @@
       font-weight: 500;
     }
 
-    /* Trend chip for an insight card. Deliberately small and parked on the footer
-       row — as a full-width block it competed with the sentence it supports. */
+    .activity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .activity-row .audit-item {
+      margin-bottom: 0;
+    }
+
+    .activity-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-500);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Trend chip for an insight card. */
     .insight-spark {
       display: block;
       flex: 0 0 auto;
@@ -2318,7 +2885,6 @@
       font-size: 11px;
       font-weight: 700;
     }
-
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4505,7 +5071,16 @@
             <rect x="3" y="4" width="18" height="18" rx="2" />
             <path d="M16 2v4M8 2v4M3 10h18" />
           </svg>
-          Content Calendar
+          Calendar
+        </div>
+        <div class="nav-item" data-page="groups" onclick="goToPage('groups')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="8" r="3" />
+            <path d="M2 20c0-3 3-5 7-5s7 2 7 5" />
+            <circle cx="17" cy="9" r="2.4" />
+            <path d="M22 20c0-2.4-2-4.3-4.5-4.9" />
+          </svg>
+          Groups
         </div>
         <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4710,26 +5285,29 @@
             <h1>Uploads</h1>
             <p>Manage on-demand video content uploaded across OCBC channels.</p>
           </div>
-          <button class="btn btn-primary" onclick="openUploadModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            New Upload
-          </button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openUploadModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              New Upload
+            </button>
+          </div>
         </div>
 
         <div class="dossier-body">
           <div class="dossier-rail" id="uploadsSourceRail">
             <button class="dossier-rail-item active" data-source="all" onclick="filterUploadsBySource('all')">All Sources</button>
             <button class="dossier-rail-item" data-source="local" onclick="filterUploadsBySource('local')">Local Uploads</button>
-            <button class="dossier-rail-item" data-source="youtube" onclick="filterUploadsBySource('youtube')">Embedded Videos</button>
+            <button class="dossier-rail-item" data-source="youtube" onclick="filterUploadsBySource('youtube')">Videos</button>
             <button class="dossier-rail-item" data-source="spotify" onclick="filterUploadsBySource('spotify')">Podcasts</button>
           </div>
 
           <div class="dossier-content">
             <div class="view-tabbar" id="uploadsViewTabbar">
               <button class="view-tab-btn active" data-view="log" onclick="switchUploadsView('log')">Log</button>
-              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Content Library</button>
+              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Collections</button>
+              <button class="view-tab-btn" data-view="activity" onclick="switchUploadsView('activity')">Recent Activity</button>
             </div>
 
             <div class="view-pane active" id="uploadsView-log">
@@ -4760,7 +5338,7 @@
                       <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
                           onchange="toggleSelectAllUploads(this)" /></td>
                       <td>Title</td>
-                      <td>Owner</td>
+                      <td>Group</td>
                       <td>Section</td>
                       <td>Tags</td>
                       <td>Status</td>
@@ -4776,6 +5354,15 @@
             <div class="view-pane" id="uploadsView-library">
               <div class="content-library-grid" id="uploadsLibraryGrid"></div>
             </div>
+
+            <div class="view-pane" id="uploadsView-activity">
+              <div class="panel">
+                <div class="panel-head">
+                  <h2>Recent Activity</h2>
+                </div>
+                <div id="uploadsActivityList"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -4787,17 +5374,20 @@
             <h1>Live</h1>
             <p>Manage and moderate live streaming sessions across OCBC channels.</p>
           </div>
-          <button class="btn btn-primary" onclick="openLiveModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            New Live Session
-          </button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openLiveModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              New Live Session
+            </button>
+          </div>
         </div>
 
         <div class="view-tabbar" id="liveViewTabbar">
           <button class="view-tab-btn active" data-view="log" onclick="switchLiveView('log')">Log</button>
-          <button class="view-tab-btn" data-view="library" onclick="switchLiveView('library')">Content Library</button>
+          <button class="view-tab-btn" data-view="library" onclick="switchLiveView('library')">Collections</button>
+          <button class="view-tab-btn" data-view="activity" onclick="switchLiveView('activity')">Recent Activity</button>
         </div>
 
         <div class="view-pane active" id="liveView-log">
@@ -4827,7 +5417,7 @@
                   <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll"
                       onchange="toggleSelectAllLive(this)" /></td>
                   <td>Title</td>
-                  <td>Owner</td>
+                  <td>Group</td>
                   <td>Section</td>
                   <td>Tags</td>
                   <td>Status</td>
@@ -4841,6 +5431,15 @@
 
         <div class="view-pane" id="liveView-library">
           <div class="content-library-grid" id="liveLibraryGrid"></div>
+        </div>
+
+        <div class="view-pane" id="liveView-activity">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Recent Activity</h2>
+            </div>
+            <div id="liveActivityList"></div>
+          </div>
         </div>
       </div>
 
@@ -5095,6 +5694,56 @@
                 onclick="document.getElementById('topicOverlay').classList.add('open')">+ New Tag</button>
             </div>
             <div class="topic-grid" id="topicsGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUPS PAGE -->
+      <div class="page" id="page-groups">
+        <div class="groups-view active" id="groups-list">
+          <div class="page-header">
+            <div>
+              <h1>Groups</h1>
+              <p>Every OCBC division producing content for Live Studio, organised like a profile — output, team, and
+                recent work at a glance.</p>
+            </div>
+          </div>
+          <div class="groups-grid" id="groupsGrid"></div>
+        </div>
+
+        <div class="groups-view" id="groups-profile">
+          <button class="groups-back-link" onclick="closeGroupProfile()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6" /></svg>
+            Back to Groups
+          </button>
+          <div class="group-hero" id="groupHero">
+            <div class="group-hero-content">
+              <div class="group-hero-badge" id="groupHeroBadge"></div>
+              <h1 id="groupHeroName"></h1>
+              <p class="group-hero-meta" id="groupHeroMeta"></p>
+            </div>
+          </div>
+          <div class="group-profile-body">
+            <p class="dossier-subhead">Top Content</p>
+            <div id="groupRecentContent"></div>
+
+            <p class="dossier-subhead" style="margin-top:24px;">Playlists</p>
+            <div class="playlists-grid" id="groupPlaylists"></div>
+
+            <p class="dossier-subhead" style="margin-top:24px;">All Content</p>
+            <div class="content-library-grid" id="groupContentGrid"></div>
+
+            <div class="group-about-card">
+              <p class="dossier-subhead" style="margin-top:0;">About This Group</p>
+              <div class="group-about-stats" id="groupAboutStats"></div>
+              <p class="group-about-label">Team</p>
+              <div id="groupAboutTeam"></div>
+
+              <p class="group-about-label" style="margin-top:20px;">Approval Workflow</p>
+              <p style="font-size:12px;color:var(--ink-500);margin:0 0 14px;" id="groupWorkflowNote"></p>
+              <div id="groupWorkflowEditor"></div>
+              <button class="btn btn-sm btn-primary" style="margin-top:10px;" onclick="saveGroupWorkflow()">Save Workflow</button>
+            </div>
           </div>
         </div>
       </div>
@@ -5854,7 +6503,7 @@
             <label class="field-label">Source</label>
             <div class="view-tabbar" id="uploadSourceTabbar">
               <button class="view-tab-btn active" data-usource="local" onclick="switchUploadSourceType('local')">Local Upload</button>
-              <button class="view-tab-btn" data-usource="youtube" onclick="switchUploadSourceType('youtube')">Embedded Video</button>
+              <button class="view-tab-btn" data-usource="youtube" onclick="switchUploadSourceType('youtube')">Video</button>
               <button class="view-tab-btn" data-usource="spotify" onclick="switchUploadSourceType('spotify')">Podcast</button>
             </div>
           </div>
@@ -6517,8 +7166,8 @@
                 <div class="ui-select-menu">
                   <div class="ui-select-option selected" data-value="draft" onclick="chooseOption(this)">Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="pending" onclick="chooseOption(this)">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
-                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this)">Live<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
-                  <div class="ui-select-option" data-value="published" onclick="chooseOption(this)">Published<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="active" onclick="chooseOption(this)">Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="published" onclick="chooseOption(this)">Live<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this)">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this)">Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                 </div>
@@ -6563,6 +7212,11 @@
             <label class="field-label">Tags</label>
             <input type="text" id="contentEditTags" placeholder="Comma-separated, e.g. Equities, SG, Rates" />
           </div>
+        </div>
+        <div class="side-block workflow-block" id="contentWorkflowBlock" style="display:none;">
+          <h3>Approval Workflow</h3>
+          <span class="workflow-dept-badge" id="contentWorkflowDept"></span>
+          <div class="workflow-stepper" id="contentWorkflowStepper"></div>
         </div>
         <div class="detail-grid">
           <div>
@@ -6783,7 +7437,100 @@
       Spotify: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M7.5 10c3-1 6.5-1 9.5.7M8 13.2c2.4-.8 5.2-.8 7.6.6M8.5 16c1.8-.6 3.9-.5 5.6.5" stroke-linecap="round"/></svg>'
     };
     const sourceTypeLabel = { local: null, youtube: 'YouTube', spotify: 'Spotify' };
-    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Live", flagged: "Flagged", published: "Published", rejected: "Rejected" };
+    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Active", flagged: "Flagged", published: "Live", rejected: "Rejected" };
+
+    // ---- Multi-stage approval workflow: each department has its own ordered stage list.
+    // GBC content is treated as lower-risk (brand/marketing), so it gets a short workflow;
+    // Wealth Management content can carry financial-advice implications, so it gets the
+    // strictest, longest chain. Editable per-department from within that group's own
+    // profile page (see renderGroupWorkflowEditor) — deliberately not a single shared
+    // settings surface, since there's no real access-rights model yet and one editor for
+    // every division would let anyone silently change another group's review process.
+    // Each stage is { name, approvers: [owner names allowed to action this stage] }.
+    let departmentWorkflows = {
+      'Group Brands & Communications': [
+        { name: 'Marketing Review', approvers: ['J. Tan', 'M. Lee'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Investment Banking': [
+        { name: 'Content Review', approvers: ['A. Kumar'] },
+        { name: 'Compliance Check', approvers: ['P. Sharma'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Wealth Management': [
+        { name: 'Content Review', approvers: ['S. Wong'] },
+        { name: 'Compliance Review', approvers: [] },
+        { name: 'Wealth Desk Sign-off', approvers: ['S. Wong'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group SME Banking': [
+        { name: 'Content Review', approvers: ['R. Ong'] },
+        { name: 'Compliance Check', approvers: [] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Property Management': [
+        { name: 'Content Review', approvers: [] },
+        { name: 'Compliance Check', approvers: [] },
+        { name: 'Publish', approvers: [] }
+      ]
+    };
+
+    const OWNER_DEPARTMENT = {
+      'J. Tan': 'Group Brands & Communications',
+      'M. Lee': 'Group Brands & Communications',
+      'A. Kumar': 'Group Investment Banking',
+      'P. Sharma': 'Group Investment Banking',
+      'L. Ibrahim': 'Group Investment Banking',
+      'S. Wong': 'Group Wealth Management',
+      'R. Ong': 'Group SME Banking'
+    };
+
+    // Distinct accent per group, Spotify-artist-page style — each profile gets its own hero color.
+    const GROUP_ACCENT = {
+      'Group Brands & Communications': '#D42B41',
+      'Group Investment Banking': '#2FA89D',
+      'Group Wealth Management': '#D99A2B',
+      'Group SME Banking': '#4ED495',
+      'Group Property Management': '#8F7BD4'
+    };
+
+    const GROUP_BANNER = {
+      'Group Brands & Communications': 'images/groups/banner/ocbc-banner-gbc.png',
+      'Group Investment Banking': 'images/groups/banner/ocbc-banner-gib.png',
+      'Group Wealth Management': 'images/groups/banner/ocbc-banner-gwm.jpeg',
+      'Group SME Banking': 'images/groups/banner/ocbc-banner-gsmeb.png',
+      'Group Property Management': 'images/groups/banner/ocbc-banner-gpm.png'
+    };
+
+    const GROUP_ACRONYM = {
+      'Group Brands & Communications': 'GBC',
+      'Group Investment Banking': 'GIB',
+      'Group Wealth Management': 'GWM',
+      'Group SME Banking': 'GSMEB',
+      'Group Property Management': 'GPM'
+    };
+
+    function groupAcronym(dept) {
+      return GROUP_ACRONYM[dept] || dept;
+    }
+
+    function ownerDepartment(owner) {
+      return OWNER_DEPARTMENT[owner] || 'General';
+    }
+
+    function groupAccent(dept) {
+      return GROUP_ACCENT[dept] || 'var(--red-600)';
+    }
+
+    function departmentWorkflowStages(department) {
+      return departmentWorkflows[department] && departmentWorkflows[department].length
+        ? departmentWorkflows[department]
+        : [{ name: 'Review', approvers: [] }, { name: 'Publish', approvers: [] }];
+    }
+
+    function allTeamMembers() {
+      return Object.keys(OWNER_DEPARTMENT);
+    }
 
     function computeStats(arr) {
       return {
@@ -6826,10 +7573,11 @@
         : '';
       const rowIcon = item.sourceType && typeIcon[sourceTypeLabel[item.sourceType]] ? typeIcon[sourceTypeLabel[item.sourceType]] : icon;
       const sourceTag = item.sourceType && sourceTypeLabel[item.sourceType] ? `<span class="table-source-tag">${sourceTypeLabel[item.sourceType]}</span>` : '';
+      const dept = ownerDepartment(item.owner);
       tr.innerHTML = `
       ${checkboxCell}
       <td><div class="title-cell"><div class="type-icon">${rowIcon}</div>${item.title}${sourceTag}</div></td>
-      <td>${item.owner}</td>
+      <td class="group-cell" title="${dept}">${groupAcronym(dept)}</td>
       <td>${item.section}</td>
       <td>${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</td>
       <td><span class="badge ${item.status}">${statusLabel[item.status]}</span></td>
@@ -6844,6 +7592,50 @@
     // else shows a description and a status-appropriate audit trail.
     // Team attributed to approvals/rejections made through the Content Detail modal.
     const REVIEWER_TEAM = 'OCBC Group Brands & Communications';
+
+    // ---- Recent Activity: lightweight in-memory event log per collection, newest first ----
+    function activityTimeNow() {
+      const now = new Date();
+      return now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ', ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+
+    const uploadActivityLog = [
+      { time: '27 Jul, 06:00', actor: 'J. Tan', action: 'uploaded', itemTitle: 'Weekly Market Wrap' },
+      { time: '27 Jul, 09:14', actor: REVIEWER_TEAM, action: 'approved', itemTitle: 'Weekly Market Wrap' },
+      { time: '26 Jul, 15:40', actor: 'R. Fernandez', action: 'flagged', itemTitle: 'Digital Assets Briefing' },
+      { time: '25 Jul, 11:20', actor: 'S. Wong', action: 'submitted for review', itemTitle: 'Wealth Planning 101' },
+      { time: '24 Jul, 08:05', actor: 'M. Lee', action: 'saved a draft of', itemTitle: 'Old Promo Reel' }
+    ];
+
+    const liveActivityLog = [
+      { time: '27 Jul, 05:12', actor: 'R. Ong', action: 'scheduled', itemTitle: 'Treasury Desk AMA' },
+      { time: '27 Jul, 05:15', actor: REVIEWER_TEAM, action: 'approved', itemTitle: 'Treasury Desk AMA' },
+      { time: '26 Jul, 18:30', actor: 'R. Fernandez', action: 'flagged', itemTitle: 'Fed Rate Reaction Live' },
+      { time: '25 Jul, 09:00', actor: 'P. Sharma', action: 'submitted for review', itemTitle: 'Morning Market Open' }
+    ];
+
+    function logUploadActivity(actor, action, itemTitle) {
+      uploadActivityLog.unshift({ time: activityTimeNow(), actor, action, itemTitle });
+    }
+
+    function logLiveActivity(actor, action, itemTitle) {
+      liveActivityLog.unshift({ time: activityTimeNow(), actor, action, itemTitle });
+    }
+
+    function renderActivityList(elId, log) {
+      const el = document.getElementById(elId);
+      el.innerHTML = log.length
+        ? log.map(a => `<div class="activity-row"><div class="audit-item"><span><span class="a-name">${a.actor}</span> ${a.action} <span class="a-name">"${a.itemTitle}"</span></span></div><span class="activity-time">${a.time}</span></div>`).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;padding:16px 0;">No recent activity yet.</p>`;
+    }
+
+    function renderUploadActivity() {
+      renderActivityList('uploadsActivityList', uploadActivityLog);
+    }
+
+    function renderLiveActivity() {
+      renderActivityList('liveActivityList', liveActivityLog);
+    }
 
     function openContentModal(item, kind) {
       const isFlagged = item.status === 'flagged';
@@ -6875,12 +7667,48 @@
       noteInput.value = '';
       noteInput.placeholder = isPending ? 'Add a note for the approval record...' : 'Add a comment...';
 
+      // Approval workflow progress — shown for every entry, in every status, not just while
+      // pending. The chain of stages is derived from the uploader's department (stricter
+      // desks like Wealth Management get more stages than lower-risk ones like GBC), and the
+      // display reflects where THIS item actually is/was in that chain: not yet entered it
+      // (draft), part-way through (pending), fully cleared (published/active), or stopped
+      // partway (flagged/rejected).
+      const workflowDept = ownerDepartment(item.owner);
+      const workflowStages = departmentWorkflowStages(workflowDept);
+      const rawStageIdx = Math.min(item.workflowStageIndex || 0, workflowStages.length - 1);
+      const workflowBlock = document.getElementById('contentWorkflowBlock');
+      workflowBlock.style.display = 'block';
+      document.getElementById('contentWorkflowDept').textContent = workflowDept;
+
+      let workflowStageIdx = rawStageIdx;
+      let stoppedIdx = -1;
+      if (item.status === 'draft') { workflowStageIdx = -1; }
+      else if (item.status === 'published' || item.status === 'active') { workflowStageIdx = workflowStages.length; }
+      else if (item.status === 'rejected') { stoppedIdx = rawStageIdx; }
+      else if (item.status === 'flagged') { stoppedIdx = rawStageIdx; }
+
+      if (item.status === 'draft') {
+        document.getElementById('contentWorkflowStepper').innerHTML = `<p style="font-size:12.5px;color:var(--ink-500);margin:0;">Not yet submitted — this entry hasn't entered the approval workflow.</p>`;
+      } else {
+        document.getElementById('contentWorkflowStepper').innerHTML = workflowStages.map((stage, i) => {
+          let cls;
+          if (stoppedIdx >= 0) {
+            cls = i < stoppedIdx ? 'done' : (i === stoppedIdx ? (item.status === 'rejected' ? 'rejected' : 'flagged') : 'upcoming');
+          } else {
+            cls = i < workflowStageIdx ? 'done' : (i === workflowStageIdx ? 'current' : 'upcoming');
+          }
+          const dot = cls === 'done' ? '✓' : (cls === 'rejected' ? '✕' : (cls === 'flagged' ? '!' : (i + 1)));
+          const approverNote = stage.approvers && stage.approvers.length ? `<span class="workflow-step-approvers">${stage.approvers.join(', ')}</span>` : '';
+          return `<div class="workflow-step ${cls}"><span class="workflow-step-dot">${dot}</span><span class="workflow-step-text"><span class="workflow-step-label">${stage.name}</span>${approverNote}</span></div>`;
+        }).join('');
+      }
+
       const verb = isDraft
         ? (kind === 'Live' ? 'started scheduling this live session' : 'started this upload')
         : (kind === 'Live' ? 'scheduled this live session' : 'uploaded this content');
       const audit = [`<span class="a-name">${item.owner}</span> ${verb}`];
       if (isDraft) audit.push('Saved as draft — not yet submitted for review');
-      if (isPending) audit.push(`Awaiting approval from <span class="a-name">${REVIEWER_TEAM}</span>`);
+      if (isPending) audit.push(`At stage "${workflowStages[workflowStageIdx].name}" of the ${workflowDept} approval workflow`);
       if (item.status === 'flagged') {
         audit.push('Auto-flag triggered on transcript scan');
         audit.push('Assigned to <span class="a-name">Compliance</span>');
@@ -6913,6 +7741,11 @@
       const approveBtn = document.getElementById('contentApproveBtn');
       rejectBtn.style.display = isPending ? 'inline-flex' : 'none';
       approveBtn.style.display = isPending ? 'inline-flex' : 'none';
+      if (isPending) {
+        approveBtn.textContent = workflowStageIdx < workflowStages.length - 1
+          ? `Approve — Advance to "${workflowStages[workflowStageIdx + 1].name}"`
+          : 'Approve & Publish';
+      }
       rejectBtn.onclick = () => rejectContentItem(item, kind);
       approveBtn.onclick = () => approveContentItem(item, kind);
       document.getElementById('contentSaveBtn').onclick = () => saveContentEdits(item, kind);
@@ -6934,8 +7767,11 @@
       if (newStatus !== item.status) {
         item.status = newStatus;
         item.reviewedBy = REVIEWER_TEAM;
+        if (newStatus === 'pending') item.workflowStageIndex = 0;
         const note = document.getElementById('contentReviewNoteInput').value.trim();
         if (note) item.reviewNote = note;
+        if (kind === 'Live') logLiveActivity(REVIEWER_TEAM, `changed status to "${statusLabel[newStatus]}" for`, item.title);
+        else logUploadActivity(REVIEWER_TEAM, `changed status to "${statusLabel[newStatus]}" for`, item.title);
       }
       if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
@@ -7385,8 +8221,8 @@
       <div class="${cls('all')} accent-teal" onclick="filterUploadsByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${scoped.length}</p></div>
       <div class="${cls('draft')} accent-gray" onclick="filterUploadsByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterUploadsByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="${cls('active')} accent-green" onclick="filterUploadsByStatus('active')"><p class="label"><span class="dot green"></span>Live</p><p class="value">${s.active}</p></div>
-      <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterUploadsByStatus('active')"><p class="label"><span class="dot green"></span>Active</p><p class="value">${s.active}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Live</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterUploadsByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="${cls('expiring')} accent-amber" onclick="filterUploadsByStatus('expiring')"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
       <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
@@ -7404,7 +8240,7 @@
         if (sourceFilter !== 'all' && itemSourceType(item) !== sourceFilter) return;
         if (filter === 'expiring') { if (expiryInfo(item).cls !== 'expiring') return; }
         else if (filter !== 'all' && item.status !== filter) return;
-        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
+        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || ownerDepartment(item.owner).toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
         visibleCount++;
         visibleIds.add(item.id);
         body.appendChild(renderRow(item, typeIcon.Upload, 'Upload', { selectable: true, expiry: true, selectedSet: selectedUploadIds, toggleFn: 'toggleUploadSelect' }));
@@ -7421,7 +8257,9 @@
       document.querySelectorAll('#uploadsViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
       document.getElementById('uploadsView-log').classList.toggle('active', view === 'log');
       document.getElementById('uploadsView-library').classList.toggle('active', view === 'library');
+      document.getElementById('uploadsView-activity').classList.toggle('active', view === 'activity');
       if (view === 'library') renderUploadsLibrary();
+      if (view === 'activity') renderUploadActivity();
     }
 
     function openLibraryItem(kind, id) {
@@ -7430,6 +8268,256 @@
       if (!item) return;
       openContentModal(item, kind === 'uploads' ? 'Upload' : 'Live');
     }
+
+    // ---- Groups: a Spotify-artist-profile-style view of each department producing
+    // content, built on top of the same OWNER_DEPARTMENT mapping the approval workflow
+    // uses. Shows every content item regardless of status (this is an internal team view,
+    // not the public-facing Collections library), so it gets its own card renderer that
+    // shows a status badge instead of the Collections active/inactive toggle. ----
+    function allDepartments() {
+      return Object.keys(departmentWorkflows);
+    }
+
+    function groupInitials(dept) {
+      return dept.replace('Group ', '').split(' ').filter(w => /[A-Za-z]/.test(w[0])).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function departmentContent(dept) {
+      const uploads = uploadsData.filter(x => ownerDepartment(x.owner) === dept).map(x => Object.assign({}, x, { kind: 'Upload' }));
+      const live = liveData.filter(x => ownerDepartment(x.owner) === dept).map(x => Object.assign({}, x, { kind: 'Live' }));
+      return [...uploads, ...live];
+    }
+
+    function departmentOwners(dept) {
+      return Object.keys(OWNER_DEPARTMENT).filter(o => OWNER_DEPARTMENT[o] === dept);
+    }
+
+    function renderGroupsList() {
+      document.getElementById('groupsGrid').innerHTML = allDepartments().map(dept => {
+        const content = departmentContent(dept);
+        const live = content.filter(x => x.status === 'published' || x.status === 'active').length;
+        return `<div class="group-card" onclick="openGroupProfile('${dept}')">
+          <div class="group-card-avatar" style="background:${groupAccent(dept)};">${groupInitials(dept)}</div>
+          <p class="group-card-name">${dept}</p>
+          <p class="group-card-meta">${content.length} item${content.length === 1 ? '' : 's'} · ${live} live/published</p>
+        </div>`;
+      }).join('');
+    }
+
+    function renderGroupContentCard(item) {
+      const kind = item.kind === 'Upload' ? 'uploads' : 'live';
+      return `<div class="library-card">
+        <div class="library-card-open" onclick="openLibraryItem('${kind}', ${item.id})">
+          <div class="library-thumb">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="library-card-body">
+            <p class="library-card-title">${item.title}</p>
+            <p class="library-card-meta">${item.owner} · ${item.section}</p>
+          </div>
+        </div>
+        <div class="library-card-foot">
+          <span class="badge ${item.status}">${statusLabel[item.status]}</span>
+        </div>
+      </div>`;
+    }
+
+    // Deterministic pseudo-view-count per item, purely for a Spotify-style "streams"
+    // number on the Top Content list — this app has no real analytics tied to
+    // individual content items, so this is illustrative only, not real data.
+    function syntheticViews(id) {
+      const seed = (id * 9301 + 49297) % 233280;
+      return 500 + Math.floor((seed / 233280) * 45000);
+    }
+
+    function departmentPlaylists(content) {
+      const tagCounts = {};
+      content.forEach(item => item.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+      return Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]).slice(0, 6).map(tag => ({ tag, count: tagCounts[tag] }));
+    }
+
+    let currentGroupDept = null;
+    let currentGroupTagFilter = 'all';
+
+    function openGroupProfile(dept) {
+      document.getElementById('groups-list').classList.remove('active');
+      document.getElementById('groups-profile').classList.add('active');
+      currentGroupDept = dept;
+      currentGroupTagFilter = 'all';
+
+      const content = departmentContent(dept).sort((a, b) => b.id - a.id);
+      const owners = departmentOwners(dept);
+      const accent = groupAccent(dept);
+      const banner = GROUP_BANNER[dept];
+
+      const hero = document.getElementById('groupHero');
+      hero.style.setProperty('--hero-color', accent);
+      hero.style.setProperty('--hero-image', banner ? `url('${banner}')` : 'none');
+      document.getElementById('groupHeroBadge').textContent = groupInitials(dept);
+      document.getElementById('groupHeroName').textContent = dept;
+      const stages = departmentWorkflowStages(dept);
+      document.getElementById('groupHeroMeta').textContent = `${content.length} content item${content.length === 1 ? '' : 's'} · ${owners.length} team member${owners.length === 1 ? '' : 's'} · ${stages.length}-stage approval workflow`;
+
+      // Top Content — ranked like Spotify's "Popular" list, by (synthetic) view count.
+      const top = [...content].sort((a, b) => syntheticViews(b.id) - syntheticViews(a.id)).slice(0, 5);
+      document.getElementById('groupRecentContent').innerHTML = top.length ? top.map((item, i) => `
+        <div class="group-recent-item" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})">
+          <span class="group-recent-rank">${i + 1}</span>
+          <div class="group-recent-icon">${typeIcon[item.kind]}</div>
+          <div class="group-recent-body">
+            <p class="group-recent-title">${item.title}</p>
+            <p class="group-recent-meta">${item.owner} · ${item.section}</p>
+          </div>
+          <span class="group-recent-views">${syntheticViews(item.id).toLocaleString()} views</span>
+        </div>
+      `).join('') : `<p style="color:var(--ink-500);font-size:13px;">No content yet from this group.</p>`;
+
+      // Playlists — auto-grouped by the most common tags this group's content uses.
+      const playlists = departmentPlaylists(content);
+      document.getElementById('groupPlaylists').innerHTML = `
+        <div class="playlist-tile playlist-tile-all active" data-tag="all" onclick="filterGroupPlaylist('all')">
+          <div class="playlist-tile-art" style="background:${accent};">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <p class="playlist-tile-name">All Content</p>
+          <p class="playlist-tile-count">${content.length} item${content.length === 1 ? '' : 's'}</p>
+        </div>
+        ${playlists.map(p => `
+          <div class="playlist-tile" data-tag="${p.tag}" onclick="filterGroupPlaylist('${p.tag}')">
+            <div class="playlist-tile-art" style="background:${accent};opacity:.72;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <p class="playlist-tile-name">${p.tag}</p>
+            <p class="playlist-tile-count">${p.count} item${p.count === 1 ? '' : 's'}</p>
+          </div>
+        `).join('')}
+      `;
+
+      renderGroupContentGrid();
+
+      const s = {
+        total: content.length,
+        live: content.filter(x => x.status === 'published' || x.status === 'active').length,
+        pending: content.filter(x => x.status === 'pending').length
+      };
+      document.getElementById('groupAboutStats').innerHTML = `
+        <div><p class="group-about-stat-value">${s.total}</p><p class="group-about-stat-label">Total Content</p></div>
+        <div><p class="group-about-stat-value">${s.live}</p><p class="group-about-stat-label">Live / Published</p></div>
+        <div><p class="group-about-stat-value">${s.pending}</p><p class="group-about-stat-label">In Review</p></div>
+      `;
+      document.getElementById('groupAboutTeam').innerHTML = owners.length
+        ? owners.map(o => `<span class="group-about-team-chip"><span class="group-about-team-avatar">${o.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>${o}</span>`).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;margin:0;">No team members assigned yet.</p>`;
+
+      document.getElementById('groupWorkflowNote').textContent = `Owned by this group — editing here only affects content from ${dept}, not any other division.`;
+      renderGroupWorkflowEditor(dept);
+    }
+
+    // ---- Per-group approval workflow editor — deliberately scoped to ONE department at a
+    // time and embedded in that group's own profile, rather than a single global settings
+    // surface. There's no real access-rights model yet, but a shared cross-department editor
+    // would let any one person silently tighten or loosen every other division's review
+    // process, which doesn't match how approval ownership should work. ----
+    let groupWorkflowDraft = null;
+
+    function renderGroupWorkflowEditor(dept) {
+      groupWorkflowDraft = JSON.parse(JSON.stringify(departmentWorkflows[dept]));
+      renderGroupWorkflowEditorRows();
+    }
+
+    function renderGroupWorkflowEditorRows() {
+      const el = document.getElementById('groupWorkflowEditor');
+      el.innerHTML = groupWorkflowDraft.map((stage, i) => {
+        const available = allTeamMembers().filter(name => !stage.approvers.includes(name));
+        return `
+        <div class="workflow-stage-editor-row">
+          <div class="workflow-stage-row">
+            <span class="workflow-stage-index">${i + 1}</span>
+            <input type="text" value="${stage.name.replace(/"/g, '&quot;')}" onchange="updateGroupWorkflowStage(${i}, this.value)" />
+            <button class="workflow-stage-remove" onclick="removeGroupWorkflowStage(${i})" ${groupWorkflowDraft.length <= 1 ? 'disabled' : ''} aria-label="Remove stage">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+          <div class="workflow-approvers-row">
+            <span class="workflow-approvers-label">Can approve this stage:</span>
+            <div class="workflow-approver-chips">
+              ${stage.approvers.length ? stage.approvers.map(name => `
+                <span class="workflow-approver-chip">${name}<button onclick="removeGroupWorkflowApprover(${i}, '${name.replace(/'/g, "\\'")}')" aria-label="Remove approver">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                </button></span>
+              `).join('') : `<span class="workflow-approvers-empty">No one assigned yet</span>`}
+            </div>
+            ${available.length ? `
+              <select class="workflow-approver-select" onchange="if(this.value){addGroupWorkflowApprover(${i}, this.value); this.value='';}">
+                <option value="">+ Add approver</option>
+                ${available.map(name => `<option value="${name}">${name}</option>`).join('')}
+              </select>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      }).join('') + `<button class="btn btn-sm" onclick="addGroupWorkflowStage()">+ Add Stage</button>`;
+    }
+
+    function updateGroupWorkflowStage(i, value) {
+      groupWorkflowDraft[i].name = value;
+    }
+
+    function addGroupWorkflowStage() {
+      groupWorkflowDraft.push({ name: 'New Stage', approvers: [] });
+      renderGroupWorkflowEditorRows();
+    }
+
+    function removeGroupWorkflowStage(i) {
+      if (groupWorkflowDraft.length <= 1) return;
+      groupWorkflowDraft.splice(i, 1);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function addGroupWorkflowApprover(i, name) {
+      if (!name || groupWorkflowDraft[i].approvers.includes(name)) return;
+      groupWorkflowDraft[i].approvers.push(name);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function removeGroupWorkflowApprover(i, name) {
+      groupWorkflowDraft[i].approvers = groupWorkflowDraft[i].approvers.filter(n => n !== name);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function saveGroupWorkflow() {
+      departmentWorkflows[currentGroupDept] = groupWorkflowDraft;
+      // Clamp any in-flight items in this department whose stage index no longer exists.
+      [...uploadsData, ...liveData].forEach(item => {
+        if (item.status === 'pending' && ownerDepartment(item.owner) === currentGroupDept) {
+          if ((item.workflowStageIndex || 0) >= groupWorkflowDraft.length) item.workflowStageIndex = groupWorkflowDraft.length - 1;
+        }
+      });
+      const stages = departmentWorkflowStages(currentGroupDept);
+      document.getElementById('groupHeroMeta').textContent = document.getElementById('groupHeroMeta').textContent.replace(/\d+-stage/, `${stages.length}-stage`);
+      renderUploadsTable();
+      renderLiveTable();
+    }
+
+    function filterGroupPlaylist(tag) {
+      currentGroupTagFilter = tag;
+      document.querySelectorAll('#groupPlaylists .playlist-tile').forEach(el => el.classList.toggle('active', el.dataset.tag === tag));
+      renderGroupContentGrid();
+    }
+
+    function renderGroupContentGrid() {
+      const content = departmentContent(currentGroupDept).sort((a, b) => b.id - a.id);
+      const filtered = currentGroupTagFilter === 'all' ? content : content.filter(x => x.tags.includes(currentGroupTagFilter));
+      document.getElementById('groupContentGrid').innerHTML = filtered.length
+        ? filtered.map(item => renderGroupContentCard(item)).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;">No content in this playlist.</p>`;
+    }
+
+    function closeGroupProfile() {
+      document.getElementById('groups-profile').classList.remove('active');
+      document.getElementById('groups-list').classList.add('active');
+    }
+
 
     // ---- Content Calendar: upcoming/scheduled content across Uploads and Live ----
     function contentCalendarEntries() {
@@ -7595,8 +8683,13 @@
       const item = arr.find(x => x.id === id);
       if (!item) return;
       item.status = checked ? 'active' : 'published';
-      if (kind === 'uploads') { renderUploadsStats(); renderUploadsTable(); renderUploadsLibrary(); }
-      else { renderLiveStats(); renderLiveTable(); renderLiveLibrary(); }
+      if (kind === 'uploads') {
+        logUploadActivity('Back Office', checked ? 'set live' : 'set to published (inactive)', item.title);
+        renderUploadsStats(); renderUploadsTable(); renderUploadsLibrary();
+      } else {
+        logLiveActivity('Back Office', checked ? 'set live' : 'set to published (inactive)', item.title);
+        renderLiveStats(); renderLiveTable(); renderLiveLibrary();
+      }
     }
 
     // ---- Live page ----
@@ -7614,9 +8707,9 @@
       document.getElementById('liveStats').innerHTML = `
       <div class="${cls('all')} accent-teal" onclick="filterLiveByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${liveData.length}</p></div>
       <div class="${cls('draft')} accent-gray" onclick="filterLiveByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
-      <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Live</p><p class="value">${s.active}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Active</p><p class="value">${s.active}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterLiveByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Live</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterLiveByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
@@ -7630,7 +8723,7 @@
       const visibleIds = new Set();
       liveData.forEach(item => {
         if (filter !== 'all' && item.status !== filter) return;
-        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
+        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || ownerDepartment(item.owner).toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
         visibleCount++;
         visibleIds.add(item.id);
         body.appendChild(renderRow(item, typeIcon.Live, 'Live', { selectable: true, selectedSet: selectedLiveIds, toggleFn: 'toggleLiveSelect' }));
@@ -7646,7 +8739,9 @@
       document.querySelectorAll('#liveViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
       document.getElementById('liveView-log').classList.toggle('active', view === 'log');
       document.getElementById('liveView-library').classList.toggle('active', view === 'library');
+      document.getElementById('liveView-activity').classList.toggle('active', view === 'activity');
       if (view === 'library') renderLiveLibrary();
+      if (view === 'activity') renderLiveActivity();
     }
 
     function renderLiveLibrary() {
@@ -9195,6 +10290,7 @@
       document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
       if (page === 'customer360') closeCustomerDossier();
       if (page === 'contentcalendar') { renderCalendarMonth(); renderContentCalendar(); }
+      if (page === 'groups') { closeGroupProfile(); renderGroupsList(); }
     }
 
     function openUploadModal() {
@@ -9223,6 +10319,7 @@
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
       uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
+      logUploadActivity(owner, 'saved a draft of', title);
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -9233,7 +10330,8 @@
       const owner = document.getElementById('uploadOwnerSelect').dataset.value;
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
-      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
+      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl(), workflowStageIndex: 0 });
+      logUploadActivity(owner, 'submitted for review', title);
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -9241,10 +10339,27 @@
 
     // ---- Content Detail modal: single-item approve/reject for Pending Review items ----
     function approveContentItem(item, kind) {
+      const note = document.getElementById('contentReviewNoteInput').value.trim();
+      const logFn = kind === 'Live' ? logLiveActivity : logUploadActivity;
+
+      if (item.status === 'pending') {
+        const stages = departmentWorkflowStages(ownerDepartment(item.owner));
+        const stageIdx = Math.min(item.workflowStageIndex || 0, stages.length - 1);
+        if (stageIdx < stages.length - 1) {
+          // Not the final stage yet — advance within the workflow, stay pending.
+          item.workflowStageIndex = stageIdx + 1;
+          if (note) item.reviewNote = note;
+          logFn(REVIEWER_TEAM, `advanced to stage "${stages[stageIdx + 1].name}" for`, item.title);
+          if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+          closeModal('contentOverlay');
+          return;
+        }
+      }
+
       item.status = 'published';
       item.reviewedBy = REVIEWER_TEAM;
-      const note = document.getElementById('contentReviewNoteInput').value.trim();
       if (note) item.reviewNote = note;
+      logFn(REVIEWER_TEAM, 'approved', item.title);
       if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
     }
@@ -9254,7 +10369,7 @@
       item.reviewedBy = REVIEWER_TEAM;
       const note = document.getElementById('contentReviewNoteInput').value.trim();
       if (note) item.reviewNote = note;
-      if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+      if (kind === 'Live') { logLiveActivity(REVIEWER_TEAM, 'rejected', item.title); renderLiveStats(); renderLiveTable(); } else { logUploadActivity(REVIEWER_TEAM, 'rejected', item.title); renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
     }
 
@@ -9291,14 +10406,18 @@
     }
 
     function bulkApproveUploads() {
+      const n = selectedUploadIds.size;
       uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'published'; });
+      if (n) logUploadActivity(REVIEWER_TEAM, 'bulk approved', `${n} upload${n === 1 ? '' : 's'}`);
       selectedUploadIds.clear();
       renderUploadsStats();
       renderUploadsTable();
     }
 
     function bulkRejectUploads() {
+      const n = selectedUploadIds.size;
       uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'rejected'; });
+      if (n) logUploadActivity(REVIEWER_TEAM, 'bulk rejected', `${n} upload${n === 1 ? '' : 's'}`);
       selectedUploadIds.clear();
       renderUploadsStats();
       renderUploadsTable();
@@ -9343,14 +10462,18 @@
     }
 
     function bulkApproveLive() {
+      const n = selectedLiveIds.size;
       liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'published'; });
+      if (n) logLiveActivity(REVIEWER_TEAM, 'bulk approved', `${n} live session${n === 1 ? '' : 's'}`);
       selectedLiveIds.clear();
       renderLiveStats();
       renderLiveTable();
     }
 
     function bulkRejectLive() {
+      const n = selectedLiveIds.size;
       liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'rejected'; });
+      if (n) logLiveActivity(REVIEWER_TEAM, 'bulk rejected', `${n} live session${n === 1 ? '' : 's'}`);
       selectedLiveIds.clear();
       renderLiveStats();
       renderLiveTable();
@@ -9370,6 +10493,7 @@
       const owner = document.getElementById('liveHostSelect').dataset.value;
       const section = document.getElementById('liveSectionSelect').dataset.value;
       liveData.unshift({ id: liveIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet scheduled.' });
+      logLiveActivity(owner, 'saved a draft of', title);
       renderLiveStats();
       renderLiveTable();
       closeModal('liveScheduleOverlay');
@@ -10220,6 +11344,7 @@
     renderC360Roster();
     renderCalendarMonth();
     renderContentCalendar();
+    renderGroupsList();
     // Must run first: it builds the KPI cards the renderers below write into.
     initializeVisualAnalytics();
     renderHealthMetrics();
