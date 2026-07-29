@@ -3294,7 +3294,21 @@
     .moment-time {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--teal-600);
+      align-self: start;
+      width: fit-content;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .moment-time.peak {
+      color: var(--green-600);
+      background: var(--green-bg);
+    }
+
+    .moment-time.later {
+      color: var(--info-600);
+      background: var(--info-bg);
     }
 
     .moment-copy b,
@@ -4083,6 +4097,27 @@
     .health-status.good { color: var(--chart-pos); }
     .health-status.warn { color: var(--amber-600); }
     .health-status.bad { color: var(--chart-neg); }
+
+    .moderation-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .moderation-state.good {
+      color: var(--chart-pos);
+    }
+
+    .moderation-state.warn {
+      color: var(--amber-600);
+    }
+
+    .moderation-state.bad {
+      color: var(--chart-neg);
+    }
 
     .performance-head,
     .performance-row {
@@ -9965,6 +10000,48 @@
       const values = baseline.map((value, pointIndex) => pointIndex === 0 ? 100 : Math.max(0, value + modifier));
       return renderInteractiveLineChart(`${type}DetailRetention${index}`, [{name:"Viewers remaining",values,color:"var(--chart-teal)"}], labels, {height:190,ariaLabel:`${item.title} viewer retention by timestamp`,format:value=>`${Math.round(value)}%`});
     }
+
+    function renderDetailHealthMetric(metric) {
+      const status = healthStatus(metric);
+      const fillColor = { good: "var(--chart-pos)", warn: "var(--amber-600)", bad: "var(--chart-neg)" };
+      const pct = value => Math.max(0, Math.min(100, value / metric.scale * 100));
+      const comparator = metric.goal === "lower" ? "≤" : "≥";
+      return `
+        <div class="health-metric">
+          <span>${metric.label}</span>
+          <div class="health-figure"><b>${metric.value}${metric.unit}</b></div>
+          <div class="health-track" role="img" aria-label="${metric.label}: ${metric.value}${metric.unit}, target ${comparator} ${metric.target}${metric.unit}, ${status.label}">
+            <i class="health-fill" style="width:${pct(metric.value)}%;background:${fillColor[status.key]}"></i>
+            <i class="health-target" style="left:${pct(metric.target)}%"></i>
+          </div>
+          <div class="health-foot">
+            <span>Target ${comparator} ${metric.target}${metric.unit}</span>
+            <span class="health-status ${status.key}">${status.glyph} ${status.label}</span>
+          </div>
+        </div>`;
+    }
+
+    function renderDetailModerationHealth(item) {
+      const state = item.flag <= 1
+        ? { key: "good", glyph: "✓", label: "Healthy" }
+        : item.flag <= 2
+          ? { key: "warn", glyph: "!", label: "Reviewing" }
+          : { key: "bad", glyph: "✕", label: "Needs attention" };
+      const metrics = [
+        { label: "Flag Rate", value: item.flag, target: 1, scale: 4, unit: "%", goal: "lower" },
+        { label: "Resolution SLA", value: 96, target: 95, scale: 100, unit: "%", goal: "higher" },
+        { label: "Response Time", value: 1.4, target: 2, scale: 6, unit: "h", goal: "lower" }
+      ];
+      return `
+        <div class="health-grid" style="grid-template-columns:repeat(2,1fr)">
+          <div class="health-metric">
+            <span>Overall status</span>
+            <div class="moderation-state ${state.key}">${state.glyph} ${state.label}</div>
+          </div>
+          ${metrics.map(renderDetailHealthMetric).join("")}
+        </div>`;
+    }
+
     function openAnalyticsDetail(type, index) {
       const item = analyticsItems[type][index]; if (!item) return;
       analyticsDetailTrigger = document.activeElement;
@@ -9996,8 +10073,8 @@
         </div>
         ${type !== "threads" ? `<div class="chart-card" style="margin-bottom:16px"><h3>Viewer Retention <span class="metric-help" title="The percentage of a starting viewer cohort that continues watching. Late joiners do not increase this percentage.">?</span></h3><p class="chart-sub">Percentage of the starting viewer cohort still watching at each timestamp; late joiners are excluded</p>${detailRetention(item,type,index)}</div>` : ""}
         <div class="analytics-detail-grid">
-          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
-          <div class="chart-card"><h3>Moderation Health</h3><div class="health-grid" style="grid-template-columns:repeat(2,1fr)"><div class="health-metric"><span>Flag Rate</span><b>${item.flag}%</b></div><div class="health-metric"><span>Status</span><b>${item.flag > 1 ? "Reviewing" : "Healthy"}</b></div><div class="health-metric"><span>Resolution SLA</span><b>96%</b></div><div class="health-metric"><span>Response Time</span><b>1.4h</b></div></div></div>
+          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time peak">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time later">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
+          <div class="chart-card"><h3>Moderation Health</h3>${renderDetailModerationHealth(item)}</div>
         </div>`;
       document.getElementById("analyticsDetailOverlay").classList.add("open");
       document.querySelector("#analyticsDetailOverlay .modal-close").focus();
