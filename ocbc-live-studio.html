@@ -2799,6 +2799,31 @@
       margin-bottom: 22px;
     }
 
+    .insights-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .insights-heading h3 {
+      margin: 0 0 3px;
+      font-size: 14px;
+    }
+
+    .insights-heading p {
+      margin: 0;
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .insights-count {
+      color: var(--ink-500);
+      font-size: 10.5px;
+      white-space: nowrap;
+    }
+
     .insight-card {
       background: var(--paper-0);
       border: 1px solid var(--line);
@@ -2857,6 +2882,16 @@
       font-size: 12.5px;
       line-height: 1.45;
       color: var(--ink-700);
+    }
+
+    .insight-category {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink-500);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .insight-text b {
@@ -3840,6 +3875,36 @@
       flex-shrink: 0;
     }
 
+    .lifecycle-summary {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 14px 0 16px;
+      padding-bottom: 11px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lifecycle-summary span,
+    .lifecycle-note {
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .lifecycle-summary b {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+    }
+
+    #threadLifecycleChart .b-val {
+      width: 105px;
+    }
+
+    .lifecycle-note {
+      margin: 4px 0 0;
+      line-height: 1.45;
+    }
+
     .legend {
       display: flex;
       gap: 14px;
@@ -4473,11 +4538,13 @@
     .format-comparison-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:12px;}
     .format-comparison-title b{font-family:'Sora',sans-serif;}
     .format-delta{font-size:10px;color:var(--green-600);text-align:right;max-width:110px;line-height:1.35;}
-    .format-bar-row{display:grid;grid-template-columns:92px 1fr 68px;align-items:center;gap:7px;margin-top:7px;font-size:10px;color:var(--ink-500);}
+    .format-count-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:7px;font-size:10.5px;color:var(--ink-500);}
+    .format-count-row b{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-700);}
+    .format-engagement-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:10.5px;color:var(--ink-500);}
+    .format-engagement-head b{color:var(--ink-700);font-size:10.5px;}
     .format-bar-track{height:7px;background:var(--paper-0);border-radius:5px;overflow:hidden;}
+    .format-engagement-head + .format-bar-track{margin-top:6px;}
     .format-bar-track i{display:block;height:100%;border-radius:5px;}
-    .format-bar-row>b{text-align:right;font-size:11px;color:var(--ink-700);}
-    .format-bar-row b small{display:block;font-size:9px;color:var(--ink-500);font-weight:500;}
     .metric-selectable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
     .metric-selectable:hover{border-color:var(--line-strong);}
     .metric-selectable.selected{background:var(--paper-100);}
@@ -6517,6 +6584,7 @@
 
         <!-- LIVE ANALYTICS -->
         <div class="analytics-tab-pane active" id="analytics-live">
+          <div class="insights-heading" id="insightsHeading-live"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-live"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -6574,6 +6642,7 @@
 
         <!-- UPLOADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-uploads">
+          <div class="insights-heading" id="insightsHeading-uploads"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-uploads"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -6631,6 +6700,7 @@
 
         <!-- THREADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-threads">
+          <div class="insights-heading" id="insightsHeading-threads"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-threads"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -9370,14 +9440,20 @@
           engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0))
         };
       });
-      const maxReach = Math.max(1,...totals.map(item => item.reach));
       const colors = {live:"var(--chart-red)",uploads:"var(--chart-teal)",threads:"var(--chart-gold)"};
-      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => `
-        <div class="format-comparison-card">
-          <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
-          <div class="format-bar-row"><span>Total views</span><div class="format-bar-track"><i style="width:${item.reach/maxReach*100}%;background:${colors[item.type]}"></i></div><b>${compactVisualNumber(item.reach)}</b></div>
-          <div class="format-bar-row"><span>Engaged viewers</span><div class="format-bar-track"><i style="width:${item.engaged/maxReach*100}%;background:${colors[item.type]};opacity:.65"></i></div><b>${compactVisualNumber(item.engaged)}<small>${item.reach?(item.engaged/item.reach*100).toFixed(1):"0.0"}% of views</small></b></div>
-        </div>`).join("");
+      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => {
+        const engagementRate = item.reach ? item.engaged / item.reach * 100 : 0;
+        return `
+          <div class="format-comparison-card">
+            <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
+            <div class="format-count-row"><span>Total views</span><b>${compactVisualNumber(item.reach)}</b></div>
+            <div class="format-count-row"><span>Engaged viewers</span><b>${compactVisualNumber(item.engaged)}</b></div>
+            <div class="format-engagement-head"><span>Engagement rate</span><b>${engagementRate.toFixed(1)}% of views</b></div>
+            <div class="format-bar-track" role="img" aria-label="${item.type} engagement rate: ${engagementRate.toFixed(1)}% of views">
+              <i style="width:${Math.min(100,engagementRate)}%;background:${colors[item.type]}"></i>
+            </div>
+          </div>`;
+      }).join("");
     }
 
     // The series supplies the SHAPE of the trend; its final point is pinned to the
@@ -9672,6 +9748,7 @@
           if (Math.abs(delta) >= 5) {
             insights.push({
               tone: delta > 0 ? "up" : "down",
+              category: "Period trend",
               title: `${metricNames[type]} period comparison`,
               text: `${metricNames[type]} ${delta > 0 ? "up" : "down"} ${Math.abs(delta).toFixed(1)}% vs the previous period.`,
               comparison: { previous, current, delta, metric: metricNames[type] },
@@ -9704,6 +9781,7 @@
         const share = leadingSection.average / totalAverage * 100;
         insights.push({
           tone: "info",
+          category: "Section driver",
           title: `${leadingSection.section} section driver`,
           text: `${leadingSection.section} is driving most of this period's ${sectionMetricNames[type]} — consider it a template for other sections.`,
           sectionDriver: { section: leadingSection.section, share, sectionCount: sectionAverages.length, metric: sectionMetricNames[type] },
@@ -9729,18 +9807,24 @@
     function renderAnalyticsInsights(type) {
       const insights = computeAnalyticsInsights(type);
       const el = document.getElementById(`insightsStrip-${type}`);
+      const heading = document.getElementById(`insightsHeading-${type}`);
       if (!el) return;
       if (!insights.length) {
         el.innerHTML = "";
         el.style.display = "none";
+        if (heading) heading.style.display = "none";
         return;
+      }
+      if (heading) {
+        heading.style.display = "flex";
+        heading.querySelector(".insights-count").textContent = `${insights.length} ${insights.length === 1 ? "insight" : "insights"}`;
       }
       el.style.display = "grid";
       const iconGlyph = { up: "↑", down: "↓", info: "i" };
       el.innerHTML = insights.map((insight, index) => `
         <button class="insight-card" type="button" onclick="openAnalyticsInsightDetail('${type}',${index})">
           <div class="insight-icon ${insight.tone}">${iconGlyph[insight.tone]}</div>
-          <div class="insight-text">${insight.text}<span class="insight-more">View details</span></div>
+          <div class="insight-text"><span class="insight-category">${insight.category}</span>${insight.text}<span class="insight-more">View details</span></div>
         </button>
       `).join("");
     }
@@ -11023,22 +11107,29 @@
 
     // Analytics: thread lifecycle chart (Threads tab)
     const threadLifecycle = [
-      { name: "Active", submissions: 286 },
-      { name: "Declining", submissions: 124 },
-      { name: "Dormant", submissions: 62 },
-      { name: "Flagged", submissions: 14 }
+      { name: "Active", submissions: 286, color: "var(--chart-pos)" },
+      { name: "Declining", submissions: 124, color: "var(--amber-600)" },
+      { name: "Dormant", submissions: 62, color: "var(--chart-gray)" },
+      { name: "Flagged", submissions: 14, color: "var(--chart-neg)" }
     ];
-    const maxLifecycle = Math.max(...threadLifecycle.map(d => d.submissions));
+    const totalLifecycle = threadLifecycle.reduce((sum, item) => sum + item.submissions, 0);
     // Guarded: this runs at parse time, so a missing mount would throw here and
     // silently take every script defined after it down with it.
     const lifecycleMount = document.getElementById('threadLifecycleChart');
-    if (lifecycleMount) lifecycleMount.innerHTML = threadLifecycle.map(d => `
-    <div class="bar-row">
-      <span class="b-label">${d.name}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(d.submissions / maxLifecycle * 100)}%"></div></div>
-      <span class="b-val">${d.submissions.toLocaleString()}</span>
-    </div>
-  `).join('');
+    if (lifecycleMount) lifecycleMount.innerHTML = `
+      <div class="lifecycle-summary"><span>Total threads</span><b>${totalLifecycle.toLocaleString()}</b></div>
+      ${threadLifecycle.map(item => {
+        const share = totalLifecycle ? item.submissions / totalLifecycle * 100 : 0;
+        return `
+          <div class="bar-row">
+            <span class="b-label">${item.name}</span>
+            <div class="bar-track" role="img" aria-label="${item.name}: ${item.submissions.toLocaleString()} threads, ${share.toFixed(1)}% of total threads">
+              <div class="bar-fill" style="width:${share}%;background:${item.color}"></div>
+            </div>
+            <span class="b-val">${item.submissions.toLocaleString()} · ${share.toFixed(1)}%</span>
+          </div>`;
+      }).join('')}
+      <p class="lifecycle-note">Bar length represents each lifecycle status as a share of total threads.</p>`;
 
     // ---- Customer 360 ----
     const customerRoster = [
