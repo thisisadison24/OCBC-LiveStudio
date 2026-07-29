@@ -707,6 +707,7 @@
 
     table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       font-size: 13px;
     }
@@ -760,6 +761,7 @@
 
     .desc-cell {
       color: var(--ink-500);
+      min-width: 260px;
       max-width: 420px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -829,6 +831,14 @@
       background: transparent;
       border: 1px dashed var(--line-strong);
       color: var(--ink-500);
+    }
+
+    .expiry-cell {
+      width: 128px;
+      max-width: 128px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .expiry-chip {
@@ -1586,6 +1596,8 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .library-thumb {
@@ -1622,6 +1634,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 8px 14px 12px;
+      margin-top: auto;
     }
 
     .library-toggle-group {
@@ -2368,6 +2381,21 @@
       justify-content: center;
       color: #87847C;
       margin-bottom: 14px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .video-box.has-thumb .video-box-play {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
     }
 
     .transcript-box {
@@ -5645,13 +5673,13 @@
                     <tr>
                       <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
                           onchange="toggleSelectAllUploads(this)" /></td>
-                      <td>Title</td>
-                      <td>Group</td>
-                      <td>Section</td>
-                      <td>Tags</td>
-                      <td>Status</td>
-                      <td>Expires</td>
-                      <td>Description</td>
+                      <td style="width:16%;">Title</td>
+                      <td style="width:9%;">Group</td>
+                      <td style="width:10%;">Section</td>
+                      <td style="width:12%;">Tags</td>
+                      <td style="width:150px;">Status</td>
+                      <td class="expiry-cell">Expires</td>
+                      <td style="width:auto;">Description</td>
                     </tr>
                   </thead>
                   <tbody id="uploadsTableBody"></tbody>
@@ -5724,12 +5752,12 @@
                 <tr>
                   <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll"
                       onchange="toggleSelectAllLive(this)" /></td>
-                  <td>Title</td>
-                  <td>Group</td>
-                  <td>Section</td>
-                  <td>Tags</td>
-                  <td>Status</td>
-                  <td>Description</td>
+                  <td style="width:16%;">Title</td>
+                  <td style="width:9%;">Group</td>
+                  <td style="width:10%;">Section</td>
+                  <td style="width:12%;">Tags</td>
+                  <td style="width:150px;">Status</td>
+                  <td style="width:auto;">Description</td>
                 </tr>
               </thead>
               <tbody id="liveTableBody"></tbody>
@@ -7531,11 +7559,13 @@
         </div>
         <div class="detail-grid">
           <div>
-            <div class="video-box">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none" />
-              </svg>
+            <div class="video-box" id="contentPlayerBox">
+              <span class="video-box-play">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
             </div>
             <div class="side-block">
               <h3 id="contentTranscriptHeading">Video Transcript</h3>
@@ -7717,7 +7747,7 @@
       { id: 16, title: "Cross-Border Payments 101", owner: "A. Kumar", section: "Corporate banking", tags: ["Payments"], status: "draft", description: "Introductory explainer on cross-border payment rails and settlement timing for corporate clients.", scheduledFor: daysFromNow(28), scheduledTime: "1:00 PM" },
       { id: 17, title: "Year-End Tax Planning Tips", owner: "S. Wong", section: "Wealth", tags: ["Tax", "Planning"], status: "pending", description: "Seasonal explainer covering common year-end tax planning moves for Premier clients.", scheduledFor: daysFromNow(35), scheduledTime: "9:00 AM", expiresOn: daysFromNow(95) },
       { id: 18, title: "SG Budget 2026: What It Means for Savers", owner: "J. Tan", section: "Markets", tags: ["Budget", "Policy"], status: "published", description: "Embedded explainer video breaking down the SG Budget 2026 announcements relevant to retail savers.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=sgbudget2026", expiresOn: daysFromNow(75) },
-      { id: 19, title: "Rate Hike Ripple Effects", owner: "A. Kumar", section: "Markets", tags: ["Rates"], status: "active", description: "Embedded video walking through how a rate hike flows through mortgages, savings, and business loans.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=ratehikeripple", expiresOn: daysFromNow(40) },
+      { id: 19, title: "Rate Hike Ripple Effects", owner: "A. Kumar", section: "Markets", tags: ["Rates"], status: "active", description: "Embedded video walking through how a rate hike flows through mortgages, savings, and business loans.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=ratehikeripple", expiresOn: daysFromNow(40), thumbnail: "images/video/thumbnails/gib/ratehikerippleeffects.png" },
       { id: 20, title: "Market Minute: This Week in Rates", owner: "M. Lee", section: "Markets", tags: ["Podcast"], status: "published", description: "Weekly audio round-up covering the past week's key rate moves and what to watch next.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/marketminute", expiresOn: daysFromNow(30) },
       { id: 21, title: "Wealth Unpacked: Retirement Myths", owner: "S. Wong", section: "Wealth", tags: ["Podcast", "Retirement"], status: "pending", description: "Podcast episode debunking common retirement planning myths, awaiting review before publishing.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/wealthunpacked" }
     ];
@@ -7880,7 +7910,7 @@
         ? `<td class="row-check-cell" onclick="event.stopPropagation()"><input type="checkbox" class="row-check" ${opts.selectedSet.has(item.id) ? 'checked' : ''} onchange="${opts.toggleFn}(${item.id}, this.checked)" /></td>`
         : '';
       const expiryCell = opts.expiry
-        ? (() => { const info = expiryInfo(item); return `<td><span class="expiry-chip ${info.cls}">${info.label}</span></td>`; })()
+        ? (() => { const info = expiryInfo(item); return `<td class="expiry-cell"><span class="expiry-chip ${info.cls}">${info.label}</span></td>`; })()
         : '';
       const rowIcon = item.sourceType && typeIcon[sourceTypeLabel[item.sourceType]] ? typeIcon[sourceTypeLabel[item.sourceType]] : icon;
       const sourceTag = item.sourceType && sourceTypeLabel[item.sourceType] ? `<span class="table-source-tag">${sourceTypeLabel[item.sourceType]}</span>` : '';
@@ -7954,6 +7984,14 @@
       const isDraft = item.status === 'draft';
 
       document.getElementById('contentTitle').textContent = item.title;
+      const playerBox = document.getElementById('contentPlayerBox');
+      if (item.thumbnail) {
+        playerBox.classList.add('has-thumb');
+        playerBox.style.backgroundImage = `url('${item.thumbnail}')`;
+      } else {
+        playerBox.classList.remove('has-thumb');
+        playerBox.style.backgroundImage = '';
+      }
       const sourceLabel = item.sourceType && sourceTypeLabel[item.sourceType] ? sourceTypeLabel[item.sourceType] + ' embed' : (kind === 'Live' ? 'Live session' : 'Local upload');
       const scheduleLabel = item.scheduledFor ? ` · Scheduled ${new Date(item.scheduledFor + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}${item.scheduledTime ? ' at ' + item.scheduledTime : ''}` : '';
       document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${sourceLabel}${item.sourceUrl ? ' · ' + item.sourceUrl : ''}${scheduleLabel}`;
@@ -8620,7 +8658,7 @@
       return `<div class="library-card">
         <div class="library-card-open" onclick="openLibraryItem('${kind}', ${item.id})">
           <div class="library-thumb">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+            ${item.thumbnail ? `<img src="${item.thumbnail}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">` : `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>`}
           </div>
           <div class="library-card-body">
             <p class="library-card-title">${item.title}</p>
@@ -8961,7 +8999,7 @@
       return `<div class="library-card">
         <div class="library-card-open" onclick="openLibraryItem('${kind}', ${item.id})">
           <div class="library-thumb">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+            ${item.thumbnail ? `<img src="${item.thumbnail}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">` : `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>`}
           </div>
           <div class="library-card-body">
             <p class="library-card-title">${item.title}</p>
