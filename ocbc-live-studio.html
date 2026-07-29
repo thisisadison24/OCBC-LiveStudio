@@ -3265,6 +3265,44 @@
       background: var(--paper-100);
     }
 
+    .visual-analytics-overview{margin:0 0 18px;}
+    .visual-analytics-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px;}
+    .visual-analytics-head h3{margin:0 0 4px;font-size:14px;}
+    .visual-analytics-head p{margin:0;color:var(--ink-500);font-size:11.5px;}
+    .format-comparison-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    .format-comparison-card{padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--paper-100);}
+    .format-comparison-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:12px;}
+    .format-comparison-title b{font-family:'Sora',sans-serif;}
+    .format-delta{font-size:10px;color:var(--green-600);text-align:right;max-width:110px;line-height:1.35;}
+    .format-bar-row{display:grid;grid-template-columns:92px 1fr 68px;align-items:center;gap:7px;margin-top:7px;font-size:10px;color:var(--ink-500);}
+    .format-bar-track{height:7px;background:var(--paper-0);border-radius:5px;overflow:hidden;}
+    .format-bar-track i{display:block;height:100%;border-radius:5px;}
+    .format-bar-row>b{text-align:right;font-size:11px;color:var(--ink-700);}
+    .format-bar-row b small{display:block;font-size:9px;color:var(--ink-500);font-weight:500;}
+    .metric-selectable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
+    .metric-selectable:hover{border-color:var(--line-strong);}
+    .metric-selectable.selected{border-color:var(--teal-600);background:linear-gradient(180deg,var(--teal-bg),var(--paper-0) 48%);}
+    .metric-selectable:focus-visible{outline:2px solid var(--teal-600);outline-offset:2px;}
+    .primary-analytics-chart{margin:-6px 0 16px;}
+    .primary-chart-summary{display:flex;align-items:baseline;gap:9px;margin-top:8px;}
+    .primary-chart-summary b{font-family:'Sora',sans-serif;font-size:22px;}
+    .primary-chart-summary span{font-size:11px;color:var(--green-600);}
+    .benchmark-legend{display:flex;align-items:center;gap:14px;font-size:10.5px;color:var(--ink-500);}
+    .benchmark-key{display:inline-flex;align-items:center;gap:5px;}
+    .benchmark-key i{width:16px;height:3px;border-radius:3px;background:var(--chart-red);}
+    .benchmark-key.typical i{height:8px;background:var(--teal-bg);border:1px solid var(--chart-teal);}
+    .visual-support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    .audience-stacked{display:flex;height:22px;border-radius:7px;overflow:hidden;margin:14px 0 12px;}
+    .audience-stacked i{display:block;height:100%;}
+    .audience-legend{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
+    .audience-legend-item{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--ink-500);}
+    .audience-legend-item span{display:flex;align-items:center;gap:6px;}
+    .audience-legend-item i{width:8px;height:8px;border-radius:3px;}
+    .insight-list{display:grid;gap:9px;margin-top:12px;}
+    .visual-insight{padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper-100);}
+    .visual-insight b{display:block;font-size:11.5px;margin-bottom:3px;}
+    .visual-insight span{font-size:10.5px;color:var(--ink-500);line-height:1.45;}
+
     /* Customer 360 */
     .sync-flag {
       font-size: 11px;
@@ -3927,6 +3965,11 @@
 
       .performance-toolbar .search {
         width: 100%;
+      }
+
+      .format-comparison-grid,
+      .visual-support-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -7520,6 +7563,157 @@
       { daysAgo: 11, segment: "New users", status: "Flagged" }
     ].forEach((meta, index) => Object.assign(analyticsItems.threads[index], meta));
 
+    const visualAnalyticsState = { live: 0, uploads: 0, threads: 0 };
+    const visualAnalyticsSeries = {
+      live: [[720,1080,1420,1260,1840,2160,1980],[58,64,71,69,77,82,79],[51,55,60,58,64,70,67],[22,25,28,31,29,36,34]],
+      uploads: [[8200,9600,11800,10400,13200,14900,15700],[680,740,820,790,910,1020,1080],[51,54,56,58,57,61,63],[7.1,7.8,8.4,8.2,9.1,9.7,10.2]],
+      threads: [[4100,4600,5200,4900,6100,6800,7200],[42,51,64,58,76,88,94],[15.2,16.1,17.4,17.1,18.5,19.2,19.8],[8.4,9.1,10.2,9.8,11.4,12.1,12.8]]
+    };
+    const visualAudience = { live:[28,38,20,14], uploads:[36,34,18,12], threads:[24,42,23,11] };
+
+    function initializeVisualAnalytics() {
+      if (document.getElementById("formatComparisonChart")) return;
+      document.getElementById("analyticsTabbar").insertAdjacentHTML("beforebegin", `
+        <div class="chart-card visual-analytics-overview">
+          <div class="visual-analytics-head"><div><h3>Performance by Content Format</h3><p>Compare reach and meaningful participation across Live, Uploads and Threads</p></div><span class="result-count">Filtered selection</span></div>
+          <div class="format-comparison-grid" id="formatComparisonChart"></div>
+        </div>`);
+      ["live","uploads","threads"].forEach(type => {
+        const pane = document.getElementById(`analytics-${type}`);
+        const grid = pane.querySelector(".kpi-grid");
+        [...grid.children].slice(0,4).forEach((card,index) => {
+          card.classList.add("metric-selectable");
+          card.tabIndex = 0;
+          card.setAttribute("role","button");
+          card.onclick = () => selectVisualMetric(type,index);
+          card.onkeydown = event => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              selectVisualMetric(type,index);
+            }
+          };
+        });
+        grid.insertAdjacentHTML("afterend", `
+          <div class="chart-card primary-analytics-chart" id="${type}PrimaryChart"></div>
+          <div class="visual-support-grid">
+            <div class="chart-card" id="${type}AudienceVisual"></div>
+            <div class="chart-card" id="${type}InsightVisual"></div>
+          </div>`);
+        const legacyTrendRow = pane.querySelector(".chart-row");
+        if (legacyTrendRow) {
+          legacyTrendRow.firstElementChild.style.display = "none";
+          legacyTrendRow.style.gridTemplateColumns = "1fr";
+        }
+      });
+      renderVisualAnalytics();
+    }
+
+    function selectVisualMetric(type,index) {
+      visualAnalyticsState[type] = index;
+      renderPrimaryVisual(type);
+    }
+
+    function compactVisualNumber(value) {
+      if (value >= 1000000) return `${(value/1000000).toFixed(1)}M`;
+      if (value >= 1000) return `${(value/1000).toFixed(1)}K`;
+      return Math.round(value).toLocaleString();
+    }
+
+    function crossFormatRows(type) {
+      const status = document.getElementById("analyticsStatusFilter");
+      const saved = status.value;
+      status.value = "all";
+      const rows = analyticsFilteredItems(type);
+      status.value = saved;
+      return rows;
+    }
+
+    function renderFormatComparison() {
+      const types = ["live","uploads","threads"];
+      const totals = types.map(type => {
+        const rows = crossFormatRows(type);
+        return {
+          type,
+          reach: rows.reduce((sum,item) => sum + item.views,0),
+          engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0))
+        };
+      });
+      const maxReach = Math.max(1,...totals.map(item => item.reach));
+      const colors = {live:"var(--chart-red)",uploads:"var(--chart-teal)",threads:"var(--chart-gold)"};
+      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => `
+        <div class="format-comparison-card">
+          <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
+          <div class="format-bar-row"><span>Total views</span><div class="format-bar-track"><i style="width:${item.reach/maxReach*100}%;background:${colors[item.type]}"></i></div><b>${compactVisualNumber(item.reach)}</b></div>
+          <div class="format-bar-row"><span>Engaged viewers</span><div class="format-bar-track"><i style="width:${item.engaged/maxReach*100}%;background:${colors[item.type]};opacity:.65"></i></div><b>${compactVisualNumber(item.engaged)}<small>${item.reach?(item.engaged/item.reach*100).toFixed(1):"0.0"}% of views</small></b></div>
+        </div>`).join("");
+    }
+
+    function visualSeriesFor(type,index) {
+      const base = visualAnalyticsSeries[type][index];
+      const rows = analyticsFilteredItems(type);
+      if (!rows.length) return base.map(() => 0);
+      const ratio = Math.max(.35,Math.min(1.35,rows.length/analyticsItems[type].length*1.35));
+      return base.map(value => index >= 2 ? value*(.88+ratio*.12) : value*ratio);
+    }
+
+    function renderPrimaryVisual(type) {
+      const index = visualAnalyticsState[type];
+      const pane = document.getElementById(`analytics-${type}`);
+      const cards = [...pane.querySelectorAll(".kpi-grid .stat-card")].slice(0,4);
+      cards.forEach((card,i) => card.classList.toggle("selected",i === index));
+      const label = cards[index].querySelector(".label").textContent.replace("?","").trim();
+      const currentValue = cards[index].querySelector(".value").textContent;
+      const values = visualSeriesFor(type,index);
+      const width=760,height=210,padX=42,padY=28,max=Math.max(1,...values)*1.16;
+      const points=values.map((value,i)=>({x:padX+i*(width-padX*2)/(values.length-1),y:height-padY-value/max*(height-padY*2)}));
+      const upper=points.map((p,i)=>`${p.x},${Math.max(padY,p.y-14-(i%3)*2)}`);
+      const lower=points.slice().reverse().map((p,i)=>`${p.x},${Math.min(height-padY,p.y+13+(i%2)*3)}`);
+      document.getElementById(`${type}PrimaryChart`).innerHTML = `
+        <div class="visual-analytics-head"><div><h3>${label} Over Time</h3><p>Compared with the typical range for similar ${type==="live"?"sessions":type}</p><div class="primary-chart-summary"><b>${currentValue}</b><span>+${[8.4,4.2,2.6,1.8][index]}% vs previous period</span></div></div>
+          <div class="benchmark-legend"><span class="benchmark-key"><i></i>Actual</span><span class="benchmark-key typical"><i></i>Typical range</span></div></div>
+        <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:210px" role="img" aria-label="${label} trend">
+          <path class="chart-axis" d="M42 182H718M42 105H718M42 28H718"/>
+          <polygon points="${upper.concat(lower).join(" ")}" fill="var(--teal-bg)" stroke="var(--chart-teal)" opacity=".75"/>
+          <polyline points="${points.map(p=>`${p.x},${p.y}`).join(" ")}" fill="none" stroke="var(--chart-red)" stroke-width="3"/>
+          ${points.map((p,i)=>`<circle cx="${p.x}" cy="${p.y}" r="${i===4?4:2.5}" fill="var(--chart-red)"/><text class="chart-label" x="${p.x}" y="203" text-anchor="middle">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</text>`).join("")}
+          <line x1="${points[4].x}" y1="${points[4].y-5}" x2="${points[4].x}" y2="${points[4].y-28}" stroke="var(--amber-600)" stroke-dasharray="3 3"/>
+          <text class="chart-value" x="${points[4].x}" y="${points[4].y-33}" text-anchor="middle">${type==="threads"?"Reply spike":"Content published"}</text>
+        </svg>`;
+    }
+
+    function renderAudienceVisual(type) {
+      const labels=["New","Returning","Regular","Premier"];
+      const colors=["var(--chart-red)","var(--chart-teal)","var(--chart-gold)","var(--chart-gray)"];
+      const segment=document.getElementById("analyticsSegmentFilter").value;
+      const values=segment==="all" ? visualAudience[type] : labels.map(label=>segment.startsWith(label)?100:0);
+      document.getElementById(`${type}AudienceVisual`).innerHTML=`
+        <h3>Audience Composition</h3><p class="chart-sub">Who engaged during the selected period</p>
+        <div class="audience-stacked">${values.map((value,i)=>`<i style="width:${value}%;background:${colors[i]}"></i>`).join("")}</div>
+        <div class="audience-legend">${values.map((value,i)=>`<div class="audience-legend-item"><span><i style="background:${colors[i]}"></i>${labels[i]}</span><b>${value}%</b></div>`).join("")}</div>`;
+    }
+
+    function renderInsightVisual(type) {
+      const rows=analyticsFilteredItems(type);
+      const insights={
+        live:[["Attendance opportunity","Most loss occurs between registration and app access."],["Peak participation","Poll responses are strongest during the middle third."]],
+        uploads:[["Retention highlight","Explainer segments outperform introductions by 11 points."],["Evergreen opportunity","Older uploads continue attracting returning viewers."]],
+        threads:[["Healthy discussion","Returning contributors generate the deepest reply chains."],["Response opportunity","Fast answers receive 1.6× more follows."]]
+      };
+      document.getElementById(`${type}InsightVisual`).innerHTML=`
+        <h3>Key Insights</h3><p class="chart-sub">Annotated patterns from the selected data</p>
+        <div class="insight-list">${rows.length?insights[type].map(([title,copy])=>`<div class="visual-insight"><b>${title}</b><span>${copy}</span></div>`).join(""):`<div class="visual-insight"><b>No matching data</b><span>Broaden the filters to generate insights.</span></div>`}</div>`;
+    }
+
+    function renderVisualAnalytics() {
+      if (!document.getElementById("formatComparisonChart")) return;
+      renderFormatComparison();
+      ["live","uploads","threads"].forEach(type=>{
+        renderPrimaryVisual(type);
+        renderAudienceVisual(type);
+        renderInsightVisual(type);
+      });
+    }
+
     const performanceState = {
       live: { page: 1, key: "primary", dir: "desc" },
       uploads: { page: 1, key: "views", dir: "desc" },
@@ -7653,6 +7847,7 @@
       renderLivePerformanceTable();
       renderPerformanceTable("uploads");
       renderPerformanceTable("threads");
+      renderVisualAnalytics();
     }
 
     function sortPerformance(type, key) {
@@ -9016,6 +9211,7 @@
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
     renderPerformanceTable('threads');
+    initializeVisualAnalytics();
   </script>
 </body>
 
