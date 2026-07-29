@@ -1,0 +1,212 @@
+PROMPT — ADD UPLOADS, LIVE, CONTENT LIBRARY & CONTENT CALENDAR TO THE EXISTING BACK OFFICE
+
+CONTEXT
+My back office (still in progress) already has its own tabs/pages and its own nav. I want
+you to add four new, interlinked features to it, matching the reference product's actual
+behavior in detail (not just the visual shell): Uploads, Live, a Content Library view, and
+a Content Calendar. These four are one connected system — they share a single underlying
+content model, cross-link to each other, and should be added as new nav destinations
+alongside whatever nav items already exist. Do not remove or restructure any existing
+back-office page while doing this.
+
+If you're also given a separate UI-theme-replication prompt for this same codebase, apply
+this feature spec USING that design system's components (stat cards, badges, tabs, panels,
+modals) rather than introducing new one-off styles.
+
+====================================================================
+1. SHARED DATA MODEL
+====================================================================
+Uploads and Live are two separate content collections that share the same shape:
+
+  {
+    id, title, owner, section, tags: [string],
+    status: 'draft' | 'pending' | 'active' | 'published' | 'flagged' | 'rejected',
+    description,
+    sourceType?: 'local' | 'youtube' | 'spotify',   // Uploads only; absent = local file
+    sourceUrl?: string,                              // set when sourceType is youtube/spotify
+    scheduledFor?: 'YYYY-MM-DD',                      // set while draft/pending — when it goes live
+    scheduledTime?: 'h:mm AM/PM',                     // paired with scheduledFor
+    expiresOn?: 'YYYY-MM-DD',                         // set once live/published — when it auto-unpublishes
+    reviewNote?, reviewedBy?, transcript?             // optional, for review/detail display
+  }
+
+STATUS VOCABULARY — use exactly these labels, and use them consistently everywhere the
+status is shown (table badges, the status filter chips, and the status dropdown inside
+the entry-detail panel all must agree):
+  draft -> "Draft", pending -> "Pending Review", active -> "Live", published -> "Published",
+  flagged -> "Flagged", rejected -> "Rejected".
+Do not label the 'active' status "Active" in one place and "Live" in another — pick "Live"
+everywhere. This app is specifically about live/on-demand video content, so "Live" is the
+correct, non-ambiguous term for "currently airing / currently available."
+
+SOURCE TYPE VOCABULARY — same rule applies to source categories. Whatever labels you use
+for the Uploads source filter in the sidebar (e.g. "Local Uploads" / "Embedded Videos" /
+"Podcasts") must be the SAME family of labels used in the "New Upload" creation flow's
+source picker (e.g. "Local Upload" / "Embedded Video" / "Podcast" — singular there since
+you're picking one). Don't let the sidebar say "Embedded Videos" while the creation modal's
+equivalent tab says "YouTube" — the underlying value (youtube/spotify) can stay technical,
+but the user-facing category name must match between every surface that shows it.
+
+EXPIRY LOGIC — a piece of content only has ONE of scheduledFor or expiresOn active at a
+given time in its lifecycle (draft/pending items are scheduled to go live; live/published
+items are counting down to expiry), but a single item CAN carry both scheduledFor and a
+pre-planned expiresOn simultaneously (e.g. "goes live in 4 days, and is already configured
+to auto-expire 14 days after that") — support this combination, don't assume they're
+mutually exclusive fields. Compute an expiry bucket for display: none / scheduled / expiring
+(within a threshold, e.g. 7 days) / expired (date has passed).
+
+====================================================================
+2. UPLOADS PAGE
+====================================================================
+- Page header: title + description, "+ New Upload" primary button (opens the creation
+  modal — see section 5).
+- KPI filter row (stat cards, one per status plus an "All" and an "Expiring Soon" tile),
+  each clickable to filter the table below; each carries its own accent color (see the
+  theme prompt's stat-card spec) and the selected state highlights in that same color.
+  Include one plain, non-clickable, non-accented card for a summary metric like average
+  review time — don't accent-match it to the "All" tile next to it.
+  Chip labels: All / Drafts / Live / Pending Review / Published / Flagged / Expiring Soon.
+- A source-filter side rail: All Sources / Local Uploads / Embedded Videos / Podcasts —
+  filters the table by sourceType. Labels must match the New Upload modal's source
+  picker labels per the vocabulary rule above.
+- View toggle (underline-style tabs): Log (table) / Library (grid — see section 4).
+- Table columns: checkbox, title (+ type icon + a small source tag chip when sourceType is
+  set), owner, section, tags, status badge, expiry chip, description. Row click opens the
+  entry-detail panel (section 6). Support multi-select with a bulk action bar (Approve /
+  Reject / Delete) that appears above the table when rows are checked.
+- Search box filtering by title/owner/tags.
+
+====================================================================
+3. LIVE PAGE
+====================================================================
+Mirrors the Uploads page structure closely, with these differences:
+- "+ Schedule Live" (or similarly named) primary button opens the live-session creation
+  modal (section 5) instead of the upload modal.
+- No source-type rail (Live sessions don't have a sourceType) — just the status filter
+  chips and the Log/Library view toggle.
+- The "Live" status filter chip's dot should be the pulsing "live" dot style (not a plain
+  status dot) to signal this is about sessions currently airing.
+- Table columns are the same shape minus source-specific columns.
+
+====================================================================
+4. CONTENT LIBRARY (grid view, shared by Uploads and Live)
+====================================================================
+- Reachable via the "Library" tab on both the Uploads and Live pages — shows only items
+  that are Live or Published (i.e., actually visible in the consumer app right now).
+- Grid of cards: thumbnail, title, owner/section meta, opens the entry-detail panel on
+  click.
+- Each card's footer has a small "Live" on/off switch (to quickly flip an item between
+  Live and Published without opening the full detail panel) — the switch MUST have a
+  small visible text label (e.g. "Live") right next to it; don't ship an unlabeled toggle,
+  it's not obvious what it controls otherwise. Also show the expiry label on the same row.
+
+====================================================================
+5. CREATION MODALS
+====================================================================
+NEW UPLOAD (centered modal):
+- Internal navigation as underline tabs (not pills): Content / Visibility & Comments /
+  Schedule.
+- Content tab: a source picker (also underline tabs, matching the sidebar's category
+  vocabulary — see section 1) with three source panes:
+    - Local Upload: a dropzone for a file.
+    - Embedded Video: a URL field + a fetched-preview block (thumbnail/title placeholder).
+    - Podcast: same pattern as embedded video, for an audio embed URL.
+  Plus title, description, section, and tags fields, shared across all three source panes.
+- Visibility & Comments tab: who can view it / comment settings, matching whatever
+  visibility pattern you use in the Live modal (see below) if one already exists.
+- Schedule tab: date + optional time for when it should go live, and — since a single
+  item can carry both a schedule and a planned expiry — an optional "auto-expire after"
+  or explicit expiry date field here too.
+
+SCHEDULE LIVE SESSION (centered modal, single scrolling form, no internal tabs needed):
+- Cover image picker (upload or auto-generate), session title, description.
+- A "When does this go live?" section: date, time, and time zone fields.
+- Host and section pickers, an optional co-host/panelist invite field.
+- "Who Can Watch" as a set of radio-style option cards (not plain radio buttons): Public /
+  Restricted (with conditional sub-fields for tag/CIF-based targeting) / Private.
+- "During the Live" toggles: notify followers on go-live, enable live chat, enable a
+  Q&A queue.
+- Footer actions: Cancel / Save as Draft / Schedule Live Session (primary).
+
+====================================================================
+6. ENTRY-DETAIL SLIDE PANEL (shared by Uploads, Live, Content Library, and Content Calendar)
+====================================================================
+Opening any row/card/calendar-entry (regardless of which of the four surfaces it was
+opened from) opens the SAME slide-in detail panel component — implement this once and
+reuse it everywhere, don't build four separate detail views.
+- Header: title + a meta line with owner, section, source (e.g. "Local upload" /
+  "YouTube embed"), and — when the item has one — its scheduled date/time (e.g.
+  "Scheduled 3 Aug 2026 at 9:00 AM"). Don't drop the scheduled time here even though it's
+  also shown elsewhere (the calendar) — someone opening the panel directly (e.g. from the
+  table, not the calendar) still needs to see it.
+- Editable fields block: title, status (dropdown, using the shared status vocabulary),
+  section, owner, tags — this back office can amend any of these directly from the panel.
+- Content column: an embedded video/audio player placeholder, transcript (or, if there's
+  no transcript, a plain description) below it.
+- Review column: review comments/notes (shown for pending or flagged items specifically,
+  with a note about who's reviewing), and an audit trail log. The audit trail should
+  narrate the item's lifecycle in plain sentences, e.g.:
+    "<owner> started this upload" / "...scheduled this live session"
+    "Saved as draft — not yet submitted for review" (draft)
+    "Awaiting approval from <review team>" (pending)
+    "Auto-flag triggered on transcript scan" / "Assigned to Compliance" (flagged)
+    "Approved by <reviewer>" / "Reviewed and published" (published)
+    "Currently live" / "Live and available on demand" (live)
+    "Rejected by <reviewer>" (rejected)
+    a reviewer-note line, if one exists
+    "Scheduled to go live on <date> at <time>" — whenever scheduledFor is set
+    "Scheduled to unpublish on <date>" or "Unpublished automatically on <date> (content
+      expiry)" — whenever expiresOn is set
+  Add lines for whichever of these conditions are true; don't hardcode a fixed set of
+  lines regardless of the item's actual state.
+- Footer: Close, plus Reject/Approve (only shown when the item is pending).
+- Layout & behavior — this is a persistent side panel, not a blocking modal:
+  - No dark backdrop; the rest of the page stays fully visible and interactive.
+  - Docks below the top bar (not overlapping/hiding it) and the underlying page content
+    reflows to make room (see the theme-replication prompt's slide-panel spec for the
+    exact mechanism) so the table and the panel are both fully usable at once, at any
+    window size.
+  - Closes automatically the moment the user navigates to a different page/tab — it
+    should never stay open (with the page still shrunk to make room for it) behind a
+    page the user has since left.
+
+====================================================================
+7. CONTENT CALENDAR
+====================================================================
+- A dedicated page, reachable from the main nav, showing every Upload/Live item that has
+  a scheduledFor date (i.e., upcoming/scheduled content across both collections).
+- View toggle (underline tabs): Month (grid) / Agenda (grouped list).
+- This page may use a wider/full-width container instead of the standard content max-width
+  — a calendar grid genuinely needs the room; make that widening an explicit exception in
+  the layout, not a side-effect.
+- Month view: a standard 7-column month grid. Each day cell lists up to a handful of that
+  day's entries as small colored chips (colored by status), each showing its scheduled
+  time as a bold inline prefix (e.g. "9:00 Wealth Planning 101") — abbreviate the time so
+  it fits on one line with the title; a "+N more" chip when a day has more entries than
+  fit. Hovering a chip's tooltip should show the time, title, and — if the item has one —
+  its expiry date. Clicking a chip opens the entry-detail panel (section 6).
+- Agenda view: entries grouped under date-relative headers (Overdue / Today / Tomorrow /
+  "Wednesday, 6 Aug", etc.), each row showing: type icon, title, "<owner> · <section> ·
+  <time>" meta line, an expiry line below that (e.g. "Expires 12 Aug 2026", styled as a
+  small danger-colored note) when the item has one, and its status badge on the right.
+  Clicking a row opens the entry-detail panel.
+- Both views must reflect scheduledTime and expiresOn wherever present — don't add these
+  fields to the data model without actually surfacing them in the calendar; that's the
+  whole point of carrying them.
+
+====================================================================
+8. WHAT TO DELIVER
+====================================================================
+1. Four new nav destinations (Uploads, Live, and Content Calendar as their own pages;
+   Content Library as a view-toggle within Uploads/Live rather than a fifth nav item —
+   unless the existing back office's nav pattern makes a dedicated nav item clearly
+   better, in which case say so and use your judgment).
+2. The shared entry-detail slide panel component, wired up from all four surfaces.
+3. The two creation modals.
+4. Cross-linking: opening an item from the calendar, the table, or the library grid all
+   land on the exact same panel with the exact same data — don't fork the detail view per
+   entry point.
+5. Preserve every existing back-office page/feature untouched; this is purely additive.
+6. If the existing back office already has its own status vocabulary, ID scheme, or
+   review-workflow conventions that would conflict with the ones described here, flag the
+   conflict and propose how to reconcile them rather than silently picking one.

@@ -44,18 +44,18 @@
     }
 
     :root[data-theme="wow"] {
-      --red-900: #C29418;
-      --red-700: #F2D272;
-      --red-600: #E8B923;
-      --red-50: rgba(232, 185, 35, 0.18);
+      --red-900: #9C7F2E;
+      --red-700: #F0D690;
+      --red-600: #D5B360;
+      --red-50: rgba(213, 179, 96, 0.18);
       --ink-900: #2B2013;
       --ink-700: #5B4C3D;
       --ink-500: #4A4030;
       --ink-300: #BBA97D;
-      --paper-100: #FAF3E3;
+      --paper-100: #F7EEDA;
       --paper-0: #FFFFFF;
-      --line: #EAE0C5;
-      --line-strong: #DCCB9E;
+      --line: #EDE0BE;
+      --line-strong: #DFCB94;
       --amber-600: #C08A1E;
       --amber-bg: rgba(192, 138, 30, 0.16);
       --green-600: #1E7A49;
@@ -66,7 +66,7 @@
       --danger-bg: rgba(185, 58, 46, 0.14);
       --info-600: #2B5FA3;
       --info-bg: rgba(43, 95, 163, 0.14);
-      --chart-red: #E8B923;
+      --chart-red: #D5B360;
       --chart-teal: #0E766D;
       --chart-gold: #C08A1E;
       --chart-gray: #4A4030;
@@ -97,6 +97,50 @@
     :root[data-theme="wow"] .app-preview-cover .app-preview-mark { color: var(--ink-900); }
     :root[data-theme="wow"] .calendar-day-cell.today .calendar-day-number { color: var(--ink-900); }
 
+    :root[data-theme="noir"] {
+      --red-900: #A9863C;
+      --red-700: #E8CE8F;
+      --red-600: #D5B360;
+      --red-50: rgba(213, 179, 96, 0.16);
+      --ink-900: #F2E9D8;
+      --ink-700: #D8CBA9;
+      --ink-500: #B0A183;
+      --ink-300: #6B5F45;
+      --paper-100: #0A0908;
+      --paper-0: #17140F;
+      --line: #2A241A;
+      --line-strong: #3D3423;
+      --amber-600: #F0B84B;
+      --amber-bg: rgba(169, 112, 15, 0.22);
+      --green-600: #4ED495;
+      --green-bg: rgba(30, 122, 73, 0.22);
+      --teal-600: #4FD9CC;
+      --teal-bg: rgba(14, 118, 109, 0.22);
+      --danger-600: #FF7A6B;
+      --danger-bg: rgba(185, 58, 46, 0.22);
+      --info-600: #5B9EFF;
+      --info-bg: rgba(43, 100, 200, 0.24);
+      --chart-red: #D5B360;
+      --chart-teal: #2FA89D;
+      --chart-gold: #D99A2B;
+      --chart-gray: #8F8B82;
+      --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    :root[data-theme="noir"] .nav-item.active,
+    :root[data-theme="noir"] .btn-primary,
+    :root[data-theme="noir"] .segment-btn.active,
+    :root[data-theme="noir"] .dossier-rail-item.active,
+    :root[data-theme="noir"] .calendar-day-cell.today .calendar-day-number,
+    :root[data-theme="noir"] .brand-mark {
+      color: #241A0B;
+    }
+
+    :root[data-theme="noir"] .app-preview-cover .app-preview-mark {
+      color: #241A0B;
+    }
+
+
     .theme-toggle {
       position: fixed;
       bottom: 20px;
@@ -118,7 +162,7 @@
     }
 
     .theme-toggle:hover { background: var(--paper-100); }
-    .theme-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red-600); flex-shrink: 0; }
+    .theme-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dot-gradient, var(--red-600)); flex-shrink: 0; }
 
     * {
       box-sizing: border-box;
@@ -178,7 +222,7 @@
       width: 30px;
       height: 30px;
       border-radius: 8px;
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -234,7 +278,7 @@
     }
 
     .nav-item.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       color: #fff;
     }
 
@@ -249,6 +293,14 @@
       max-width: 1240px;
       margin: 0 auto;
       width: 100%;
+      transition: margin-right .2s ease;
+    }
+
+    body.detail-panel-open .main {
+      width: calc(100% - 440px);
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     .main:has(> #page-contentcalendar.active) {
@@ -306,7 +358,7 @@
     }
 
     .btn-primary {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       border-color: var(--red-600);
       color: #fff;
     }
@@ -418,6 +470,9 @@
       align-items: center;
       gap: 6px;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stat-card .value {
@@ -680,7 +735,14 @@
 
     .desc-cell {
       color: var(--ink-500);
-      max-width: 260px;
+      max-width: 420px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .group-cell {
+      max-width: 90px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -692,7 +754,7 @@
       background: var(--paper-100);
       color: var(--ink-700);
       padding: 2px 8px;
-      border-radius: 20px;
+      border-radius: 4px;
       margin: 0 4px 4px 0;
       border: 1px solid var(--line);
       text-transform: capitalize;
@@ -702,7 +764,7 @@
       font-size: 11.5px;
       font-weight: 500;
       padding: 3px 10px;
-      border-radius: 20px;
+      border-radius: 4px;
       display: inline-block;
       white-space: nowrap;
       text-transform: capitalize;
@@ -1186,17 +1248,19 @@
     }
 
     .overlay.slide-overlay {
+      top: var(--topbar-h, 57px);
       justify-content: flex-end;
       align-items: stretch;
       padding: 0;
       background: transparent;
       pointer-events: none;
+      z-index: 30;
     }
 
     .modal.slide-panel {
-      max-width: 560px;
+      max-width: 440px;
       width: 100%;
-      height: 100vh;
+      height: calc(100vh - var(--topbar-h, 57px));
       border-radius: 0;
       overflow-y: auto;
       animation: slideInRight .2s ease;
@@ -1397,7 +1461,7 @@
     }
 
     .segment-btn.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       border-color: var(--red-600);
       color: #fff;
     }
@@ -1535,6 +1599,18 @@
       padding: 8px 14px 12px;
     }
 
+    .library-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .library-toggle-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-500);
+    }
+
     .library-expiry {
       font-size: 11px;
       color: var(--ink-500);
@@ -1596,6 +1672,12 @@
       font-size: 11.5px;
       color: var(--ink-500);
       margin: 2px 0 0;
+    }
+
+    .calendar-entry-expiry {
+      font-size: 11px;
+      color: var(--danger-600);
+      margin: 3px 0 0;
     }
 
     .calendar-month-head {
@@ -1671,7 +1753,7 @@
     }
 
     .calendar-day-cell.today .calendar-day-number {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       color: #fff;
       border-radius: 50%;
     }
@@ -1697,6 +1779,291 @@
     .calendar-chip-more {
       font-size: 10px;
       color: var(--ink-500);
+    }
+
+    .groups-view {
+      display: none;
+    }
+
+    .groups-view.active {
+      display: block;
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .group-card {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .group-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+    }
+
+    .group-card-avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .group-card-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .group-card-meta {
+      font-size: 12px;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .groups-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .groups-back-link:hover {
+      color: var(--ink-900);
+    }
+
+    .group-hero {
+      border-radius: var(--radius-lg);
+      padding: 48px 32px 32px;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.28) 60%),
+        var(--hero-image, none) center/cover no-repeat,
+        linear-gradient(160deg, var(--hero-color, var(--red-600)) 0%, var(--hero-color, var(--red-600)) 55%, var(--paper-100) 140%);
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .group-hero-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.18);
+      margin-bottom: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .group-hero-content h1 {
+      font-size: 32px;
+      margin: 0 0 6px;
+      color: #fff;
+    }
+
+    .group-hero-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    .group-recent-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .group-recent-rank {
+      width: 20px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+
+    .group-recent-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--paper-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+
+    .group-recent-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .group-recent-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .group-recent-meta {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin: 2px 0 0;
+    }
+
+    .group-recent-views {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-500);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+
+    .playlist-tile {
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      cursor: pointer;
+      transition: border-color .12s ease, box-shadow .12s ease;
+    }
+
+    .playlist-tile:hover {
+      border-color: var(--line-strong);
+    }
+
+    .playlist-tile.active {
+      border-color: var(--red-600);
+      box-shadow: 0 0 0 1px var(--red-600);
+    }
+
+    .playlist-tile-art {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .playlist-tile-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      margin: 0 0 2px;
+      text-transform: capitalize;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .playlist-tile-count {
+      font-size: 11px;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .group-about-card {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+    }
+
+    .group-about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .group-about-stat-value {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .group-about-stat-label {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .group-about-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-500);
+      margin: 0 0 10px;
+    }
+
+    .group-about-team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 5px 12px 5px 5px;
+      margin: 0 8px 8px 0;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .group-about-team-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--red-600);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .calendar-chip-time {
+      font-weight: 700;
+      opacity: .75;
     }
 
     .upload-tab-pane {
@@ -2005,6 +2372,266 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .workflow-dept-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--paper-100);
+      color: var(--ink-700);
+      margin-bottom: 14px;
+    }
+
+    .workflow-stepper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      position: relative;
+      padding-bottom: 18px;
+    }
+
+    .workflow-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .workflow-step:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: var(--line-strong);
+    }
+
+    .workflow-step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      border: 2px solid var(--line-strong);
+      z-index: 1;
+    }
+
+    .workflow-step.done .workflow-step-dot {
+      background: var(--green-600);
+      border-color: var(--green-600);
+      color: #fff;
+    }
+
+    .workflow-step.current .workflow-step-dot {
+      background: var(--amber-600);
+      border-color: var(--amber-600);
+      color: #fff;
+    }
+
+    .workflow-step.rejected .workflow-step-dot {
+      background: var(--danger-600);
+      border-color: var(--danger-600);
+      color: #fff;
+    }
+
+    .workflow-step.rejected .workflow-step-label {
+      color: var(--danger-600);
+    }
+
+    .workflow-step.flagged .workflow-step-dot {
+      background: var(--amber-600);
+      border-color: var(--danger-600);
+      color: #fff;
+    }
+
+    .workflow-step.flagged .workflow-step-label {
+      color: var(--danger-600);
+    }
+
+    .workflow-step-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 3px;
+    }
+
+    .workflow-step-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-900);
+    }
+
+    .workflow-step-approvers {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-step.upcoming .workflow-step-label {
+      color: var(--ink-500);
+      font-weight: 500;
+    }
+
+    .workflow-dept-editor {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-dept-editor:first-child {
+      padding-top: 0;
+    }
+
+    .workflow-dept-editor:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .workflow-dept-editor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .workflow-dept-editor-head h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .workflow-dept-count {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-stage-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .workflow-stage-index {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      font-size: 10.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .workflow-stage-row input {
+      flex: 1;
+    }
+
+    .workflow-stage-remove {
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      cursor: pointer;
+      padding: 4px;
+      flex-shrink: 0;
+      border-radius: 6px;
+    }
+
+    .workflow-stage-remove:hover {
+      color: var(--danger-600);
+      background: var(--danger-bg);
+    }
+
+    .workflow-stage-remove:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .workflow-stage-editor-row {
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-stage-editor-row:last-of-type {
+      border-bottom: none;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+    }
+
+    .workflow-approvers-row {
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .workflow-approvers-label {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+
+    .workflow-approver-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .workflow-approver-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 4px 6px 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .workflow-approver-chip button {
+      background: none;
+      border: none;
+      color: var(--ink-500);
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      border-radius: 50%;
+    }
+
+    .workflow-approver-chip button:hover {
+      color: var(--danger-600);
+      background: var(--danger-bg);
+    }
+
+    .workflow-approvers-empty {
+      font-size: 12px;
+      color: var(--ink-500);
+      font-style: italic;
+    }
+
+    .workflow-approver-select {
+      align-self: flex-start;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      border: 1px solid var(--line-strong);
+      background: var(--paper-0);
+      color: var(--ink-700);
+    }
+
     .side-block h3 {
       font-size: 12px;
       font-weight: 600;
@@ -2076,6 +2703,27 @@
     .audit-item .a-name {
       color: var(--ink-900);
       font-weight: 500;
+    }
+
+    .activity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .activity-row .audit-item {
+      margin-bottom: 0;
+    }
+
+    .activity-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-500);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* Analytics / overview sections */
@@ -3185,6 +3833,44 @@
       background: var(--paper-100);
     }
 
+    .visual-analytics-overview{margin:0 0 18px;}
+    .visual-analytics-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px;}
+    .visual-analytics-head h3{margin:0 0 4px;font-size:14px;}
+    .visual-analytics-head p{margin:0;color:var(--ink-500);font-size:11.5px;}
+    .format-comparison-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    .format-comparison-card{padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--paper-100);}
+    .format-comparison-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:12px;}
+    .format-comparison-title b{font-family:'Sora',sans-serif;}
+    .format-delta{font-size:10px;color:var(--green-600);text-align:right;max-width:110px;line-height:1.35;}
+    .format-bar-row{display:grid;grid-template-columns:92px 1fr 68px;align-items:center;gap:7px;margin-top:7px;font-size:10px;color:var(--ink-500);}
+    .format-bar-track{height:7px;background:var(--paper-0);border-radius:5px;overflow:hidden;}
+    .format-bar-track i{display:block;height:100%;border-radius:5px;}
+    .format-bar-row>b{text-align:right;font-size:11px;color:var(--ink-700);}
+    .format-bar-row b small{display:block;font-size:9px;color:var(--ink-500);font-weight:500;}
+    .metric-selectable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
+    .metric-selectable:hover{border-color:var(--line-strong);}
+    .metric-selectable.selected{border-color:var(--teal-600);background:linear-gradient(180deg,var(--teal-bg),var(--paper-0) 48%);}
+    .metric-selectable:focus-visible{outline:2px solid var(--teal-600);outline-offset:2px;}
+    .primary-analytics-chart{margin:-6px 0 16px;}
+    .primary-chart-summary{display:flex;align-items:baseline;gap:9px;margin-top:8px;}
+    .primary-chart-summary b{font-family:'Sora',sans-serif;font-size:22px;}
+    .primary-chart-summary span{font-size:11px;color:var(--green-600);}
+    .benchmark-legend{display:flex;align-items:center;gap:14px;font-size:10.5px;color:var(--ink-500);}
+    .benchmark-key{display:inline-flex;align-items:center;gap:5px;}
+    .benchmark-key i{width:16px;height:3px;border-radius:3px;background:var(--chart-red);}
+    .benchmark-key.typical i{height:8px;background:var(--teal-bg);border:1px solid var(--chart-teal);}
+    .visual-support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    .audience-stacked{display:flex;height:22px;border-radius:7px;overflow:hidden;margin:14px 0 12px;}
+    .audience-stacked i{display:block;height:100%;}
+    .audience-legend{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;}
+    .audience-legend-item{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--ink-500);}
+    .audience-legend-item span{display:flex;align-items:center;gap:6px;}
+    .audience-legend-item i{width:8px;height:8px;border-radius:3px;}
+    .insight-list{display:grid;gap:9px;margin-top:12px;}
+    .visual-insight{padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper-100);}
+    .visual-insight b{display:block;font-size:11.5px;margin-bottom:3px;}
+    .visual-insight span{font-size:10.5px;color:var(--ink-500);line-height:1.45;}
+
     /* Customer 360 */
     .sync-flag {
       font-size: 11px;
@@ -3327,7 +4013,7 @@
     }
 
     .dossier-rail-item.active {
-      background: var(--red-600);
+      background: var(--gold-gradient, var(--red-600));
       color: #fff;
     }
 
@@ -3848,6 +4534,11 @@
       .performance-toolbar .search {
         width: 100%;
       }
+
+      .format-comparison-grid,
+      .visual-support-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -3918,7 +4609,16 @@
             <rect x="3" y="4" width="18" height="18" rx="2" />
             <path d="M16 2v4M8 2v4M3 10h18" />
           </svg>
-          Content Calendar
+          Calendar
+        </div>
+        <div class="nav-item" data-page="groups" onclick="goToPage('groups')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="8" r="3" />
+            <path d="M2 20c0-3 3-5 7-5s7 2 7 5" />
+            <circle cx="17" cy="9" r="2.4" />
+            <path d="M22 20c0-2.4-2-4.3-4.5-4.9" />
+          </svg>
+          Groups
         </div>
         <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4123,12 +4823,14 @@
             <h1>Uploads</h1>
             <p>Manage on-demand video content uploaded across OCBC channels.</p>
           </div>
-          <button class="btn btn-primary" onclick="openUploadModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            New Upload
-          </button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openUploadModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              New Upload
+            </button>
+          </div>
         </div>
 
         <div class="dossier-body">
@@ -4142,7 +4844,8 @@
           <div class="dossier-content">
             <div class="view-tabbar" id="uploadsViewTabbar">
               <button class="view-tab-btn active" data-view="log" onclick="switchUploadsView('log')">Log</button>
-              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Content Library</button>
+              <button class="view-tab-btn" data-view="library" onclick="switchUploadsView('library')">Collections</button>
+              <button class="view-tab-btn" data-view="activity" onclick="switchUploadsView('activity')">Recent Activity</button>
             </div>
 
             <div class="view-pane active" id="uploadsView-log">
@@ -4173,7 +4876,7 @@
                       <td class="row-check-cell"><input type="checkbox" class="row-check" id="uploadsSelectAll"
                           onchange="toggleSelectAllUploads(this)" /></td>
                       <td>Title</td>
-                      <td>Owner</td>
+                      <td>Group</td>
                       <td>Section</td>
                       <td>Tags</td>
                       <td>Status</td>
@@ -4189,6 +4892,15 @@
             <div class="view-pane" id="uploadsView-library">
               <div class="content-library-grid" id="uploadsLibraryGrid"></div>
             </div>
+
+            <div class="view-pane" id="uploadsView-activity">
+              <div class="panel">
+                <div class="panel-head">
+                  <h2>Recent Activity</h2>
+                </div>
+                <div id="uploadsActivityList"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -4200,17 +4912,20 @@
             <h1>Live</h1>
             <p>Manage and moderate live streaming sessions across OCBC channels.</p>
           </div>
-          <button class="btn btn-primary" onclick="openLiveModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            New Live Session
-          </button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-primary" onclick="openLiveModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              New Live Session
+            </button>
+          </div>
         </div>
 
         <div class="view-tabbar" id="liveViewTabbar">
           <button class="view-tab-btn active" data-view="log" onclick="switchLiveView('log')">Log</button>
-          <button class="view-tab-btn" data-view="library" onclick="switchLiveView('library')">Content Library</button>
+          <button class="view-tab-btn" data-view="library" onclick="switchLiveView('library')">Collections</button>
+          <button class="view-tab-btn" data-view="activity" onclick="switchLiveView('activity')">Recent Activity</button>
         </div>
 
         <div class="view-pane active" id="liveView-log">
@@ -4240,7 +4955,7 @@
                   <td class="row-check-cell"><input type="checkbox" class="row-check" id="liveSelectAll"
                       onchange="toggleSelectAllLive(this)" /></td>
                   <td>Title</td>
-                  <td>Owner</td>
+                  <td>Group</td>
                   <td>Section</td>
                   <td>Tags</td>
                   <td>Status</td>
@@ -4254,6 +4969,15 @@
 
         <div class="view-pane" id="liveView-library">
           <div class="content-library-grid" id="liveLibraryGrid"></div>
+        </div>
+
+        <div class="view-pane" id="liveView-activity">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Recent Activity</h2>
+            </div>
+            <div id="liveActivityList"></div>
+          </div>
         </div>
       </div>
 
@@ -4960,7 +5684,7 @@
       <div class="page" id="page-contentcalendar">
         <div class="page-header">
           <div>
-            <h1>Content Calendar</h1>
+            <h1>Calendar</h1>
             <p>Upcoming content across Uploads and Live — scheduled launches and pending releases, in order.</p>
           </div>
         </div>
@@ -4986,6 +5710,56 @@
         <div class="view-pane" id="calendarView-agenda">
           <div class="panel">
             <div id="contentCalendarList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROUPS PAGE -->
+      <div class="page" id="page-groups">
+        <div class="groups-view active" id="groups-list">
+          <div class="page-header">
+            <div>
+              <h1>Groups</h1>
+              <p>Every OCBC division producing content for Live Studio, organised like a profile — output, team, and
+                recent work at a glance.</p>
+            </div>
+          </div>
+          <div class="groups-grid" id="groupsGrid"></div>
+        </div>
+
+        <div class="groups-view" id="groups-profile">
+          <button class="groups-back-link" onclick="closeGroupProfile()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6" /></svg>
+            Back to Groups
+          </button>
+          <div class="group-hero" id="groupHero">
+            <div class="group-hero-content">
+              <div class="group-hero-badge" id="groupHeroBadge"></div>
+              <h1 id="groupHeroName"></h1>
+              <p class="group-hero-meta" id="groupHeroMeta"></p>
+            </div>
+          </div>
+          <div class="group-profile-body">
+            <p class="dossier-subhead">Top Content</p>
+            <div id="groupRecentContent"></div>
+
+            <p class="dossier-subhead" style="margin-top:24px;">Playlists</p>
+            <div class="playlists-grid" id="groupPlaylists"></div>
+
+            <p class="dossier-subhead" style="margin-top:24px;">All Content</p>
+            <div class="content-library-grid" id="groupContentGrid"></div>
+
+            <div class="group-about-card">
+              <p class="dossier-subhead" style="margin-top:0;">About This Group</p>
+              <div class="group-about-stats" id="groupAboutStats"></div>
+              <p class="group-about-label">Team</p>
+              <div id="groupAboutTeam"></div>
+
+              <p class="group-about-label" style="margin-top:20px;">Approval Workflow</p>
+              <p style="font-size:12px;color:var(--ink-500);margin:0 0 14px;" id="groupWorkflowNote"></p>
+              <div id="groupWorkflowEditor"></div>
+              <button class="btn btn-sm btn-primary" style="margin-top:10px;" onclick="saveGroupWorkflow()">Save Workflow</button>
+            </div>
           </div>
         </div>
       </div>
@@ -5409,11 +6183,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="segment-tabbar" id="uploadTabbar">
-          <button class="segment-btn active" data-utab="content" onclick="switchUploadTab('content')">Content</button>
-          <button class="segment-btn" data-utab="visibility" onclick="switchUploadTab('visibility')">Visibility &amp;
+        <div class="view-tabbar" id="uploadTabbar">
+          <button class="view-tab-btn active" data-utab="content" onclick="switchUploadTab('content')">Content</button>
+          <button class="view-tab-btn" data-utab="visibility" onclick="switchUploadTab('visibility')">Visibility &amp;
             Comments</button>
-          <button class="segment-btn" data-utab="schedule" onclick="switchUploadTab('schedule')">Schedule</button>
+          <button class="view-tab-btn" data-utab="schedule" onclick="switchUploadTab('schedule')">Schedule</button>
         </div>
 
         <!-- CONTENT TAB -->
@@ -5421,10 +6195,10 @@
 
           <div class="field-group">
             <label class="field-label">Source</label>
-            <div class="segment-tabbar" id="uploadSourceTabbar">
-              <button class="segment-btn active" data-usource="local" onclick="switchUploadSourceType('local')">Local File</button>
-              <button class="segment-btn" data-usource="youtube" onclick="switchUploadSourceType('youtube')">YouTube</button>
-              <button class="segment-btn" data-usource="spotify" onclick="switchUploadSourceType('spotify')">Spotify</button>
+            <div class="view-tabbar" id="uploadSourceTabbar">
+              <button class="view-tab-btn active" data-usource="local" onclick="switchUploadSourceType('local')">Local Upload</button>
+              <button class="view-tab-btn" data-usource="youtube" onclick="switchUploadSourceType('youtube')">Embedded Video</button>
+              <button class="view-tab-btn" data-usource="spotify" onclick="switchUploadSourceType('spotify')">Podcast</button>
             </div>
           </div>
 
@@ -6087,7 +6861,7 @@
                   <div class="ui-select-option selected" data-value="draft" onclick="chooseOption(this)">Draft<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="pending" onclick="chooseOption(this)">Pending Review<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="active" onclick="chooseOption(this)">Active<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
-                  <div class="ui-select-option" data-value="published" onclick="chooseOption(this)">Published<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
+                  <div class="ui-select-option" data-value="published" onclick="chooseOption(this)">Live<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="flagged" onclick="chooseOption(this)">Flagged<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                   <div class="ui-select-option" data-value="rejected" onclick="chooseOption(this)">Rejected<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" /></svg></div>
                 </div>
@@ -6132,6 +6906,11 @@
             <label class="field-label">Tags</label>
             <input type="text" id="contentEditTags" placeholder="Comma-separated, e.g. Equities, SG, Rates" />
           </div>
+        </div>
+        <div class="side-block workflow-block" id="contentWorkflowBlock" style="display:none;">
+          <h3>Approval Workflow</h3>
+          <span class="workflow-dept-badge" id="contentWorkflowDept"></span>
+          <div class="workflow-stepper" id="contentWorkflowStepper"></div>
         </div>
         <div class="detail-grid">
           <div>
@@ -6268,22 +7047,33 @@
     }
 
     function toggleTheme(){
-      const next = document.documentElement.dataset.theme === 'wow' ? 'dark' : 'wow';
+      const current = document.documentElement.dataset.theme || 'dark';
+      const order = { dark: 'wow', wow: 'noir', noir: 'dark' };
+      const next = order[current];
       applyTheme(next);
       localStorage.setItem('liveStudioTheme', next);
     }
 
     function applyTheme(theme){
-      if(theme === 'wow'){
-        document.documentElement.dataset.theme = 'wow';
-        document.getElementById('themeToggleLabel').textContent = 'Dark Mode';
+      const labels = { dark: 'Wow Mode', wow: 'Noir Mode', noir: 'Dark Mode' };
+      if(theme === 'wow' || theme === 'noir'){
+        document.documentElement.dataset.theme = theme;
       } else {
         delete document.documentElement.dataset.theme;
-        document.getElementById('themeToggleLabel').textContent = 'Wow Mode';
+        theme = 'dark';
       }
+      document.getElementById('themeToggleLabel').textContent = labels[theme];
     }
 
-    applyTheme(localStorage.getItem('liveStudioTheme') === 'wow' ? 'wow' : 'dark');
+    applyTheme(['wow', 'noir'].includes(localStorage.getItem('liveStudioTheme')) ? localStorage.getItem('liveStudioTheme') : 'dark');
+
+    function updateTopbarHeightVar() {
+      const tb = document.querySelector('.topbar');
+      if (tb) document.documentElement.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    }
+    updateTopbarHeightVar();
+    window.addEventListener('resize', updateTopbarHeightVar);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateTopbarHeightVar);
 
     let uploadIdCounter = 100;
 
@@ -6291,24 +7081,24 @@
     const uploadsData = [
       { id: 1, title: "Weekly Market Wrap", owner: "J. Tan", section: "Markets", tags: ["Equities", "SG"], status: "published", description: "A round-up of the week's key equity market moves across the region, with commentary on rate expectations.", expiresOn: daysFromNow(-5) },
       { id: 2, title: "Q2 Earnings Roundup", owner: "A. Kumar", section: "Markets", tags: ["Earnings"], status: "active", description: "Summary of Q2 earnings across major regional banks and how results compare to consensus estimates.", expiresOn: daysFromNow(3) },
-      { id: 3, title: "Wealth Planning 101", owner: "S. Wong", section: "Wealth", tags: ["Retirement"], status: "pending", description: "Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups.", scheduledFor: daysFromNow(4) },
+      { id: 3, title: "Wealth Planning 101", owner: "S. Wong", section: "Wealth", tags: ["Retirement"], status: "pending", description: "Introductory explainer on retirement planning basics for Premier Banking clients, covering CPF top-ups.", scheduledFor: daysFromNow(4), scheduledTime: "9:00 AM", expiresOn: daysFromNow(18) },
       { id: 4, title: "SME Loan Explainer", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "published", description: "Walkthrough of the SME working capital loan application process and eligibility criteria.", expiresOn: daysFromNow(45) },
       {
         id: 5, title: "Digital Assets Briefing", owner: "L. Ibrahim", section: "Markets", tags: ["Digital Assets"], status: "flagged", description: "Overview of digital asset market trends and OCBC's current stance on custody services.",
         transcript: '"...given the momentum, clients should <mark class="flagmark">allocate a portion of their portfolio into crypto now</mark> before the next leg up..."'
       },
-      { id: 6, title: "Premier Client Welcome", owner: "S. Wong", section: "Wealth", tags: ["Onboarding"], status: "pending", description: "Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support.", scheduledFor: daysFromNow(2) },
+      { id: 6, title: "Premier Client Welcome", owner: "S. Wong", section: "Wealth", tags: ["Onboarding"], status: "pending", description: "Welcome video for newly onboarded Premier Banking clients, introducing relationship manager support.", scheduledFor: daysFromNow(2), scheduledTime: "11:30 AM", expiresOn: daysFromNow(62) },
       { id: 7, title: "Old Promo Reel", owner: "M. Lee", section: "Personal banking", tags: ["Promo"], status: "rejected", description: "Legacy promotional video referencing a since-discontinued account pricing tier." },
-      { id: 8, title: "Untitled Upload", owner: "A. Kumar", section: "Markets", tags: [], status: "draft", description: "Draft — not yet submitted for review.", scheduledFor: daysFromNow(9) },
+      { id: 8, title: "Untitled Upload", owner: "A. Kumar", section: "Markets", tags: [], status: "draft", description: "Draft — not yet submitted for review.", scheduledFor: daysFromNow(9), scheduledTime: "2:00 PM" },
       { id: 9, title: "ESG Investing Basics", owner: "S. Wong", section: "Wealth", tags: ["ESG", "Investing"], status: "published", description: "Introductory overview of ESG investing principles and how they apply to fund selection.", expiresOn: daysFromNow(60) },
       { id: 10, title: "FX Hedging for SMEs", owner: "R. Ong", section: "SME banking", tags: ["FX", "Hedging"], status: "active", description: "Practical guide for SME treasurers on hedging currency exposure using forward contracts.", expiresOn: daysFromNow(21) },
       { id: 11, title: "Retail Banking App Walkthrough", owner: "M. Lee", section: "Personal banking", tags: ["App", "Onboarding"], status: "published", description: "Step-by-step walkthrough of the OCBC retail banking app's key features for new customers.", expiresOn: daysFromNow(90) },
       { id: 12, title: "Markets Wrap: Rate Cut Special", owner: "J. Tan", section: "Markets", tags: ["Rates", "Macro"], status: "active", description: "Special edition market wrap covering the implications of the latest rate cut decision.", expiresOn: daysFromNow(14) },
-      { id: 13, title: "Q3 Outlook Webinar Recap", owner: "J. Tan", section: "Markets", tags: ["Outlook"], status: "pending", description: "Recap of the Q3 markets outlook webinar, edited down for on-demand viewing.", scheduledFor: daysFromNow(12) },
-      { id: 14, title: "CPF Retirement Sums Explained", owner: "S. Wong", section: "Wealth", tags: ["CPF", "Retirement"], status: "draft", description: "Explainer on the CPF Basic, Full, and Enhanced Retirement Sums and how they affect payouts.", scheduledFor: daysFromNow(16) },
-      { id: 15, title: "Business Loan Fast Track", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "pending", description: "Overview of the fast-track approval process for eligible SME business loans.", scheduledFor: daysFromNow(20) },
-      { id: 16, title: "Cross-Border Payments 101", owner: "A. Kumar", section: "Corporate banking", tags: ["Payments"], status: "draft", description: "Introductory explainer on cross-border payment rails and settlement timing for corporate clients.", scheduledFor: daysFromNow(28) },
-      { id: 17, title: "Year-End Tax Planning Tips", owner: "S. Wong", section: "Wealth", tags: ["Tax", "Planning"], status: "pending", description: "Seasonal explainer covering common year-end tax planning moves for Premier clients.", scheduledFor: daysFromNow(35) },
+      { id: 13, title: "Q3 Outlook Webinar Recap", owner: "J. Tan", section: "Markets", tags: ["Outlook"], status: "pending", description: "Recap of the Q3 markets outlook webinar, edited down for on-demand viewing.", scheduledFor: daysFromNow(12), scheduledTime: "9:00 AM", expiresOn: daysFromNow(57) },
+      { id: 14, title: "CPF Retirement Sums Explained", owner: "S. Wong", section: "Wealth", tags: ["CPF", "Retirement"], status: "draft", description: "Explainer on the CPF Basic, Full, and Enhanced Retirement Sums and how they affect payouts.", scheduledFor: daysFromNow(16), scheduledTime: "3:30 PM" },
+      { id: 15, title: "Business Loan Fast Track", owner: "R. Ong", section: "SME banking", tags: ["Loans"], status: "pending", description: "Overview of the fast-track approval process for eligible SME business loans.", scheduledFor: daysFromNow(20), scheduledTime: "10:00 AM", expiresOn: daysFromNow(50) },
+      { id: 16, title: "Cross-Border Payments 101", owner: "A. Kumar", section: "Corporate banking", tags: ["Payments"], status: "draft", description: "Introductory explainer on cross-border payment rails and settlement timing for corporate clients.", scheduledFor: daysFromNow(28), scheduledTime: "1:00 PM" },
+      { id: 17, title: "Year-End Tax Planning Tips", owner: "S. Wong", section: "Wealth", tags: ["Tax", "Planning"], status: "pending", description: "Seasonal explainer covering common year-end tax planning moves for Premier clients.", scheduledFor: daysFromNow(35), scheduledTime: "9:00 AM", expiresOn: daysFromNow(95) },
       { id: 18, title: "SG Budget 2026: What It Means for Savers", owner: "J. Tan", section: "Markets", tags: ["Budget", "Policy"], status: "published", description: "Embedded explainer video breaking down the SG Budget 2026 announcements relevant to retail savers.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=sgbudget2026", expiresOn: daysFromNow(75) },
       { id: 19, title: "Rate Hike Ripple Effects", owner: "A. Kumar", section: "Markets", tags: ["Rates"], status: "active", description: "Embedded video walking through how a rate hike flows through mortgages, savings, and business loans.", sourceType: "youtube", sourceUrl: "https://www.youtube.com/watch?v=ratehikeripple", expiresOn: daysFromNow(40) },
       { id: 20, title: "Market Minute: This Week in Rates", owner: "M. Lee", section: "Markets", tags: ["Podcast"], status: "published", description: "Weekly audio round-up covering the past week's key rate moves and what to watch next.", sourceType: "spotify", sourceUrl: "https://open.spotify.com/episode/marketminute", expiresOn: daysFromNow(30) },
@@ -6323,15 +7113,15 @@
         transcript: '"...this is a great time to <mark class="flagmark">buy into tech names before the next rally</mark>, especially with rates likely to ease..."'
       },
       { id: 2, title: "Interest Rate Outlook Live", owner: "P. Sharma", section: "Markets", tags: ["Rates"], status: "active", description: "Live discussion on the interest rate outlook for the next two quarters with the treasury desk." },
-      { id: 3, title: "Morning Market Open", owner: "P. Sharma", section: "Markets", tags: ["Equities"], status: "pending", description: "Daily market-open segment awaiting compliance sign-off before this morning's broadcast.", scheduledFor: daysFromNow(1) },
+      { id: 3, title: "Morning Market Open", owner: "P. Sharma", section: "Markets", tags: ["Equities"], status: "pending", description: "Daily market-open segment awaiting compliance sign-off before this morning's broadcast.", scheduledFor: daysFromNow(1), scheduledTime: "8:30 AM" },
       { id: 4, title: "Treasury Desk AMA", owner: "R. Ong", section: "Wealth", tags: ["Treasury", "Q&A"], status: "published", description: "Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast." },
-      { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled.", scheduledFor: daysFromNow(6) },
+      { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled.", scheduledFor: daysFromNow(6), scheduledTime: "4:00 PM" },
       { id: 6, title: "SME Growth Clinic", owner: "R. Ong", section: "SME banking", tags: ["Growth", "Q&A"], status: "published", description: "Live clinic session helping SME owners plan for expansion financing and cashflow." },
       { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", description: "Live audience Q&A addressing client concerns around recent market volatility." },
-      { id: 8, title: "Markets Outlook: August Preview", owner: "P. Sharma", section: "Markets", tags: ["Outlook"], status: "pending", description: "Live preview of key market events and data releases expected in August.", scheduledFor: daysFromNow(8) },
-      { id: 9, title: "Wealth Webinar: Legacy Planning", owner: "S. Wong", section: "Wealth", tags: ["Legacy", "Planning"], status: "draft", description: "Live webinar on legacy and estate planning considerations for Premier Banking clients.", scheduledFor: daysFromNow(25) },
-      { id: 10, title: "SME Digitalisation Grants Briefing", owner: "R. Ong", section: "SME banking", tags: ["Grants"], status: "pending", description: "Live briefing on available government digitalisation grants for SME clients.", scheduledFor: daysFromNow(18) },
-      { id: 11, title: "Corporate Treasury Roundtable", owner: "A. Kumar", section: "Corporate banking", tags: ["Treasury"], status: "draft", description: "Live roundtable discussion with corporate treasury clients on liquidity management.", scheduledFor: daysFromNow(32) }
+      { id: 8, title: "Markets Outlook: August Preview", owner: "P. Sharma", section: "Markets", tags: ["Outlook"], status: "pending", description: "Live preview of key market events and data releases expected in August.", scheduledFor: daysFromNow(8), scheduledTime: "9:00 AM" },
+      { id: 9, title: "Wealth Webinar: Legacy Planning", owner: "S. Wong", section: "Wealth", tags: ["Legacy", "Planning"], status: "draft", description: "Live webinar on legacy and estate planning considerations for Premier Banking clients.", scheduledFor: daysFromNow(25), scheduledTime: "2:00 PM" },
+      { id: 10, title: "SME Digitalisation Grants Briefing", owner: "R. Ong", section: "SME banking", tags: ["Grants"], status: "pending", description: "Live briefing on available government digitalisation grants for SME clients.", scheduledFor: daysFromNow(18), scheduledTime: "11:00 AM" },
+      { id: 11, title: "Corporate Treasury Roundtable", owner: "A. Kumar", section: "Corporate banking", tags: ["Treasury"], status: "draft", description: "Live roundtable discussion with corporate treasury clients on liquidity management.", scheduledFor: daysFromNow(32), scheduledTime: "3:00 PM" }
     ];
 
     const typeIcon = {
@@ -6341,7 +7131,100 @@
       Spotify: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M7.5 10c3-1 6.5-1 9.5.7M8 13.2c2.4-.8 5.2-.8 7.6.6M8.5 16c1.8-.6 3.9-.5 5.6.5" stroke-linecap="round"/></svg>'
     };
     const sourceTypeLabel = { local: null, youtube: 'YouTube', spotify: 'Spotify' };
-    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Active", flagged: "Flagged", published: "Published", rejected: "Rejected" };
+    const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Active", flagged: "Flagged", published: "Live", rejected: "Rejected" };
+
+    // ---- Multi-stage approval workflow: each department has its own ordered stage list.
+    // GBC content is treated as lower-risk (brand/marketing), so it gets a short workflow;
+    // Wealth Management content can carry financial-advice implications, so it gets the
+    // strictest, longest chain. Editable per-department from within that group's own
+    // profile page (see renderGroupWorkflowEditor) — deliberately not a single shared
+    // settings surface, since there's no real access-rights model yet and one editor for
+    // every division would let anyone silently change another group's review process.
+    // Each stage is { name, approvers: [owner names allowed to action this stage] }.
+    let departmentWorkflows = {
+      'Group Brands & Communications': [
+        { name: 'Marketing Review', approvers: ['J. Tan', 'M. Lee'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Investment Banking': [
+        { name: 'Content Review', approvers: ['A. Kumar'] },
+        { name: 'Compliance Check', approvers: ['P. Sharma'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Wealth Management': [
+        { name: 'Content Review', approvers: ['S. Wong'] },
+        { name: 'Compliance Review', approvers: [] },
+        { name: 'Wealth Desk Sign-off', approvers: ['S. Wong'] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group SME Banking': [
+        { name: 'Content Review', approvers: ['R. Ong'] },
+        { name: 'Compliance Check', approvers: [] },
+        { name: 'Publish', approvers: [] }
+      ],
+      'Group Property Management': [
+        { name: 'Content Review', approvers: [] },
+        { name: 'Compliance Check', approvers: [] },
+        { name: 'Publish', approvers: [] }
+      ]
+    };
+
+    const OWNER_DEPARTMENT = {
+      'J. Tan': 'Group Brands & Communications',
+      'M. Lee': 'Group Brands & Communications',
+      'A. Kumar': 'Group Investment Banking',
+      'P. Sharma': 'Group Investment Banking',
+      'L. Ibrahim': 'Group Investment Banking',
+      'S. Wong': 'Group Wealth Management',
+      'R. Ong': 'Group SME Banking'
+    };
+
+    // Distinct accent per group, Spotify-artist-page style — each profile gets its own hero color.
+    const GROUP_ACCENT = {
+      'Group Brands & Communications': '#D42B41',
+      'Group Investment Banking': '#2FA89D',
+      'Group Wealth Management': '#D99A2B',
+      'Group SME Banking': '#4ED495',
+      'Group Property Management': '#8F7BD4'
+    };
+
+    const GROUP_BANNER = {
+      'Group Brands & Communications': 'images/groups/banner/ocbc-banner-gbc.png',
+      'Group Investment Banking': 'images/groups/banner/ocbc-banner-gib.png',
+      'Group Wealth Management': 'images/groups/banner/ocbc-banner-gwm.jpeg',
+      'Group SME Banking': 'images/groups/banner/ocbc-banner-gsmeb.png',
+      'Group Property Management': 'images/groups/banner/ocbc-banner-gpm.png'
+    };
+
+    const GROUP_ACRONYM = {
+      'Group Brands & Communications': 'GBC',
+      'Group Investment Banking': 'GIB',
+      'Group Wealth Management': 'GWM',
+      'Group SME Banking': 'GSMEB',
+      'Group Property Management': 'GPM'
+    };
+
+    function groupAcronym(dept) {
+      return GROUP_ACRONYM[dept] || dept;
+    }
+
+    function ownerDepartment(owner) {
+      return OWNER_DEPARTMENT[owner] || 'General';
+    }
+
+    function groupAccent(dept) {
+      return GROUP_ACCENT[dept] || 'var(--red-600)';
+    }
+
+    function departmentWorkflowStages(department) {
+      return departmentWorkflows[department] && departmentWorkflows[department].length
+        ? departmentWorkflows[department]
+        : [{ name: 'Review', approvers: [] }, { name: 'Publish', approvers: [] }];
+    }
+
+    function allTeamMembers() {
+      return Object.keys(OWNER_DEPARTMENT);
+    }
 
     function computeStats(arr) {
       return {
@@ -6384,10 +7267,11 @@
         : '';
       const rowIcon = item.sourceType && typeIcon[sourceTypeLabel[item.sourceType]] ? typeIcon[sourceTypeLabel[item.sourceType]] : icon;
       const sourceTag = item.sourceType && sourceTypeLabel[item.sourceType] ? `<span class="table-source-tag">${sourceTypeLabel[item.sourceType]}</span>` : '';
+      const dept = ownerDepartment(item.owner);
       tr.innerHTML = `
       ${checkboxCell}
       <td><div class="title-cell"><div class="type-icon">${rowIcon}</div>${item.title}${sourceTag}</div></td>
-      <td>${item.owner}</td>
+      <td class="group-cell" title="${dept}">${groupAcronym(dept)}</td>
       <td>${item.section}</td>
       <td>${item.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</td>
       <td><span class="badge ${item.status}">${statusLabel[item.status]}</span></td>
@@ -6403,6 +7287,50 @@
     // Team attributed to approvals/rejections made through the Content Detail modal.
     const REVIEWER_TEAM = 'OCBC Group Brands & Communications';
 
+    // ---- Recent Activity: lightweight in-memory event log per collection, newest first ----
+    function activityTimeNow() {
+      const now = new Date();
+      return now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ', ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+
+    const uploadActivityLog = [
+      { time: '27 Jul, 06:00', actor: 'J. Tan', action: 'uploaded', itemTitle: 'Weekly Market Wrap' },
+      { time: '27 Jul, 09:14', actor: REVIEWER_TEAM, action: 'approved', itemTitle: 'Weekly Market Wrap' },
+      { time: '26 Jul, 15:40', actor: 'R. Fernandez', action: 'flagged', itemTitle: 'Digital Assets Briefing' },
+      { time: '25 Jul, 11:20', actor: 'S. Wong', action: 'submitted for review', itemTitle: 'Wealth Planning 101' },
+      { time: '24 Jul, 08:05', actor: 'M. Lee', action: 'saved a draft of', itemTitle: 'Old Promo Reel' }
+    ];
+
+    const liveActivityLog = [
+      { time: '27 Jul, 05:12', actor: 'R. Ong', action: 'scheduled', itemTitle: 'Treasury Desk AMA' },
+      { time: '27 Jul, 05:15', actor: REVIEWER_TEAM, action: 'approved', itemTitle: 'Treasury Desk AMA' },
+      { time: '26 Jul, 18:30', actor: 'R. Fernandez', action: 'flagged', itemTitle: 'Fed Rate Reaction Live' },
+      { time: '25 Jul, 09:00', actor: 'P. Sharma', action: 'submitted for review', itemTitle: 'Morning Market Open' }
+    ];
+
+    function logUploadActivity(actor, action, itemTitle) {
+      uploadActivityLog.unshift({ time: activityTimeNow(), actor, action, itemTitle });
+    }
+
+    function logLiveActivity(actor, action, itemTitle) {
+      liveActivityLog.unshift({ time: activityTimeNow(), actor, action, itemTitle });
+    }
+
+    function renderActivityList(elId, log) {
+      const el = document.getElementById(elId);
+      el.innerHTML = log.length
+        ? log.map(a => `<div class="activity-row"><div class="audit-item"><span><span class="a-name">${a.actor}</span> ${a.action} <span class="a-name">"${a.itemTitle}"</span></span></div><span class="activity-time">${a.time}</span></div>`).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;padding:16px 0;">No recent activity yet.</p>`;
+    }
+
+    function renderUploadActivity() {
+      renderActivityList('uploadsActivityList', uploadActivityLog);
+    }
+
+    function renderLiveActivity() {
+      renderActivityList('liveActivityList', liveActivityLog);
+    }
+
     function openContentModal(item, kind) {
       const isFlagged = item.status === 'flagged';
       const isPending = item.status === 'pending';
@@ -6410,7 +7338,8 @@
 
       document.getElementById('contentTitle').textContent = item.title;
       const sourceLabel = item.sourceType && sourceTypeLabel[item.sourceType] ? sourceTypeLabel[item.sourceType] + ' embed' : (kind === 'Live' ? 'Live session' : 'Local upload');
-      document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${sourceLabel}${item.sourceUrl ? ' · ' + item.sourceUrl : ''}`;
+      const scheduleLabel = item.scheduledFor ? ` · Scheduled ${new Date(item.scheduledFor + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}${item.scheduledTime ? ' at ' + item.scheduledTime : ''}` : '';
+      document.getElementById('contentMeta').textContent = `${item.owner} · ${item.section} · ${sourceLabel}${item.sourceUrl ? ' · ' + item.sourceUrl : ''}${scheduleLabel}`;
 
       const transcriptHeading = document.getElementById('contentTranscriptHeading');
       const transcriptBox = document.getElementById('contentTranscript');
@@ -6432,12 +7361,48 @@
       noteInput.value = '';
       noteInput.placeholder = isPending ? 'Add a note for the approval record...' : 'Add a comment...';
 
+      // Approval workflow progress — shown for every entry, in every status, not just while
+      // pending. The chain of stages is derived from the uploader's department (stricter
+      // desks like Wealth Management get more stages than lower-risk ones like GBC), and the
+      // display reflects where THIS item actually is/was in that chain: not yet entered it
+      // (draft), part-way through (pending), fully cleared (published/active), or stopped
+      // partway (flagged/rejected).
+      const workflowDept = ownerDepartment(item.owner);
+      const workflowStages = departmentWorkflowStages(workflowDept);
+      const rawStageIdx = Math.min(item.workflowStageIndex || 0, workflowStages.length - 1);
+      const workflowBlock = document.getElementById('contentWorkflowBlock');
+      workflowBlock.style.display = 'block';
+      document.getElementById('contentWorkflowDept').textContent = workflowDept;
+
+      let workflowStageIdx = rawStageIdx;
+      let stoppedIdx = -1;
+      if (item.status === 'draft') { workflowStageIdx = -1; }
+      else if (item.status === 'published' || item.status === 'active') { workflowStageIdx = workflowStages.length; }
+      else if (item.status === 'rejected') { stoppedIdx = rawStageIdx; }
+      else if (item.status === 'flagged') { stoppedIdx = rawStageIdx; }
+
+      if (item.status === 'draft') {
+        document.getElementById('contentWorkflowStepper').innerHTML = `<p style="font-size:12.5px;color:var(--ink-500);margin:0;">Not yet submitted — this entry hasn't entered the approval workflow.</p>`;
+      } else {
+        document.getElementById('contentWorkflowStepper').innerHTML = workflowStages.map((stage, i) => {
+          let cls;
+          if (stoppedIdx >= 0) {
+            cls = i < stoppedIdx ? 'done' : (i === stoppedIdx ? (item.status === 'rejected' ? 'rejected' : 'flagged') : 'upcoming');
+          } else {
+            cls = i < workflowStageIdx ? 'done' : (i === workflowStageIdx ? 'current' : 'upcoming');
+          }
+          const dot = cls === 'done' ? '✓' : (cls === 'rejected' ? '✕' : (cls === 'flagged' ? '!' : (i + 1)));
+          const approverNote = stage.approvers && stage.approvers.length ? `<span class="workflow-step-approvers">${stage.approvers.join(', ')}</span>` : '';
+          return `<div class="workflow-step ${cls}"><span class="workflow-step-dot">${dot}</span><span class="workflow-step-text"><span class="workflow-step-label">${stage.name}</span>${approverNote}</span></div>`;
+        }).join('');
+      }
+
       const verb = isDraft
         ? (kind === 'Live' ? 'started scheduling this live session' : 'started this upload')
         : (kind === 'Live' ? 'scheduled this live session' : 'uploaded this content');
       const audit = [`<span class="a-name">${item.owner}</span> ${verb}`];
       if (isDraft) audit.push('Saved as draft — not yet submitted for review');
-      if (isPending) audit.push(`Awaiting approval from <span class="a-name">${REVIEWER_TEAM}</span>`);
+      if (isPending) audit.push(`At stage "${workflowStages[workflowStageIdx].name}" of the ${workflowDept} approval workflow`);
       if (item.status === 'flagged') {
         audit.push('Auto-flag triggered on transcript scan');
         audit.push('Assigned to <span class="a-name">Compliance</span>');
@@ -6447,6 +7412,10 @@
       if (item.status === 'active') audit.push(kind === 'Live' ? 'Currently live' : 'Live and available on demand');
       if (item.status === 'rejected') audit.push(item.reviewedBy ? `Rejected by <span class="a-name">${item.reviewedBy}</span>` : 'Rejected during review');
       if (item.reviewNote) audit.push(`Reviewer note: "${item.reviewNote}"`);
+      if (item.scheduledFor) {
+        const schedDate = new Date(item.scheduledFor + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
+        audit.push(`Scheduled to go live on ${schedDate}${item.scheduledTime ? ' at ' + item.scheduledTime : ''}`);
+      }
       if (item.expiresOn) {
         const info = expiryInfo(item);
         audit.push(info.cls === 'expired'
@@ -6466,11 +7435,17 @@
       const approveBtn = document.getElementById('contentApproveBtn');
       rejectBtn.style.display = isPending ? 'inline-flex' : 'none';
       approveBtn.style.display = isPending ? 'inline-flex' : 'none';
+      if (isPending) {
+        approveBtn.textContent = workflowStageIdx < workflowStages.length - 1
+          ? `Approve — Advance to "${workflowStages[workflowStageIdx + 1].name}"`
+          : 'Approve & Publish';
+      }
       rejectBtn.onclick = () => rejectContentItem(item, kind);
       approveBtn.onclick = () => approveContentItem(item, kind);
       document.getElementById('contentSaveBtn').onclick = () => saveContentEdits(item, kind);
 
       document.getElementById('contentOverlay').classList.add('open');
+      document.body.classList.add('detail-panel-open');
     }
 
     function capitalizeWords(str) {
@@ -6486,8 +7461,11 @@
       if (newStatus !== item.status) {
         item.status = newStatus;
         item.reviewedBy = REVIEWER_TEAM;
+        if (newStatus === 'pending') item.workflowStageIndex = 0;
         const note = document.getElementById('contentReviewNoteInput').value.trim();
         if (note) item.reviewNote = note;
+        if (kind === 'Live') logLiveActivity(REVIEWER_TEAM, `changed status to "${statusLabel[newStatus]}" for`, item.title);
+        else logUploadActivity(REVIEWER_TEAM, `changed status to "${statusLabel[newStatus]}" for`, item.title);
       }
       if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
@@ -6918,10 +7896,10 @@
       <div class="${cls('draft')} accent-gray" onclick="filterUploadsByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterUploadsByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
       <div class="${cls('active')} accent-green" onclick="filterUploadsByStatus('active')"><p class="label"><span class="dot green"></span>Active</p><p class="value">${s.active}</p></div>
-      <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterUploadsByStatus('published')"><p class="label"><span class="dot info"></span>Live</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterUploadsByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="${cls('expiring')} accent-amber" onclick="filterUploadsByStatus('expiring')"><p class="label"><span class="dot amber"></span>Expiring Soon</p><p class="value">${expiringSoon}</p></div>
-      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
+      <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">4.2h</p></div>
     `;
     }
     function renderUploadsTable() {
@@ -6936,7 +7914,7 @@
         if (sourceFilter !== 'all' && itemSourceType(item) !== sourceFilter) return;
         if (filter === 'expiring') { if (expiryInfo(item).cls !== 'expiring') return; }
         else if (filter !== 'all' && item.status !== filter) return;
-        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
+        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || ownerDepartment(item.owner).toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
         visibleCount++;
         visibleIds.add(item.id);
         body.appendChild(renderRow(item, typeIcon.Upload, 'Upload', { selectable: true, expiry: true, selectedSet: selectedUploadIds, toggleFn: 'toggleUploadSelect' }));
@@ -6953,7 +7931,9 @@
       document.querySelectorAll('#uploadsViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
       document.getElementById('uploadsView-log').classList.toggle('active', view === 'log');
       document.getElementById('uploadsView-library').classList.toggle('active', view === 'library');
+      document.getElementById('uploadsView-activity').classList.toggle('active', view === 'activity');
       if (view === 'library') renderUploadsLibrary();
+      if (view === 'activity') renderUploadActivity();
     }
 
     function openLibraryItem(kind, id) {
@@ -6962,6 +7942,256 @@
       if (!item) return;
       openContentModal(item, kind === 'uploads' ? 'Upload' : 'Live');
     }
+
+    // ---- Groups: a Spotify-artist-profile-style view of each department producing
+    // content, built on top of the same OWNER_DEPARTMENT mapping the approval workflow
+    // uses. Shows every content item regardless of status (this is an internal team view,
+    // not the public-facing Collections library), so it gets its own card renderer that
+    // shows a status badge instead of the Collections active/inactive toggle. ----
+    function allDepartments() {
+      return Object.keys(departmentWorkflows);
+    }
+
+    function groupInitials(dept) {
+      return dept.replace('Group ', '').split(' ').filter(w => /[A-Za-z]/.test(w[0])).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function departmentContent(dept) {
+      const uploads = uploadsData.filter(x => ownerDepartment(x.owner) === dept).map(x => Object.assign({}, x, { kind: 'Upload' }));
+      const live = liveData.filter(x => ownerDepartment(x.owner) === dept).map(x => Object.assign({}, x, { kind: 'Live' }));
+      return [...uploads, ...live];
+    }
+
+    function departmentOwners(dept) {
+      return Object.keys(OWNER_DEPARTMENT).filter(o => OWNER_DEPARTMENT[o] === dept);
+    }
+
+    function renderGroupsList() {
+      document.getElementById('groupsGrid').innerHTML = allDepartments().map(dept => {
+        const content = departmentContent(dept);
+        const live = content.filter(x => x.status === 'published' || x.status === 'active').length;
+        return `<div class="group-card" onclick="openGroupProfile('${dept}')">
+          <div class="group-card-avatar" style="background:${groupAccent(dept)};">${groupInitials(dept)}</div>
+          <p class="group-card-name">${dept}</p>
+          <p class="group-card-meta">${content.length} item${content.length === 1 ? '' : 's'} · ${live} live/published</p>
+        </div>`;
+      }).join('');
+    }
+
+    function renderGroupContentCard(item) {
+      const kind = item.kind === 'Upload' ? 'uploads' : 'live';
+      return `<div class="library-card">
+        <div class="library-card-open" onclick="openLibraryItem('${kind}', ${item.id})">
+          <div class="library-thumb">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="library-card-body">
+            <p class="library-card-title">${item.title}</p>
+            <p class="library-card-meta">${item.owner} · ${item.section}</p>
+          </div>
+        </div>
+        <div class="library-card-foot">
+          <span class="badge ${item.status}">${statusLabel[item.status]}</span>
+        </div>
+      </div>`;
+    }
+
+    // Deterministic pseudo-view-count per item, purely for a Spotify-style "streams"
+    // number on the Top Content list — this app has no real analytics tied to
+    // individual content items, so this is illustrative only, not real data.
+    function syntheticViews(id) {
+      const seed = (id * 9301 + 49297) % 233280;
+      return 500 + Math.floor((seed / 233280) * 45000);
+    }
+
+    function departmentPlaylists(content) {
+      const tagCounts = {};
+      content.forEach(item => item.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+      return Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]).slice(0, 6).map(tag => ({ tag, count: tagCounts[tag] }));
+    }
+
+    let currentGroupDept = null;
+    let currentGroupTagFilter = 'all';
+
+    function openGroupProfile(dept) {
+      document.getElementById('groups-list').classList.remove('active');
+      document.getElementById('groups-profile').classList.add('active');
+      currentGroupDept = dept;
+      currentGroupTagFilter = 'all';
+
+      const content = departmentContent(dept).sort((a, b) => b.id - a.id);
+      const owners = departmentOwners(dept);
+      const accent = groupAccent(dept);
+      const banner = GROUP_BANNER[dept];
+
+      const hero = document.getElementById('groupHero');
+      hero.style.setProperty('--hero-color', accent);
+      hero.style.setProperty('--hero-image', banner ? `url('${banner}')` : 'none');
+      document.getElementById('groupHeroBadge').textContent = groupInitials(dept);
+      document.getElementById('groupHeroName').textContent = dept;
+      const stages = departmentWorkflowStages(dept);
+      document.getElementById('groupHeroMeta').textContent = `${content.length} content item${content.length === 1 ? '' : 's'} · ${owners.length} team member${owners.length === 1 ? '' : 's'} · ${stages.length}-stage approval workflow`;
+
+      // Top Content — ranked like Spotify's "Popular" list, by (synthetic) view count.
+      const top = [...content].sort((a, b) => syntheticViews(b.id) - syntheticViews(a.id)).slice(0, 5);
+      document.getElementById('groupRecentContent').innerHTML = top.length ? top.map((item, i) => `
+        <div class="group-recent-item" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})">
+          <span class="group-recent-rank">${i + 1}</span>
+          <div class="group-recent-icon">${typeIcon[item.kind]}</div>
+          <div class="group-recent-body">
+            <p class="group-recent-title">${item.title}</p>
+            <p class="group-recent-meta">${item.owner} · ${item.section}</p>
+          </div>
+          <span class="group-recent-views">${syntheticViews(item.id).toLocaleString()} views</span>
+        </div>
+      `).join('') : `<p style="color:var(--ink-500);font-size:13px;">No content yet from this group.</p>`;
+
+      // Playlists — auto-grouped by the most common tags this group's content uses.
+      const playlists = departmentPlaylists(content);
+      document.getElementById('groupPlaylists').innerHTML = `
+        <div class="playlist-tile playlist-tile-all active" data-tag="all" onclick="filterGroupPlaylist('all')">
+          <div class="playlist-tile-art" style="background:${accent};">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <p class="playlist-tile-name">All Content</p>
+          <p class="playlist-tile-count">${content.length} item${content.length === 1 ? '' : 's'}</p>
+        </div>
+        ${playlists.map(p => `
+          <div class="playlist-tile" data-tag="${p.tag}" onclick="filterGroupPlaylist('${p.tag}')">
+            <div class="playlist-tile-art" style="background:${accent};opacity:.72;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <p class="playlist-tile-name">${p.tag}</p>
+            <p class="playlist-tile-count">${p.count} item${p.count === 1 ? '' : 's'}</p>
+          </div>
+        `).join('')}
+      `;
+
+      renderGroupContentGrid();
+
+      const s = {
+        total: content.length,
+        live: content.filter(x => x.status === 'published' || x.status === 'active').length,
+        pending: content.filter(x => x.status === 'pending').length
+      };
+      document.getElementById('groupAboutStats').innerHTML = `
+        <div><p class="group-about-stat-value">${s.total}</p><p class="group-about-stat-label">Total Content</p></div>
+        <div><p class="group-about-stat-value">${s.live}</p><p class="group-about-stat-label">Live / Published</p></div>
+        <div><p class="group-about-stat-value">${s.pending}</p><p class="group-about-stat-label">In Review</p></div>
+      `;
+      document.getElementById('groupAboutTeam').innerHTML = owners.length
+        ? owners.map(o => `<span class="group-about-team-chip"><span class="group-about-team-avatar">${o.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>${o}</span>`).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;margin:0;">No team members assigned yet.</p>`;
+
+      document.getElementById('groupWorkflowNote').textContent = `Owned by this group — editing here only affects content from ${dept}, not any other division.`;
+      renderGroupWorkflowEditor(dept);
+    }
+
+    // ---- Per-group approval workflow editor — deliberately scoped to ONE department at a
+    // time and embedded in that group's own profile, rather than a single global settings
+    // surface. There's no real access-rights model yet, but a shared cross-department editor
+    // would let any one person silently tighten or loosen every other division's review
+    // process, which doesn't match how approval ownership should work. ----
+    let groupWorkflowDraft = null;
+
+    function renderGroupWorkflowEditor(dept) {
+      groupWorkflowDraft = JSON.parse(JSON.stringify(departmentWorkflows[dept]));
+      renderGroupWorkflowEditorRows();
+    }
+
+    function renderGroupWorkflowEditorRows() {
+      const el = document.getElementById('groupWorkflowEditor');
+      el.innerHTML = groupWorkflowDraft.map((stage, i) => {
+        const available = allTeamMembers().filter(name => !stage.approvers.includes(name));
+        return `
+        <div class="workflow-stage-editor-row">
+          <div class="workflow-stage-row">
+            <span class="workflow-stage-index">${i + 1}</span>
+            <input type="text" value="${stage.name.replace(/"/g, '&quot;')}" onchange="updateGroupWorkflowStage(${i}, this.value)" />
+            <button class="workflow-stage-remove" onclick="removeGroupWorkflowStage(${i})" ${groupWorkflowDraft.length <= 1 ? 'disabled' : ''} aria-label="Remove stage">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+          <div class="workflow-approvers-row">
+            <span class="workflow-approvers-label">Can approve this stage:</span>
+            <div class="workflow-approver-chips">
+              ${stage.approvers.length ? stage.approvers.map(name => `
+                <span class="workflow-approver-chip">${name}<button onclick="removeGroupWorkflowApprover(${i}, '${name.replace(/'/g, "\\'")}')" aria-label="Remove approver">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                </button></span>
+              `).join('') : `<span class="workflow-approvers-empty">No one assigned yet</span>`}
+            </div>
+            ${available.length ? `
+              <select class="workflow-approver-select" onchange="if(this.value){addGroupWorkflowApprover(${i}, this.value); this.value='';}">
+                <option value="">+ Add approver</option>
+                ${available.map(name => `<option value="${name}">${name}</option>`).join('')}
+              </select>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      }).join('') + `<button class="btn btn-sm" onclick="addGroupWorkflowStage()">+ Add Stage</button>`;
+    }
+
+    function updateGroupWorkflowStage(i, value) {
+      groupWorkflowDraft[i].name = value;
+    }
+
+    function addGroupWorkflowStage() {
+      groupWorkflowDraft.push({ name: 'New Stage', approvers: [] });
+      renderGroupWorkflowEditorRows();
+    }
+
+    function removeGroupWorkflowStage(i) {
+      if (groupWorkflowDraft.length <= 1) return;
+      groupWorkflowDraft.splice(i, 1);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function addGroupWorkflowApprover(i, name) {
+      if (!name || groupWorkflowDraft[i].approvers.includes(name)) return;
+      groupWorkflowDraft[i].approvers.push(name);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function removeGroupWorkflowApprover(i, name) {
+      groupWorkflowDraft[i].approvers = groupWorkflowDraft[i].approvers.filter(n => n !== name);
+      renderGroupWorkflowEditorRows();
+    }
+
+    function saveGroupWorkflow() {
+      departmentWorkflows[currentGroupDept] = groupWorkflowDraft;
+      // Clamp any in-flight items in this department whose stage index no longer exists.
+      [...uploadsData, ...liveData].forEach(item => {
+        if (item.status === 'pending' && ownerDepartment(item.owner) === currentGroupDept) {
+          if ((item.workflowStageIndex || 0) >= groupWorkflowDraft.length) item.workflowStageIndex = groupWorkflowDraft.length - 1;
+        }
+      });
+      const stages = departmentWorkflowStages(currentGroupDept);
+      document.getElementById('groupHeroMeta').textContent = document.getElementById('groupHeroMeta').textContent.replace(/\d+-stage/, `${stages.length}-stage`);
+      renderUploadsTable();
+      renderLiveTable();
+    }
+
+    function filterGroupPlaylist(tag) {
+      currentGroupTagFilter = tag;
+      document.querySelectorAll('#groupPlaylists .playlist-tile').forEach(el => el.classList.toggle('active', el.dataset.tag === tag));
+      renderGroupContentGrid();
+    }
+
+    function renderGroupContentGrid() {
+      const content = departmentContent(currentGroupDept).sort((a, b) => b.id - a.id);
+      const filtered = currentGroupTagFilter === 'all' ? content : content.filter(x => x.tags.includes(currentGroupTagFilter));
+      document.getElementById('groupContentGrid').innerHTML = filtered.length
+        ? filtered.map(item => renderGroupContentCard(item)).join('')
+        : `<p style="color:var(--ink-500);font-size:13px;">No content in this playlist.</p>`;
+    }
+
+    function closeGroupProfile() {
+      document.getElementById('groups-profile').classList.remove('active');
+      document.getElementById('groups-list').classList.add('active');
+    }
+
 
     // ---- Content Calendar: upcoming/scheduled content across Uploads and Live ----
     function contentCalendarEntries() {
@@ -7033,9 +8263,14 @@
         const items = byDate[cell.dateStr] || [];
         const visible = items.slice(0, 4);
         const extra = items.length - visible.length;
+        const chipTooltip = (item) => {
+          let t = item.scheduledTime ? `${item.scheduledTime} · ${item.title}` : item.title;
+          if (item.expiresOn) t += ` · Expires ${new Date(item.expiresOn + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+          return t;
+        };
         return `<div class="calendar-day-cell${cell.isToday ? ' today' : ''}">
           <span class="calendar-day-number">${cell.day}</span>
-          ${visible.map(item => `<div class="calendar-chip ${item.status}" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})" title="${item.title}">${item.title}</div>`).join('')}
+          ${visible.map(item => `<div class="calendar-chip ${item.status}" onclick="openLibraryItem('${item.kind === 'Upload' ? 'uploads' : 'live'}', ${item.id})" title="${chipTooltip(item)}">${item.scheduledTime ? `<span class="calendar-chip-time">${item.scheduledTime}</span> ` : ''}${item.title}</div>`).join('')}
           ${extra > 0 ? `<div class="calendar-chip-more">+${extra} more</div>` : ''}
         </div>`;
       }).join('');
@@ -7073,7 +8308,8 @@
               <div class="calendar-entry-icon">${typeIcon[item.kind]}</div>
               <div class="calendar-entry-body">
                 <p class="calendar-entry-title">${item.title}</p>
-                <p class="calendar-entry-meta">${item.owner} · ${item.section}</p>
+                <p class="calendar-entry-meta">${item.owner} · ${item.section}${item.scheduledTime ? ` · ${item.scheduledTime}` : ''}</p>
+                ${item.expiresOn ? `<p class="calendar-entry-expiry">Expires ${new Date(item.expiresOn + 'T00:00:00').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}</p>` : ''}
               </div>
               <span class="badge ${item.status}">${statusLabel[item.status]}</span>
             </div>
@@ -7096,10 +8332,13 @@
           </div>
         </div>
         <div class="library-card-foot">
-          <label class="switch" onclick="event.stopPropagation()">
-            <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleLibraryActive('${kind}', ${item.id}, this.checked)" />
-            <span class="slider"></span>
-          </label>
+          <div class="library-toggle-group">
+            <label class="switch" onclick="event.stopPropagation()">
+              <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleLibraryActive('${kind}', ${item.id}, this.checked)" />
+              <span class="slider"></span>
+            </label>
+            <span class="library-toggle-label">Live</span>
+          </div>
           <span class="library-expiry">${expiryLabel}</span>
         </div>
       </div>`;
@@ -7118,8 +8357,13 @@
       const item = arr.find(x => x.id === id);
       if (!item) return;
       item.status = checked ? 'active' : 'published';
-      if (kind === 'uploads') { renderUploadsStats(); renderUploadsTable(); renderUploadsLibrary(); }
-      else { renderLiveStats(); renderLiveTable(); renderLiveLibrary(); }
+      if (kind === 'uploads') {
+        logUploadActivity('Back Office', checked ? 'set live' : 'set to published (inactive)', item.title);
+        renderUploadsStats(); renderUploadsTable(); renderUploadsLibrary();
+      } else {
+        logLiveActivity('Back Office', checked ? 'set live' : 'set to published (inactive)', item.title);
+        renderLiveStats(); renderLiveTable(); renderLiveLibrary();
+      }
     }
 
     // ---- Live page ----
@@ -7137,11 +8381,11 @@
       document.getElementById('liveStats').innerHTML = `
       <div class="${cls('all')} accent-teal" onclick="filterLiveByStatus('all')"><p class="label"><span class="dot gray"></span>All</p><p class="value">${liveData.length}</p></div>
       <div class="${cls('draft')} accent-gray" onclick="filterLiveByStatus('draft')"><p class="label"><span class="dot gray"></span>Drafts</p><p class="value">${s.draft}</p></div>
-      <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Live Now</p><p class="value">${s.active}</p></div>
+      <div class="${cls('active')} accent-green" onclick="filterLiveByStatus('active')"><p class="label"><span class="dot live"></span>Active</p><p class="value">${s.active}</p></div>
       <div class="${cls('pending')} accent-amber" onclick="filterLiveByStatus('pending')"><p class="label"><span class="dot amber"></span>Pending Review</p><p class="value">${s.pending}</p></div>
-      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Published</p><p class="value">${s.published}</p></div>
+      <div class="${cls('published')} accent-info" onclick="filterLiveByStatus('published')"><p class="label"><span class="dot info"></span>Live</p><p class="value">${s.published}</p></div>
       <div class="${cls('flagged')} flagged" onclick="filterLiveByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
-      <div class="stat-card accent-teal"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
+      <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
     }
     function renderLiveTable() {
@@ -7153,7 +8397,7 @@
       const visibleIds = new Set();
       liveData.forEach(item => {
         if (filter !== 'all' && item.status !== filter) return;
-        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
+        if (query && !(item.title.toLowerCase().includes(query) || item.owner.toLowerCase().includes(query) || ownerDepartment(item.owner).toLowerCase().includes(query) || item.tags.join(' ').toLowerCase().includes(query))) return;
         visibleCount++;
         visibleIds.add(item.id);
         body.appendChild(renderRow(item, typeIcon.Live, 'Live', { selectable: true, selectedSet: selectedLiveIds, toggleFn: 'toggleLiveSelect' }));
@@ -7169,7 +8413,9 @@
       document.querySelectorAll('#liveViewTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
       document.getElementById('liveView-log').classList.toggle('active', view === 'log');
       document.getElementById('liveView-library').classList.toggle('active', view === 'library');
+      document.getElementById('liveView-activity').classList.toggle('active', view === 'activity');
       if (view === 'library') renderLiveLibrary();
+      if (view === 'activity') renderLiveActivity();
     }
 
     function renderLiveLibrary() {
@@ -7414,6 +8660,157 @@
       { daysAgo: 11, segment: "New users", status: "Flagged" }
     ].forEach((meta, index) => Object.assign(analyticsItems.threads[index], meta));
 
+    const visualAnalyticsState = { live: 0, uploads: 0, threads: 0 };
+    const visualAnalyticsSeries = {
+      live: [[720,1080,1420,1260,1840,2160,1980],[58,64,71,69,77,82,79],[51,55,60,58,64,70,67],[22,25,28,31,29,36,34]],
+      uploads: [[8200,9600,11800,10400,13200,14900,15700],[680,740,820,790,910,1020,1080],[51,54,56,58,57,61,63],[7.1,7.8,8.4,8.2,9.1,9.7,10.2]],
+      threads: [[4100,4600,5200,4900,6100,6800,7200],[42,51,64,58,76,88,94],[15.2,16.1,17.4,17.1,18.5,19.2,19.8],[8.4,9.1,10.2,9.8,11.4,12.1,12.8]]
+    };
+    const visualAudience = { live:[28,38,20,14], uploads:[36,34,18,12], threads:[24,42,23,11] };
+
+    function initializeVisualAnalytics() {
+      if (document.getElementById("formatComparisonChart")) return;
+      document.getElementById("analyticsTabbar").insertAdjacentHTML("beforebegin", `
+        <div class="chart-card visual-analytics-overview">
+          <div class="visual-analytics-head"><div><h3>Performance by Content Format</h3><p>Compare reach and meaningful participation across Live, Uploads and Threads</p></div><span class="result-count">Filtered selection</span></div>
+          <div class="format-comparison-grid" id="formatComparisonChart"></div>
+        </div>`);
+      ["live","uploads","threads"].forEach(type => {
+        const pane = document.getElementById(`analytics-${type}`);
+        const grid = pane.querySelector(".kpi-grid");
+        [...grid.children].slice(0,4).forEach((card,index) => {
+          card.classList.add("metric-selectable");
+          card.tabIndex = 0;
+          card.setAttribute("role","button");
+          card.onclick = () => selectVisualMetric(type,index);
+          card.onkeydown = event => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              selectVisualMetric(type,index);
+            }
+          };
+        });
+        grid.insertAdjacentHTML("afterend", `
+          <div class="chart-card primary-analytics-chart" id="${type}PrimaryChart"></div>
+          <div class="visual-support-grid">
+            <div class="chart-card" id="${type}AudienceVisual"></div>
+            <div class="chart-card" id="${type}InsightVisual"></div>
+          </div>`);
+        const legacyTrendRow = pane.querySelector(".chart-row");
+        if (legacyTrendRow) {
+          legacyTrendRow.firstElementChild.style.display = "none";
+          legacyTrendRow.style.gridTemplateColumns = "1fr";
+        }
+      });
+      renderVisualAnalytics();
+    }
+
+    function selectVisualMetric(type,index) {
+      visualAnalyticsState[type] = index;
+      renderPrimaryVisual(type);
+    }
+
+    function compactVisualNumber(value) {
+      if (value >= 1000000) return `${(value/1000000).toFixed(1)}M`;
+      if (value >= 1000) return `${(value/1000).toFixed(1)}K`;
+      return Math.round(value).toLocaleString();
+    }
+
+    function crossFormatRows(type) {
+      const status = document.getElementById("analyticsStatusFilter");
+      const saved = status.value;
+      status.value = "all";
+      const rows = analyticsFilteredItems(type);
+      status.value = saved;
+      return rows;
+    }
+
+    function renderFormatComparison() {
+      const types = ["live","uploads","threads"];
+      const totals = types.map(type => {
+        const rows = crossFormatRows(type);
+        return {
+          type,
+          reach: rows.reduce((sum,item) => sum + item.views,0),
+          engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0))
+        };
+      });
+      const maxReach = Math.max(1,...totals.map(item => item.reach));
+      const colors = {live:"var(--chart-red)",uploads:"var(--chart-teal)",threads:"var(--chart-gold)"};
+      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => `
+        <div class="format-comparison-card">
+          <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
+          <div class="format-bar-row"><span>Total views</span><div class="format-bar-track"><i style="width:${item.reach/maxReach*100}%;background:${colors[item.type]}"></i></div><b>${compactVisualNumber(item.reach)}</b></div>
+          <div class="format-bar-row"><span>Engaged viewers</span><div class="format-bar-track"><i style="width:${item.engaged/maxReach*100}%;background:${colors[item.type]};opacity:.65"></i></div><b>${compactVisualNumber(item.engaged)}<small>${item.reach?(item.engaged/item.reach*100).toFixed(1):"0.0"}% of views</small></b></div>
+        </div>`).join("");
+    }
+
+    function visualSeriesFor(type,index) {
+      const base = visualAnalyticsSeries[type][index];
+      const rows = analyticsFilteredItems(type);
+      if (!rows.length) return base.map(() => 0);
+      const ratio = Math.max(.35,Math.min(1.35,rows.length/analyticsItems[type].length*1.35));
+      return base.map(value => index >= 2 ? value*(.88+ratio*.12) : value*ratio);
+    }
+
+    function renderPrimaryVisual(type) {
+      const index = visualAnalyticsState[type];
+      const pane = document.getElementById(`analytics-${type}`);
+      const cards = [...pane.querySelectorAll(".kpi-grid .stat-card")].slice(0,4);
+      cards.forEach((card,i) => card.classList.toggle("selected",i === index));
+      const label = cards[index].querySelector(".label").textContent.replace("?","").trim();
+      const currentValue = cards[index].querySelector(".value").textContent;
+      const values = visualSeriesFor(type,index);
+      const width=760,height=210,padX=42,padY=28,max=Math.max(1,...values)*1.16;
+      const points=values.map((value,i)=>({x:padX+i*(width-padX*2)/(values.length-1),y:height-padY-value/max*(height-padY*2)}));
+      const upper=points.map((p,i)=>`${p.x},${Math.max(padY,p.y-14-(i%3)*2)}`);
+      const lower=points.slice().reverse().map((p,i)=>`${p.x},${Math.min(height-padY,p.y+13+(i%2)*3)}`);
+      document.getElementById(`${type}PrimaryChart`).innerHTML = `
+        <div class="visual-analytics-head"><div><h3>${label} Over Time</h3><p>Compared with the typical range for similar ${type==="live"?"sessions":type}</p><div class="primary-chart-summary"><b>${currentValue}</b><span>+${[8.4,4.2,2.6,1.8][index]}% vs previous period</span></div></div>
+          <div class="benchmark-legend"><span class="benchmark-key"><i></i>Actual</span><span class="benchmark-key typical"><i></i>Typical range</span></div></div>
+        <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:210px" role="img" aria-label="${label} trend">
+          <path class="chart-axis" d="M42 182H718M42 105H718M42 28H718"/>
+          <polygon points="${upper.concat(lower).join(" ")}" fill="var(--teal-bg)" stroke="var(--chart-teal)" opacity=".75"/>
+          <polyline points="${points.map(p=>`${p.x},${p.y}`).join(" ")}" fill="none" stroke="var(--chart-red)" stroke-width="3"/>
+          ${points.map((p,i)=>`<circle cx="${p.x}" cy="${p.y}" r="${i===4?4:2.5}" fill="var(--chart-red)"/><text class="chart-label" x="${p.x}" y="203" text-anchor="middle">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]}</text>`).join("")}
+          <line x1="${points[4].x}" y1="${points[4].y-5}" x2="${points[4].x}" y2="${points[4].y-28}" stroke="var(--amber-600)" stroke-dasharray="3 3"/>
+          <text class="chart-value" x="${points[4].x}" y="${points[4].y-33}" text-anchor="middle">${type==="threads"?"Reply spike":"Content published"}</text>
+        </svg>`;
+    }
+
+    function renderAudienceVisual(type) {
+      const labels=["New","Returning","Regular","Premier"];
+      const colors=["var(--chart-red)","var(--chart-teal)","var(--chart-gold)","var(--chart-gray)"];
+      const segment=document.getElementById("analyticsSegmentFilter").value;
+      const values=segment==="all" ? visualAudience[type] : labels.map(label=>segment.startsWith(label)?100:0);
+      document.getElementById(`${type}AudienceVisual`).innerHTML=`
+        <h3>Audience Composition</h3><p class="chart-sub">Who engaged during the selected period</p>
+        <div class="audience-stacked">${values.map((value,i)=>`<i style="width:${value}%;background:${colors[i]}"></i>`).join("")}</div>
+        <div class="audience-legend">${values.map((value,i)=>`<div class="audience-legend-item"><span><i style="background:${colors[i]}"></i>${labels[i]}</span><b>${value}%</b></div>`).join("")}</div>`;
+    }
+
+    function renderInsightVisual(type) {
+      const rows=analyticsFilteredItems(type);
+      const insights={
+        live:[["Attendance opportunity","Most loss occurs between registration and app access."],["Peak participation","Poll responses are strongest during the middle third."]],
+        uploads:[["Retention highlight","Explainer segments outperform introductions by 11 points."],["Evergreen opportunity","Older uploads continue attracting returning viewers."]],
+        threads:[["Healthy discussion","Returning contributors generate the deepest reply chains."],["Response opportunity","Fast answers receive 1.6× more follows."]]
+      };
+      document.getElementById(`${type}InsightVisual`).innerHTML=`
+        <h3>Key Insights</h3><p class="chart-sub">Annotated patterns from the selected data</p>
+        <div class="insight-list">${rows.length?insights[type].map(([title,copy])=>`<div class="visual-insight"><b>${title}</b><span>${copy}</span></div>`).join(""):`<div class="visual-insight"><b>No matching data</b><span>Broaden the filters to generate insights.</span></div>`}</div>`;
+    }
+
+    function renderVisualAnalytics() {
+      if (!document.getElementById("formatComparisonChart")) return;
+      renderFormatComparison();
+      ["live","uploads","threads"].forEach(type=>{
+        renderPrimaryVisual(type);
+        renderAudienceVisual(type);
+        renderInsightVisual(type);
+      });
+    }
+
     const performanceState = {
       live: { page: 1, key: "primary", dir: "desc" },
       uploads: { page: 1, key: "views", dir: "desc" },
@@ -7547,6 +8944,7 @@
       renderLivePerformanceTable();
       renderPerformanceTable("uploads");
       renderPerformanceTable("threads");
+      renderVisualAnalytics();
     }
 
     function sortPerformance(type, key) {
@@ -7878,12 +9276,14 @@
     }
 
     function goToPage(page) {
+      closeModal('contentOverlay');
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + page).classList.add('active');
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
       if (page === 'customer360') closeCustomerDossier();
       if (page === 'contentcalendar') { renderCalendarMonth(); renderContentCalendar(); }
+      if (page === 'groups') { closeGroupProfile(); renderGroupsList(); }
     }
 
     function openUploadModal() {
@@ -7912,6 +9312,7 @@
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
       uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
+      logUploadActivity(owner, 'saved a draft of', title);
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -7922,7 +9323,8 @@
       const owner = document.getElementById('uploadOwnerSelect').dataset.value;
       const section = document.getElementById('uploadSectionSelect').dataset.value;
       const expiresOn = document.getElementById('uploadExpiryInput').value || null;
-      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl() });
+      uploadsData.unshift({ id: uploadIdCounter++, title, owner, section, tags: [], status: 'pending', description: 'Submitted for review.', expiresOn, sourceType: currentUploadSourceType, sourceUrl: currentUploadSourceUrl(), workflowStageIndex: 0 });
+      logUploadActivity(owner, 'submitted for review', title);
       renderUploadsStats();
       renderUploadsTable();
       closeModal('uploadOverlay');
@@ -7930,10 +9332,27 @@
 
     // ---- Content Detail modal: single-item approve/reject for Pending Review items ----
     function approveContentItem(item, kind) {
+      const note = document.getElementById('contentReviewNoteInput').value.trim();
+      const logFn = kind === 'Live' ? logLiveActivity : logUploadActivity;
+
+      if (item.status === 'pending') {
+        const stages = departmentWorkflowStages(ownerDepartment(item.owner));
+        const stageIdx = Math.min(item.workflowStageIndex || 0, stages.length - 1);
+        if (stageIdx < stages.length - 1) {
+          // Not the final stage yet — advance within the workflow, stay pending.
+          item.workflowStageIndex = stageIdx + 1;
+          if (note) item.reviewNote = note;
+          logFn(REVIEWER_TEAM, `advanced to stage "${stages[stageIdx + 1].name}" for`, item.title);
+          if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+          closeModal('contentOverlay');
+          return;
+        }
+      }
+
       item.status = 'published';
       item.reviewedBy = REVIEWER_TEAM;
-      const note = document.getElementById('contentReviewNoteInput').value.trim();
       if (note) item.reviewNote = note;
+      logFn(REVIEWER_TEAM, 'approved', item.title);
       if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
     }
@@ -7943,7 +9362,7 @@
       item.reviewedBy = REVIEWER_TEAM;
       const note = document.getElementById('contentReviewNoteInput').value.trim();
       if (note) item.reviewNote = note;
-      if (kind === 'Live') { renderLiveStats(); renderLiveTable(); } else { renderUploadsStats(); renderUploadsTable(); }
+      if (kind === 'Live') { logLiveActivity(REVIEWER_TEAM, 'rejected', item.title); renderLiveStats(); renderLiveTable(); } else { logUploadActivity(REVIEWER_TEAM, 'rejected', item.title); renderUploadsStats(); renderUploadsTable(); }
       closeModal('contentOverlay');
     }
 
@@ -7980,14 +9399,18 @@
     }
 
     function bulkApproveUploads() {
+      const n = selectedUploadIds.size;
       uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'published'; });
+      if (n) logUploadActivity(REVIEWER_TEAM, 'bulk approved', `${n} upload${n === 1 ? '' : 's'}`);
       selectedUploadIds.clear();
       renderUploadsStats();
       renderUploadsTable();
     }
 
     function bulkRejectUploads() {
+      const n = selectedUploadIds.size;
       uploadsData.forEach(item => { if (selectedUploadIds.has(item.id)) item.status = 'rejected'; });
+      if (n) logUploadActivity(REVIEWER_TEAM, 'bulk rejected', `${n} upload${n === 1 ? '' : 's'}`);
       selectedUploadIds.clear();
       renderUploadsStats();
       renderUploadsTable();
@@ -8032,14 +9455,18 @@
     }
 
     function bulkApproveLive() {
+      const n = selectedLiveIds.size;
       liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'published'; });
+      if (n) logLiveActivity(REVIEWER_TEAM, 'bulk approved', `${n} live session${n === 1 ? '' : 's'}`);
       selectedLiveIds.clear();
       renderLiveStats();
       renderLiveTable();
     }
 
     function bulkRejectLive() {
+      const n = selectedLiveIds.size;
       liveData.forEach(item => { if (selectedLiveIds.has(item.id)) item.status = 'rejected'; });
+      if (n) logLiveActivity(REVIEWER_TEAM, 'bulk rejected', `${n} live session${n === 1 ? '' : 's'}`);
       selectedLiveIds.clear();
       renderLiveStats();
       renderLiveTable();
@@ -8059,13 +9486,14 @@
       const owner = document.getElementById('liveHostSelect').dataset.value;
       const section = document.getElementById('liveSectionSelect').dataset.value;
       liveData.unshift({ id: liveIdCounter++, title, owner, section, tags: [], status: 'draft', description: 'Draft — not yet scheduled.' });
+      logLiveActivity(owner, 'saved a draft of', title);
       renderLiveStats();
       renderLiveTable();
       closeModal('liveScheduleOverlay');
     }
 
     function switchUploadTab(tab) {
-      document.querySelectorAll('#uploadTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.utab === tab));
+      document.querySelectorAll('#uploadTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.utab === tab));
       document.querySelectorAll('.upload-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'uploadtab-' + tab));
     }
 
@@ -8077,7 +9505,7 @@
 
     function switchUploadSourceType(type) {
       currentUploadSourceType = type;
-      document.querySelectorAll('#uploadSourceTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.usource === type));
+      document.querySelectorAll('#uploadSourceTabbar .view-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.usource === type));
       document.querySelectorAll('.upload-source-pane').forEach(p => p.classList.toggle('active', p.id === 'uploadsource-' + type));
     }
 
@@ -8093,6 +9521,7 @@
     }
     function closeModal(id) {
       document.getElementById(id).classList.remove('open');
+      if (id === 'contentOverlay') document.body.classList.remove('detail-panel-open');
     }
     document.querySelectorAll('.overlay').forEach(ov => {
       ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('open'); });
@@ -8905,48 +10334,11 @@
     renderC360Roster();
     renderCalendarMonth();
     renderContentCalendar();
+    renderGroupsList();
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
     renderPerformanceTable('threads');
-  </script>
-</body>
-
-</html>ction closeCustomerDossier() {
-      currentDossierCif = null;
-      document.getElementById('c360-dossier').classList.remove('active');
-      document.getElementById('c360-roster').classList.add('active');
-    }
-
-    function switchDossierTab(tab) {
-      document.querySelectorAll('#dossierTabbar .dossier-rail-item').forEach(b => b.classList.toggle('active', b.dataset.dtab === tab));
-      document.querySelectorAll('.dossier-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'dossier-' + tab));
-    }
-
-    // ---- Initial render ----
-    renderOverviewHeader();
-    renderOverviewStats();
-    renderOverviewPillarKpis();
-    renderLiveRegistrationsChart();
-    renderNextLiveSessionPreview();
-    renderOverviewCommunity();
-    renderTopPostPreview();
-    renderOverviewGlance();
-    renderUploadsStats();
-    renderUploadsTable();
-    renderLiveStats();
-    renderLiveTable();
-    renderSubmissionsFeed();
-    renderLiveFeed();
-    renderTopics();
-    renderHotTopicsStats();
-    renderHotTopics();
-    renderC360RosterStats();
-    renderC360Roster();
-    renderCalendarMonth();
-    renderContentCalendar();
-    renderLivePerformanceTable();
-    renderPerformanceTable('uploads');
-    renderPerformanceTable('threads');
+    initializeVisualAnalytics();
   </script>
 </body>
 
