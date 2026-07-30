@@ -6126,6 +6126,77 @@
     .wn-action-btn.primary { background: var(--ink-900); color: #fff; }
     :root[data-theme="wow"] .wn-pill.active,
     :root[data-theme="wow"] .wn-action-btn.primary { background: var(--accent); }
+    /* ── Live Session Templates ───────────────────────────── */
+    .tmpl-strip-wrap {
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    .tmpl-strip-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-400);
+      margin-bottom: 12px;
+    }
+    .tmpl-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .tmpl-strip::-webkit-scrollbar { display: none; }
+    .tmpl-card {
+      flex-shrink: 0;
+      width: 148px;
+      padding: 11px 13px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper-0);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      text-align: left;
+    }
+    .tmpl-card:hover { border-color: var(--ink-300); }
+    .tmpl-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-10);
+    }
+    .tmpl-card-icon {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: var(--paper-100);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+      color: var(--ink-500);
+    }
+    .tmpl-card.selected .tmpl-card-icon {
+      background: var(--accent-10);
+      color: var(--accent);
+    }
+    .tmpl-card-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink-900);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tmpl-card-desc {
+      font-size: 11px;
+      color: var(--ink-400);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
     /* ── Live Now Ticker ──────────────────────────────────── */
     #liveTickerBar {
       position: fixed;
@@ -8275,6 +8346,11 @@
       </div>
       <div class="modal-body">
 
+        <div class="tmpl-strip-wrap">
+          <p class="tmpl-strip-label">Start from a template</p>
+          <div class="tmpl-strip" id="liveTemplateStrip"></div>
+        </div>
+
         <div class="thumb-row">
           <div class="live-cover-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -8299,7 +8375,7 @@
 
         <div class="field-group">
           <label class="field-label">Description</label>
-          <textarea placeholder="Tell viewers what this session covers..."></textarea>
+          <textarea id="liveDescInput" placeholder="Tell viewers what this session covers..."></textarea>
         </div>
 
         <div class="live-when-card">
@@ -8490,7 +8566,7 @@
             <p class="tr-sub">Push a notification to followers of this section the moment the session goes live.</p>
           </div>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" id="liveNotifyToggle" checked />
             <span class="slider"></span>
           </label>
         </div>
@@ -8500,7 +8576,7 @@
             <p class="tr-sub">Viewers can send messages and questions while the session is live.</p>
           </div>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" id="liveChatToggle" checked />
             <span class="slider"></span>
           </label>
         </div>
@@ -8510,7 +8586,7 @@
             <p class="tr-sub">Collect and surface viewer questions for the host to answer on air.</p>
           </div>
           <label class="switch">
-            <input type="checkbox" />
+            <input type="checkbox" id="liveQaToggle" />
             <span class="slider"></span>
           </label>
         </div>
@@ -8948,6 +9024,166 @@
       YouTube: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>',
       Spotify: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M7.5 10c3-1 6.5-1 9.5.7M8 13.2c2.4-.8 5.2-.8 7.6.6M8.5 16c1.8-.6 3.9-.5 5.6.5" stroke-linecap="round"/></svg>'
     };
+    // ── Live session templates ──────────────────────────────
+    const liveTemplates = [
+      {
+        id: 'blank',
+        name: 'Blank',
+        desc: 'Start from scratch',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>`,
+        titlePlaceholder: 'e.g. Fed Rate Reaction Live',
+        desc2: '',
+        section: 'Markets',
+        host: 'J. Tan',
+        visibility: 'public',
+        clientTags: '',
+        notify: true,
+        chat: true,
+        qa: false,
+      },
+      {
+        id: 'market-update',
+        name: 'Market Update',
+        desc: 'Daily markets recap for clients',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+        titlePlaceholder: 'e.g. Markets Update: Rate Decision Recap',
+        desc2: 'A live segment covering key market movements and what they mean for clients today.',
+        section: 'Markets',
+        host: 'M. Lee',
+        visibility: 'public',
+        clientTags: '',
+        notify: true,
+        chat: true,
+        qa: false,
+      },
+      {
+        id: 'rate-reaction',
+        name: 'Rate Reaction',
+        desc: 'Rapid response to central bank decisions',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>`,
+        titlePlaceholder: 'e.g. Fed Rate Reaction Live',
+        desc2: 'Live reaction and analysis following the rate decision, covering FX and fixed income impact.',
+        section: 'Markets',
+        host: 'J. Tan',
+        visibility: 'public',
+        clientTags: '',
+        notify: true,
+        chat: true,
+        qa: false,
+      },
+      {
+        id: 'wealth-qa',
+        name: 'Wealth Q&A',
+        desc: 'Live Q&A for Wealth & Premier clients',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+        titlePlaceholder: 'e.g. Wealth Q&A: Navigating Volatility',
+        desc2: 'Live audience Q&A addressing client questions on portfolio positioning and market outlook.',
+        section: 'Wealth',
+        host: 'P. Sharma',
+        visibility: 'filter',
+        clientTags: 'Premier, Wealth',
+        notify: true,
+        chat: true,
+        qa: true,
+      },
+      {
+        id: 'sme-clinic',
+        name: 'SME Clinic',
+        desc: 'Live advisory session for SME clients',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>`,
+        titlePlaceholder: 'e.g. SME Growth Clinic: Financing Options',
+        desc2: 'A live clinic helping SME owners understand financing options, grants, and cashflow strategies.',
+        section: 'SME Banking',
+        host: 'R. Ong',
+        visibility: 'public',
+        clientTags: '',
+        notify: true,
+        chat: true,
+        qa: true,
+      },
+      {
+        id: 'exec-briefing',
+        name: 'Exec Briefing',
+        desc: 'Internal leadership-only briefing',
+        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+        titlePlaceholder: 'e.g. Treasury Desk Briefing — Q3 Outlook',
+        desc2: 'An internal leadership briefing covering strategic updates. Restricted to OCBC members only.',
+        section: 'Corporate banking',
+        host: 'A. Kumar',
+        visibility: 'private',
+        clientTags: '',
+        notify: false,
+        chat: false,
+        qa: false,
+      },
+    ];
+
+    let currentLiveTemplate = 'blank';
+
+    function renderLiveTemplateStrip() {
+      const strip = document.getElementById('liveTemplateStrip');
+      if (!strip) return;
+      strip.innerHTML = liveTemplates.map(t => `
+        <button class="tmpl-card${currentLiveTemplate === t.id ? ' selected' : ''}" onclick="applyLiveTemplate('${t.id}')">
+          <div class="tmpl-card-icon">${t.icon}</div>
+          <p class="tmpl-card-name">${t.name}</p>
+          <p class="tmpl-card-desc">${t.desc}</p>
+        </button>`).join('');
+    }
+
+    function applyLiveTemplate(id) {
+      currentLiveTemplate = id;
+      const t = liveTemplates.find(x => x.id === id);
+      if (!t) return;
+
+      // Title
+      const titleEl = document.getElementById('liveTitleInput');
+      if (titleEl) { titleEl.value = ''; titleEl.placeholder = t.titlePlaceholder; }
+
+      // Description
+      const descEl = document.getElementById('liveDescInput');
+      if (descEl) { descEl.value = t.desc2; descEl.placeholder = 'Tell viewers what this session covers...'; }
+
+      // Host select
+      const hostSel = document.getElementById('liveHostSelect');
+      if (hostSel) {
+        hostSel.dataset.value = t.host;
+        hostSel.querySelector('.ui-select-label').textContent = t.host;
+        hostSel.querySelectorAll('.ui-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === t.host));
+      }
+
+      // Section select
+      const secSel = document.getElementById('liveSectionSelect');
+      if (secSel) {
+        secSel.dataset.value = t.section;
+        secSel.querySelector('.ui-select-label').textContent = t.section;
+        secSel.querySelectorAll('.ui-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === t.section));
+      }
+
+      // Visibility
+      document.querySelectorAll('#liveVisOptions .radio-card').forEach(card => {
+        const isMatch = card.dataset.vis === t.visibility;
+        card.classList.toggle('checked', isMatch);
+        card.querySelector('input[type=radio]').checked = isMatch;
+        const filterFields = card.querySelector('.vis-filter-fields');
+        if (filterFields) filterFields.style.display = (isMatch && t.visibility === 'filter') ? 'block' : 'none';
+      });
+      if (t.visibility === 'filter') {
+        const tagInput = document.querySelector('#liveVisOptions [data-vis="filter"] input[type=text]');
+        if (tagInput) tagInput.value = t.clientTags;
+      }
+
+      // Toggles
+      const notifyEl = document.getElementById('liveNotifyToggle');
+      const chatEl   = document.getElementById('liveChatToggle');
+      const qaEl     = document.getElementById('liveQaToggle');
+      if (notifyEl) notifyEl.checked = t.notify;
+      if (chatEl)   chatEl.checked   = t.chat;
+      if (qaEl)     qaEl.checked     = t.qa;
+
+      renderLiveTemplateStrip();
+    }
+
     const sourceTypeLabel = { local: null, youtube: 'YouTube', spotify: 'Spotify' };
     const statusLabel = { draft: "Draft", pending: "Pending Review", active: "Approved", flagged: "Flagged", published: "Live", rejected: "Rejected" };
 
@@ -12343,7 +12579,10 @@
     }
 
     function openLiveModal() {
+      currentLiveTemplate = 'blank';
       document.getElementById('liveScheduleOverlay').classList.add('open');
+      renderLiveTemplateStrip();
+      applyLiveTemplate('blank');
     }
 
     function currentUploadSourceUrl() {
