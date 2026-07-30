@@ -11449,12 +11449,8 @@
 
     function goToLivePreview() {
       goToPage('live');
-      // Switch to Log view (in case another tab is active) then scroll to preview
       switchLiveView('log');
-      setTimeout(() => {
-        const target = document.getElementById('liveAppPreviewCard') || document.getElementById('liveStats');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 80);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderLiveStats() {
