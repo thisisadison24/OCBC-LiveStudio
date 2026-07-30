@@ -168,9 +168,9 @@
 
     .theme-toggle {
       position: fixed;
-      bottom: 20px;
+      top: 12px;
       right: 20px;
-      z-index: 100;
+      z-index: 300;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -225,7 +225,7 @@
     .topbar {
       background: #08090A;
       color: #EFEDE8;
-      padding: 10px 20px;
+      padding: 10px 150px 10px 20px;
       display: flex;
       align-items: center;
       gap: 22px;
@@ -6843,7 +6843,10 @@
       align-items: stretch;
       z-index: 200;
       overflow: hidden;
+      cursor: pointer;
+      transition: filter .15s;
     }
+    #liveTickerBar:hover { filter: brightness(1.12); }
     .ticker-badge {
       display: flex;
       align-items: center;
@@ -9589,7 +9592,7 @@
     </div>
   </div>
 
-  <div id="liveTickerBar" style="display:none">
+  <div id="liveTickerBar" style="display:none" onclick="goToLivePreview()" title="View live sessions">
     <div class="ticker-badge"><span class="ticker-dot"></span>Live Now</div>
     <div class="ticker-divider"></div>
     <div class="ticker-track-wrap">
@@ -11442,6 +11445,16 @@
       if (!track) return;
       track.innerHTML = html + html;
       track.style.animationDuration = Math.max(18, active.length * 14) + 's';
+    }
+
+    function goToLivePreview() {
+      goToPage('live');
+      // Switch to Log view (in case another tab is active) then scroll to preview
+      switchLiveView('log');
+      setTimeout(() => {
+        const target = document.getElementById('liveAppPreviewCard') || document.getElementById('liveStats');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
     }
 
     function renderLiveStats() {
