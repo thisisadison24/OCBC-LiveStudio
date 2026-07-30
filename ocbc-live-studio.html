@@ -314,7 +314,7 @@
 
     /* Main */
     .main {
-      padding: 28px 34px 48px;
+      padding: 28px 34px 80px;
       max-width: 1240px;
       margin: 0 auto;
       width: 100%;
@@ -2604,211 +2604,262 @@
       flex-shrink: 0;
     }
 
-    .workflow-editor-step {
+    /* Workflow editor — two-panel redesign */
+    .wf-editor-wrap {
       display: flex;
-      gap: 12px;
-    }
-
-    .workflow-editor-dot-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .workflow-editor-dot {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--paper-100);
-      border: 2px solid var(--line-strong);
-      color: var(--ink-500);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .workflow-editor-connector {
-      width: 2px;
-      flex: 1;
-      min-height: 24px;
-      background: var(--line-strong);
-      margin: 4px 0;
-    }
-
-    .workflow-editor-step-body {
-      flex: 1;
-      min-width: 0;
-      padding-bottom: 20px;
-    }
-
-    .workflow-editor-stage-head {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .workflow-editor-stage-input {
-      flex: 1;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink-900);
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      padding: 6px 8px;
-      margin-left: -8px;
-      transition: border-color .12s ease, background .12s ease;
-    }
-
-    .workflow-editor-stage-input:hover {
-      border-color: var(--line);
-    }
-
-    .workflow-editor-stage-input:focus {
-      border-color: var(--line-strong);
-      background: var(--paper-100);
-      outline: none;
-    }
-
-    .workflow-stage-remove {
-      background: none;
-      border: none;
-      color: var(--ink-500);
-      cursor: pointer;
-      padding: 4px;
-      flex-shrink: 0;
-      border-radius: 6px;
-    }
-
-    .workflow-stage-remove:hover {
-      color: var(--danger-600);
-      background: var(--danger-bg);
-    }
-
-    .workflow-stage-remove:disabled {
-      opacity: .35;
-      cursor: not-allowed;
-    }
-
-    .workflow-approvers-row {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .workflow-approver-chips {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .workflow-approver-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--paper-100);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 3px 6px 3px 3px;
-      font-size: 12px;
-      font-weight: 600;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 420px;
     }
-
-    .workflow-approver-avatar {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--red-600);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8.5px;
-      font-weight: 700;
+    .wf-stage-list {
+      width: 196px;
       flex-shrink: 0;
+      border-right: 1px solid var(--line);
+      background: var(--paper-100);
+      display: flex;
+      flex-direction: column;
     }
-
-    .workflow-approver-chip button {
+    .wf-stage-list-item {
+      padding: 11px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background .12s;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .wf-stage-list-item:hover { background: var(--paper-200); }
+    .wf-stage-list-item.active { background: var(--paper-0); box-shadow: inset 3px 0 0 var(--accent); }
+    .wf-stage-list-item-text { flex: 1; min-width: 0; }
+    .wf-stage-list-num {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--ink-400);
+      margin: 0 0 2px;
+    }
+    .wf-stage-list-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-800);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 0 3px;
+    }
+    .wf-stage-list-meta {
+      font-size: 10.5px;
+      color: var(--ink-400);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+    .wf-stage-list-delete {
       background: none;
       border: none;
-      color: var(--ink-500);
+      color: var(--ink-300);
       cursor: pointer;
-      padding: 2px;
+      padding: 3px;
+      border-radius: 5px;
       display: flex;
-      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: color .12s, background .12s;
     }
-
-    .workflow-approver-chip button:hover {
-      color: var(--danger-600);
-      background: var(--danger-bg);
-    }
-
-    .workflow-approvers-empty {
-      font-size: 12px;
+    .wf-stage-list-delete:hover { color: var(--danger-600); background: var(--danger-bg); }
+    .wf-stage-list-delete:disabled { opacity: .25; cursor: not-allowed; }
+    .wf-stage-list-add {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 13px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
       color: var(--ink-500);
-      font-style: italic;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color .12s, background .12s;
+      text-align: left;
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      width: 100%;
     }
-
-    .workflow-require-row {
+    .wf-stage-list-add:hover { color: var(--accent); background: var(--accent-10); }
+    .wf-stage-detail {
+      flex: 1;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background: var(--paper-0);
+      overflow-y: auto;
+    }
+    .wf-detail-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-top: 10px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
     }
-    .workflow-require-label {
-      font-size: 11.5px;
-      color: var(--ink-500);
-      font-weight: 500;
+    .wf-detail-num {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--ink-400);
       white-space: nowrap;
     }
-    .workflow-require-toggle {
-      display: flex;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      overflow: hidden;
-    }
-    .workflow-require-toggle button {
-      font-family: inherit;
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border: none;
-      background: transparent;
-      color: var(--ink-500);
-      cursor: pointer;
-      transition: background .12s, color .12s;
-    }
-    .workflow-require-toggle button:not(:last-child) {
-      border-right: 1px solid var(--line);
-    }
-    .workflow-require-toggle button.active {
-      background: var(--accent);
-      color: #fff;
-    }
-    .workflow-require-toggle button:not(.active):hover {
-      background: var(--paper-100);
+    .wf-detail-name-input {
+      flex: 1;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
       color: var(--ink-900);
-    }
-
-    .workflow-approver-select {
-      font-family: inherit;
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 5px 8px;
-      border-radius: 8px;
-      border: 1px dashed var(--line-strong);
       background: transparent;
-      color: var(--ink-500);
-      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 5px 9px;
+      transition: border-color .12s, background .12s;
     }
+    .wf-detail-name-input:hover { border-color: var(--line); }
+    .wf-detail-name-input:focus { border-color: var(--line-strong); background: var(--paper-100); outline: none; }
+    /* Workflow editor — flat group rows in detail panel */
+    .wf-groups-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--ink-400);
+      margin: 0 0 12px;
+    }
+    .wf-groups-hint { font-size: 11.5px; color: var(--ink-400); font-style: italic; margin: -8px 0 12px; }
+    .wf-no-groups { font-size: 13px; color: var(--ink-400); font-style: italic; margin: 0 0 12px; }
 
+    /* Approval group summary cards (read view in stage detail) */
+    .wf-group-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper-100);
+      margin-bottom: 8px;
+    }
+    .wf-group-summary-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .wf-group-summary-info { flex: 1; min-width: 0; }
+    .wf-group-summary-name {
+      font-size: 13px; font-weight: 700; color: var(--ink-900); margin: 0 0 2px;
+    }
+    .wf-group-summary-meta { font-size: 12px; color: var(--ink-500); margin: 0; }
+    .wf-group-summary-badge {
+      font-size: 11px; font-weight: 700;
+      color: var(--accent); background: var(--accent-10);
+      padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+    }
+    .wf-group-summary-edit {
+      background: none; border: 1px solid var(--line); border-radius: 7px;
+      color: var(--ink-600); font-family: inherit; font-size: 12px; font-weight: 600;
+      padding: 4px 10px; cursor: pointer; flex-shrink: 0;
+      transition: border-color .12s, color .12s;
+    }
+    .wf-group-summary-edit:hover { border-color: var(--accent); color: var(--accent); }
+    .wf-group-summary-del {
+      background: none; border: none; color: var(--ink-300);
+      cursor: pointer; padding: 4px; border-radius: 6px; display: flex; flex-shrink: 0;
+      transition: color .12s, background .12s;
+    }
+    .wf-group-summary-del:hover { color: var(--danger-600); background: var(--danger-bg); }
+    .wf-add-group-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 14px; border-radius: 9px;
+      border: 1px dashed var(--line-strong); background: transparent;
+      color: var(--ink-500); font-family: inherit; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; transition: border-color .15s, color .15s, background .15s;
+    }
+    .wf-add-group-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-10); }
+
+    /* Approval group layer (modal overlay within wf-editor-wrap) */
+    .wf-editor-wrap { position: relative; }
+    .wf-group-layer {
+      position: absolute; inset: 0;
+      background: var(--paper-0); border-radius: 14px; z-index: 10;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .wf-layer-head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px; border-bottom: 1px solid var(--line); flex-shrink: 0;
+    }
+    .wf-layer-back {
+      display: flex; align-items: center; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      color: var(--ink-500); font-family: inherit; font-size: 13px; font-weight: 600;
+      padding: 5px 8px; border-radius: 7px; transition: color .12s, background .12s;
+    }
+    .wf-layer-back:hover { color: var(--ink-900); background: var(--paper-100); }
+    .wf-layer-title { font-size: 14px; font-weight: 700; color: var(--ink-900); flex: 1; }
+    .wf-layer-body {
+      flex: 1; padding: 20px 22px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 22px;
+    }
+    .wf-layer-field { display: flex; flex-direction: column; gap: 8px; }
+    .wf-layer-label {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--ink-400);
+    }
+    .wf-layer-sublabel { font-size: 12px; color: var(--ink-500); margin: -4px 0 0; }
+    .wf-layer-input {
+      font-family: inherit; font-size: 14px; font-weight: 600; color: var(--ink-900);
+      background: var(--paper-100); border: 1px solid var(--line);
+      border-radius: 9px; padding: 10px 13px; transition: border-color .12s;
+    }
+    .wf-layer-input:focus { border-color: var(--accent); outline: none; background: var(--paper-0); }
+    .wf-layer-toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .wf-layer-toggle {
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 9px; border: 1.5px solid var(--line);
+      background: var(--paper-100); font-family: inherit; font-size: 13px; font-weight: 600;
+      color: var(--ink-700); cursor: pointer; transition: border-color .12s, background .12s, color .12s;
+    }
+    .wf-layer-toggle:hover { border-color: var(--line-strong); background: var(--paper-200); }
+    .wf-layer-toggle.on { border-color: var(--accent); background: var(--accent-10); color: var(--ink-900); }
+    .wf-layer-toggle-check {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid var(--line-strong); display: flex; align-items: center;
+      justify-content: center; font-size: 9px; flex-shrink: 0; transition: background .12s, border-color .12s;
+    }
+    .wf-layer-toggle.on .wf-layer-toggle-check { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .wf-layer-need {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; background: var(--paper-100);
+      border: 1px solid var(--line); border-radius: 10px;
+    }
+    .wf-layer-need-label { font-size: 13px; font-weight: 600; color: var(--ink-700); flex: 1; }
+    .wf-layer-stepper { display: flex; align-items: center; gap: 8px; }
+    .wf-layer-stepper-btn {
+      width: 30px; height: 30px; border-radius: 8px;
+      border: 1.5px solid var(--line-strong); background: var(--paper-0);
+      color: var(--ink-800); font-size: 18px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .12s, border-color .12s, color .12s;
+    }
+    .wf-layer-stepper-btn:hover:not(:disabled) { background: var(--accent-10); border-color: var(--accent); color: var(--accent); }
+    .wf-layer-stepper-btn:disabled { opacity: .3; cursor: not-allowed; }
+    .wf-layer-stepper-val { font-size: 24px; font-weight: 800; color: var(--ink-900); min-width: 32px; text-align: center; }
+    .wf-layer-need-of { font-size: 12.5px; color: var(--ink-400); }
+    .wf-layer-footer {
+      display: flex; justify-content: flex-end; gap: 8px;
+      padding: 14px 18px; border-top: 1px solid var(--line); flex-shrink: 0;
+    }
     .group-workflow-actions {
       display: flex;
       gap: 8px;
@@ -5682,6 +5733,295 @@
     .home-tab-pane { display: none; }
     .home-tab-pane.active { display: block; }
 
+    /* DM / Messages */
+    .dm-layout {
+      display: flex;
+      height: calc(100vh - 120px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--paper-0);
+    }
+    .dm-sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+    .dm-sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dm-sidebar-title {
+      font-size: 16px;
+      font-weight: 800;
+      font-family: 'Sora', sans-serif;
+    }
+    .dm-compose-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--ink-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .12s;
+    }
+    .dm-compose-btn:hover { background: var(--paper-100); color: var(--ink-900); }
+    .dm-search-wrap { padding: 10px 14px; border-bottom: 1px solid var(--line); }
+    .dm-search-input {
+      width: 100%;
+      font-family: inherit;
+      font-size: 13px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 7px 14px;
+      color: var(--ink-900);
+      outline: none;
+      box-sizing: border-box;
+    }
+    .dm-search-input:focus { border-color: var(--line-strong); }
+    .dm-convo-list { flex: 1; overflow-y: auto; }
+    .dm-convo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background .12s;
+      position: relative;
+    }
+    .dm-convo-item:hover { background: var(--paper-100); }
+    .dm-convo-item.active { background: var(--accent-10); }
+    .dm-convo-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold-gradient, var(--red-600));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .dm-online-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22C55E;
+      border: 2px solid var(--paper-0);
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+    }
+    .dm-convo-info { flex: 1; min-width: 0; }
+    .dm-convo-name { font-size: 13.5px; font-weight: 700; margin: 0 0 2px; color: var(--ink-900); }
+    .dm-convo-preview { font-size: 12px; color: var(--ink-500); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dm-convo-preview.unread { color: var(--ink-800); font-weight: 600; }
+    .dm-convo-time { font-size: 11px; color: var(--ink-400); flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+    .dm-unread-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+    }
+    /* Chat area */
+    .dm-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .dm-chat-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .dm-chat-head-info { flex: 1; }
+    .dm-chat-head-name { font-size: 14px; font-weight: 700; margin: 0 0 1px; }
+    .dm-chat-head-sub { font-size: 12px; color: var(--ink-500); margin: 0; }
+    .dm-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .dm-date-sep {
+      text-align: center;
+      font-size: 11px;
+      color: var(--ink-400);
+      font-weight: 600;
+      margin: 12px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dm-date-sep::before, .dm-date-sep::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .dm-msg-row { display: flex; align-items: flex-end; gap: 8px; margin-bottom: 2px; }
+    .dm-msg-row.sent { flex-direction: row-reverse; }
+    .dm-msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gold-gradient, var(--red-600));
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-bottom: 2px;
+    }
+    .dm-msg-row.sent .dm-msg-avatar { display: none; }
+    .dm-bubble-wrap { display: flex; flex-direction: column; align-items: flex-start; max-width: 68%; }
+    .dm-msg-row.sent .dm-bubble-wrap { align-items: flex-end; }
+    .dm-bubble {
+      padding: 9px 13px;
+      border-radius: 18px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .dm-bubble.received { background: var(--paper-100); border: 1px solid var(--line); color: var(--ink-900); border-bottom-left-radius: 5px; }
+    .dm-bubble.sent { background: var(--accent); color: #fff; border-bottom-right-radius: 5px; }
+    .dm-bubble-time { font-size: 10px; color: var(--ink-400); margin-top: 3px; padding: 0 4px; }
+    .dm-share-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      max-width: 260px;
+      background: var(--paper-0);
+      cursor: pointer;
+      transition: border-color .12s;
+    }
+    .dm-share-card:hover { border-color: var(--line-strong); }
+    .dm-share-card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--paper-100), var(--line));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-300);
+    }
+    .dm-share-card-body { padding: 10px 12px; }
+    .dm-share-card-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-500); margin: 0 0 3px; }
+    .dm-share-card-title { font-size: 13px; font-weight: 700; margin: 0 0 6px; color: var(--ink-900); }
+    .dm-share-card-btn { font-size: 12px; font-weight: 700; color: var(--accent); background: none; border: none; cursor: pointer; padding: 0; }
+    /* Input bar */
+    .dm-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .dm-input {
+      flex: 1;
+      font-family: inherit;
+      font-size: 13.5px;
+      background: var(--paper-100);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 9px 16px;
+      color: var(--ink-900);
+      outline: none;
+      transition: border-color .12s;
+    }
+    .dm-input:focus { border-color: var(--line-strong); }
+    .dm-input-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .12s, color .12s;
+    }
+    .dm-input-btn.ghost { background: transparent; color: var(--ink-500); }
+    .dm-input-btn.ghost:hover { background: var(--paper-100); color: var(--ink-900); }
+    .dm-input-btn.send { background: var(--accent); color: #fff; }
+    .dm-input-btn.send:hover { opacity: .88; }
+    /* Empty state */
+    .dm-empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-400);
+      gap: 12px;
+      padding: 40px;
+      text-align: center;
+    }
+    .dm-empty svg { opacity: .25; }
+    .dm-empty h3 { font-size: 18px; font-weight: 700; color: var(--ink-700); margin: 0; }
+    .dm-empty p { font-size: 13.5px; margin: 0; }
+    /* Share picker */
+    .dm-share-picker {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      background: var(--paper-0);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+      z-index: 30;
+      padding: 14px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .dm-share-picker-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-400); margin: 0 0 10px; }
+    .dm-share-picker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background .12s;
+    }
+    .dm-share-picker-item:hover { background: var(--paper-100); }
+    .dm-share-picker-thumb {
+      width: 48px;
+      height: 27px;
+      border-radius: 5px;
+      background: linear-gradient(135deg, var(--paper-100), var(--line));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .dm-share-picker-info { flex: 1; min-width: 0; }
+    .dm-share-picker-name { font-size: 12.5px; font-weight: 600; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dm-share-picker-sub { font-size: 11px; color: var(--ink-500); margin: 0; }
+
     /* What's New */
     .wn-pill {
       font-family: inherit;
@@ -5786,6 +6126,126 @@
     .wn-action-btn.primary { background: var(--ink-900); color: #fff; }
     :root[data-theme="wow"] .wn-pill.active,
     :root[data-theme="wow"] .wn-action-btn.primary { background: var(--accent); }
+    /* ── Live Now Ticker ──────────────────────────────────── */
+    #liveTickerBar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: var(--paper-0);
+      border-top: 1.5px solid var(--line);
+      display: flex;
+      align-items: stretch;
+      z-index: 200;
+      overflow: hidden;
+    }
+    .ticker-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 20px 0 18px;
+      background: #c1121f;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    @keyframes tickerPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .25; }
+    }
+    .ticker-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #fff;
+      animation: tickerPulse 1.3s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .ticker-divider {
+      width: 1.5px;
+      background: var(--line);
+      flex-shrink: 0;
+    }
+    .ticker-track-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-track-wrap::before,
+    .ticker-track-wrap::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0;
+      width: 36px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .ticker-track-wrap::before { left: 0;  background: linear-gradient(to right, var(--paper-0), transparent); }
+    .ticker-track-wrap::after  { right: 0; background: linear-gradient(to left,  var(--paper-0), transparent); }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      will-change: transform;
+      animation: tickerScroll 30s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 30px;
+    }
+    .ticker-item-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #c1121f;
+      background: rgba(193,18,31,.1);
+      padding: 2px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .ticker-item-live-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #c1121f;
+      animation: tickerPulse 1.3s ease-in-out infinite;
+    }
+    .ticker-item-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink-900);
+    }
+    .ticker-item-host {
+      font-size: 12px;
+      color: var(--ink-500);
+    }
+    .ticker-item-viewers {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-400);
+    }
+    .ticker-sep {
+      font-size: 8px;
+      color: var(--ink-300);
+      padding: 0 2px;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 
@@ -5895,7 +6355,7 @@
               Community sentiment.</p>
           </div>
           <div class="overview-header-meta">
-            <span class="live-now-pill" onclick="goToPage('live')" id="overviewLiveNowPill"></span>
+
             <p class="as-of-note" id="overviewAsOf"></p>
           </div>
         </div>
@@ -7315,6 +7775,10 @@
             <button class="dossier-rail-item" data-htab="whatsnew" onclick="switchHomeTab('whatsnew')">
               What's New
             </button>
+            <button class="dossier-rail-item" data-htab="messages" onclick="switchHomeTab('messages')" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              Messages
+              <span class="inbox-badge zero" id="dmUnreadBadge" style="font-size:10px;">0</span>
+            </button>
           </div>
           <!-- Right content -->
           <div class="dossier-content">
@@ -7331,6 +7795,30 @@
               <div class="panel">
                 <div class="panel-head"><h2>Pending Review</h2></div>
                 <div id="inboxPageList" style="padding:14px 18px 18px;display:flex;flex-direction:column;gap:12px;"></div>
+              </div>
+            </div>
+            <!-- Messages pane -->
+            <div class="home-tab-pane" id="homeTabMessages">
+              <div class="dm-layout">
+                <div class="dm-sidebar">
+                  <div class="dm-sidebar-head">
+                    <span class="dm-sidebar-title">Messages</span>
+                    <button class="dm-compose-btn" onclick="openNewDm()" title="New message">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </button>
+                  </div>
+                  <div class="dm-search-wrap">
+                    <input class="dm-search-input" placeholder="Search messages" oninput="filterDmList(this.value)" />
+                  </div>
+                  <div class="dm-convo-list" id="dmConvoList"></div>
+                </div>
+                <div class="dm-main" id="dmMain">
+                  <div class="dm-empty">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    <h3>Your Messages</h3>
+                    <p>Send private messages and share content<br>with your team for quick feedback.</p>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- What's New pane -->
@@ -8359,6 +8847,14 @@
     </div>
   </div>
 
+  <div id="liveTickerBar" style="display:none">
+    <div class="ticker-badge"><span class="ticker-dot"></span>Live Now</div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-track-wrap">
+      <div class="ticker-track" id="liveTickerTrack"></div>
+    </div>
+  </div>
+
   <script>
     // Returns an ISO date string `n` days from today — used so demo expiry dates
     // stay meaningful (expired / expiring soon / scheduled) no matter when this is opened.
@@ -8434,12 +8930,12 @@
         id: 1, title: "Fed Rate Reaction Live", owner: "M. Lee", section: "Markets", tags: ["Macro", "FX"], status: "flagged", description: "Live reaction segment following the Fed's rate decision, covering FX and rates market impact.",
         transcript: '"...this is a great time to <mark class="flagmark">buy into tech names before the next rally</mark>, especially with rates likely to ease..."'
       },
-      { id: 2, title: "Interest Rate Outlook Live", owner: "P. Sharma", section: "Markets", tags: ["Rates"], status: "active", description: "Live discussion on the interest rate outlook for the next two quarters with the treasury desk." },
+      { id: 2, title: "Interest Rate Outlook Live", owner: "P. Sharma", section: "Markets", tags: ["Rates"], status: "active", viewers: 2140, description: "Live discussion on the interest rate outlook for the next two quarters with the treasury desk." },
       { id: 3, title: "Morning Market Open", owner: "P. Sharma", section: "Markets", tags: ["Equities"], status: "pending", description: "Daily market-open segment awaiting compliance sign-off before this morning's broadcast.", scheduledFor: daysFromNow(1), scheduledTime: "8:30 AM" },
       { id: 4, title: "Treasury Desk AMA", owner: "R. Ong", section: "Wealth", tags: ["Treasury", "Q&A"], status: "published", description: "Scheduled live Q&A with the treasury desk on portfolio hedging strategies, cleared for broadcast." },
       { id: 5, title: "Untitled Live Session", owner: "S. Wong", section: "Wealth", tags: [], status: "draft", description: "Draft — not yet scheduled.", scheduledFor: daysFromNow(6), scheduledTime: "4:00 PM" },
       { id: 6, title: "SME Growth Clinic", owner: "R. Ong", section: "SME banking", tags: ["Growth", "Q&A"], status: "published", description: "Live clinic session helping SME owners plan for expansion financing and cashflow." },
-      { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", description: "Live audience Q&A addressing client concerns around recent market volatility." },
+      { id: 7, title: "Wealth Q&A: Markets Volatility", owner: "P. Sharma", section: "Wealth", tags: ["Volatility", "Q&A"], status: "active", viewers: 3680, description: "Live audience Q&A addressing client concerns around recent market volatility." },
       { id: 8, title: "Markets Outlook: August Preview", owner: "P. Sharma", section: "Markets", tags: ["Outlook"], status: "pending", description: "Live preview of key market events and data releases expected in August.", scheduledFor: daysFromNow(8), scheduledTime: "9:00 AM" },
       { id: 9, title: "Wealth Webinar: Legacy Planning", owner: "S. Wong", section: "Wealth", tags: ["Legacy", "Planning"], status: "draft", description: "Live webinar on legacy and estate planning considerations for Premier Banking clients.", scheduledFor: daysFromNow(25), scheduledTime: "2:00 PM" },
       { id: 10, title: "SME Digitalisation Grants Briefing", owner: "R. Ong", section: "SME banking", tags: ["Grants"], status: "pending", description: "Live briefing on available government digitalisation grants for SME clients.", scheduledFor: daysFromNow(18), scheduledTime: "11:00 AM" },
@@ -8462,32 +8958,70 @@
     // profile page (see renderGroupWorkflowEditor) — deliberately not a single shared
     // settings surface, since there's no real access-rights model yet and one editor for
     // every division would let anyone silently change another group's review process.
-    // Each stage is { name, approvers: [owner names allowed to action this stage] }.
+    // Each stage is { name, groups: [{ label, members, required }] }.
+    // A stage advances when every group has received its required number of approvals.
     let departmentWorkflows = {
       'Group Brands & Communications': [
-        { name: 'Marketing Review', approvers: ['J. Tan', 'M. Lee'], require: 'any' },
-        { name: 'Publish', approvers: [], require: 'any' }
+        {
+          name: 'Content Review',
+          groups: [
+            { label: 'GBC', members: ['J. Tan', 'M. Lee'], required: 1 }
+          ]
+        },
+        {
+          name: 'Sign-off',
+          groups: [
+            { label: 'GBC Lead', members: ['J. Tan'], required: 1 },
+            { label: 'Legal', members: ['P. Sharma'], required: 1 }
+          ]
+        },
+        { name: 'Publish', groups: [] }
       ],
       'Group Investment Banking': [
-        { name: 'Content Review', approvers: ['A. Kumar'], require: 'any' },
-        { name: 'Compliance Check', approvers: ['P. Sharma'], require: 'any' },
-        { name: 'Publish', approvers: [], require: 'any' }
+        {
+          name: 'Content Review',
+          groups: [
+            { label: 'GIB', members: ['A. Kumar', 'L. Ibrahim'], required: 1 }
+          ]
+        },
+        {
+          name: 'Compliance Check',
+          groups: [
+            { label: 'Compliance', members: ['P. Sharma'], required: 1 }
+          ]
+        },
+        { name: 'Publish', groups: [] }
       ],
       'Group Wealth Management': [
-        { name: 'Content Review', approvers: ['S. Wong'], require: 'any' },
-        { name: 'Compliance Review', approvers: [], require: 'any' },
-        { name: 'Wealth Desk Sign-off', approvers: ['S. Wong'], require: 'any' },
-        { name: 'Publish', approvers: [], require: 'any' }
+        {
+          name: 'Content Review',
+          groups: [
+            { label: 'GWM', members: ['S. Wong'], required: 1 }
+          ]
+        },
+        { name: 'Compliance Review', groups: [] },
+        {
+          name: 'Wealth Desk Sign-off',
+          groups: [
+            { label: 'GWM Lead', members: ['S. Wong'], required: 1 }
+          ]
+        },
+        { name: 'Publish', groups: [] }
       ],
       'Group SME Banking': [
-        { name: 'Content Review', approvers: ['R. Ong'], require: 'any' },
-        { name: 'Compliance Check', approvers: [], require: 'any' },
-        { name: 'Publish', approvers: [], require: 'any' }
+        {
+          name: 'Content Review',
+          groups: [
+            { label: 'GSMEB', members: ['R. Ong'], required: 1 }
+          ]
+        },
+        { name: 'Compliance Check', groups: [] },
+        { name: 'Publish', groups: [] }
       ],
       'Group Property Management': [
-        { name: 'Content Review', approvers: [], require: 'any' },
-        { name: 'Compliance Check', approvers: [], require: 'any' },
-        { name: 'Publish', approvers: [], require: 'any' }
+        { name: 'Content Review', groups: [] },
+        { name: 'Compliance Check', groups: [] },
+        { name: 'Publish', groups: [] }
       ]
     };
 
@@ -8541,7 +9075,7 @@
     function departmentWorkflowStages(department) {
       return departmentWorkflows[department] && departmentWorkflows[department].length
         ? departmentWorkflows[department]
-        : [{ name: 'Review', approvers: [] }, { name: 'Publish', approvers: [] }];
+        : [{ name: 'Review', groups: [] }, { name: 'Publish', groups: [] }];
     }
 
     function allTeamMembers() {
@@ -8722,9 +9256,9 @@
             cls = i < workflowStageIdx ? 'done' : (i === workflowStageIdx ? 'current' : 'upcoming');
           }
           const dot = cls === 'done' ? '✓' : (cls === 'rejected' ? '✕' : (cls === 'flagged' ? '!' : (i + 1)));
-          const req = stage.require || 'any';
-          const approverNote = stage.approvers && stage.approvers.length
-            ? `<span class="workflow-step-approvers">${stage.approvers.join(', ')}${stage.approvers.length >= 2 ? ` <span style="font-style:italic;opacity:.7;">(${req === 'all' ? 'all required' : 'any one'})</span>` : ''}</span>`
+          const activeGroups = (stage.groups || []).filter(g => g.members && g.members.length > 0);
+          const approverNote = activeGroups.length
+            ? `<span class="workflow-step-approvers">${activeGroups.map(g => `${g.label}: ${g.required >= g.members.length ? 'all' : g.required + ' of ' + g.members.length}`).join(' · ')}</span>`
             : '';
           return `<div class="workflow-step ${cls}"><span class="workflow-step-dot">${dot}</span><span class="workflow-step-text"><span class="workflow-step-label">${stage.name}</span>${approverNote}</span></div>`;
         }).join('');
@@ -9056,10 +9590,8 @@
     `;
     }
 
-    // Page header: live-status pill and a freshness stamp.
+    // Page header: freshness stamp.
     function renderOverviewHeader() {
-      const liveNow = liveData.filter(x => x.status === 'active').length;
-      document.getElementById('overviewLiveNowPill').innerHTML = `<span class="dot live"></span>${liveNow} Live Now`;
 
       const now = new Date();
       const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -9446,94 +9978,246 @@
     // would let any one person silently tighten or loosen every other division's review
     // process, which doesn't match how approval ownership should work. ----
     let groupWorkflowDraft = null;
+    let wfSelectedStageIdx = 0;
 
     function renderGroupWorkflowEditor(dept) {
       groupWorkflowDraft = JSON.parse(JSON.stringify(departmentWorkflows[dept]));
+      wfLayerState = { open: false, si: 0, gi: -1, label: '', members: [], required: 1 };
+      wfSelectedStageIdx = 0;
+      renderGroupWorkflowEditorRows();
+    }
+
+    // ── Layer state (the add/edit approval group overlay) ──
+    let wfLayerState = { open: false, si: 0, gi: -1, label: '', members: [], required: 1 };
+
+    function openWfGroupLayer(si, gi) {
+      const isNew = gi < 0;
+      const grp = isNew ? null : (groupWorkflowDraft[si].groups || [])[gi];
+      wfLayerState = {
+        open: true, si, gi: isNew ? -1 : gi,
+        label: isNew ? (groupAcronym(currentGroupDept) || 'Approvers') : grp.label,
+        members: isNew ? [] : [...grp.members],
+        required: isNew ? 1 : (grp.required || 1)
+      };
+      renderWfGroupLayer();
+    }
+
+    function closeWfGroupLayer() {
+      wfLayerState.open = false;
+      const el = document.getElementById('wfGroupLayer');
+      if (el) { el.style.display = 'none'; el.innerHTML = ''; }
+    }
+
+    function wfGroupLayerHtml() {
+      const { si, gi, label, members, required } = wfLayerState;
+      const isNew = gi < 0;
+      const total = members.length;
+      const canDec = required > 1;
+      const canInc = total === 0 || required < total;
+      const toggles = allTeamMembers().map(name => {
+        const on = members.includes(name);
+        return `<button class="wf-layer-toggle${on ? ' on' : ''}" onclick="toggleWfLayerMember('${name.replace(/'/g,"\\'")}')">
+          <span class="wf-layer-toggle-check">${on ? '✓' : ''}</span>${name}
+        </button>`;
+      }).join('');
+      return `
+        <div class="wf-layer-head">
+          <button class="wf-layer-back" onclick="closeWfGroupLayer()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <span class="wf-layer-title">${isNew ? 'Add Approval Group' : 'Edit Approval Group'}</span>
+        </div>
+        <div class="wf-layer-body">
+          <div class="wf-layer-field">
+            <label class="wf-layer-label">Group Name</label>
+            <input class="wf-layer-input" id="wfLayerNameInput" type="text" value="${label.replace(/"/g,'&quot;')}"
+                   placeholder="e.g. GBC, Legal, Risk" oninput="wfLayerState.label=this.value" />
+          </div>
+          <div class="wf-layer-field">
+            <label class="wf-layer-label">Who can approve?</label>
+            ${total > 0 ? `<p class="wf-layer-sublabel">${total} person${total !== 1 ? 's' : ''} selected</p>` : ''}
+            <div class="wf-layer-toggles">${toggles}</div>
+          </div>
+          <div class="wf-layer-field">
+            <label class="wf-layer-label">Approvals needed to advance</label>
+            <div class="wf-layer-need">
+              <span class="wf-layer-need-label">Need</span>
+              <div class="wf-layer-stepper">
+                <button class="wf-layer-stepper-btn" onclick="wfLayerIncrRequired(-1)" ${canDec?'':'disabled'}>−</button>
+                <span class="wf-layer-stepper-val">${required}</span>
+                <button class="wf-layer-stepper-btn" onclick="wfLayerIncrRequired(1)" ${canInc?'':'disabled'}>+</button>
+              </div>
+              <span class="wf-layer-need-of">of ${total > 0 ? total + ' selected' : 'anyone'}</span>
+            </div>
+          </div>
+        </div>
+        <div class="wf-layer-footer">
+          <button class="btn btn-sm" onclick="closeWfGroupLayer()">Cancel</button>
+          <button class="btn btn-sm btn-primary" onclick="saveWfGroupLayer()">${isNew ? 'Add Group' : 'Save Changes'}</button>
+        </div>`;
+    }
+
+    function renderWfGroupLayer() {
+      const el = document.getElementById('wfGroupLayer');
+      if (!el) { renderGroupWorkflowEditorRows(); return; }
+      el.style.display = wfLayerState.open ? 'flex' : 'none';
+      el.innerHTML = wfLayerState.open ? wfGroupLayerHtml() : '';
+    }
+
+    function toggleWfLayerMember(name) {
+      const idx = wfLayerState.members.indexOf(name);
+      if (idx >= 0) {
+        wfLayerState.members.splice(idx, 1);
+        if (wfLayerState.members.length > 0 && wfLayerState.required > wfLayerState.members.length)
+          wfLayerState.required = wfLayerState.members.length;
+      } else {
+        wfLayerState.members.push(name);
+      }
+      renderWfGroupLayer();
+    }
+
+    function wfLayerIncrRequired(delta) {
+      const max = wfLayerState.members.length > 0 ? wfLayerState.members.length : 99;
+      wfLayerState.required = Math.max(1, Math.min(max, wfLayerState.required + delta));
+      renderWfGroupLayer();
+    }
+
+    function saveWfGroupLayer() {
+      const nameEl = document.getElementById('wfLayerNameInput');
+      const label = (nameEl ? nameEl.value.trim() : '') || wfLayerState.label || 'Group';
+      const { si, gi, members, required } = wfLayerState;
+      const group = { label, members: [...members], required };
+      if (!groupWorkflowDraft[si].groups) groupWorkflowDraft[si].groups = [];
+      if (gi < 0) {
+        groupWorkflowDraft[si].groups.push(group);
+      } else {
+        groupWorkflowDraft[si].groups[gi] = group;
+      }
+      closeWfGroupLayer();
       renderGroupWorkflowEditorRows();
     }
 
     function renderGroupWorkflowEditorRows() {
       const el = document.getElementById('groupWorkflowEditor');
-      el.innerHTML = groupWorkflowDraft.map((stage, i) => {
-        const available = allTeamMembers().filter(name => !stage.approvers.includes(name));
-        const isLast = i === groupWorkflowDraft.length - 1;
-        const req = stage.require || 'any';
-        const showRequire = stage.approvers.length >= 2;
+      const canDeleteStage = groupWorkflowDraft.length > 1;
+
+      // ── Left panel ──
+      const listHtml = groupWorkflowDraft.map((stage, si) => {
+        const groups = (stage.groups || []).filter(g => g.members.length > 0);
+        const meta = groups.length
+          ? groups.map(g => `${g.label} (${g.required || 1}/${g.members.length})`).join(' · ')
+          : 'Open — anyone can approve';
         return `
-        <div class="workflow-editor-step">
-          <div class="workflow-editor-dot-col">
-            <span class="workflow-editor-dot">${i + 1}</span>
-            ${isLast ? '' : '<span class="workflow-editor-connector"></span>'}
-          </div>
-          <div class="workflow-editor-step-body">
-            <div class="workflow-editor-stage-head">
-              <input type="text" class="workflow-editor-stage-input" value="${stage.name.replace(/"/g, '&quot;')}" onchange="updateGroupWorkflowStage(${i}, this.value)" />
-              <button class="workflow-stage-remove" onclick="removeGroupWorkflowStage(${i})" ${groupWorkflowDraft.length <= 1 ? 'disabled' : ''} aria-label="Remove stage">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
-              </button>
+          <div class="wf-stage-list-item${si === wfSelectedStageIdx ? ' active' : ''}" onclick="selectWfStage(${si})">
+            <div class="wf-stage-list-item-text">
+              <p class="wf-stage-list-num">Stage ${si + 1}</p>
+              <p class="wf-stage-list-name" id="wfListName${si}">${stage.name.replace(/</g,'&lt;')}</p>
+              <p class="wf-stage-list-meta">${meta}</p>
             </div>
-            <div class="workflow-approvers-row">
-              <div class="workflow-approver-chips">
-                ${stage.approvers.length ? stage.approvers.map(name => `
-                  <span class="workflow-approver-chip"><span class="workflow-approver-avatar">${name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>${name}<button onclick="removeGroupWorkflowApprover(${i}, '${name.replace(/'/g, "\\'")}')" aria-label="Remove approver">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6L6 18M6 6l12 12" /></svg>
-                  </button></span>
-                `).join('') : `<span class="workflow-approvers-empty">No one assigned yet</span>`}
-                ${available.length ? `
-                  <select class="workflow-approver-select" onchange="if(this.value){addGroupWorkflowApprover(${i}, this.value); this.value='';}">
-                    <option value="">+ Add approver</option>
-                    ${available.map(name => `<option value="${name}">${name}</option>`).join('')}
-                  </select>
-                ` : ''}
-              </div>
-            </div>
-            ${showRequire ? `
-            <div class="workflow-require-row">
-              <span class="workflow-require-label">Approval needed:</span>
-              <div class="workflow-require-toggle">
-                <button class="${req === 'any' ? 'active' : ''}" onclick="updateGroupWorkflowRequire(${i}, 'any')">Any one</button>
-                <button class="${req === 'all' ? 'active' : ''}" onclick="updateGroupWorkflowRequire(${i}, 'all')">All listed</button>
-              </div>
-            </div>` : ''}
-          </div>
-        </div>
-      `;
+            <button class="wf-stage-list-delete" onclick="event.stopPropagation();removeGroupWorkflowStage(${si})"
+                    ${canDeleteStage ? '' : 'disabled'} aria-label="Remove stage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>`;
       }).join('');
+
+      // ── Right panel ──
+      const si = Math.min(wfSelectedStageIdx, groupWorkflowDraft.length - 1);
+      const stage = groupWorkflowDraft[si];
+      const groups = stage.groups || [];
+      const hasGroups = groups.length > 0;
+      const multiGroup = groups.filter(g => g.members.length > 0).length >= 2;
+
+      const summaryCards = groups.map((grp, gi) => {
+        const req = grp.required || 1;
+        const total = grp.members.length;
+        const badge = total > 0
+          ? `${req} of ${total} approvals${req !== 1 ? 's' : ''}`
+          : 'No approvers set';
+        const people = total > 0 ? grp.members.join(' · ') : '';
+        return `
+          <div class="wf-group-summary">
+            <span class="wf-group-summary-dot"></span>
+            <div class="wf-group-summary-info">
+              <p class="wf-group-summary-name">${grp.label}</p>
+              ${people ? `<p class="wf-group-summary-meta">${people}</p>` : ''}
+            </div>
+            <span class="wf-group-summary-badge">${badge}</span>
+            <button class="wf-group-summary-edit" onclick="openWfGroupLayer(${si},${gi})">Edit</button>
+            <button class="wf-group-summary-del" onclick="removeGroupWorkflowApprovalGroup(${si},${gi})" aria-label="Remove">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>`;
+      }).join('');
+
+      const detailHtml = `
+        <div class="wf-detail-header">
+          <span class="wf-detail-num">Stage ${si + 1}</span>
+          <input class="wf-detail-name-input" type="text" value="${stage.name.replace(/"/g,'&quot;')}"
+                 oninput="updateGroupWorkflowStage(${si},this.value)" />
+        </div>
+        <div>
+          <p class="wf-groups-label">Approvers</p>
+          ${multiGroup ? `<p class="wf-groups-hint">All groups must be satisfied to advance</p>` : ''}
+          ${hasGroups ? summaryCards : `<p class="wf-no-groups">No approvers defined — anyone can approve this stage.</p>`}
+          <button class="wf-add-group-btn" onclick="openWfGroupLayer(${si},-1)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            Add approval group
+          </button>
+        </div>`;
+
+      el.innerHTML = `
+        <div class="wf-editor-wrap">
+          <div class="wf-stage-list">
+            ${listHtml}
+            <button class="wf-stage-list-add" onclick="addGroupWorkflowStage()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              Add stage
+            </button>
+          </div>
+          <div class="wf-stage-detail">${detailHtml}</div>
+          <div class="wf-group-layer" id="wfGroupLayer" style="display:none;"></div>
+        </div>`;
+
+      if (wfLayerState.open) renderWfGroupLayer();
+    }
+
+    function selectWfStage(i) {
+      wfSelectedStageIdx = i;
+      renderGroupWorkflowEditorRows();
     }
 
     function updateGroupWorkflowStage(i, value) {
       groupWorkflowDraft[i].name = value;
-    }
-
-    function updateGroupWorkflowRequire(i, value) {
-      groupWorkflowDraft[i].require = value;
-      renderGroupWorkflowEditorRows();
+      const el = document.getElementById(`wfListName${i}`);
+      if (el) el.textContent = value;
     }
 
     function addGroupWorkflowStage() {
-      groupWorkflowDraft.push({ name: 'New Stage', approvers: [], require: 'any' });
+      groupWorkflowDraft.push({ name: 'New Stage', groups: [] });
+      wfSelectedStageIdx = groupWorkflowDraft.length - 1;
       renderGroupWorkflowEditorRows();
     }
 
     function removeGroupWorkflowStage(i) {
       if (groupWorkflowDraft.length <= 1) return;
       groupWorkflowDraft.splice(i, 1);
+      if (wfSelectedStageIdx >= groupWorkflowDraft.length) wfSelectedStageIdx = groupWorkflowDraft.length - 1;
       renderGroupWorkflowEditorRows();
     }
 
-    function addGroupWorkflowApprover(i, name) {
-      if (!name || groupWorkflowDraft[i].approvers.includes(name)) return;
-      groupWorkflowDraft[i].approvers.push(name);
-      renderGroupWorkflowEditorRows();
-    }
-
-    function removeGroupWorkflowApprover(i, name) {
-      groupWorkflowDraft[i].approvers = groupWorkflowDraft[i].approvers.filter(n => n !== name);
+    function removeGroupWorkflowApprovalGroup(si, gi) {
+      groupWorkflowDraft[si].groups.splice(gi, 1);
       renderGroupWorkflowEditorRows();
     }
 
     function saveGroupWorkflow() {
-      departmentWorkflows[currentGroupDept] = groupWorkflowDraft;
+      // Strip groups with no members (empty rows mean "open approval") before saving
+      departmentWorkflows[currentGroupDept] = groupWorkflowDraft.map(stage => ({
+        ...stage,
+        groups: (stage.groups || []).filter(g => g.members.length > 0)
+      }));
       // Clamp any in-flight items in this department whose stage index no longer exists.
       [...uploadsData, ...liveData].forEach(item => {
         if (item.status === 'pending' && ownerDepartment(item.owner) === currentGroupDept) {
@@ -9747,6 +10431,27 @@
       renderLiveTable();
     }
 
+    function renderLiveTicker() {
+      const bar = document.getElementById('liveTickerBar');
+      if (!bar) return;
+      const active = liveData.filter(x => x.status === 'active');
+      if (!active.length) { bar.style.display = 'none'; return; }
+      bar.style.display = 'flex';
+      const eyeSvg = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+      const itemHtml = item => `
+        <span class="ticker-item">
+          <span class="ticker-item-live"><span class="ticker-item-live-dot"></span>Live</span>
+          <span class="ticker-item-title">${item.title}</span>
+          <span class="ticker-item-host">with ${item.owner}${item.section ? ' · ' + item.section : ''}</span>
+          ${item.viewers ? `<span class="ticker-item-viewers">${eyeSvg} ${item.viewers.toLocaleString()} watching</span>` : ''}
+        </span><span class="ticker-sep">◆</span>`;
+      const html = active.map(itemHtml).join('');
+      const track = document.getElementById('liveTickerTrack');
+      if (!track) return;
+      track.innerHTML = html + html;
+      track.style.animationDuration = Math.max(18, active.length * 14) + 's';
+    }
+
     function renderLiveStats() {
       const s = computeStats(liveData);
       const active = document.getElementById('liveLogStatusFilter').dataset.value;
@@ -9760,6 +10465,7 @@
       <div class="${cls('flagged')} flagged" onclick="filterLiveByStatus('flagged')"><p class="label"><span class="dot red"></span>Flagged</p><p class="value">${s.flagged}</p></div>
       <div class="stat-card"><p class="label"><span class="dot gray"></span>Avg Review Time</p><p class="value">1.5h</p></div>
     `;
+      renderLiveTicker();
     }
     function renderLiveTable() {
       const filter = document.getElementById('liveLogStatusFilter').dataset.value;
@@ -12692,6 +13398,7 @@
       document.getElementById('homeTab' + tab.charAt(0).toUpperCase() + tab.slice(1))?.classList.add('active');
       if (tab === 'inbox') renderInboxPage();
       if (tab === 'whatsnew') renderWhatsNew();
+      if (tab === 'messages') renderDmPage();
     }
 
     function filterInboxByType(value) {
@@ -12869,6 +13576,260 @@
     function closeInboxDetail() {
       document.getElementById('inboxDetailScreen').style.display = 'none';
       inboxDetailContext = null;
+    }
+
+    // ---- Direct Messages ----
+    const DM_ME = { id: 'me', name: 'You', initials: 'YO' };
+    const DM_USERS = [
+      { id: 'u1', name: 'J. Tan',     initials: 'JT', dept: 'Group Brands & Communications', online: true },
+      { id: 'u2', name: 'A. Kumar',   initials: 'AK', dept: 'Group Investment Banking',      online: false },
+      { id: 'u3', name: 'M. Lee',     initials: 'ML', dept: 'Group Brands & Communications', online: true },
+      { id: 'u4', name: 'S. Wong',    initials: 'SW', dept: 'Group Wealth Management',       online: false },
+      { id: 'u5', name: 'R. Ong',     initials: 'RO', dept: 'Group SME Banking',             online: true },
+      { id: 'u6', name: 'P. Sharma',  initials: 'PS', dept: 'Group Investment Banking',      online: false },
+      { id: 'u7', name: 'L. Ibrahim', initials: 'LI', dept: 'Group Investment Banking',      online: false },
+    ];
+
+    let DM_CONVOS = [
+      {
+        id: 'c1', userId: 'u1', unread: 1,
+        messages: [
+          { id: 'm1', from: 'u1', type: 'text', text: 'Hey, can you take a look at the Q2 Earnings video before it goes live?', time: '9:14 AM' },
+          { id: 'm2', from: 'me', type: 'text', text: 'Sure, sending it now.', time: '9:15 AM' },
+          { id: 'm3', from: 'me', type: 'share', contentType: 'uploads', contentIdx: 1, time: '9:15 AM' },
+          { id: 'm4', from: 'u1', type: 'text', text: 'The compliance section at 2:30 needs a second look. Otherwise looks great.', time: '9:22 AM' },
+        ]
+      },
+      {
+        id: 'c2', userId: 'u3', unread: 0,
+        messages: [
+          { id: 'm1', from: 'u3', type: 'text', text: 'The SME Loan Explainer just got approved, great work on that one!', time: 'Yesterday' },
+          { id: 'm2', from: 'me', type: 'text', text: 'Thanks! The team worked hard on the visuals.', time: 'Yesterday' },
+        ]
+      },
+      {
+        id: 'c3', userId: 'u2', unread: 2,
+        messages: [
+          { id: 'm1', from: 'u2', type: 'text', text: 'FYI the Rate Hike video has a compliance flag, can you review?', time: '8:00 AM' },
+          { id: 'm2', from: 'u2', type: 'share', contentType: 'uploads', contentIdx: 4, time: '8:01 AM' },
+          { id: 'm3', from: 'u2', type: 'text', text: 'We need to resolve before end of week.', time: '8:01 AM' },
+        ]
+      },
+      {
+        id: 'c4', userId: 'u5', unread: 0,
+        messages: [
+          { id: 'm1', from: 'me', type: 'text', text: 'Can you join the SME Growth Clinic live session tomorrow?', time: 'Mon' },
+          { id: 'm2', from: 'u5', type: 'text', text: "Absolutely, I'll be there.", time: 'Mon' },
+          { id: 'm3', from: 'me', type: 'share', contentType: 'live', contentIdx: 2, time: 'Mon' },
+        ]
+      },
+    ];
+
+    let activeDmConvoId = null;
+    let dmSharePickerOpen = false;
+
+    function dmUser(id) { return DM_USERS.find(u => u.id === id) || DM_ME; }
+
+    function dmLastMessage(convo) {
+      const last = convo.messages[convo.messages.length - 1];
+      if (!last) return '';
+      if (last.type === 'share') return '📎 Shared a video';
+      return last.from === 'me' ? `You: ${last.text}` : last.text;
+    }
+
+    function dmLastTime(convo) {
+      const last = convo.messages[convo.messages.length - 1];
+      return last ? last.time : '';
+    }
+
+    function updateDmUnreadBadge() {
+      const total = DM_CONVOS.reduce((s, c) => s + (c.unread || 0), 0);
+      const el = document.getElementById('dmUnreadBadge');
+      if (el) { el.textContent = total; el.className = 'inbox-badge' + (total === 0 ? ' zero' : ''); }
+    }
+
+    function renderDmConvoList(filter) {
+      const list = document.getElementById('dmConvoList');
+      if (!list) return;
+      let convos = DM_CONVOS;
+      if (filter) {
+        const q = filter.toLowerCase();
+        convos = convos.filter(c => dmUser(c.userId).name.toLowerCase().includes(q));
+      }
+      list.innerHTML = convos.map(c => {
+        const user = dmUser(c.userId);
+        const preview = dmLastMessage(c);
+        const isActive = c.id === activeDmConvoId;
+        return `<div class="dm-convo-item${isActive ? ' active' : ''}" onclick="openDmConvo('${c.id}')">
+          <div class="dm-convo-avatar">
+            ${user.initials}
+            ${user.online ? '<span class="dm-online-dot"></span>' : ''}
+          </div>
+          <div class="dm-convo-info">
+            <p class="dm-convo-name">${user.name}</p>
+            <p class="dm-convo-preview${c.unread ? ' unread' : ''}">${preview}</p>
+          </div>
+          <span class="dm-convo-time">${dmLastTime(c)}</span>
+          ${c.unread ? '<span class="dm-unread-dot"></span>' : ''}
+        </div>`;
+      }).join('') || `<p style="text-align:center;padding:24px;font-size:13px;color:var(--ink-400);">No conversations found.</p>`;
+    }
+
+    function filterDmList(q) { renderDmConvoList(q); }
+
+    function openDmConvo(id) {
+      const convo = DM_CONVOS.find(c => c.id === id);
+      if (!convo) return;
+      convo.unread = 0;
+      activeDmConvoId = id;
+      updateDmUnreadBadge();
+      renderDmConvoList();
+      renderDmChat(convo);
+    }
+
+    function renderDmChat(convo) {
+      const user = dmUser(convo.userId);
+      const main = document.getElementById('dmMain');
+      main.innerHTML = `
+        <div class="dm-chat-head">
+          <div class="dm-convo-avatar" style="width:38px;height:38px;font-size:12px;flex-shrink:0;position:relative;">
+            ${user.initials}
+            ${user.online ? '<span class="dm-online-dot"></span>' : ''}
+          </div>
+          <div class="dm-chat-head-info">
+            <p class="dm-chat-head-name">${user.name}</p>
+            <p class="dm-chat-head-sub">${user.dept}${user.online ? ' · <span style="color:#22C55E;font-weight:600;">Active now</span>' : ''}</p>
+          </div>
+          <button class="dm-input-btn ghost" title="View profile" style="width:32px;height:32px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </button>
+        </div>
+        <div class="dm-messages" id="dmMessages">
+          <div class="dm-date-sep">Today</div>
+          ${convo.messages.map(m => dmMsgHtml(m, user)).join('')}
+        </div>
+        <div class="dm-input-row" style="position:relative;">
+          <button class="dm-input-btn ghost" onclick="toggleDmSharePicker()" title="Share content">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+          </button>
+          <input class="dm-input" id="dmTextInput" placeholder="Message ${user.name}…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendDmMessage();}"/>
+          <button class="dm-input-btn send" onclick="sendDmMessage()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>`;
+      scrollDmToBottom();
+    }
+
+    function dmMsgHtml(msg, user) {
+      const isSent = msg.from === 'me';
+      const sender = isSent ? DM_ME : user;
+      if (msg.type === 'share') {
+        const arr = msg.contentType === 'uploads' ? uploadsData : liveData;
+        const item = arr[msg.contentIdx];
+        if (!item) return '';
+        const typeLabel = msg.contentType === 'live' ? 'Live Session' : 'Upload';
+        const thumbHtml = item.thumbnail
+          ? `<img src="${item.thumbnail}" style="width:100%;height:100%;object-fit:cover;">`
+          : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>`;
+        return `<div class="dm-msg-row${isSent ? ' sent' : ''}">
+          ${!isSent ? `<div class="dm-msg-avatar">${sender.initials}</div>` : ''}
+          <div class="dm-bubble-wrap">
+            <div class="dm-share-card" onclick="openInboxDetail('${msg.contentType}',${msg.contentIdx})">
+              <div class="dm-share-card-thumb">${thumbHtml}</div>
+              <div class="dm-share-card-body">
+                <p class="dm-share-card-type">${typeLabel}</p>
+                <p class="dm-share-card-title">${item.title}</p>
+                <button class="dm-share-card-btn">View full screen →</button>
+              </div>
+            </div>
+            <span class="dm-bubble-time">${msg.time}</span>
+          </div>
+        </div>`;
+      }
+      return `<div class="dm-msg-row${isSent ? ' sent' : ''}">
+        ${!isSent ? `<div class="dm-msg-avatar">${sender.initials}</div>` : ''}
+        <div class="dm-bubble-wrap">
+          <div class="dm-bubble ${isSent ? 'sent' : 'received'}">${msg.text}</div>
+          <span class="dm-bubble-time">${msg.time}</span>
+        </div>
+      </div>`;
+    }
+
+    function sendDmMessage() {
+      const input = document.getElementById('dmTextInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text || !activeDmConvoId) return;
+      const convo = DM_CONVOS.find(c => c.id === activeDmConvoId);
+      if (!convo) return;
+      convo.messages.push({ id: 'm' + Date.now(), from: 'me', type: 'text', text, time: 'Just now' });
+      input.value = '';
+      renderDmConvoList();
+      renderDmChat(convo);
+    }
+
+    function toggleDmSharePicker() {
+      const main = document.getElementById('dmMain');
+      const existing = main.querySelector('.dm-share-picker');
+      if (existing) { existing.remove(); return; }
+      const recent = [
+        ...uploadsData.slice(0, 5).map((item, i) => ({ type: 'uploads', idx: i, item })),
+        ...liveData.slice(0, 3).map((item, i) => ({ type: 'live', idx: i, item })),
+      ];
+      const picker = document.createElement('div');
+      picker.className = 'dm-share-picker';
+      picker.innerHTML = `<p class="dm-share-picker-title">Share content</p>` +
+        recent.map(({ type, idx, item }) => {
+          const typeLabel = type === 'live' ? 'Live' : 'Upload';
+          const thumbHtml = item.thumbnail
+            ? `<img src="${item.thumbnail}" style="width:100%;height:100%;object-fit:cover;border-radius:5px;">`
+            : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>`;
+          return `<div class="dm-share-picker-item" onclick="shareDmContent('${type}',${idx})">
+            <div class="dm-share-picker-thumb">${thumbHtml}</div>
+            <div class="dm-share-picker-info">
+              <p class="dm-share-picker-name">${item.title}</p>
+              <p class="dm-share-picker-sub">${typeLabel} · ${item.owner}</p>
+            </div>
+          </div>`;
+        }).join('');
+      const inputRow = main.querySelector('.dm-input-row');
+      inputRow.style.position = 'relative';
+      inputRow.appendChild(picker);
+      setTimeout(() => document.addEventListener('click', closeDmPickerOutside, { once: true }), 0);
+    }
+
+    function closeDmPickerOutside(e) {
+      const picker = document.querySelector('.dm-share-picker');
+      if (picker && !picker.contains(e.target)) picker.remove();
+    }
+
+    function shareDmContent(type, idx) {
+      document.querySelector('.dm-share-picker')?.remove();
+      const convo = DM_CONVOS.find(c => c.id === activeDmConvoId);
+      if (!convo) return;
+      convo.messages.push({ id: 'm' + Date.now(), from: 'me', type: 'share', contentType: type, contentIdx: idx, time: 'Just now' });
+      const user = dmUser(convo.userId);
+      renderDmConvoList();
+      renderDmChat(convo);
+    }
+
+    function openNewDm() {
+      const names = DM_USERS.filter(u => !DM_CONVOS.find(c => c.userId === u.id));
+      if (!names.length) return;
+      const u = names[0];
+      const newConvo = { id: 'c' + Date.now(), userId: u.id, unread: 0, messages: [] };
+      DM_CONVOS.unshift(newConvo);
+      openDmConvo(newConvo.id);
+    }
+
+    function scrollDmToBottom() {
+      const msgs = document.getElementById('dmMessages');
+      if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function renderDmPage() {
+      renderDmConvoList();
+      updateDmUnreadBadge();
     }
 
     // ---- What's New ----
@@ -13404,11 +14365,13 @@
     renderUploadsTable();
     renderLiveStats();
     renderLiveTable();
+    renderLiveTicker();
     renderSubmissionsFeed();
     renderLiveFeed();
     renderTopics();
     renderPolls();
     updateInboxBadges();
+    updateDmUnreadBadge();
     switchHomeTab('inbox');
     renderHotTopicsStats();
     renderHotTopics();
