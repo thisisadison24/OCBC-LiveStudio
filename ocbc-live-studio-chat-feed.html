@@ -168,9 +168,9 @@
 
     .theme-toggle {
       position: fixed;
-      bottom: 56px;
+      bottom: 20px;
       right: 20px;
-      z-index: 210;
+      z-index: 100;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1056,220 +1056,6 @@
       display: block;
     }
 
-    .thread-workspace {
-      display: grid;
-      grid-template-columns: 210px minmax(0, 1fr);
-      gap: 24px;
-      align-items: start;
-      margin-top: 20px;
-    }
-
-    .thread-workspace-content {
-      min-width: 0;
-    }
-
-    #thread-queue .panel-head,
-    #thread-live .panel-head {
-      display: block;
-    }
-
-    #thread-queue .panel-head .filter-row,
-    #thread-live .panel-head .filter-row {
-      display: grid;
-      grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(170px, 1fr)) minmax(150px, .8fr);
-      gap: 10px;
-      width: 100%;
-      margin-top: 14px;
-    }
-
-    #thread-live .panel-head .filter-row {
-      grid-template-columns: minmax(220px, 1.3fr) repeat(3, minmax(170px, 1fr));
-    }
-
-    #thread-queue .panel-head .search,
-    #thread-live .panel-head .search,
-    #thread-queue .panel-head .filter,
-    #thread-live .panel-head .filter {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .thread-summary-card {
-      width: 100%;
-      color: var(--ink-900);
-      font: inherit;
-      text-align: left;
-    }
-
-    .thread-summary-card:hover {
-      border-color: var(--line-strong);
-      transform: translateY(-1px);
-    }
-
-    .thread-summary-card:focus-visible {
-      outline: 2px solid var(--info-600);
-      outline-offset: 2px;
-    }
-
-    .thread-summary-card .summary-action {
-      display: block;
-      margin-top: 5px;
-      color: var(--ink-500);
-      font-size: 10.5px;
-      font-weight: 500;
-    }
-
-    .thread-context-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      overflow: hidden;
-      margin-bottom: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: var(--paper-0);
-    }
-
-    .thread-context-metric {
-      min-width: 0;
-      padding: 15px 18px;
-      border: 0;
-      border-right: 1px solid var(--line);
-      background: transparent;
-      color: var(--ink-900);
-      font: inherit;
-      text-align: left;
-    }
-
-    button.thread-context-metric {
-      cursor: pointer;
-    }
-
-    .thread-context-metric:last-child {
-      border-right: 0;
-    }
-
-    button.thread-context-metric:hover {
-      background: var(--paper-100);
-    }
-
-    .thread-context-metric:focus-visible {
-      position: relative;
-      z-index: 1;
-      outline: 2px solid var(--info-600);
-      outline-offset: -2px;
-    }
-
-    .thread-context-label {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      overflow: hidden;
-      margin: 0 0 7px;
-      color: var(--ink-500);
-      font-size: 11.5px;
-      font-weight: 600;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .thread-context-value {
-      margin: 0;
-      color: var(--ink-900);
-      font: 750 22px/1.15 'Sora', sans-serif;
-    }
-
-    .thread-context-value.attention {
-      color: var(--danger-600);
-    }
-
-    .thread-context-value.warning {
-      color: var(--amber-600);
-    }
-
-    .thread-context-note {
-      display: block;
-      overflow: hidden;
-      margin-top: 4px;
-      color: var(--ink-500);
-      font-size: 9.5px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .thread-pane-heading {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .thread-pane-heading h2 {
-      margin: 0 0 4px;
-    }
-
-    .thread-pane-heading p {
-      margin: 0;
-      color: var(--ink-500);
-      font-size: 12.5px;
-    }
-
-    .moderation-context {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 7px;
-      margin: 0 0 10px;
-    }
-
-    .moderation-priority,
-    .moderation-sla {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .moderation-priority.high {
-      color: var(--danger-600);
-    }
-
-    .moderation-priority.medium {
-      color: var(--amber-600);
-    }
-
-    .moderation-priority.routine {
-      color: var(--green-600);
-    }
-
-    .moderation-sla {
-      color: var(--ink-500);
-      font-weight: 600;
-    }
-
-    .needs-action-group + .needs-action-group {
-      margin-top: 20px;
-    }
-
-    .needs-action-group-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 0 0 10px;
-    }
-
-    .needs-action-group-head h3 {
-      margin: 0;
-      font-size: 14px;
-    }
-
-    .needs-action-group-head span {
-      color: var(--ink-500);
-      font-size: 11px;
-    }
-
     .analytics-tab-pane {
       display: none;
     }
@@ -1661,8 +1447,7 @@
     }
 
     @media (max-width: 900px) {
-      .analytics-workspace,
-      .thread-workspace {
+      .analytics-workspace {
         display: block;
       }
 
@@ -4770,11 +4555,177 @@
       display: none;
     }
 
-    .live-preview-spacer {
+    .live-preview-activity {
       grid-column: 2;
       grid-row: 3;
       align-self: stretch;
       min-width: 0;
+      padding: 11px 0 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .live-activity-head,
+    .live-readiness-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .live-activity-head b,
+    .live-readiness-head b {
+      font-size: 12px;
+    }
+
+    .live-updating {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green-600);
+      font-size: 9.5px;
+      font-weight: 650;
+    }
+
+    .live-updating::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .live-activity-stats,
+    .live-readiness-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .live-activity-stat {
+      padding: 8px 9px;
+      border-radius: 8px;
+      background: var(--paper-100);
+    }
+
+    .live-activity-stat strong {
+      display: block;
+      color: var(--ink-900);
+      font: 700 13px/1.2 'Sora', sans-serif;
+    }
+
+    .live-activity-stat span {
+      color: var(--ink-500);
+      font-size: 9px;
+    }
+
+    .live-chat-preview {
+      display: grid;
+      gap: 5px;
+    }
+
+    .live-chat-preview p {
+      overflow: hidden;
+      margin: 0;
+      color: var(--ink-700);
+      font-size: 10px;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .live-chat-feed {
+      display: grid;
+      gap: 6px;
+      max-height: 132px;
+      overflow: hidden;
+    }
+
+    .live-chat-message {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: start;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper-0);
+    }
+
+    .live-chat-avatar {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--paper-0);
+      background: var(--teal-600);
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .live-chat-copy {
+      min-width: 0;
+    }
+
+    .live-chat-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+      color: var(--ink-500);
+      font-size: 8.5px;
+    }
+
+    .live-chat-meta strong {
+      overflow: hidden;
+      color: var(--ink-700);
+      font-size: 9.5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .live-chat-copy p {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 0;
+      color: var(--ink-700);
+      font-size: 9.5px;
+      line-height: 1.35;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .live-chat-tag {
+      align-self: center;
+      padding: 3px 6px;
+      border-radius: 999px;
+      color: var(--info-600);
+      background: color-mix(in srgb, var(--info-600) 11%, transparent);
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .live-chat-tag.flagged {
+      color: var(--danger-600);
+      background: color-mix(in srgb, var(--danger-600) 11%, transparent);
+    }
+
+    .live-activity-foot {
+      margin: 8px 0 0;
+      color: var(--ink-500);
+      font-size: 9.5px;
+    }
+
+    .live-activity-foot .alert {
+      color: var(--danger-600);
+    }
+
+    .live-readiness-status {
+      color: var(--green-600);
+      font-size: 10px;
+      font-weight: 700;
     }
 
     @media (max-width: 720px) {
@@ -4795,23 +4746,13 @@
         margin-top: 8px;
       }
 
-      #thread-queue .panel-head .filter-row,
-      #thread-live .panel-head .filter-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .management-preview-card .live-preview-activity {
+        margin-top: 10px;
       }
 
-      .thread-context-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .live-chat-feed {
+        max-height: none;
       }
-
-      .thread-context-metric:nth-child(2) {
-        border-right: 0;
-      }
-
-      .thread-context-metric:nth-child(-n+2) {
-        border-bottom: 1px solid var(--line);
-      }
-
     }
 
     /* Overview: Live Preview carousel nav */
@@ -7330,7 +7271,7 @@
             <div class="chart-card" id="liveAppPreviewCard">
               <p class="live-preview-eyebrow">Live Preview · As Seen In App</p>
               <div class="app-preview-card" id="nextLiveSessionPreview"></div>
-              <div class="live-preview-spacer" aria-hidden="true"></div>
+              <div class="live-preview-activity" id="livePreviewActivity"></div>
               <div class="preview-nav">
                 <button class="preview-nav-btn" onclick="cycleLivePreview(-1)" aria-label="Previous session">‹</button>
                 <span class="preview-nav-count" id="livePreviewIndex"></span>
@@ -7642,19 +7583,34 @@
             <p>Coordinate market news and discussion posts submitted by app users — verify submissions, manage the live
               feed, and curate tags.</p>
           </div>
-          <button class="btn btn-sm" onclick="goToAnalytics('threads')">View Threads Analytics →</button>
         </div>
 
-        <div class="thread-context-strip" id="threadContextStats" aria-label="Current Threads section summary"></div>
+        <div class="stat-grid">
+          <div class="stat-card accent-amber">
+            <p class="label"><span class="dot amber"></span>Pending Review</p>
+            <p class="value">14</p>
+          </div>
+          <div class="stat-card accent-green">
+            <p class="label"><span class="dot live"></span>Live Posts</p>
+            <p class="value">486</p>
+          </div>
+          <div class="stat-card flagged">
+            <p class="label"><span class="dot red"></span>Flagged for Compliance</p>
+            <p class="value">3</p>
+          </div>
+          <div class="stat-card accent-teal">
+            <p class="label"><span class="dot gray"></span>Featured Tags</p>
+            <p class="value">2</p>
+          </div>
+        </div>
 
-        <div class="thread-workspace">
-          <nav class="analytics-side-rail dossier-rail" id="threadTabbar" aria-label="Threads management sections">
-            <button class="analytics-rail-item dossier-rail-item active" data-ttab="queue" onclick="switchThreadTab('queue')">All Submissions</button>
-            <button class="analytics-rail-item dossier-rail-item" data-ttab="live" onclick="switchThreadTab('live')">Published Feed</button>
-            <button class="analytics-rail-item dossier-rail-item" data-ttab="topics" onclick="switchThreadTab('topics')">Tags</button>
-            <button class="analytics-rail-item dossier-rail-item" data-ttab="polls" onclick="switchThreadTab('polls')">Polls</button>
-          </nav>
-          <div class="thread-workspace-content">
+        <div class="segment-tabbar" id="threadTabbar">
+          <button class="segment-btn active" data-ttab="queue" onclick="switchThreadTab('queue')">Verification
+            Queue</button>
+          <button class="segment-btn" data-ttab="live" onclick="switchThreadTab('live')">Live Feed</button>
+          <button class="segment-btn" data-ttab="topics" onclick="switchThreadTab('topics')">Tags</button>
+          <button class="segment-btn" data-ttab="polls" onclick="switchThreadTab('polls')">Polls</button>
+        </div>
 
         <!-- VERIFICATION QUEUE -->
         <div class="thread-tab-pane active" id="thread-queue">
@@ -7669,10 +7625,7 @@
               </div>
             </div>
             <div class="panel-head">
-              <div>
-                <h2>All Submissions</h2>
-                <p class="chart-sub"><span id="submissionsResultCount">0 submissions</span> matching the current filters</p>
-              </div>
+              <h2>Awaiting Verification</h2>
               <div class="filter-row">
                 <input class="search" type="text" id="submissionsSearch" placeholder="Search submissions..."
                   oninput="renderSubmissionsFeed()" />
@@ -7738,21 +7691,21 @@
                       </svg></div>
                   </div>
                 </div>
-                <div class="ui-select filter" id="submissionStatusFilter" data-value="all">
+                <div class="ui-select filter" id="submissionStatusFilter" data-value="pending">
                   <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
-                    <span class="ui-select-label">All Statuses</span>
+                    <span class="ui-select-label">Pending</span>
                     <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.4">
                       <path d="M6 9l6 6 6-6" />
                     </svg>
                   </button>
                   <div class="ui-select-menu">
-                    <div class="ui-select-option selected" data-value="all" onclick="chooseOption(this,'renderSubmissionsFeed')">
+                    <div class="ui-select-option" data-value="all" onclick="chooseOption(this,'renderSubmissionsFeed')">
                       All Statuses<svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2.6">
                         <path d="M20 6L9 17l-5-5" />
                       </svg></div>
-                    <div class="ui-select-option" data-value="pending"
+                    <div class="ui-select-option selected" data-value="pending"
                       onclick="chooseOption(this,'renderSubmissionsFeed')">Pending<svg class="check" width="14"
                         height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
                         <path d="M20 6L9 17l-5-5" />
@@ -7774,11 +7727,6 @@
                       </svg></div>
                   </div>
                 </div>
-                <select class="filter" id="submissionSort" onchange="renderSubmissionsFeed()" aria-label="Sort submissions">
-                  <option value="priority">Priority first</option>
-                  <option value="oldest">Oldest first</option>
-                  <option value="newest">Newest first</option>
-                </select>
               </div>
             </div>
             <div class="select-all-row" style="padding:12px 18px 0;">
@@ -7803,12 +7751,9 @@
               </div>
             </div>
             <div class="panel-head">
-              <div>
-                <h2>Published Feed</h2>
-                <p class="chart-sub"><span id="liveFeedResultCount">0 posts</span> matching the current filters</p>
-              </div>
+              <h2>Published to App Feed</h2>
               <div class="filter-row">
-                <input class="search" type="text" id="liveFeedSearch" placeholder="Search published posts..."
+                <input class="search" type="text" id="liveFeedSearch" placeholder="Search live posts..."
                   oninput="renderLiveFeed()" />
                 <div class="ui-select filter" id="liveFeedFilter" data-value="all">
                   <button type="button" class="ui-select-trigger" onclick="toggleSelect(this.parentElement, event)">
@@ -7862,11 +7807,6 @@
                       </svg></div>
                   </div>
                 </div>
-                <select class="filter" id="liveFeedSort" onchange="renderLiveFeed()" aria-label="Sort published posts">
-                  <option value="newest">Newest first</option>
-                  <option value="reported">Most reported</option>
-                  <option value="views">Most viewed</option>
-                </select>
               </div>
             </div>
             <div class="select-all-row" style="padding:12px 18px 0;">
@@ -7882,15 +7822,9 @@
         <div class="thread-tab-pane" id="thread-topics">
           <div class="panel">
             <div class="panel-head">
-              <div>
-                <h2>Tags</h2>
-                <p class="chart-sub" id="featuredTagSlots">0 featured</p>
-              </div>
-              <div class="filter-row">
-                <input class="search" type="text" id="topicsSearch" placeholder="Search tags..." oninput="renderTopics()" />
-                <button class="btn btn-primary btn-sm"
-                  onclick="document.getElementById('topicOverlay').classList.add('open')">+ New Tag</button>
-              </div>
+              <h2>Tags</h2>
+              <button class="btn btn-primary btn-sm"
+                onclick="document.getElementById('topicOverlay').classList.add('open')">+ New Tag</button>
             </div>
             <div class="topic-grid" id="topicsGrid"></div>
           </div>
@@ -7898,6 +7832,7 @@
 
         <!-- POLLS -->
         <div class="thread-tab-pane" id="thread-polls">
+          <div class="stat-grid" id="pollsStatGrid" style="margin-bottom:18px;"></div>
           <div class="panel">
             <div class="panel-head">
               <h2>Polls</h2>
@@ -7931,8 +7866,6 @@
               </div>
             </div>
             <div id="pollsList" style="padding:14px 18px 18px;display:flex;flex-direction:column;gap:14px;"></div>
-          </div>
-        </div>
           </div>
         </div>
       </div>
@@ -9665,11 +9598,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="side-block">
-          <h3>Review Context</h3>
-          <div class="moderation-context" id="submissionModalOperationalContext"></div>
-          <p class="c-text" id="submissionModalAuthorHistory" style="font-size:12px;color:var(--ink-500);"></p>
-        </div>
         <div class="side-block" id="submissionModalFlagBlock" style="display:none;">
           <div class="feed-flag-note">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -9697,51 +9625,8 @@
         </div>
       </div>
       <div class="modal-foot">
-        <button class="btn btn-danger-outline" onclick="rejectCurrentSubmission()">Reject</button>
-        <button class="btn btn-primary" onclick="approveCurrentSubmission()">Approve &amp; Publish</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PUBLISHED POST MODERATION MODAL -->
-  <div class="overlay" id="publishedPostOverlay">
-    <div class="modal" style="max-width:680px;" role="dialog" aria-modal="true" aria-labelledby="publishedPostModalTitle">
-      <div class="modal-head">
-        <div>
-          <h2 id="publishedPostModalTitle" style="margin:0;">Published Post Review</h2>
-          <p class="fa-meta" id="publishedPostModalMeta"></p>
-        </div>
-        <button class="modal-close" onclick="closeModal('publishedPostOverlay')" aria-label="Close published post review">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="side-block">
-          <div class="feed-author">
-            <div class="feed-avatar" id="publishedPostModalAvatar"></div>
-            <div><p class="fa-name" id="publishedPostModalAuthor"></p><p class="fa-meta" id="publishedPostModalPublished"></p></div>
-          </div>
-          <p class="c-text" id="publishedPostModalContent" style="margin-top:14px;font-size:13.5px;line-height:1.7;"></p>
-        </div>
-        <div class="side-block">
-          <h3>Operational Context</h3>
-          <div class="moderation-context" id="publishedPostModalStatus"></div>
-          <div class="feed-stats" id="publishedPostModalStats"></div>
-        </div>
-        <div class="side-block">
-          <h3>Moderation History</h3>
-          <p class="c-text" id="publishedPostModalHistory" style="font-size:12.5px;line-height:1.7;"></p>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="publishedPostRemovalReason">Reason required when removing</label>
-          <textarea id="publishedPostRemovalReason" placeholder="Explain why this post should be removed..."></textarea>
-          <p id="publishedPostRemovalError" style="display:none;color:var(--danger-600);font-size:11px;margin:5px 0 0;">Add a removal reason before continuing.</p>
-        </div>
-      </div>
-      <div class="modal-foot">
-        <button class="btn" onclick="goToCurrentPublishedPostAnalytics()">View performance in Analytics</button>
-        <button class="btn" id="publishedPostFeatureButton" onclick="toggleCurrentPublishedPostFeatured()">Feature</button>
-        <button class="btn btn-danger-outline" onclick="removeCurrentPublishedPost()">Remove Post</button>
+        <button class="btn btn-danger-outline" onclick="closeModal('submissionOverlay')">Reject</button>
+        <button class="btn btn-primary" onclick="closeModal('submissionOverlay')">Approve &amp; Publish</button>
       </div>
     </div>
   </div>
@@ -10686,6 +10571,69 @@
       </div>
     `;
 
+      const activityProfiles = [
+        {
+          watching: 1248,
+          chatRate: 18,
+          questions: 2,
+          flagged: 1,
+          messages: [
+            { name: "Mei Lin", initials: "ML", time: "Just now", text: "Could you explain how this affects mortgage rates?", tag: "Question" },
+            { name: "Daniel Tan", initials: "DT", time: "12 sec", text: "Is the expected cut already priced in?", tag: "Question" },
+            { name: "Alicia Wong", initials: "AW", time: "28 sec", text: "This is misleading and needs checking.", tag: "Flagged" }
+          ]
+        },
+        {
+          watching: 936,
+          chatRate: 12,
+          questions: 4,
+          flagged: 0,
+          messages: [
+            { name: "Nur Aisyah", initials: "NA", time: "Just now", text: "How should SMEs prepare for the next quarter?", tag: "Question" },
+            { name: "Marcus Lee", initials: "ML", time: "19 sec", text: "Will the slides be available after this session?" },
+            { name: "Siti Rahman", initials: "SR", time: "41 sec", text: "The working-capital example was very useful." }
+          ]
+        },
+        {
+          watching: 684,
+          chatRate: 9,
+          questions: 3,
+          flagged: 0,
+          messages: [
+            { name: "Ethan Goh", initials: "EG", time: "Just now", text: "What is the expected impact on bond yields?", tag: "Question" },
+            { name: "Rachel Lim", initials: "RL", time: "24 sec", text: "Could the host revisit the earlier chart?", tag: "Question" },
+            { name: "Javier Ong", initials: "JO", time: "52 sec", text: "Appreciate the clear explanation of duration risk." }
+          ]
+        }
+      ];
+      const profile = activityProfiles[livePreviewIndex % activityProfiles.length];
+      const activity = document.getElementById('livePreviewActivity');
+      activity.innerHTML = isLive
+        ? `<div class="live-activity-head"><b>Live chat feed</b><span class="live-updating">Updating live</span></div>
+           <div class="live-activity-stats">
+             <div class="live-activity-stat"><strong>${profile.watching.toLocaleString()}</strong><span>watching now</span></div>
+             <div class="live-activity-stat"><strong>${profile.chatRate}/min</strong><span>chat rate</span></div>
+             <div class="live-activity-stat"><strong>${profile.questions}</strong><span>open questions</span></div>
+           </div>
+           <div class="live-chat-feed">${profile.messages.map(message => `
+             <div class="live-chat-message">
+               <span class="live-chat-avatar" aria-hidden="true">${message.initials}</span>
+               <div class="live-chat-copy">
+                 <div class="live-chat-meta"><strong>${message.name}</strong><span>${message.time}</span></div>
+                 <p>${message.text}</p>
+               </div>
+               ${message.tag ? `<span class="live-chat-tag${message.tag === "Flagged" ? " flagged" : ""}">${message.tag}</span>` : ""}
+             </div>`).join("")}</div>
+           <p class="live-activity-foot">${profile.questions} questions awaiting response${profile.flagged ? ` · <span class="alert">${profile.flagged} flagged message</span>` : " · No flagged messages"}</p>`
+        : `<div class="live-readiness-head"><b>Launch readiness</b><span class="live-readiness-status">Ready</span></div>
+           <div class="live-readiness-stats">
+             <div class="live-activity-stat"><strong>${(640 + livePreviewIndex * 185).toLocaleString()}</strong><span>registrations</span></div>
+             <div class="live-activity-stat"><strong>${78 + livePreviewIndex % 3 * 3}%</strong><span>app access</span></div>
+             <div class="live-activity-stat"><strong>${livePreviewIndex + 1}d ${4 + livePreviewIndex}h</strong><span>until start</span></div>
+           </div>
+           <div class="live-chat-preview"><p>✓ Stream check passed</p><p>✓ Host and moderation team assigned</p></div>
+           <p class="live-activity-foot">Audience notifications scheduled before the session.</p>`;
+
       document.getElementById('livePreviewIndex').textContent = `${livePreviewIndex + 1} / ${livePreviewSessions.length}`;
       document.querySelectorAll('.preview-nav-btn').forEach(b => b.disabled = livePreviewSessions.length <= 1);
     }
@@ -10983,7 +10931,7 @@
 
     // Top Contributors: ranked by total engagement (views + likes + comments)
     // across their published posts, sourced from the same livePosts array
-    // that powers the Threads > Published Feed page.
+    // that powers the Threads > Live Feed page.
     function renderCommunityContributors() {
       const totals = {};
       livePosts.forEach(p => {
@@ -11006,7 +10954,7 @@
     }
 
     // Top Post: highest-engagement published post, reusing the exact
-    // .feed-card markup the Threads > Published Feed page renders.
+    // .feed-card markup the Threads > Live Feed page renders.
     function renderTopPostPreview() {
       const top = [...livePosts].sort((a, b) => (b.views + b.likes + b.comments) - (a.views + a.likes + a.comments))[0];
       document.getElementById('topPostPreview').innerHTML = `
@@ -11834,167 +11782,17 @@
     const submissionStatusLabel = { pending: "Pending", approved: "Approved", flagged: "Flagged", rejected: "Rejected" };
 
     const selectedSubmissionIndices = new Set();
-    let currentSubmissionIndex = null;
-
-    function relativeAgeMinutes(label) {
-      const amount = parseInt(label, 10) || 0;
-      if (label.includes('d')) return amount * 1440;
-      if (label.includes('h')) return amount * 60;
-      return amount;
-    }
-
-    function getSubmissionModerationContext(submission) {
-      if (submission.status === 'flagged') {
-        return { level: 'high', label: 'High priority', sla: 'Review now' };
-      }
-      if (submission.status === 'pending' && (submission.submitted.includes('25m') || submission.submitted.includes('40m') || submission.submitted.includes('1h'))) {
-        return { level: 'medium', label: 'Approaching target', sla: '5 min to review target' };
-      }
-      if (submission.status === 'pending') {
-        const elapsed = parseInt(submission.submitted, 10) || 0;
-        return { level: 'routine', label: 'Routine', sla: `${Math.max(60 - elapsed, 1)} min to review target` };
-      }
-      return { level: 'routine', label: 'Resolved', sla: submissionStatusLabel[submission.status] };
-    }
-
-    function renderModerationContext(submission) {
-      const context = getSubmissionModerationContext(submission);
-      return `<div class="moderation-context">
-        <span class="moderation-priority ${context.level}"><span class="dot ${context.level === 'high' ? 'red' : context.level === 'medium' ? 'amber' : 'live'}"></span>${context.label}</span>
-        <span class="moderation-sla">${context.sla}</span>
-      </div>`;
-    }
-
-    function updateThreadOperationalCounts() {
-      const activeTab = document.querySelector('#threadTabbar [data-ttab].active')?.dataset.ttab || 'queue';
-      renderThreadContextStats(activeTab);
-    }
-
-    function renderThreadContextStats(tab = 'queue') {
-      const mount = document.getElementById('threadContextStats');
-      if (!mount) return;
-      const metric = ({ label, value, note, dot = 'gray', attention = false, warning = false, action = '' }) => {
-        const tag = action ? 'button' : 'div';
-        const actionAttributes = action ? `type="button" onclick="${action}"` : '';
-        return `<${tag} class="thread-context-metric" ${actionAttributes}>
-          <p class="thread-context-label"><span class="dot ${dot}"></span>${label}</p>
-          <p class="thread-context-value${attention ? ' attention' : warning ? ' warning' : ''}">${value}</p>
-          <span class="thread-context-note">${note}</span>
-        </${tag}>`;
-      };
-
-      let metrics;
-      if (tab === 'live') {
-        const featured = livePosts.filter(post => post.featured).length;
-        const reported = livePosts.filter(post => post.reported).length;
-        const comments = livePosts.reduce((total, post) => total + post.comments, 0);
-        metrics = [
-          { label: 'Published', value: livePosts.length, note: 'Posts currently in the feed', dot: 'live' },
-          { label: 'Featured', value: featured, note: 'Pinned for greater visibility', dot: 'gray', action: "setUiSelectValue('liveFeedFilter','featured','Featured');renderLiveFeed()" },
-          { label: 'Reported', value: reported, note: 'Requires moderation review', dot: 'red', attention: reported > 0, action: "openReportedPublishedFeed()" },
-          { label: 'Comments', value: comments.toLocaleString(), note: 'Across published posts', dot: 'gray' }
-        ];
-      } else if (tab === 'topics') {
-        const featured = topics.filter(topic => topic.featured).length;
-        const associatedPosts = topics.reduce((total, topic) => total + topic.posts, 0);
-        metrics = [
-          { label: 'Total Tags', value: topics.length, note: 'Available for curation', dot: 'gray' },
-          { label: 'Featured', value: featured, note: 'Visible in featured placements', dot: 'live' },
-          { label: 'Available Slots', value: Math.max(0, 4 - featured), note: 'Of 4 featured positions', dot: 'amber' },
-          { label: 'Tagged Posts', value: associatedPosts.toLocaleString(), note: 'Across all managed tags', dot: 'gray' }
-        ];
-      } else if (tab === 'polls') {
-        const active = POLLS_DATA.filter(poll => poll.status === 'active').length;
-        const scheduled = POLLS_DATA.filter(poll => poll.status === 'scheduled').length;
-        const responses = POLLS_DATA.filter(poll => poll.status !== 'scheduled').reduce((total, poll) => total + pollTotalVotes(poll), 0);
-        const closingSoon = POLLS_DATA.filter(pollEndsSoon).length;
-        metrics = [
-          { label: 'Active Polls', value: active, note: 'Currently accepting responses', dot: 'live', action: "setUiSelectValue('pollStatusFilter','active','Active');renderPolls()" },
-          { label: 'Scheduled', value: scheduled, note: 'Launching in the future', dot: 'amber', action: "setUiSelectValue('pollStatusFilter','scheduled','Scheduled');renderPolls()" },
-          { label: 'Total Responses', value: responses.toLocaleString(), note: 'Across active and closed polls', dot: 'gray' },
-          { label: 'Closing Soon', value: closingSoon, note: 'Within the next 48 hours', dot: closingSoon ? 'red' : 'gray', attention: closingSoon > 0 }
-        ];
-      } else {
-        const pending = submissions.filter(submission => submission.status === 'pending').length;
-        const flagged = submissions.filter(submission => submission.status === 'flagged').length;
-        const approaching = submissions.filter(submission =>
-          submission.status === 'pending' && getSubmissionModerationContext(submission).level === 'medium').length;
-        metrics = [
-          { label: 'Total Submissions', value: submissions.length, note: 'Across every review status', dot: 'gray', action: "openThreadQueue('all')" },
-          { label: 'Pending', value: pending, note: 'Awaiting a decision', dot: 'amber', action: "openThreadQueue('pending')" },
-          { label: 'Flagged', value: flagged, note: 'Compliance review required', dot: 'red', attention: flagged > 0, action: "openThreadQueue('flagged')" },
-          { label: 'Approaching Target', value: approaching, note: 'Near the review-time target', dot: approaching ? 'amber' : 'gray', warning: approaching > 0, action: "openThreadQueue('pending')" }
-        ];
-      }
-      mount.innerHTML = metrics.map(metric).join('');
-    }
-
-    function renderSubmissionStatusCard(sourceSubmissions = submissions) {
-      const card = document.getElementById('overviewSubmissionStatusCard');
-      if (!card) return;
-      const statuses = [
-        { key: 'approved', label: 'Approved', color: 'var(--green-600)' },
-        { key: 'pending', label: 'Pending', color: 'var(--amber-600)' },
-        { key: 'flagged', label: 'Flagged', color: 'var(--danger-600)' },
-        { key: 'rejected', label: 'Rejected', color: 'var(--teal-600)' }
-      ].map(status => ({
-        ...status,
-        count: sourceSubmissions.filter(submission => submission.status === status.key).length
-      }));
-      const total = sourceSubmissions.length;
-      const circumference = 345.6;
-      let offset = 0;
-      const segments = statuses.map(status => {
-        const length = total ? status.count / total * circumference : 0;
-        const segment = `<circle r="55" cx="80" cy="80" fill="transparent" style="stroke:${status.color};"
-          stroke-width="26" stroke-dasharray="${length.toFixed(1)} ${circumference.toFixed(1)}"
-          stroke-dashoffset="${(-offset).toFixed(1)}" transform="rotate(-90 80 80)" />`;
-        offset += length;
-        return segment;
-      }).join('');
-      card.innerHTML = `
-        <h3>Submissions by Status</h3>
-        <p class="chart-sub">Distribution of the same ${total} matching submission${total === 1 ? '' : 's'} shown below</p>
-        <div class="donut-row">
-          <svg viewBox="0 0 160 160" width="160" height="160" aria-label="${total} total submissions by status">
-            ${segments}
-            <text x="80" y="76" text-anchor="middle" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;fill:var(--ink-900);">${total}</text>
-            <text x="80" y="92" text-anchor="middle" style="font-family:'Inter',sans-serif;font-size:8.5px;font-weight:500;fill:var(--ink-500);">Total Submissions</text>
-          </svg>
-          <div class="donut-legend">
-            ${statuses.map(status => {
-              const percent = total ? Math.round(status.count / total * 100) : 0;
-              return `<button class="donut-legend-item" style="border:0;background:transparent;width:100%;cursor:pointer;"
-                onclick="openThreadQueue('${status.key}')">
-                <span class="donut-legend-swatch" style="background:${status.color};"></span>
-                <span class="donut-legend-label">${status.label}</span>
-                <span class="donut-legend-value">${status.count} · ${percent}%</span>
-              </button>`;
-            }).join('')}
-          </div>
-        </div>`;
-    }
 
     function renderSubmissionsFeed() {
-      updateThreadOperationalCounts();
       const statusFilter = document.getElementById('submissionStatusFilter').dataset.value;
       const categoryFilter = document.getElementById('submissionCategoryFilter').dataset.value;
       const verifiedFilter = document.getElementById('submissionVerifiedFilter').dataset.value;
       const query = document.getElementById('submissionsSearch').value.trim().toLowerCase();
-      const sort = document.getElementById('submissionSort').value;
       const list = document.getElementById('submissionsFeed');
       list.innerHTML = '';
       let visibleCount = 0;
       const visibleIndices = new Set();
-      const orderedIndices = submissions.map((_, index) => index).sort((a, b) => {
-        if (sort === 'oldest') return relativeAgeMinutes(submissions[b].submitted) - relativeAgeMinutes(submissions[a].submitted);
-        if (sort === 'newest') return relativeAgeMinutes(submissions[a].submitted) - relativeAgeMinutes(submissions[b].submitted);
-        const priorityOrder = { high: 0, medium: 1, routine: 2 };
-        return priorityOrder[getSubmissionModerationContext(submissions[a]).level] -
-          priorityOrder[getSubmissionModerationContext(submissions[b]).level];
-      });
-      orderedIndices.forEach(idx => {
-        const s = submissions[idx];
+      submissions.forEach((s, idx) => {
         if (statusFilter !== 'all' && s.status !== statusFilter) return;
         if (categoryFilter !== 'all' && s.category !== categoryFilter) return;
         if (verifiedFilter === 'verified' && s.tier !== 'Verified Investor') return;
@@ -12019,7 +11817,6 @@
           </div>
           <span class="feed-tag">${s.category}</span>
         </div>
-        ${renderModerationContext(s)}
         <p class="feed-body">${s.content}</p>
         ${s.hasChart ? `<div class="feed-attachment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>Attached chart</div>` : ''}
         ${s.flagReason ? `<div class="feed-flag-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17.5A1.8 1.8 0 004 20.2h16a1.8 1.8 0 001.5-2.7L13.7 3.9a1.8 1.8 0 00-3.4 0z"/></svg>${s.flagReason}</div>` : ''}
@@ -12036,9 +11833,6 @@
       if (visibleCount === 0) {
         list.innerHTML = `<p style="color:var(--ink-500);font-size:13px;padding:20px 0;text-align:center;">No submissions match these filters.</p>`;
       }
-      const resultCount = document.getElementById('submissionsResultCount');
-      if (resultCount) resultCount.textContent = `${visibleCount} submission${visibleCount === 1 ? '' : 's'}`;
-      renderSubmissionStatusCard(Array.from(visibleIndices).map(index => submissions[index]));
       Array.from(selectedSubmissionIndices).forEach(idx => { if (!visibleIndices.has(idx)) selectedSubmissionIndices.delete(idx); });
       updateSubmissionsBulkBar();
     }
@@ -12112,20 +11906,11 @@
 
     function openSubmissionModal(idx) {
       const s = submissions[idx];
-      currentSubmissionIndex = idx;
       document.getElementById('submissionModalAvatar').textContent = s.initials;
-      document.getElementById('submissionModalName').innerHTML = `${s.author} ${s.tier === 'Verified Investor' ? '<span class="fa-tier">Verified Investor</span>' : ''}`;
+      document.getElementById('submissionModalName').innerHTML = `${s.author} ${s.tier === 'Verified Investor' ? '<span class="fa-tier" id="submissionModalTier">Verified Investor</span>' : ''}`;
       document.getElementById('submissionModalMeta').textContent = `${s.category} · ${s.submitted}`;
       document.getElementById('submissionModalContent').textContent = s.content;
       document.getElementById('submissionModalAttachment').style.display = s.hasChart ? 'flex' : 'none';
-      const context = getSubmissionModerationContext(s);
-      document.getElementById('submissionModalOperationalContext').innerHTML = `
-        <span class="moderation-priority ${context.level}"><span class="dot ${context.level === 'high' ? 'red' : context.level === 'medium' ? 'amber' : 'live'}"></span>${context.label}</span>
-        <span class="moderation-sla">${context.sla}</span>`;
-      document.getElementById('submissionModalAuthorHistory').textContent =
-        s.tier === 'Verified Investor'
-          ? 'Verified contributor · 12 previously approved submissions · No active moderation restrictions'
-          : 'Community contributor · 3 previously approved submissions · 1 prior edit requested';
       const flagBlock = document.getElementById('submissionModalFlagBlock');
       if (s.flagReason) {
         flagBlock.style.display = 'block';
@@ -12136,41 +11921,9 @@
       document.getElementById('submissionOverlay').classList.add('open');
     }
 
-    function approveCurrentSubmission() {
-      if (currentSubmissionIndex === null || !submissions[currentSubmissionIndex]) return;
-      approveSubmission(currentSubmissionIndex);
-      closeModal('submissionOverlay');
-      currentSubmissionIndex = null;
-    }
-
-    function rejectCurrentSubmission() {
-      if (currentSubmissionIndex === null || !submissions[currentSubmissionIndex]) return;
-      rejectSubmission(currentSubmissionIndex);
-      closeModal('submissionOverlay');
-      currentSubmissionIndex = null;
-    }
-
-    function openThreadQueue(status = 'pending') {
-      switchThreadTab('queue');
-      const labels = { pending: 'Pending', flagged: 'Flagged', approved: 'Approved', rejected: 'Rejected', all: 'All Statuses' };
-      setUiSelectValue('submissionStatusFilter', status, labels[status] || 'All Statuses');
-      renderSubmissionsFeed();
-    }
-
-    function openReportedPublishedFeed() {
-      switchThreadTab('live');
-      setUiSelectValue('liveFeedFilter', 'reported', 'Reported by users');
-      renderLiveFeed();
-    }
-
     function switchThreadTab(tab) {
-      document.querySelectorAll('#threadTabbar [data-ttab]').forEach(b => b.classList.toggle('active', b.dataset.ttab === tab));
+      document.querySelectorAll('#threadTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.ttab === tab));
       document.querySelectorAll('.thread-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'thread-' + tab));
-      renderThreadContextStats(tab);
-      if (tab === 'queue') renderSubmissionsFeed();
-      if (tab === 'live') renderLiveFeed();
-      if (tab === 'topics') renderTopics();
-      if (tab === 'polls') renderPolls();
     }
 
     // ---- Analytics: filterable/sortable/paginated performance tables + detail modal ----
@@ -13662,77 +13415,16 @@
     ];
 
     const selectedLiveFeedIndices = new Set();
-    let currentPublishedPostIndex = null;
-
-    function openPublishedPostModal(idx) {
-      const post = livePosts[idx];
-      if (!post) return;
-      currentPublishedPostIndex = idx;
-      document.getElementById('publishedPostModalAvatar').textContent = post.initials;
-      document.getElementById('publishedPostModalAuthor').innerHTML =
-        `${post.author}${post.tier === 'Verified Investor' ? ' <span class="fa-tier">Verified</span>' : ''}`;
-      document.getElementById('publishedPostModalMeta').textContent = `${post.category} · Published ${post.publishedAt}`;
-      document.getElementById('publishedPostModalPublished').textContent = post.featured ? 'Currently featured in the app feed' : 'Published in the app feed';
-      document.getElementById('publishedPostModalContent').textContent = post.content;
-      document.getElementById('publishedPostModalStats').innerHTML =
-        `<span>${post.views.toLocaleString()} views</span><span>${post.likes} likes</span><span>${post.comments} comments</span>`;
-      document.getElementById('publishedPostModalStatus').innerHTML = post.reported
-        ? `<span class="moderation-priority high"><span class="dot red"></span>Reported</span><span class="moderation-sla">3 reports in the last 20 minutes</span>`
-        : `<span class="moderation-priority routine"><span class="dot live"></span>No active reports</span><span class="moderation-sla">No intervention required</span>`;
-      document.getElementById('publishedPostModalHistory').textContent = post.reported
-        ? `Approved and published ${post.publishedAt}. Three user reports were received recently and remain unresolved.`
-        : `Approved and published ${post.publishedAt}. No subsequent moderation action has been required.`;
-      document.getElementById('publishedPostFeatureButton').textContent = post.featured ? 'Unfeature' : 'Feature';
-      document.getElementById('publishedPostRemovalReason').value = '';
-      document.getElementById('publishedPostRemovalError').style.display = 'none';
-      document.getElementById('publishedPostOverlay').classList.add('open');
-    }
-
-    function toggleCurrentPublishedPostFeatured() {
-      if (currentPublishedPostIndex === null || !livePosts[currentPublishedPostIndex]) return;
-      livePosts[currentPublishedPostIndex].featured = !livePosts[currentPublishedPostIndex].featured;
-      openPublishedPostModal(currentPublishedPostIndex);
-      renderLiveFeed();
-    }
-
-    function removeCurrentPublishedPost() {
-      if (currentPublishedPostIndex === null || !livePosts[currentPublishedPostIndex]) return;
-      const reason = document.getElementById('publishedPostRemovalReason').value.trim();
-      const error = document.getElementById('publishedPostRemovalError');
-      if (!reason) {
-        error.style.display = 'block';
-        document.getElementById('publishedPostRemovalReason').focus();
-        return;
-      }
-      error.style.display = 'none';
-      if (!window.confirm('Remove this post from the published app feed?')) return;
-      livePosts.splice(currentPublishedPostIndex, 1);
-      currentPublishedPostIndex = null;
-      closeModal('publishedPostOverlay');
-      renderLiveFeed();
-    }
-
-    function goToCurrentPublishedPostAnalytics() {
-      closeModal('publishedPostOverlay');
-      goToAnalytics('threads');
-    }
 
     function renderLiveFeed() {
       const filter = document.getElementById('liveFeedFilter').dataset.value;
       const verifiedFilter = document.getElementById('liveFeedVerifiedFilter').dataset.value;
       const query = document.getElementById('liveFeedSearch').value.trim().toLowerCase();
-      const sort = document.getElementById('liveFeedSort').value;
       const list = document.getElementById('liveFeedList');
       list.innerHTML = '';
       let visibleCount = 0;
       const visibleIndices = new Set();
-      const orderedIndices = livePosts.map((_, index) => index).sort((a, b) => {
-        if (sort === 'views') return livePosts[b].views - livePosts[a].views;
-        if (sort === 'reported') return Number(livePosts[b].reported) - Number(livePosts[a].reported);
-        return relativeAgeMinutes(livePosts[a].publishedAt) - relativeAgeMinutes(livePosts[b].publishedAt);
-      });
-      orderedIndices.forEach(idx => {
-        const p = livePosts[idx];
+      livePosts.forEach((p, idx) => {
         if (filter === 'featured' && !p.featured) return;
         if (filter === 'reported' && !p.reported) return;
         if (verifiedFilter === 'verified' && p.tier !== 'Verified Investor') return;
@@ -13742,19 +13434,10 @@
         visibleIndices.add(idx);
         const card = document.createElement('div');
         card.className = 'feed-card';
-        card.tabIndex = 0;
-        card.setAttribute('role', 'button');
-        card.onclick = () => openPublishedPostModal(idx);
-        card.onkeydown = event => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            openPublishedPostModal(idx);
-          }
-        };
         card.innerHTML = `
         <div class="feed-card-head">
           <div class="feed-card-head-left">
-            <input type="checkbox" class="row-check" onclick="event.stopPropagation()" onchange="toggleLiveFeedSelect(${idx}, this.checked)" ${selectedLiveFeedIndices.has(idx) ? 'checked' : ''} />
+            <input type="checkbox" class="row-check" onchange="toggleLiveFeedSelect(${idx}, this.checked)" ${selectedLiveFeedIndices.has(idx) ? 'checked' : ''} />
             <div class="feed-author">
               <div class="feed-avatar">${p.initials}</div>
               <div>
@@ -13765,7 +13448,6 @@
           </div>
           <span class="feed-tag">${p.category}</span>
         </div>
-        ${p.reported ? `<div class="moderation-context"><span class="moderation-priority high"><span class="dot red"></span>High priority</span><span class="moderation-sla">3 reports in the last 20 minutes</span></div>` : ''}
         <p class="feed-body">${p.content}</p>
         ${p.hasChart ? `<div class="feed-attachment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>Attached chart</div>` : ''}
         ${p.reported ? `<div class="feed-flag-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17.5A1.8 1.8 0 004 20.2h16a1.8 1.8 0 001.5-2.7L13.7 3.9a1.8 1.8 0 00-3.4 0z"/></svg>${p.reportReason}</div>` : ''}
@@ -13776,21 +13458,18 @@
             <span>${p.comments} comments</span>
           </div>
           <div class="feed-actions">
-            <button class="btn btn-sm btn-danger-outline" onclick="event.stopPropagation();openPublishedPostModal(${idx})">Review</button>
-            <button class="btn btn-sm ${p.featured ? 'btn-primary' : ''}" onclick="event.stopPropagation();toggleFeatured(${idx})">${p.featured ? 'Unfeature' : 'Feature'}</button>
+            <button class="btn btn-sm btn-danger-outline" onclick="removeLivePost(${idx})">Remove</button>
+            <button class="btn btn-sm ${p.featured ? 'btn-primary' : ''}" onclick="toggleFeatured(${idx})">${p.featured ? 'Unfeature' : 'Feature'}</button>
           </div>
         </div>
       `;
         list.appendChild(card);
       });
       if (visibleCount === 0) {
-        list.innerHTML = `<p style="color:var(--ink-500);font-size:13px;padding:20px 0;text-align:center;">No published posts match these filters.</p>`;
+        list.innerHTML = `<p style="color:var(--ink-500);font-size:13px;padding:20px 0;text-align:center;">No live posts match these filters.</p>`;
       }
-      const resultCount = document.getElementById('liveFeedResultCount');
-      if (resultCount) resultCount.textContent = `${visibleCount} post${visibleCount === 1 ? '' : 's'}`;
       Array.from(selectedLiveFeedIndices).forEach(idx => { if (!visibleIndices.has(idx)) selectedLiveFeedIndices.delete(idx); });
       updateLiveFeedBulkBar();
-      if (document.querySelector('#threadTabbar [data-ttab="live"].active')) renderThreadContextStats('live');
     }
 
     function toggleLiveFeedSelect(idx, checked) {
@@ -13860,15 +13539,7 @@
 
     function renderTopics() {
       const grid = document.getElementById('topicsGrid');
-      const search = (document.getElementById('topicsSearch')?.value || '').trim().toLowerCase();
-      const visibleTopics = topics
-        .map((topic, index) => ({ topic, index }))
-        .filter(({ topic }) => !search || topic.tag.toLowerCase().includes(search) || topic.label.toLowerCase().includes(search))
-        .sort((a, b) => Number(b.topic.featured) - Number(a.topic.featured));
-      const featuredCount = topics.filter(topic => topic.featured).length;
-      const slotLabel = document.getElementById('featuredTagSlots');
-      if (slotLabel) slotLabel.textContent = `${featuredCount} of 4 featured slots used`;
-      grid.innerHTML = visibleTopics.map(({ topic: t, index: idx }) => `
+      grid.innerHTML = topics.map((t, idx) => `
       <div class="topic-card">
         <div class="topic-card-head">
           <div>
@@ -13885,16 +13556,10 @@
           ${t.featured ? '<span class="feed-pin-badge">★ Featured</span>' : ''}
         </div>
       </div>
-    `).join('') || `<p style="color:var(--ink-500);font-size:13px;padding:20px;">No tags match your search.</p>`;
-      if (document.querySelector('#threadTabbar [data-ttab="topics"].active')) renderThreadContextStats('topics');
+    `).join('');
     }
 
     function toggleTopicFeatured(idx) {
-      if (!topics[idx].featured && topics.filter(topic => topic.featured).length >= 4) {
-        alert('You can feature up to four tags. Unfeature another tag before continuing.');
-        renderTopics();
-        return;
-      }
       topics[idx].featured = !topics[idx].featured;
       renderTopics();
     }
@@ -15852,9 +15517,16 @@
     }
 
     function renderPollsStats() {
-      if (document.querySelector('#threadTabbar [data-ttab="polls"].active')) {
-        renderThreadContextStats('polls');
-      }
+      const active = POLLS_DATA.filter(p => p.status === 'active').length;
+      const scheduled = POLLS_DATA.filter(p => p.status === 'scheduled').length;
+      const closed = POLLS_DATA.filter(p => p.status === 'closed').length;
+      const totalResponses = POLLS_DATA.filter(p => p.status !== 'scheduled')
+        .reduce((s, p) => s + pollTotalVotes(p), 0);
+      document.getElementById('pollsStatGrid').innerHTML = `
+        <div class="stat-card accent-green"><p class="label"><span class="dot live"></span>Active Polls</p><p class="value">${active}</p></div>
+        <div class="stat-card accent-amber"><p class="label"><span class="dot amber"></span>Scheduled</p><p class="value">${scheduled}</p></div>
+        <div class="stat-card accent-teal"><p class="label">Total Responses</p><p class="value">${totalResponses.toLocaleString()}</p></div>
+        <div class="stat-card accent-gray"><p class="label">Closed Polls</p><p class="value">${closed}</p></div>`;
     }
 
     function renderPollCard(poll) {
@@ -15908,9 +15580,8 @@
             <span>by ${poll.createdBy}</span>
           </div>
           <div class="poll-actions" onclick="event.stopPropagation()">
-            <button class="btn btn-sm" onclick="duplicatePoll('${poll.id}')">Duplicate</button>
             ${poll.status === 'closed' ? `<button class="btn btn-sm" onclick="exportPoll('${poll.id}')">Export CSV</button>` : ''}
-            <button class="btn btn-sm btn-primary" onclick="openPollDetail('${poll.id}')">${poll.status === 'scheduled' ? 'Preview' : 'View Results'}</button>
+            <button class="btn btn-sm btn-primary" onclick="openPollDetail('${poll.id}')">View Results</button>
           </div>
         </div>
       </div>`;
@@ -15927,26 +15598,6 @@
       const el = document.getElementById('pollsList');
       if (el) el.innerHTML = polls.length ? polls.map(renderPollCard).join('') : '<p style="color:var(--ink-500);font-size:13.5px;padding:8px 0;">No polls match the current filters.</p>';
       renderPollsStats();
-    }
-
-    function duplicatePoll(id) {
-      const source = POLLS_DATA.find(poll => poll.id === id);
-      if (!source) return;
-      const copy = {
-        ...source,
-        id: `p${Date.now()}`,
-        question: `${source.question} (Copy)`,
-        options: source.options.map(option => ({ label: option.label, votes: 0 })),
-        status: 'scheduled',
-        startDate: daysFromNow(1),
-        endDate: daysFromNow(8),
-        featured: false,
-        timelineDays: [],
-        feedbackComments: []
-      };
-      POLLS_DATA.unshift(copy);
-      setUiSelectValue('pollStatusFilter', 'all', 'All Statuses');
-      renderPolls();
     }
 
     function openPollDetail(id) {
