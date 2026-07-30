@@ -6127,59 +6127,67 @@
     :root[data-theme="wow"] .wn-pill.active,
     :root[data-theme="wow"] .wn-action-btn.primary { background: var(--accent); }
     /* ── Content Templates (Live & Upload) ───────────────── */
-    .tmpl-section { margin-bottom: 20px; }
-    .tmpl-section-label {
+    .tmpl-strip-wrap { margin-bottom: 20px; }
+    .tmpl-strip-label {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
       color: var(--ink-400);
-      margin-bottom: 9px;
+      margin-bottom: 10px;
     }
-    .tmpl-pills {
+    .tmpl-strip {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
     }
-    .tmpl-pill {
-      padding: 6px 14px;
+    .tmpl-strip::-webkit-scrollbar { display: none; }
+    .tmpl-card {
+      flex-shrink: 0;
+      width: 152px;
+      padding: 12px 13px;
       border: 1.5px solid var(--line);
-      border-radius: 20px;
+      border-radius: 10px;
       background: var(--paper-0);
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--ink-500);
       cursor: pointer;
-      transition: border-color .12s, background .12s, color .12s;
-      white-space: nowrap;
+      transition: border-color .14s, background .14s;
+      text-align: left;
     }
-    .tmpl-pill:hover { border-color: var(--ink-400); color: var(--ink-900); }
-    .tmpl-pill.selected {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
+    .tmpl-card:hover { border-color: var(--ink-300); }
+    .tmpl-card.selected { border-color: var(--accent); background: var(--accent); }
+    .tmpl-card-icon {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: var(--paper-100);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+      color: var(--ink-500);
     }
+    .tmpl-card.selected .tmpl-card-icon { background: rgba(255,255,255,.18); color: #fff; }
+    .tmpl-card-name { font-size: 12.5px; font-weight: 700; color: var(--ink-900); margin-bottom: 3px; }
+    .tmpl-card.selected .tmpl-card-name { color: #fff; }
+    .tmpl-card-desc { font-size: 11px; color: var(--ink-500); line-height: 1.4; }
+    .tmpl-card.selected .tmpl-card-desc { color: rgba(255,255,255,.72); }
     .tmpl-vars-panel {
-      margin-top: 10px;
+      margin-top: 12px;
       padding: 14px 16px;
       background: var(--paper-100);
       border: 1px solid var(--line);
       border-radius: 10px;
     }
     .tmpl-vars-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
     }
     .tmpl-vars-icon {
-      width: 30px; height: 30px;
+      width: 28px; height: 28px;
       border-radius: 7px;
       background: var(--accent-10);
       color: var(--accent);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      margin-top: 1px;
     }
     .tmpl-vars-name { font-size: 13px; font-weight: 700; color: var(--ink-900); margin-bottom: 2px; }
     .tmpl-vars-hint { font-size: 11.5px; color: var(--ink-500); }
@@ -6188,22 +6196,14 @@
       grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
       gap: 10px;
     }
-    .tmpl-var-item > .field-label { margin-bottom: 5px; }
+    .tmpl-var-item .field-label { display: block; margin-bottom: 5px; }
     .tmpl-var-select, .tmpl-var-input {
-      width: 100%;
-      padding: 7px 10px;
-      border: 1.5px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper-0);
-      color: var(--ink-900);
-      font-size: 13px;
-      font-family: inherit;
-      box-sizing: border-box;
+      width: 100%; padding: 7px 10px;
+      border: 1.5px solid var(--line); border-radius: 8px;
+      background: var(--paper-0); color: var(--ink-900);
+      font-size: 13px; font-family: inherit; box-sizing: border-box;
     }
-    .tmpl-var-select:focus, .tmpl-var-input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
+    .tmpl-var-select:focus, .tmpl-var-input:focus { outline: none; border-color: var(--accent); }
 
     /* ── Live Now Ticker ──────────────────────────────────── */
     #liveTickerBar {
@@ -7968,9 +7968,9 @@
         <!-- CONTENT TAB -->
         <div class="upload-tab-pane active" id="uploadtab-content">
 
-          <div class="tmpl-section" id="uploadTmplSection">
-            <p class="tmpl-section-label">Template</p>
-            <div class="tmpl-pills" id="uploadTmplPills"></div>
+          <div class="tmpl-strip-wrap">
+            <p class="tmpl-strip-label">Template</p>
+            <div class="tmpl-strip" id="uploadTmplStrip"></div>
             <div class="tmpl-vars-panel" id="uploadTmplVars" style="display:none"></div>
           </div>
 
@@ -8360,9 +8360,9 @@
       </div>
       <div class="modal-body">
 
-        <div class="tmpl-section" id="liveTmplSection">
-          <p class="tmpl-section-label">Template</p>
-          <div class="tmpl-pills" id="liveTmplPills"></div>
+        <div class="tmpl-strip-wrap">
+          <p class="tmpl-strip-label">Template</p>
+          <div class="tmpl-strip" id="liveTmplStrip"></div>
           <div class="tmpl-vars-panel" id="liveTmplVars" style="display:none"></div>
         </div>
 
@@ -9041,96 +9041,85 @@
     };
     // ── Live session templates ──────────────────────────────
     // ── Template data ───────────────────────────────────────
-    const SVG = {
-      chart:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
-      bolt:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>`,
-      chat:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
-      brief:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>`,
-      lock:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
-      film:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M2 15h20M7 5v14M17 5v14"/></svg>`,
-      book:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>`,
-      star:   `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    const TSVG = {
+      chart: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+      bolt:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>`,
+      chat:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+      brief: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>`,
+      lock:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+      film:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M2 15h20M7 5v14M17 5v14"/></svg>`,
+      book:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>`,
+      star:  `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     };
 
     const liveTemplates = [
-      { id: 'blank', name: 'Blank', icon: SVG.chart,
-        vars: [],
-        titleTemplate: '', descTemplate: '',
+      { id: 'blank', name: 'Blank', desc: 'Start from scratch', icon: TSVG.film,
+        vars: [], descTemplate: '',
         section: 'Markets', host: 'J. Tan', visibility: 'public', clientTags: '', notify: true, chat: true, qa: false },
-      { id: 'market-update', name: 'Market Update', icon: SVG.chart,
+      { id: 'market-update', name: 'Market Update', desc: 'Daily or weekly markets recap', icon: TSVG.chart,
         vars: [
           { key: 'period', label: 'Cadence', type: 'select', options: ['Daily', 'Weekly', 'Monthly'], default: 'Daily' },
-          { key: 'focus', label: 'Focus', type: 'text', placeholder: 'e.g. SG rates, APAC equities', default: '' },
+          { key: 'focus', label: 'Focus area', type: 'text', placeholder: 'e.g. SG rates, APAC equities', default: '' },
         ],
-        titleTemplate: '{{period}} Markets Update: {{focus}}',
         descTemplate: 'A live {{period_lc}} segment covering {{focus_or_default}} and what the latest moves mean for clients.',
         section: 'Markets', host: 'M. Lee', visibility: 'public', clientTags: '', notify: true, chat: true, qa: false },
-      { id: 'rate-reaction', name: 'Rate Reaction', icon: SVG.bolt,
+      { id: 'rate-reaction', name: 'Rate Reaction', desc: 'Rapid response to central bank decisions', icon: TSVG.bolt,
         vars: [
           { key: 'bank', label: 'Central Bank', type: 'select', options: ['Fed', 'ECB', 'MAS', 'BOJ', 'BOE'], default: 'Fed' },
           { key: 'decision', label: 'Decision', type: 'select', options: ['rate hike', 'rate cut', 'hold'], default: 'rate hike' },
         ],
-        titleTemplate: '{{bank}} {{decision_title}} Reaction — Live',
         descTemplate: 'Live reaction following the {{bank}}\'s decision to {{decision}}, covering FX, fixed income, and what it means for client portfolios.',
         section: 'Markets', host: 'J. Tan', visibility: 'public', clientTags: '', notify: true, chat: true, qa: false },
-      { id: 'wealth-qa', name: 'Wealth Q&A', icon: SVG.chat,
+      { id: 'wealth-qa', name: 'Wealth Q&A', desc: 'Live Q&A for Premier & Wealth clients', icon: TSVG.chat,
         vars: [
           { key: 'topic', label: 'Topic', type: 'text', placeholder: 'e.g. markets volatility', default: '' },
         ],
-        titleTemplate: 'Wealth Live Q&A: {{topic}}',
         descTemplate: 'Live audience Q&A for Premier and Wealth clients on {{topic}}. Submit your questions in the Q&A queue during the session.',
         section: 'Wealth', host: 'P. Sharma', visibility: 'filter', clientTags: 'Premier, Wealth', notify: true, chat: true, qa: true },
-      { id: 'sme-clinic', name: 'SME Clinic', icon: SVG.brief,
+      { id: 'sme-clinic', name: 'SME Clinic', desc: 'Live advisory session for SME clients', icon: TSVG.brief,
         vars: [
           { key: 'topic', label: 'Clinic topic', type: 'text', placeholder: 'e.g. digitalisation grants', default: '' },
         ],
-        titleTemplate: 'SME Clinic: {{topic}}',
-        descTemplate: 'A live clinic helping SME owners with {{topic}}. Join live and submit your questions to get answers on air.',
+        descTemplate: 'A live clinic helping SME owners with {{topic}}. Join live and get your questions answered on air.',
         section: 'SME Banking', host: 'R. Ong', visibility: 'public', clientTags: '', notify: true, chat: true, qa: true },
-      { id: 'exec-briefing', name: 'Exec Briefing', icon: SVG.lock,
+      { id: 'exec-briefing', name: 'Exec Briefing', desc: 'Internal leadership-only briefing', icon: TSVG.lock,
         vars: [
           { key: 'type', label: 'Briefing type', type: 'select', options: ['Treasury', 'Strategy', 'Risk', 'Compliance'], default: 'Treasury' },
           { key: 'period', label: 'Period', type: 'text', placeholder: 'e.g. Q3 2026', default: '' },
         ],
-        titleTemplate: '{{type}} Briefing — {{period}}',
         descTemplate: 'Internal {{type_lc}} briefing for {{period}}. Restricted to OCBC members only.',
         section: 'Corporate banking', host: 'A. Kumar', visibility: 'private', clientTags: '', notify: false, chat: false, qa: false },
     ];
 
     const uploadTemplates = [
-      { id: 'blank', name: 'Blank', icon: SVG.film,
-        vars: [],
-        titleTemplate: '', descTemplate: '',
+      { id: 'blank', name: 'Blank', desc: 'Start from scratch', icon: TSVG.film,
+        vars: [], descTemplate: '',
         section: 'Markets', owner: 'J. Tan' },
-      { id: 'market-wrap', name: 'Market Wrap', icon: SVG.chart,
+      { id: 'market-wrap', name: 'Market Wrap', desc: 'Weekly or monthly markets roundup', icon: TSVG.chart,
         vars: [
           { key: 'period', label: 'Period', type: 'select', options: ['Daily', 'Weekly', 'Monthly', 'Quarterly'], default: 'Weekly' },
           { key: 'dates', label: 'Date range', type: 'text', placeholder: 'e.g. Jul 28 – Aug 1', default: '' },
         ],
-        titleTemplate: '{{period}} Markets Wrap — {{dates}}',
-        descTemplate: 'A {{period_lc}} roundup of key market events and performance{{dates ? " for " + dates : ""}}. Catch up on what moved markets.',
+        descTemplate: 'A {{period_lc}} roundup of key market events and performance{{dates_suffix}}. Catch up on what moved markets.',
         section: 'Markets', owner: 'M. Lee' },
-      { id: 'explainer', name: 'Explainer', icon: SVG.book,
+      { id: 'explainer', name: 'Explainer', desc: 'Client-friendly educational video', icon: TSVG.book,
         vars: [
           { key: 'topic', label: 'Topic', type: 'text', placeholder: 'e.g. How bond yields work', default: '' },
         ],
-        titleTemplate: 'Explainer: {{topic}}',
         descTemplate: 'A clear, client-friendly explainer on {{topic}} — what it means, why it matters, and what to do about it.',
         section: 'Markets', owner: 'J. Tan' },
-      { id: 'product-spotlight', name: 'Product Spotlight', icon: SVG.star,
+      { id: 'product-spotlight', name: 'Product Spotlight', desc: 'Highlight an OCBC product', icon: TSVG.star,
         vars: [
           { key: 'product', label: 'Product name', type: 'text', placeholder: 'e.g. OCBC 360 Account', default: '' },
         ],
-        titleTemplate: 'Product Spotlight: {{product}}',
         descTemplate: 'Everything you need to know about {{product}} — key features, benefits, and how to get started today.',
         section: 'Personal banking', owner: 'S. Wong' },
-      { id: 'research-note', name: 'Research Note', icon: SVG.chart,
+      { id: 'research-note', name: 'Research Note', desc: 'Video summary of a research report', icon: TSVG.chart,
         vars: [
           { key: 'topic', label: 'Research topic', type: 'text', placeholder: 'e.g. APAC equities outlook', default: '' },
           { key: 'analyst', label: 'Analyst (optional)', type: 'text', placeholder: 'e.g. A. Kumar', default: '' },
         ],
-        titleTemplate: 'Research Note: {{topic}}',
-        descTemplate: 'Video summary of our latest research on {{topic}}{{analyst ? ", presented by " + analyst : ""}}.',
+        descTemplate: 'Video summary of our latest research on {{topic}}{{analyst_suffix}}.',
         section: 'Markets', owner: 'A. Kumar' },
     ];
 
@@ -9145,19 +9134,23 @@
       return str
         .replace(/\{\{period_lc\}\}/g, (vals.period || '').toLowerCase())
         .replace(/\{\{type_lc\}\}/g,   (vals.type   || '').toLowerCase())
-        .replace(/\{\{decision_title\}\}/g, (v => v.charAt(0).toUpperCase() + v.slice(1))(vals.decision || ''))
         .replace(/\{\{focus_or_default\}\}/g, vals.focus || 'key market events')
-        .replace(/\{\{(\w+)\}\}/g, (_, k) => vals[k] !== undefined ? vals[k] : (t.vars.find(v => v.key === k) || {}).default || '');
+        .replace(/\{\{dates_suffix\}\}/g,   vals.dates ? ' for ' + vals.dates : '')
+        .replace(/\{\{analyst_suffix\}\}/g, vals.analyst ? ', presented by ' + vals.analyst : '')
+        .replace(/\{\{(\w+)\}\}/g, (_, k) => vals[k] !== undefined ? vals[k] : ((t.vars.find(v => v.key === k) || {}).default || ''));
     }
 
-    function renderTmplPills(mode) {
+    function renderTmplStrip(mode) {
       const templates = mode === 'live' ? liveTemplates : uploadTemplates;
       const currentId = mode === 'live' ? currentLiveTemplate : currentUploadTemplate;
-      const el = document.getElementById(mode + 'TmplPills');
+      const el = document.getElementById(mode + 'TmplStrip');
       if (!el) return;
-      el.innerHTML = templates.map(t =>
-        `<button class="tmpl-pill${currentId === t.id ? ' selected' : ''}" onclick="selectTemplate('${mode}','${t.id}')">${t.name}</button>`
-      ).join('');
+      el.innerHTML = templates.map(t => `
+        <button class="tmpl-card${currentId === t.id ? ' selected' : ''}" onclick="selectTemplate('${mode}','${t.id}')">
+          <div class="tmpl-card-icon">${t.icon}</div>
+          <p class="tmpl-card-name">${t.name}</p>
+          <p class="tmpl-card-desc">${t.desc}</p>
+        </button>`).join('');
     }
 
     function renderTmplVarsPanel(mode) {
@@ -9167,14 +9160,14 @@
       const panel = document.getElementById(mode + 'TmplVars');
       if (!panel) return;
       const t = templates.find(x => x.id === currentId);
-      if (!t || !t.vars.length || currentId === 'blank') { panel.style.display = 'none'; return; }
+      if (!t || !t.vars.length) { panel.style.display = 'none'; return; }
       panel.style.display = 'block';
       panel.innerHTML = `
         <div class="tmpl-vars-header">
           <div class="tmpl-vars-icon">${t.icon}</div>
           <div>
             <p class="tmpl-vars-name">${t.name}</p>
-            <p class="tmpl-vars-hint">Fill in the blanks — title and description update as you type.</p>
+            <p class="tmpl-vars-hint">These fill in the description automatically.</p>
           </div>
         </div>
         <div class="tmpl-vars-fields">
@@ -9182,9 +9175,9 @@
             <div class="tmpl-var-item">
               <label class="field-label">${v.label}</label>
               ${v.type === 'select'
-                ? `<select class="tmpl-var-select" onchange="onTmplVarChange('${mode}','${v.key}',this.value)">${
-                    v.options.map(o => `<option value="${o}"${(vals[v.key] || v.default) === o ? ' selected' : ''}>${o}</option>`).join('')
-                  }</select>`
+                ? `<select class="tmpl-var-select" onchange="onTmplVarChange('${mode}','${v.key}',this.value)">
+                    ${v.options.map(o => `<option value="${o}"${(vals[v.key] || v.default) === o ? ' selected' : ''}>${o}</option>`).join('')}
+                  </select>`
                 : `<input class="tmpl-var-input" type="text" placeholder="${v.placeholder || ''}" value="${vals[v.key] !== undefined ? vals[v.key] : (v.default || '')}" oninput="onTmplVarChange('${mode}','${v.key}',this.value)">`
               }
             </div>`).join('')}
@@ -9194,38 +9187,39 @@
     function onTmplVarChange(mode, key, value) {
       if (mode === 'live') liveTmplVars[key] = value;
       else uploadTmplVars[key] = value;
-      injectTmplToForm(mode);
+      injectTmplDesc(mode);
     }
 
-    function injectTmplToForm(mode) {
+    function injectTmplDesc(mode) {
       const templates = mode === 'live' ? liveTemplates : uploadTemplates;
       const currentId = mode === 'live' ? currentLiveTemplate : currentUploadTemplate;
       const vals = mode === 'live' ? liveTmplVars : uploadTmplVars;
       const t = templates.find(x => x.id === currentId);
       if (!t) return;
-      const title = tmplResolve(t.titleTemplate, t, vals);
-      const desc  = tmplResolve(t.descTemplate, t, vals);
+      const desc = tmplResolve(t.descTemplate, t, vals);
+      const descId = mode === 'live' ? 'liveDescInput' : 'uploadDescInput';
+      const descEl = document.getElementById(descId);
+      if (descEl) descEl.value = desc;
+    }
 
+    function applyTmplFormDefaults(mode) {
+      const templates = mode === 'live' ? liveTemplates : uploadTemplates;
+      const currentId = mode === 'live' ? currentLiveTemplate : currentUploadTemplate;
+      const t = templates.find(x => x.id === currentId);
+      if (!t) return;
       if (mode === 'live') {
-        const titleEl = document.getElementById('liveTitleInput');
-        const descEl  = document.getElementById('liveDescInput');
-        if (titleEl) { titleEl.value = ''; titleEl.placeholder = title || 'e.g. Fed Rate Reaction Live'; }
-        if (descEl)  { descEl.value = desc; }
-        // Host
         const hostSel = document.getElementById('liveHostSelect');
         if (hostSel) {
           hostSel.dataset.value = t.host;
           hostSel.querySelector('.ui-select-label').textContent = t.host;
           hostSel.querySelectorAll('.ui-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === t.host));
         }
-        // Section
         const secSel = document.getElementById('liveSectionSelect');
         if (secSel) {
           secSel.dataset.value = t.section;
           secSel.querySelector('.ui-select-label').textContent = t.section;
           secSel.querySelectorAll('.ui-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === t.section));
         }
-        // Visibility
         document.querySelectorAll('#liveVisOptions .radio-card').forEach(card => {
           const match = card.dataset.vis === t.visibility;
           card.classList.toggle('checked', match);
@@ -9244,10 +9238,6 @@
         if (c) c.checked = t.chat;
         if (q) q.checked = t.qa;
       } else {
-        const titleEl = document.getElementById('uploadTitleInput');
-        const descEl  = document.getElementById('uploadDescInput');
-        if (titleEl) { titleEl.value = ''; titleEl.placeholder = title || 'e.g. Weekly Market Wrap'; }
-        if (descEl)  { descEl.value = desc; }
         const ownerSel = document.getElementById('uploadOwnerSelect');
         if (ownerSel) {
           ownerSel.dataset.value = t.owner;
@@ -9267,15 +9257,14 @@
       const templates = mode === 'live' ? liveTemplates : uploadTemplates;
       const t = templates.find(x => x.id === id);
       if (!t) return;
-      if (mode === 'live') { currentLiveTemplate = id; liveTmplVars = {}; }
-      else { currentUploadTemplate = id; uploadTmplVars = {}; }
-      (t.vars || []).forEach(v => {
-        if (mode === 'live') liveTmplVars[v.key] = v.default || '';
-        else uploadTmplVars[v.key] = v.default || '';
-      });
-      renderTmplPills(mode);
+      const vars = {};
+      (t.vars || []).forEach(v => { vars[v.key] = v.default || ''; });
+      if (mode === 'live') { currentLiveTemplate = id; liveTmplVars = vars; }
+      else { currentUploadTemplate = id; uploadTmplVars = vars; }
+      renderTmplStrip(mode);
       renderTmplVarsPanel(mode);
-      injectTmplToForm(mode);
+      injectTmplDesc(mode);
+      applyTmplFormDefaults(mode);
     }
 
     const sourceTypeLabel = { local: null, youtube: 'YouTube', spotify: 'Spotify' };
@@ -12671,11 +12660,13 @@
       document.getElementById('spotifyPreview').style.display = 'none';
       document.getElementById('uploadOverlay').classList.add('open');
       selectTemplate('upload', 'blank');
+      renderTmplStrip('upload');
     }
 
     function openLiveModal() {
       document.getElementById('liveScheduleOverlay').classList.add('open');
       selectTemplate('live', 'blank');
+      renderTmplStrip('live');
     }
 
     function currentUploadSourceUrl() {
