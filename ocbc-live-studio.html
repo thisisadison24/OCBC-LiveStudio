@@ -11128,7 +11128,7 @@
         const req = grp.required || 1;
         const total = grp.members.length;
         const badge = total > 0
-          ? `${req} of ${total} approvals${req !== 1 ? 's' : ''}`
+          ? `${req} of ${total} approval${req !== 1 ? 's' : ''}`
           : 'No approvers set';
         const people = total > 0 ? grp.members.join(' · ') : '';
         return `
