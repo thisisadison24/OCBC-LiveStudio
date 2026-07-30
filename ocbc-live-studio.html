@@ -2911,15 +2911,6 @@
       flex-shrink: 0;
     }
 
-    /* Trend chip for an insight card. */
-    .insight-spark {
-      display: block;
-      flex: 0 0 auto;
-      width: 56px;
-      height: 16px;
-      overflow: visible;
-    }
-
     /* Ranked comparison bars, used for the modal's evidence chart and the
        Threads insight visual. */
     .evidence-bars {
@@ -2966,6 +2957,31 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 22px;
+    }
+
+    .insights-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .insights-heading h3 {
+      margin: 0 0 3px;
+      font-size: 14px;
+    }
+
+    .insights-heading p {
+      margin: 0;
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .insights-count {
+      color: var(--ink-500);
+      font-size: 10.5px;
+      white-space: nowrap;
     }
 
     .insight-card {
@@ -3028,19 +3044,24 @@
       color: var(--ink-700);
     }
 
+    .insight-category {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink-500);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
     .insight-text b {
       color: var(--ink-900);
       font-weight: 700;
     }
 
-    .insight-foot {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 5px;
-    }
-
     .insight-more {
+      display: block;
+      margin-top: 5px;
       color: var(--info-600);
       font-size: 11px;
       font-weight: 700;
@@ -3336,6 +3357,205 @@
       margin-bottom: 16px;
     }
 
+    .insight-scope {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .insight-scope span {
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .insight-comparison-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .insight-summary-cell {
+      padding: 13px 15px;
+      border-right: 1px solid var(--line);
+      background: var(--paper-100);
+    }
+
+    .insight-summary-cell:last-child {
+      border-right: 0;
+    }
+
+    .insight-summary-cell span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .insight-summary-cell b {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+    }
+
+    .insight-summary-cell small {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink-500);
+      font-size: 9.5px;
+      line-height: 1.35;
+    }
+
+    .insight-modal-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .ranked-item-list {
+      display: grid;
+      gap: 4px;
+      margin-top: 13px;
+    }
+
+    .ranked-item-row {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .ranked-item-row:first-child {
+      border-top: 0;
+    }
+
+    .ranked-item-number {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--paper-100);
+      color: var(--ink-500);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .ranked-item-title {
+      overflow: hidden;
+      color: var(--ink-700);
+      font-size: 11.5px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+
+    .ranked-item-value {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-900);
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .insight-finding {
+      padding: 14px 16px;
+      border-left: 3px solid var(--chart-seq-4);
+      border-radius: 0 10px 10px 0;
+      background: var(--paper-100);
+    }
+
+    .insight-finding b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .insight-finding p {
+      margin: 0;
+      color: var(--ink-700);
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .insight-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: var(--paper-100);
+    }
+
+    .insight-action-row p {
+      margin: 0;
+      color: var(--ink-500);
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .insight-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--teal-600);
+      border-radius: 8px;
+      background: var(--teal-bg);
+      color: var(--teal-600);
+      font: inherit;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .insight-cta:hover {
+      background: var(--paper-0);
+      transform: translateY(-1px);
+    }
+
+    .insight-cta:focus-visible {
+      outline: 2px solid var(--teal-600);
+      outline-offset: 2px;
+    }
+
+    .insight-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width:900px) {
+      .insight-comparison-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .insight-summary-cell:nth-child(2) {
+        border-right: 0;
+      }
+
+      .insight-modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-action-row {
+        align-items: stretch;
+        flex-direction: column;
+      }
+    }
+
     .performance-toolbar {
       display: flex;
       align-items: center;
@@ -3454,7 +3674,21 @@
     .moment-time {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--teal-600);
+      align-self: start;
+      width: fit-content;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .moment-time.peak {
+      color: var(--green-600);
+      background: var(--green-bg);
+    }
+
+    .moment-time.later {
+      color: var(--info-600);
+      background: var(--info-bg);
     }
 
     .moment-copy b,
@@ -3799,6 +4033,36 @@
       width: 52px;
       text-align: right;
       flex-shrink: 0;
+    }
+
+    .lifecycle-summary {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 14px 0 16px;
+      padding-bottom: 11px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lifecycle-summary span,
+    .lifecycle-note {
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .lifecycle-summary b {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+    }
+
+    #threadLifecycleChart .b-val {
+      width: 105px;
+    }
+
+    .lifecycle-note {
+      margin: 4px 0 0;
+      line-height: 1.45;
     }
 
     .legend {
@@ -4244,6 +4508,48 @@
     .health-status.warn { color: var(--amber-600); }
     .health-status.bad { color: var(--chart-neg); }
 
+    .moderation-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .moderation-state.good {
+      color: var(--chart-pos);
+    }
+
+    .moderation-state.warn {
+      color: var(--amber-600);
+    }
+
+    .moderation-state.bad {
+      color: var(--chart-neg);
+    }
+
+    .engagement-health-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 12px 0;
+    }
+
+    .engagement-health-cohort {
+      max-width: 290px;
+      color: var(--ink-500);
+      font-size: 10.5px;
+      line-height: 1.45;
+      text-align: right;
+    }
+
+    .peer-benchmark {
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
     .performance-head,
     .performance-row {
       display: grid;
@@ -4392,11 +4698,13 @@
     .format-comparison-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:12px;}
     .format-comparison-title b{font-family:'Sora',sans-serif;}
     .format-delta{font-size:10px;color:var(--green-600);text-align:right;max-width:110px;line-height:1.35;}
-    .format-bar-row{display:grid;grid-template-columns:92px 1fr 68px;align-items:center;gap:7px;margin-top:7px;font-size:10px;color:var(--ink-500);}
+    .format-count-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:7px;font-size:10.5px;color:var(--ink-500);}
+    .format-count-row b{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-700);}
+    .format-engagement-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:10.5px;color:var(--ink-500);}
+    .format-engagement-head b{color:var(--ink-700);font-size:10.5px;}
     .format-bar-track{height:7px;background:var(--paper-0);border-radius:5px;overflow:hidden;}
+    .format-engagement-head + .format-bar-track{margin-top:6px;}
     .format-bar-track i{display:block;height:100%;border-radius:5px;}
-    .format-bar-row>b{text-align:right;font-size:11px;color:var(--ink-700);}
-    .format-bar-row b small{display:block;font-size:9px;color:var(--ink-500);font-weight:500;}
     .metric-selectable{cursor:pointer;transition:border-color .12s ease,background .12s ease;}
     .metric-selectable:hover{border-color:var(--line-strong);}
     .metric-selectable.selected{background:var(--paper-100);}
@@ -6812,6 +7120,7 @@
 
         <!-- LIVE ANALYTICS -->
         <div class="analytics-tab-pane active" id="analytics-live">
+          <div class="insights-heading" id="insightsHeading-live"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-live"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -6869,6 +7178,7 @@
 
         <!-- UPLOADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-uploads">
+          <div class="insights-heading" id="insightsHeading-uploads"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-uploads"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -6926,6 +7236,7 @@
 
         <!-- THREADS ANALYTICS -->
         <div class="analytics-tab-pane" id="analytics-threads">
+          <div class="insights-heading" id="insightsHeading-threads"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-threads"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
           <div class="kpi-grid"></div>
@@ -9865,14 +10176,20 @@
           engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0))
         };
       });
-      const maxReach = Math.max(1,...totals.map(item => item.reach));
       const colors = {live:"var(--chart-red)",uploads:"var(--chart-teal)",threads:"var(--chart-gold)"};
-      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => `
-        <div class="format-comparison-card">
-          <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
-          <div class="format-bar-row"><span>Total views</span><div class="format-bar-track"><i style="width:${item.reach/maxReach*100}%;background:${colors[item.type]}"></i></div><b>${compactVisualNumber(item.reach)}</b></div>
-          <div class="format-bar-row"><span>Engaged viewers</span><div class="format-bar-track"><i style="width:${item.engaged/maxReach*100}%;background:${colors[item.type]};opacity:.65"></i></div><b>${compactVisualNumber(item.engaged)}<small>${item.reach?(item.engaged/item.reach*100).toFixed(1):"0.0"}% of views</small></b></div>
-        </div>`).join("");
+      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => {
+        const engagementRate = item.reach ? item.engaged / item.reach * 100 : 0;
+        return `
+          <div class="format-comparison-card">
+            <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
+            <div class="format-count-row"><span>Total views</span><b>${compactVisualNumber(item.reach)}</b></div>
+            <div class="format-count-row"><span>Engaged viewers</span><b>${compactVisualNumber(item.engaged)}</b></div>
+            <div class="format-engagement-head"><span>Engagement rate</span><b>${engagementRate.toFixed(1)}% of views</b></div>
+            <div class="format-bar-track" role="img" aria-label="${item.type} engagement rate: ${engagementRate.toFixed(1)}% of views">
+              <i style="width:${Math.min(100,engagementRate)}%;background:${colors[item.type]}"></i>
+            </div>
+          </div>`;
+      }).join("");
     }
 
     // The series supplies the SHAPE of the trend; its final point is pinned to the
@@ -9929,7 +10246,7 @@
           <svg viewBox="0 0 ${width} ${height}" style="width:100%;height:${height}px" role="img" aria-label="${options.ariaLabel || "Interactive trend chart"}">
             ${[top, top + (height-top-bottom)/2, height-bottom].map(y => `<line class="studio-chart-grid" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>`).join("")}
             <line class="studio-chart-guideline" id="${chartId}Guideline" x1="0" y1="${top}" x2="0" y2="${height-bottom}"/>
-            ${points.map((line, seriesIndex) => `<path fill="none" stroke="${series[seriesIndex].color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M${line.map(point => `${point.x},${point.y}`).join(" L")}"/>`).join("")}
+            ${points.map((line, seriesIndex) => `<path fill="none" stroke="${series[seriesIndex].color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"${series[seriesIndex].dash ? ` stroke-dasharray="${series[seriesIndex].dash}"` : ""} d="M${line.map(point => `${point.x},${point.y}`).join(" L")}"/>`).join("")}
             ${series.map((item, seriesIndex) => `<circle id="${chartId}Point${seriesIndex}" r="4.5" fill="${item.color}" stroke="var(--paper-0)" stroke-width="2" cx="0" cy="0" opacity="0"/>`).join("")}
             ${labels.map((label, index) => {
               const x = points[0][index].x;
@@ -10145,75 +10462,121 @@
 
     function computeAnalyticsInsights(type) {
       const insights = [];
-      const metricNames = {
-        live: analyticsMetrics.live[0].label,
-        uploads: analyticsMetrics.uploads[0].label,
-        threads: analyticsMetrics.threads[0].label
+      const trendConfig = {
+        live: { metricIndex: 0, changeMode: "relative", stableThreshold: 5, rankingKey: "views", rankingLabel: "session viewers" },
+        uploads: { metricIndex: 2, changeMode: "relative", stableThreshold: 3, rankingKey: "rate", rankingLabel: "completion rate" },
+        threads: { metricIndex: 3, changeMode: "relative", stableThreshold: 3, rankingKey: "engagement", rankingLabel: "engagement rate" }
       };
-      const sectionMetricNames = {
-        live: "registrations",
-        uploads: "views",
-        threads: "views"
+      const driverConfig = {
+        live: { property: "section", dimension: "section", category: "Section driver", metricKey: "primary", metricLabel: "registrations", filterKind: "section" },
+        uploads: { property: "owner", dimension: "creator", category: "Creator driver", metricKey: "views", metricLabel: "average upload views", filterKind: "creator" },
+        threads: { property: "segment", dimension: "audience segment", category: "Audience driver", metricKey: "engagement", metricLabel: "average engagement rate", filterKind: "segment" }
       };
-      // Same filter-scaled series the KPI card and trend chart use, so the
-      // insight cannot contradict the number sitting next to it.
-      const series = visualSeriesFor(type, 0);
+      const trend = trendConfig[type];
+      const metric = analyticsMetrics[type][trend.metricIndex];
+      const series = visualSeriesFor(type, trend.metricIndex);
 
       if (series && series.length >= 2) {
         const previous = Number(series[series.length - 2]);
         const current = Number(series[series.length - 1]);
         if (previous !== 0) {
-          const delta = ((current - previous) / previous) * 100;
-          if (Math.abs(delta) >= 5) {
+          const relativeDelta = ((current - previous) / previous) * 100;
+          const pointDelta = current - previous;
+          const changeValue = trend.changeMode === "relative" ? relativeDelta : pointDelta;
+          const changeLabel = trend.changeMode === "relative"
+            ? `${Math.abs(changeValue).toFixed(1)}%`
+            : `${Math.abs(changeValue).toFixed(1)} points`;
+          if (Math.abs(changeValue) >= trend.stableThreshold) {
             insights.push({
-              tone: delta > 0 ? "up" : "down",
-              title: `${metricNames[type]} period comparison`,
-              text: `${metricNames[type]} ${delta > 0 ? "up" : "down"} ${Math.abs(delta).toFixed(1)}% vs the previous period.`,
-              spark: series,
-              chart: { kind: "trend", series, label: metricNames[type] },
-              evidence: `The primary series moved from ${Math.round(previous).toLocaleString()} to ${Math.round(current).toLocaleString()}, a ${delta > 0 ? "positive" : "negative"} change of ${Math.abs(delta).toFixed(1)}%.`,
-              interpretation: delta > 0
-                ? "Performance is moving above the immediately preceding period. Check whether the lift is broad-based or concentrated in a small number of items."
-                : "Performance is below the immediately preceding period. Review changes in publishing volume, reach and audience response.",
-              action: `Open the ${type} performance table and compare the highest- and lowest-performing items for the selected filters.`
+              tone: changeValue > 0 ? "up" : "down",
+              category: "Period trend",
+              title: `${metric.label} period comparison`,
+              text: `${metric.label} ${changeValue > 0 ? "up" : "down"} ${changeLabel} vs the previous period.`,
+              comparison: { previous, current, changeValue, changeMode: trend.changeMode, stableThreshold: trend.stableThreshold, metric: metric.label, unit: metric.unit, rankingKey: trend.rankingKey, rankingLabel: trend.rankingLabel },
+              chart: { kind: "trend", series, label: metric.label },
+              evidence: `${metric.label} moved from ${formatMetricValue(metric.unit, previous)} to ${formatMetricValue(metric.unit, current)}, a ${changeValue > 0 ? "positive" : "negative"} change of ${changeLabel}.`,
+              interpretation: type === "live"
+                ? "The change reflects audience reach for live session pages and should be checked against registrations and attendance."
+                : type === "uploads"
+                  ? "Completion movement indicates whether viewers are reaching the end of uploaded content, independent of total reach."
+                  : "Engagement movement reflects the depth of discussion activity rather than thread-view volume alone.",
+              action: `Open the ${type} performance table and compare the highest and lowest performing items for the selected filters.`
             });
           }
         }
       }
 
-      const primaryKey = type === "live" ? "primary" : "views";
-      const sectionGroups = analyticsFilteredItems(type).reduce((groups, item) => {
-        if (!groups[item.section]) groups[item.section] = { total: 0, count: 0 };
-        groups[item.section].total += Number(item[primaryKey] || 0);
-        groups[item.section].count += 1;
-        return groups;
+      const driver = driverConfig[type];
+      const groups = analyticsFilteredItems(type).reduce((result, item) => {
+        const group = item[driver.property];
+        if (!result[group]) result[group] = { total: 0, count: 0 };
+        result[group].total += Number(item[driver.metricKey] || 0);
+        result[group].count += 1;
+        return result;
       }, {});
-      const sectionAverages = Object.entries(sectionGroups).map(([section, values]) => ({
-        section,
+      const groupAverages = Object.entries(groups).map(([label, values]) => ({
+        label,
         average: values.total / values.count
       }));
-      const totalAverage = sectionAverages.reduce((sum, item) => sum + item.average, 0);
-      const leadingSection = sectionAverages.sort((a, b) => b.average - a.average)[0];
+      const totalAverage = groupAverages.reduce((sum, item) => sum + item.average, 0);
+      const leader = [...groupAverages].sort((a, b) => b.average - a.average)[0];
 
-      if (leadingSection && totalAverage && leadingSection.average / totalAverage > .4) {
-        const share = leadingSection.average / totalAverage * 100;
+      if (leader && totalAverage) {
+        const isComparison = groupAverages.length > 1;
+        const share = leader.average / totalAverage * 100;
+        const days = Number(document.getElementById("analyticsDateFilter").value);
+        const status = document.getElementById("analyticsStatusFilter").value;
+        const benchmarkRows = analyticsItems[type].filter(item =>
+          item.daysAgo <= days && (status === "all" || item.status === status)
+        );
+        const benchmarkAverage = benchmarkRows.length
+          ? benchmarkRows.reduce((sum, item) => sum + Number(item[driver.metricKey] || 0), 0) / benchmarkRows.length
+          : 0;
+        const benchmarkDelta = benchmarkAverage ? (leader.average - benchmarkAverage) / benchmarkAverage * 100 : 0;
+        const benchmarkDirection = benchmarkDelta >= 0 ? "above" : "below";
+        const driverText = !isComparison
+          ? `${leader.label} is ${Math.abs(benchmarkDelta).toFixed(1)}% ${benchmarkDirection} the ${type} average for ${driver.metricLabel}.`
+          : type === "live"
+            ? `${leader.label} sessions lead this period's registrations.`
+            : type === "uploads"
+              ? `${leader.label} has the highest average reach per upload this period.`
+              : `${leader.label} audiences show the strongest average thread engagement this period.`;
         insights.push({
           tone: "info",
-          title: `${leadingSection.section} section driver`,
-          text: `${leadingSection.section} is driving most of this period's ${sectionMetricNames[type]} — consider it a template for other sections.`,
+          category: driver.category,
+          title: isComparison ? `${leader.label} ${driver.dimension} driver` : `${leader.label} benchmark`,
+          text: driverText,
+          driver: { ...driver, value: leader.label, share, groupCount: groupAverages.length, isComparison, selectedAverage: leader.average, benchmarkAverage, benchmarkDelta },
           chart: {
             kind: "bars",
-            label: `Share of combined section-average ${sectionMetricNames[type]}`,
-            items: sectionAverages.map(item => ({
-              label: item.section,
-              value: item.average / totalAverage * 100,
-              // The section being singled out is the one the claim is about.
-              color: item.section === leadingSection.section ? "var(--chart-seq-4)" : "var(--chart-seq-2)"
-            }))
+            label: isComparison
+              ? `Share of combined ${driver.metricLabel} by ${driver.dimension}`
+              : `${driver.metricLabel[0].toUpperCase() + driver.metricLabel.slice(1)} against the broader ${type} benchmark`,
+            valueFormat: isComparison ? "percent" : ["rate", "engagement"].includes(driver.metricKey) ? "rate" : "count",
+            items: isComparison
+              ? groupAverages.map(item => ({
+                  label: item.label,
+                  value: item.average / totalAverage * 100,
+                  color: item.label === leader.label ? "var(--chart-seq-4)" : "var(--chart-seq-2)"
+                }))
+              : [
+                  { label: `${leader.label} selection`, value: leader.average, color: "var(--chart-seq-4)" },
+                  { label: `All ${type}`, value: benchmarkAverage, color: "var(--chart-seq-2)" }
+                ]
           },
-          evidence: `${leadingSection.section} represents ${share.toFixed(1)}% of the combined section-average ${sectionMetricNames[type]} in the current filtered selection.`,
-          interpretation: "This section is contributing a disproportionately large share of the selected performance signal.",
-          action: `Review the leading ${leadingSection.section} items and identify formats, topics or distribution patterns that can be tested in other sections.`
+          evidence: isComparison
+            ? `${leader.label} represents ${share.toFixed(1)}% of the combined group-average ${driver.metricLabel} in the current filtered selection.`
+            : `${leader.label} averages ${["rate", "engagement"].includes(driver.metricKey) ? `${leader.average.toFixed(1)}%` : compactVisualNumber(leader.average)} compared with ${["rate", "engagement"].includes(driver.metricKey) ? `${benchmarkAverage.toFixed(1)}%` : compactVisualNumber(benchmarkAverage)} across all ${type} items in the same period.`,
+          interpretation: !isComparison
+            ? `That places the filtered selection ${Math.abs(benchmarkDelta).toFixed(1)}% ${benchmarkDirection} the broader ${type} benchmark, providing context beyond the narrowed group.`
+            : type === "live"
+              ? "This section is generating the strongest registration volume among the included live sessions."
+              : type === "uploads"
+                ? "This creator's uploads are attracting the strongest average reach, making its topics and packaging useful comparison points."
+                : "This audience segment is associated with deeper thread engagement and may indicate where conversation formats resonate most.",
+          action: isComparison
+            ? `Review the leading ${leader.label} items and identify patterns that can be tested across the rest of the ${type} portfolio.`
+            : `Review the ${leader.label} items contributing to this result and compare their strongest and weakest performers.`
         });
       }
 
@@ -10223,61 +10586,191 @@
     function renderAnalyticsInsights(type) {
       const insights = computeAnalyticsInsights(type);
       const el = document.getElementById(`insightsStrip-${type}`);
+      const heading = document.getElementById(`insightsHeading-${type}`);
       if (!el) return;
       if (!insights.length) {
         el.innerHTML = "";
         el.style.display = "none";
+        if (heading) heading.style.display = "none";
         return;
+      }
+      if (heading) {
+        heading.style.display = "flex";
+        heading.querySelector(".insights-count").textContent = `${insights.length} ${insights.length === 1 ? "insight" : "insights"}`;
       }
       el.style.display = "grid";
       const iconGlyph = { up: "↑", down: "↓", info: "i" };
       el.innerHTML = insights.map((insight, index) => `
         <button class="insight-card" type="button" onclick="openAnalyticsInsightDetail('${type}',${index})">
           <div class="insight-icon ${insight.tone}">${iconGlyph[insight.tone]}</div>
-          <div class="insight-text">${insight.text}
-            <div class="insight-foot">${renderSparkline(insight.spark, insight.tone)}<span class="insight-more">View details</span></div>
-          </div>
+          <div class="insight-text"><span class="insight-category">${insight.category}</span>${insight.text}<span class="insight-more">View details</span></div>
         </button>
       `).join("");
+    }
+
+    function analyticsComparisonRanges() {
+      const days = Number(document.getElementById("analyticsDateFilter").value);
+      const currentEnd = new Date();
+      currentEnd.setHours(0, 0, 0, 0);
+      const currentStart = new Date(currentEnd);
+      currentStart.setDate(currentStart.getDate() - days + 1);
+      const previousEnd = new Date(currentStart);
+      previousEnd.setDate(previousEnd.getDate() - 1);
+      const previousStart = new Date(previousEnd);
+      previousStart.setDate(previousStart.getDate() - days + 1);
+      const format = date => date.toLocaleDateString("en-SG", { day: "numeric", month: "short", year: "numeric" });
+      return {
+        days,
+        currentStart,
+        currentEnd,
+        previousStart,
+        previousEnd,
+        currentLabel: `${format(currentStart)} – ${format(currentEnd)}`,
+        previousLabel: `${format(previousStart)} – ${format(previousEnd)}`
+      };
+    }
+
+    function analyticsScopeChips() {
+      const ids = ["analyticsDateFilter", "analyticsSectionFilter", "analyticsCreatorFilter", "analyticsSegmentFilter", "analyticsStatusFilter"];
+      return ids.map((id, index) => {
+        const select = document.getElementById(id);
+        if (!select || (index > 0 && select.value === "all")) return null;
+        return select.selectedOptions?.[0]?.textContent;
+      }).filter(Boolean);
+    }
+
+    function analyticsTrendLabels(range) {
+      return Array.from({ length: 7 }, (_, index) => {
+        const date = new Date(range.currentStart);
+        date.setDate(date.getDate() + Math.round((range.days - 1) * index / 6));
+        return date.toLocaleDateString("en-SG", { day: "numeric", month: "short" });
+      });
+    }
+
+    function focusAnalyticsPerformance(type, filterKind = "", filterValue = "") {
+      closeAnalyticsDetail();
+      switchAnalyticsTab(type);
+      if (filterKind && filterValue) {
+        const filterId = {
+          section: "analyticsSectionFilter",
+          creator: "analyticsCreatorFilter",
+          segment: "analyticsSegmentFilter"
+        }[filterKind];
+        const filter = document.getElementById(filterId);
+        if (filter && [...filter.options].some(option => option.value === filterValue)) {
+          filter.value = filterValue;
+          handleAnalyticsFilterChange();
+        }
+      }
+      const bodyId = type === "live" ? "livePerformanceBody" : type === "uploads" ? "uploadPerformanceBody" : "threadPerformanceBody";
+      setTimeout(() => document.getElementById(bodyId)?.closest(".chart-card")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
     }
 
     function openAnalyticsInsightDetail(type, index) {
       const insight = computeAnalyticsInsights(type)[index];
       if (!insight) return;
       analyticsDetailTrigger = document.activeElement;
+      const range = analyticsComparisonRanges();
+      const scopeChips = analyticsScopeChips();
       document.getElementById("analyticsDetailTitle").textContent = insight.title;
-      document.getElementById("analyticsDetailMeta").textContent = `${type[0].toUpperCase() + type.slice(1)} analytics · Current filtered selection`;
-      // Lead with the evidence as a chart; the prose panels below explain it
-      // rather than standing in for it.
+      document.getElementById("analyticsDetailMeta").textContent = insight.comparison
+        ? `${type[0].toUpperCase() + type.slice(1)} analytics · ${range.currentLabel} compared with ${range.previousLabel}`
+        : `${type[0].toUpperCase() + type.slice(1)} analytics · ${range.currentLabel}`;
       const chart = insight.chart;
+      const rows = analyticsFilteredItems(type);
+      const contributorKey = insight.driver?.metricKey || insight.comparison?.rankingKey || (type === "live" ? "primary" : "views");
+      const contributorRows = rows
+        .filter(item => !insight.driver || item[insight.driver.property] === insight.driver.value)
+        .sort((a, b) => Number(b[contributorKey] || 0) - Number(a[contributorKey] || 0))
+        .slice(0, 3);
+      const contributorVisual = contributorRows.length
+        ? `<div class="ranked-item-list">${contributorRows.map((item, itemIndex) => `
+            <div class="ranked-item-row">
+              <span class="ranked-item-number">${itemIndex + 1}</span>
+              <span class="ranked-item-title" title="${item.title}">${item.title}</span>
+              <span class="ranked-item-value">${["rate","engagement"].includes(contributorKey) ? `${Number(item[contributorKey] || 0).toFixed(1)}%` : compactVisualNumber(Number(item[contributorKey] || 0))}</span>
+            </div>`).join("")}</div>`
+        : `<p class="chart-sub" style="margin-top:12px">No matching items for the active filters.</p>`;
+
       const evidenceVisual = !chart ? "" : chart.kind === "trend"
-        ? `<div class="chart-card" style="margin-bottom:16px">
-             <h3>${chart.label} trend</h3>
-             <p class="chart-sub">Across the selected period, using the current filters</p>
-             ${renderInteractiveLineChart(`insightEvidence${type}`, [{ name: chart.label, values: chart.series, color: "var(--chart-seq-4)" }],
-               ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-               { height: 190, ariaLabel: `${chart.label} trend`, format: value => compactVisualNumber(value) })}
-           </div>`
+        ? (() => {
+            const comparison = insight.comparison;
+            const previousFactor = comparison.current ? comparison.previous / comparison.current : 1;
+            const previousSeries = chart.series.map((value, pointIndex) => value * previousFactor * (.96 + pointIndex * .04 / Math.max(1, chart.series.length - 1)));
+            return `<div class="chart-card">
+             <h3>${chart.label} comparison</h3>
+             <p class="chart-sub">Current period against the immediately preceding ${range.days}-day period</p>
+              ${renderInteractiveLineChart(`insightEvidence${type}`, [
+                { name: "Current period", values: chart.series, color: "var(--chart-seq-4)" },
+                { name: "Previous period", values: previousSeries, color: "var(--chart-gray)", dash: "5 5" }
+              ], analyticsTrendLabels(range),
+                { height: 150, ariaLabel: `${chart.label} current and previous period comparison`, format: value => formatMetricValue(comparison.unit, value) })}
+            </div>`
+          })()
         : `<div class="chart-card" style="margin-bottom:16px">
-             <h3>Section comparison</h3>
+             <h3>${insight.driver.isComparison ? `${insight.driver.dimension[0].toUpperCase() + insight.driver.dimension.slice(1)} comparison` : "Selection versus benchmark"}</h3>
              <p class="chart-sub">${chart.label}</p>
-             ${renderEvidenceBars(chart.items)}
-           </div>`;
+             ${renderEvidenceBars(chart.items, chart.valueFormat === "rate"
+               ? value => `${value.toFixed(1)}%`
+               : chart.valueFormat === "count"
+                 ? value => compactVisualNumber(value)
+                 : value => `${value.toFixed(1)}%`)}
+            </div>`;
+
+      const comparisonSummary = insight.comparison
+        ? (() => {
+            const comparison = insight.comparison;
+            const changeDisplay = comparison.changeMode === "relative"
+              ? `${comparison.changeValue >= 0 ? "+" : ""}${comparison.changeValue.toFixed(1)}%`
+              : `${comparison.changeValue >= 0 ? "+" : ""}${comparison.changeValue.toFixed(1)} pts`;
+            return `<div class="insight-comparison-summary">
+              <div class="insight-summary-cell"><span>Previous</span><b>${formatMetricValue(comparison.unit, comparison.previous)}</b><small>${range.previousLabel}</small></div>
+              <div class="insight-summary-cell"><span>Current</span><b>${formatMetricValue(comparison.unit, comparison.current)}</b><small>${range.currentLabel}</small></div>
+              <div class="insight-summary-cell"><span>Change</span><b style="color:var(--chart-${comparison.changeValue >= 0 ? "pos" : "neg"})">${changeDisplay}</b><small>Current versus previous</small></div>
+              <div class="insight-summary-cell"><span>Assessment</span><b>${Math.abs(comparison.changeValue) < comparison.stableThreshold ? "Stable" : comparison.changeValue > 0 ? "Improving" : "Declining"}</b><small>Based on ${comparison.metric.toLowerCase()} movement</small></div>
+            </div>`;
+          })()
+        : insight.driver.isComparison
+          ? `<div class="insight-comparison-summary">
+              <div class="insight-summary-cell"><span>Leading ${insight.driver.dimension}</span><b>${insight.driver.value}</b><small>${range.currentLabel}</small></div>
+              <div class="insight-summary-cell"><span>Share</span><b>${insight.driver.share.toFixed(1)}%</b><small>Of combined group averages</small></div>
+              <div class="insight-summary-cell"><span>Groups compared</span><b>${insight.driver.groupCount}</b><small>Under current filters</small></div>
+              <div class="insight-summary-cell"><span>Signal</span><b>${insight.driver.share > 40 ? "Concentrated" : "Leading"}</b><small>Based on ${insight.driver.metricLabel}</small></div>
+            </div>`
+          : (() => {
+              const driver = insight.driver;
+              const formatDriverValue = value => ["rate", "engagement"].includes(driver.metricKey)
+                ? `${value.toFixed(1)}%`
+                : compactVisualNumber(value);
+              return `<div class="insight-comparison-summary">
+                <div class="insight-summary-cell"><span>Filtered selection</span><b>${formatDriverValue(driver.selectedAverage)}</b><small>${driver.value}</small></div>
+                <div class="insight-summary-cell"><span>${type[0].toUpperCase() + type.slice(1)} benchmark</span><b>${formatDriverValue(driver.benchmarkAverage)}</b><small>All items in the same period</small></div>
+                <div class="insight-summary-cell"><span>Variance</span><b style="color:var(--chart-${driver.benchmarkDelta >= 0 ? "pos" : "neg"})">${driver.benchmarkDelta >= 0 ? "+" : ""}${driver.benchmarkDelta.toFixed(1)}%</b><small>Selection versus benchmark</small></div>
+                <div class="insight-summary-cell"><span>Assessment</span><b>${Math.abs(driver.benchmarkDelta) < 3 ? "In line" : driver.benchmarkDelta > 0 ? "Above benchmark" : "Below benchmark"}</b><small>Based on ${driver.metricLabel}</small></div>
+              </div>`;
+            })();
+
       document.getElementById("analyticsDetailBody").innerHTML = `
-        ${evidenceVisual}
-        <div class="detail-grid">
+        <div class="insight-scope">${scopeChips.map(chip => `<span>${chip}</span>`).join("")}</div>
+        ${comparisonSummary}
+        <div class="insight-modal-grid">
+          ${evidenceVisual}
           <div class="chart-card">
-            <h3>What the data shows</h3>
-            <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.evidence}</p>
-          </div>
-          <div class="chart-card">
-            <h3>How to interpret it</h3>
-            <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.interpretation}</p>
+            <h3>${insight.driver ? `Top ${contributorRows.length} ${insight.driver.value} items` : `Top ${contributorRows.length} items in current period`}</h3>
+            <p class="chart-sub">Ranked from highest to lowest by ${insight.driver?.metricLabel || insight.comparison?.rankingLabel || (type === "live" ? "registrations" : "views")}</p>
+            ${contributorVisual}
           </div>
         </div>
-        <div class="chart-card">
-          <h3>Suggested follow-up</h3>
-          <p class="chart-sub" style="font-size:12px;line-height:1.6;margin-top:8px">${insight.action}</p>
+        <div class="insight-finding">
+          <b>Key finding</b>
+          <p>${insight.evidence} ${insight.interpretation}</p>
+        </div>
+        <div class="insight-action-row" style="margin-top:16px">
+          <p>${insight.action}</p>
+          <button class="insight-cta" type="button" onclick="focusAnalyticsPerformance('${type}','${insight.driver?.filterKind || ""}','${insight.driver?.value || ""}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M9 10v9"/></svg>
+            ${insight.driver ? `Open ${insight.driver.value} items` : "Open performance table"}
+          </button>
         </div>`;
       document.getElementById("analyticsDetailOverlay").classList.add("open");
       document.querySelector("#analyticsDetailOverlay .modal-close").focus();
@@ -10370,27 +10863,6 @@
             <span class="funnel-taper-figures">${caption}</span>
           </div>`;
       }).join("")}</div>`;
-    }
-
-    // Compact trend shape for insight cards. Decorative on its own — it always
-    // sits beside the number it illustrates, never replacing it.
-    // The viewBox matches the rendered 56x16 box 1:1, so the stroke stays even
-    // instead of being squashed by a non-uniform scale.
-    function renderSparkline(values, tone) {
-      if (!values || values.length < 2) return "";
-      const width = 56, height = 16, min = Math.min(...values), max = Math.max(...values);
-      const range = max - min || 1;
-      const inset = 2.5;
-      const points = values.map((value, index) => [
-        inset + index * (width - inset * 2) / (values.length - 1),
-        height - inset - (value - min) / range * (height - inset * 2)
-      ]);
-      const color = tone === "down" ? "var(--chart-neg)" : tone === "up" ? "var(--chart-pos)" : "var(--chart-seq-3)";
-      return `<svg class="insight-spark" viewBox="0 0 ${width} ${height}" aria-hidden="true">
-        <polyline fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-          points="${points.map(point => point.map(n => n.toFixed(1)).join(",")).join(" ")}"/>
-        <circle cx="${points.at(-1)[0].toFixed(1)}" cy="${points.at(-1)[1].toFixed(1)}" r="1.8" fill="${color}"/>
-      </svg>`;
     }
 
     function renderEvidenceBars(items, format = value => `${value.toFixed(1)}%`) {
@@ -10701,6 +11173,135 @@
       const values = baseline.map((value, pointIndex) => pointIndex === 0 ? 100 : Math.max(0, value + modifier));
       return renderInteractiveLineChart(`${type}DetailRetention${index}`, [{name:"Viewers remaining",values,color:"var(--chart-teal)"}], labels, {height:190,ariaLabel:`${item.title} viewer retention by timestamp`,format:value=>`${Math.round(value)}%`});
     }
+
+    function renderDetailHealthMetric(metric) {
+      const status = healthStatus(metric);
+      const fillColor = { good: "var(--chart-pos)", warn: "var(--amber-600)", bad: "var(--chart-neg)" };
+      const pct = value => Math.max(0, Math.min(100, value / metric.scale * 100));
+      const comparator = metric.goal === "lower" ? "≤" : "≥";
+      return `
+        <div class="health-metric">
+          <span>${metric.label}</span>
+          <div class="health-figure"><b>${metric.value}${metric.unit}</b></div>
+          <div class="health-track" role="img" aria-label="${metric.label}: ${metric.value}${metric.unit}, target ${comparator} ${metric.target}${metric.unit}, ${status.label}">
+            <i class="health-fill" style="width:${pct(metric.value)}%;background:${fillColor[status.key]}"></i>
+            <i class="health-target" style="left:${pct(metric.target)}%"></i>
+          </div>
+          <div class="health-foot">
+            <span>Target ${comparator} ${metric.target}${metric.unit}</span>
+            <span class="health-status ${status.key}">${status.glyph} ${status.label}</span>
+          </div>
+        </div>`;
+    }
+
+    function renderDetailModerationHealth(item) {
+      const state = item.flag <= 1
+        ? { key: "good", glyph: "✓", label: "Healthy" }
+        : item.flag <= 2
+          ? { key: "warn", glyph: "!", label: "Reviewing" }
+          : { key: "bad", glyph: "✕", label: "Needs attention" };
+      const metrics = [
+        { label: "Flag Rate", value: item.flag, target: 1, scale: 4, unit: "%", goal: "lower" },
+        { label: "Resolution SLA", value: 96, target: 95, scale: 100, unit: "%", goal: "higher" },
+        { label: "Response Time", value: 1.4, target: 2, scale: 6, unit: "h", goal: "lower" }
+      ];
+      return `
+        <div class="health-grid" style="grid-template-columns:repeat(2,1fr)">
+          <div class="health-metric">
+            <span>Overall status</span>
+            <div class="moderation-state ${state.key}">${state.glyph} ${state.label}</div>
+          </div>
+          ${metrics.map(renderDetailHealthMetric).join("")}
+        </div>`;
+    }
+
+    function engagementMetricsFor(item, type) {
+      if (type === "live") {
+        const watchMinutes = Number(item.watch.match(/\d+/)?.[0] || 0);
+        return [
+          { label: "Chat participation", value: item.engagement },
+          { label: "Poll participation", value: item.engagement * .62 },
+          { label: "Question rate", value: item.engagement * .18 },
+          { label: "Average watch ratio", value: Math.min(100, watchMinutes / 60 * 100) }
+        ];
+      }
+      if (type === "uploads") {
+        return [
+          { label: "Comment rate", value: item.engagement / 1.4 },
+          { label: "Share rate", value: item.engagement / 6 },
+          { label: "Save rate", value: item.engagement / 4.5 },
+          { label: "Completion rate", value: item.rate }
+        ];
+      }
+      return [
+        { label: "Reply rate", value: item.views ? item.replies / item.views * 100 : 0 },
+        { label: "Contributor rate", value: item.views ? item.contributors / item.views * 100 : 0 },
+        { label: "Follow rate", value: item.engagement / 4.5 },
+        { label: "Returning participants", value: Math.min(100, 48 + item.engagement * .75) }
+      ];
+    }
+
+    function median(values) {
+      const sorted = [...values].sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+    }
+
+    function renderDetailEngagementHealth(item, type) {
+      const sameSectionPeers = analyticsItems[type].filter(peer => peer !== item && peer.section === item.section);
+      const peers = sameSectionPeers.length >= 2
+        ? sameSectionPeers
+        : analyticsItems[type].filter(peer => peer !== item);
+      const peerMetrics = peers.map(peer => engagementMetricsFor(peer, type));
+      const metrics = engagementMetricsFor(item, type).map((metric, metricIndex) => {
+        const benchmark = peerMetrics.length ? median(peerMetrics.map(peer => peer[metricIndex].value)) : metric.value;
+        const difference = benchmark ? (metric.value - benchmark) / benchmark * 100 : 0;
+        const status = difference >= 10
+          ? { key: "good", glyph: "↑", label: "Above peers" }
+          : difference <= -10
+            ? { key: "bad", glyph: "↓", label: "Below peers" }
+            : { key: "warn", glyph: "•", label: "Typical" };
+        return { ...metric, benchmark, difference, status };
+      });
+      const averageDifference = metrics.reduce((sum, metric) => sum + metric.difference, 0) / metrics.length;
+      const overall = averageDifference >= 10
+        ? { key: "good", glyph: "↑", label: "Strong engagement" }
+        : averageDifference <= -10
+          ? { key: "bad", glyph: "↓", label: "Needs attention" }
+          : { key: "warn", glyph: "•", label: "Typical engagement" };
+      const formatLabel = type === "live" ? "live sessions" : type === "uploads" ? "uploads" : "threads";
+      const cohortLabel = sameSectionPeers.length >= 2
+        ? `Compared with ${peers.length} other ${item.section} ${formatLabel}.`
+        : `Compared with ${peers.length} other ${formatLabel} across all sections; the ${item.section} cohort is too small.`;
+      const colors = { good: "var(--chart-pos)", warn: "var(--amber-600)", bad: "var(--chart-neg)" };
+
+      return `
+        <div class="engagement-health-head">
+          <div class="moderation-state ${overall.key}">${overall.glyph} ${overall.label}</div>
+          <div class="engagement-health-cohort">${cohortLabel} Benchmarks use the peer median.</div>
+        </div>
+        <div class="health-grid" style="grid-template-columns:repeat(2,1fr)">
+          ${metrics.map(metric => {
+            const scale = Math.max(metric.value, metric.benchmark, 1) * 1.25;
+            const actualWidth = Math.min(100, metric.value / scale * 100);
+            const benchmarkPosition = Math.min(100, metric.benchmark / scale * 100);
+            return `
+              <div class="health-metric">
+                <span>${metric.label}</span>
+                <div class="health-figure"><b>${metric.value.toFixed(1)}%</b><small class="peer-benchmark">Median ${metric.benchmark.toFixed(1)}%</small></div>
+                <div class="health-track" role="img" aria-label="${metric.label}: ${metric.value.toFixed(1)}%, peer median ${metric.benchmark.toFixed(1)}%, ${metric.status.label}">
+                  <i class="health-fill" style="width:${actualWidth}%;background:${colors[metric.status.key]}"></i>
+                  <i class="health-target" style="left:${benchmarkPosition}%"></i>
+                </div>
+                <div class="health-foot">
+                  <span>${Math.abs(metric.difference).toFixed(0)}% ${metric.difference >= 0 ? "above" : "below"} median</span>
+                  <span class="health-status ${metric.status.key}">${metric.status.glyph} ${metric.status.label}</span>
+                </div>
+              </div>`;
+          }).join("")}
+        </div>`;
+    }
+
     function openAnalyticsDetail(type, index) {
       const item = analyticsItems[type][index]; if (!item) return;
       analyticsDetailTrigger = document.activeElement;
@@ -10723,17 +11324,12 @@
             <p class="chart-sub">${type === "live" ? "Number of people actively watching at each moment, including viewers who joined late" : type === "uploads" ? "New views received during each reporting day" : "New replies received during each reporting interval"}</p>
             ${detailTrend(item,type,index)}
           </div>
-          <div class="chart-card"><h3>${type === "threads" ? "Conversation Health" : "Engagement Breakdown"}</h3><p class="chart-sub">Quality and participation signals</p><div class="engagement-grid">
-            <div class="engagement-metric"><span>${type === "threads" ? "Reactions" : "Comments"}</span><b>${Math.round(item.views * item.engagement / 140).toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>Shares</span><b>${Math.round(item.views * item.engagement / 600).toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>${type === "threads" ? "Follows" : "Saves"}</span><b>${Math.round(item.views * item.engagement / 450).toLocaleString()}</b></div>
-            <div class="engagement-metric"><span>Returning Users</span><b>62%</b></div>
-          </div></div>
+          <div class="chart-card"><h3>Engagement Health</h3><p class="chart-sub">Performance against comparable content, using rates rather than audience-size-driven counts</p>${renderDetailEngagementHealth(item,type)}</div>
         </div>
         ${type !== "threads" ? `<div class="chart-card" style="margin-bottom:16px"><h3>Viewer Retention <span class="metric-help" title="The percentage of a starting viewer cohort that continues watching. Late joiners do not increase this percentage.">?</span></h3><p class="chart-sub">Percentage of the starting viewer cohort still watching at each timestamp; late joiners are excluded</p>${detailRetention(item,type,index)}</div>` : ""}
         <div class="analytics-detail-grid">
-          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
-          <div class="chart-card"><h3>Moderation Health</h3><div class="health-grid" style="grid-template-columns:repeat(2,1fr)"><div class="health-metric"><span>Flag Rate</span><b>${item.flag}%</b></div><div class="health-metric"><span>Status</span><b>${item.flag > 1 ? "Reviewing" : "Healthy"}</b></div><div class="health-metric"><span>Resolution SLA</span><b>96%</b></div><div class="health-metric"><span>Response Time</span><b>1.4h</b></div></div></div>
+          <div class="chart-card"><h3>Key Moments</h3><div class="moment-item"><span class="moment-time peak">Peak</span><div class="moment-copy"><b>Engagement spike</b><span>Audience activity exceeded the content baseline.</span></div></div><div class="moment-item"><span class="moment-time later">Later</span><div class="moment-copy"><b>Activity slowed</b><span>Participation returned to the section average.</span></div></div></div>
+          <div class="chart-card"><h3>Moderation Health</h3>${renderDetailModerationHealth(item)}</div>
         </div>`;
       document.getElementById("analyticsDetailOverlay").classList.add("open");
       document.querySelector("#analyticsDetailOverlay .modal-close").focus();
@@ -11318,22 +11914,29 @@
 
     // Analytics: thread lifecycle chart (Threads tab)
     const threadLifecycle = [
-      { name: "Active", submissions: 286 },
-      { name: "Declining", submissions: 124 },
-      { name: "Dormant", submissions: 62 },
-      { name: "Flagged", submissions: 14 }
+      { name: "Active", submissions: 286, color: "var(--chart-pos)" },
+      { name: "Declining", submissions: 124, color: "var(--amber-600)" },
+      { name: "Dormant", submissions: 62, color: "var(--chart-gray)" },
+      { name: "Flagged", submissions: 14, color: "var(--chart-neg)" }
     ];
-    const maxLifecycle = Math.max(...threadLifecycle.map(d => d.submissions));
+    const totalLifecycle = threadLifecycle.reduce((sum, item) => sum + item.submissions, 0);
     // Guarded: this runs at parse time, so a missing mount would throw here and
     // silently take every script defined after it down with it.
     const lifecycleMount = document.getElementById('threadLifecycleChart');
-    if (lifecycleMount) lifecycleMount.innerHTML = threadLifecycle.map(d => `
-    <div class="bar-row">
-      <span class="b-label">${d.name}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(d.submissions / maxLifecycle * 100)}%"></div></div>
-      <span class="b-val">${d.submissions.toLocaleString()}</span>
-    </div>
-  `).join('');
+    if (lifecycleMount) lifecycleMount.innerHTML = `
+      <div class="lifecycle-summary"><span>Total threads</span><b>${totalLifecycle.toLocaleString()}</b></div>
+      ${threadLifecycle.map(item => {
+        const share = totalLifecycle ? item.submissions / totalLifecycle * 100 : 0;
+        return `
+          <div class="bar-row">
+            <span class="b-label">${item.name}</span>
+            <div class="bar-track" role="img" aria-label="${item.name}: ${item.submissions.toLocaleString()} threads, ${share.toFixed(1)}% of total threads">
+              <div class="bar-fill" style="width:${share}%;background:${item.color}"></div>
+            </div>
+            <span class="b-val">${item.submissions.toLocaleString()} · ${share.toFixed(1)}%</span>
+          </div>`;
+      }).join('')}
+      <p class="lifecycle-note">Bar length represents each lifecycle status as a share of total threads.</p>`;
 
     // ---- Customer 360 ----
     const customerRoster = [
