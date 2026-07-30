@@ -7033,7 +7033,7 @@
           </svg>
           Groups
         </div>
-        <div class="nav-item active" data-page="analytics" onclick="goToPage('analytics')">
+        <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 3v18h18" />
             <path d="M18 17V9M13 17V5M8 17v-5" />
@@ -7047,7 +7047,7 @@
     <div class="main">
 
       <!-- OVERVIEW PAGE -->
-      <div class="page" id="page-overview">
+      <div class="page active" id="page-overview">
         <div class="page-header">
           <div>
             <h1>Overview</h1>
@@ -8233,7 +8233,7 @@
       </div>
 
       <!-- ANALYTICS PAGE -->
-      <div class="page active" id="page-analytics">
+      <div class="page" id="page-analytics">
         <div class="page-header">
           <div>
             <h1>Analytics</h1>
@@ -13516,7 +13516,8 @@
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + page).classList.add('active');
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+      const navEl = document.querySelector(`.nav-item[data-page="${page}"]`);
+      if (navEl) navEl.classList.add('active');
       if (page === 'customer360') closeCustomerDossier();
       if (page === 'contentcalendar') { renderCalendarMonth(); renderContentCalendar(); }
       if (page === 'groups') { closeGroupProfile(); renderGroupsList(); }
