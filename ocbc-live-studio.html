@@ -1064,6 +1064,464 @@
       display: block;
     }
 
+    .analytics-workspace {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .analytics-side-rail {
+      position: sticky;
+      top: 76px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .analytics-rail-item {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      background: transparent;
+      color: var(--ink-500);
+      font: 500 13px/1.2 'Inter', sans-serif;
+      text-align: left;
+      cursor: pointer;
+      transition: background .12s ease, color .12s ease;
+    }
+
+    .analytics-rail-item:hover {
+      background: var(--paper-0);
+      color: var(--ink-900);
+    }
+
+    .analytics-rail-item.active {
+      background: var(--gold-gradient, var(--red-600));
+      color: #fff;
+    }
+
+    .analytics-rail-item:focus-visible {
+      outline: 2px solid var(--info-600);
+      outline-offset: 2px;
+    }
+
+    .analytics-workspace-content {
+      min-width: 0;
+    }
+
+    .analytics-overview-section {
+      margin-bottom: 24px;
+    }
+
+    .analytics-overview-section.attention-zone {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: transparent;
+    }
+
+    .attention-zone #overviewStats {
+      margin-bottom: 0;
+    }
+
+    .attention-card-status {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .attention-card-status.good {
+      color: var(--green-600);
+    }
+
+    .attention-card-status.bad {
+      color: var(--danger-600);
+    }
+
+    .attention-card-status.neutral {
+      color: var(--teal-600);
+    }
+
+    .attention-comparison {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 2px 0 12px;
+      color: var(--ink-500);
+      font-size: 11px;
+    }
+
+    .attention-comparison .stat-trend {
+      font-size: 11px;
+    }
+
+    .analytics-overview-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .analytics-overview-heading .overview-zone-label,
+    .analytics-overview-heading .overview-zone-caption {
+      margin-left: 0;
+    }
+
+    #analytics-overview .analytics-filters {
+      margin-bottom: 16px;
+    }
+
+    .community-pulse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) 1.4fr;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper-0);
+      overflow: hidden;
+    }
+
+    .community-pulse-cell {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .community-pulse-cell:last-child {
+      border-right: 0;
+    }
+
+    .community-pulse-cell span {
+      display: block;
+      color: var(--ink-500);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .community-pulse-cell b {
+      color: var(--ink-900);
+      font: 750 22px/1.15 'Sora', sans-serif;
+    }
+
+    .community-pulse-split {
+      display: flex;
+      height: 8px;
+      margin-top: 13px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: var(--paper-200);
+    }
+
+    .community-pulse-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper-0);
+      overflow: hidden;
+    }
+
+    .community-pulse-summary {
+      display: grid;
+      grid-template-columns: 1.45fr .7fr 1fr;
+    }
+
+    .community-score-panel,
+    .community-summary-stat {
+      padding: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .community-summary-stat:last-child {
+      border-right: 0;
+    }
+
+    .community-pulse-kicker {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink-500);
+      font-size: 11px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .community-score-line {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .community-score-line strong {
+      color: var(--green-600);
+      font: 800 30px/1 'Sora', sans-serif;
+    }
+
+    .community-score-line span {
+      color: var(--green-600);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .community-score-explanation {
+      margin: 8px 0 14px;
+      color: var(--ink-500);
+      font-size: 11.5px;
+      line-height: 1.45;
+    }
+
+    .community-score-explanation .positive {
+      color: var(--green-600);
+      font-weight: 700;
+    }
+
+    .community-score-explanation .negative {
+      color: var(--danger-600);
+      font-weight: 700;
+    }
+
+    .community-score-explanation .operator {
+      margin: 0 5px;
+      color: var(--ink-700);
+      font-weight: 700;
+    }
+
+    .community-summary-stat strong {
+      display: block;
+      color: var(--ink-900);
+      font: 750 21px/1.2 'Sora', sans-serif;
+    }
+
+    .community-summary-stat.topic strong {
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .community-distribution {
+      padding: 16px 20px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .community-distribution-head,
+    .community-distribution-legend {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .community-distribution-head {
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .community-distribution-head b {
+      font-size: 12.5px;
+    }
+
+    .community-distribution-head span,
+    .community-distribution-legend {
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .community-distribution-bar {
+      display: flex;
+      height: 10px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: var(--paper-200);
+    }
+
+    .community-distribution-legend {
+      margin-top: 8px;
+    }
+
+    .community-distribution-legend span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .community-distribution-legend i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .community-driver-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .community-driver-panel {
+      padding: 18px 20px;
+    }
+
+    .community-driver-panel + .community-driver-panel {
+      border-left: 1px solid var(--line);
+    }
+
+    .community-driver-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .community-driver-heading b {
+      font-size: 12.5px;
+    }
+
+    .community-driver-heading button {
+      border: 0;
+      background: transparent;
+      color: var(--info-600);
+      font-size: 10.5px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .community-driver-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .community-driver-row:hover b,
+    .community-driver-row:focus-visible b {
+      color: var(--info-600);
+    }
+
+    .community-driver-row:focus-visible {
+      outline: 2px solid var(--info-600);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .community-driver-row b {
+      display: block;
+      color: var(--ink-900);
+      font-size: 11.5px;
+      margin-bottom: 3px;
+    }
+
+    .community-driver-row span,
+    .community-driver-row > strong {
+      color: var(--ink-500);
+      font-size: 10.5px;
+    }
+
+    .community-driver-row div span {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-height: 1.4;
+    }
+
+    .community-driver-row > strong {
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .hot-topic-card.topic-focus {
+      outline: 2px solid var(--info-600);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px var(--info-bg);
+    }
+
+    @media (max-width: 900px) {
+      .analytics-workspace {
+        display: block;
+      }
+
+      .analytics-side-rail {
+        position: sticky;
+        top: 0;
+        z-index: 6;
+        flex-direction: row;
+        overflow-x: auto;
+        margin-bottom: 18px;
+      }
+
+      .analytics-rail-item {
+        width: auto;
+        min-width: max-content;
+        text-align: center;
+      }
+
+      .community-pulse-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .community-pulse-summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .community-score-panel {
+        grid-column: 1 / -1;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .community-driver-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .community-driver-panel + .community-driver-panel {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .community-pulse-cell:nth-child(2) {
+        border-right: 0;
+      }
+
+      .community-pulse-cell:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .analytics-overview-section.attention-zone {
+        padding: 14px;
+      }
+
+      .community-pulse-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .community-pulse-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .community-summary-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .community-pulse-cell {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
     .feed-stats {
       display: flex;
       gap: 16px;
@@ -3920,6 +4378,82 @@
       margin: 11px 0 0;
     }
 
+    /* Full-width but shallow management preview: use the horizontal space for
+       context instead of making the in-app mock vertically dominant. */
+    .management-preview-card {
+      width: 100%;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(220px, 1fr);
+      grid-template-rows: auto 1fr auto;
+      column-gap: 22px;
+      align-items: center;
+    }
+
+    .management-preview-card .live-preview-eyebrow {
+      grid-column: 1 / -1;
+      margin-bottom: 8px;
+    }
+
+    .management-preview-card .app-preview-card {
+      display: contents;
+    }
+
+    .management-preview-card .app-preview-cover {
+      grid-column: 1;
+      grid-row: 2 / 4;
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .management-preview-card .app-preview-body {
+      grid-column: 2;
+      grid-row: 2;
+      padding: 4px 0 10px;
+      align-self: end;
+    }
+
+    .management-preview-card .app-preview-title {
+      font-size: 17px;
+    }
+
+    .management-preview-card .app-preview-meta {
+      font-size: 12.5px;
+    }
+
+    .management-preview-card .preview-nav {
+      grid-column: 2;
+      grid-row: 3;
+      justify-content: flex-start;
+      margin-top: 0;
+      align-self: start;
+    }
+
+    .management-preview-card .live-preview-caption {
+      display: none;
+    }
+
+    @media (max-width: 720px) {
+      .management-preview-card {
+        display: block;
+      }
+
+      .management-preview-card .app-preview-card {
+        display: block;
+      }
+
+      .management-preview-card .app-preview-body {
+        padding: 10px 12px;
+      }
+
+      .management-preview-card .preview-nav {
+        justify-content: center;
+        margin-top: 8px;
+      }
+    }
+
     /* Overview: Live Preview carousel nav */
     .preview-nav {
       display: flex;
@@ -3972,6 +4506,30 @@
     /* Overview: larger hero figures for the Needs Attention band */
     #page-overview .stat-card.hero .value {
       font-size: 30px;
+    }
+
+    #analyticsOverviewAttentionMount .stat-card.hero .value {
+      font-size: 30px;
+    }
+
+    #analyticsOverviewAttentionMount .stat-card .label {
+      font-size: 12.5px;
+    }
+
+    .format-comparison-card.clickable {
+      cursor: pointer;
+      transition: transform .15s, border-color .15s, box-shadow .15s;
+    }
+
+    .format-comparison-card.clickable:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .06);
+    }
+
+    .format-comparison-card.clickable:focus-visible {
+      outline: 2px solid var(--info-600);
+      outline-offset: 2px;
     }
 
     /* Overview: targeted type-scale pass (Overview only) */
@@ -5806,15 +6364,6 @@
         </div>
       </div>
       <div class="topbar-nav">
-        <div class="nav-item active" data-page="overview" onclick="goToPage('overview')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="9" rx="1.5" />
-            <rect x="14" y="3" width="7" height="5" rx="1.5" />
-            <rect x="14" y="12" width="7" height="9" rx="1.5" />
-            <rect x="3" y="16" width="7" height="5" rx="1.5" />
-          </svg>
-          Overview
-        </div>
         <div class="nav-item" data-page="home" onclick="goToPage('home')" style="position:relative;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/><path d="M3 12v9h18v-9"/>
@@ -5873,7 +6422,7 @@
           </svg>
           Groups
         </div>
-        <div class="nav-item" data-page="analytics" onclick="goToPage('analytics')">
+        <div class="nav-item active" data-page="analytics" onclick="goToPage('analytics')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 3v18h18" />
             <path d="M18 17V9M13 17V5M8 17v-5" />
@@ -5887,7 +6436,7 @@
     <div class="main">
 
       <!-- OVERVIEW PAGE -->
-      <div class="page active" id="page-overview">
+      <div class="page" id="page-overview">
         <div class="page-header">
           <div>
             <h1>Overview</h1>
@@ -5923,12 +6472,12 @@
           <div class="kpi-grid kpi-grid-2" id="overviewLiveKpis"></div>
 
           <div class="chart-row">
-            <div class="chart-card stretch">
+            <div class="chart-card stretch" id="overviewRegistrationCard">
               <h3>Registrations Over the Last 14 Days</h3>
               <p class="chart-sub">Daily registrations across all scheduled live sessions — hover to inspect a day</p>
               <div class="line-chart-wrap" id="liveRegChartWrap"></div>
             </div>
-            <div class="chart-card">
+            <div class="chart-card" id="liveAppPreviewCard">
               <p class="live-preview-eyebrow">Live Preview · As Seen In App</p>
               <div class="app-preview-card" id="nextLiveSessionPreview"></div>
               <div class="preview-nav">
@@ -6003,7 +6552,7 @@
           <div class="kpi-grid kpi-grid-2" id="overviewThreadsKpis"></div>
 
           <div class="chart-row">
-            <div class="chart-card">
+            <div class="chart-card" id="overviewSubmissionStatusCard">
               <h3>Submissions by Status</h3>
               <p class="chart-sub">Approved, rejected, and flagged posts</p>
               <div class="donut-row">
@@ -6033,7 +6582,7 @@
                 </div>
               </div>
             </div>
-            <div class="chart-card">
+            <div class="chart-card" id="topPostPreviewCard">
               <p class="live-preview-eyebrow">Top Post · As Seen In App</p>
               <div id="topPostPreview"></div>
               <p class="live-preview-caption">The highest-engagement post published this period.</p>
@@ -7071,15 +7620,47 @@
       </div>
 
       <!-- ANALYTICS PAGE -->
-      <div class="page" id="page-analytics">
+      <div class="page active" id="page-analytics">
         <div class="page-header">
           <div>
             <h1>Analytics</h1>
-            <p>Performance, engagement and moderation insights across Live, Uploads and Threads — built for engineering
-              and analytics teams.</p>
+            <p>Operational priorities and performance insights across Live, Uploads and Threads.</p>
           </div>
         </div>
 
+        <div class="analytics-workspace">
+          <nav class="analytics-side-rail dossier-rail" id="analyticsTabbar" aria-label="Analytics sections">
+            <button class="analytics-rail-item dossier-rail-item active" data-atab="overview" onclick="switchAnalyticsTab('overview')">Overview</button>
+            <button class="analytics-rail-item dossier-rail-item" data-atab="live" onclick="switchAnalyticsTab('live')">Live</button>
+            <button class="analytics-rail-item dossier-rail-item" data-atab="uploads" onclick="switchAnalyticsTab('uploads')">Uploads</button>
+            <button class="analytics-rail-item dossier-rail-item" data-atab="threads" onclick="switchAnalyticsTab('threads')">Threads</button>
+          </nav>
+          <div class="analytics-workspace-content">
+            <div class="analytics-tab-pane active" id="analytics-overview">
+              <section class="analytics-overview-section attention-zone">
+                <div class="analytics-overview-heading">
+                  <div><p class="overview-zone-label">Needs Attention</p><p class="overview-zone-caption">Current operational backlog across all content. These figures are not affected by analytics filters.</p></div>
+                </div>
+                <div id="analyticsOverviewAttentionMount"></div>
+              </section>
+              <section class="analytics-overview-section">
+                <div class="analytics-overview-heading">
+                  <div><p class="overview-zone-label">Performance by Content</p><p class="overview-zone-caption">Compare reach and meaningful participation across Live, Uploads and Threads.</p></div>
+                  <span class="result-count">Filtered selection</span>
+                </div>
+                <div id="analyticsOverviewFilterMount"></div>
+                <div class="format-comparison-grid" id="formatComparisonChart"></div>
+              </section>
+              <section class="analytics-overview-section">
+                <div class="analytics-overview-heading">
+                  <div><p class="overview-zone-label">Hot Topics Pulse</p><p class="overview-zone-caption">Sentiment across mentions associated with currently trending Hot Topics.</p></div>
+                  <button class="btn btn-sm" type="button" onclick="goToPage('hottopics')">View Hot Topics</button>
+                </div>
+                <div id="analyticsCommunityPulse"></div>
+              </section>
+            </div>
+
+            <div id="detailAnalyticsFilterMount">
         <div class="analytics-filters">
           <label>Date range<select id="analyticsDateFilter" onchange="handleAnalyticsFilterChange()">
               <option value="30">Last 30 days</option>
@@ -7111,15 +7692,10 @@
               <option>Cancelled</option>
             </select></label>
         </div>
-
-        <div class="segment-tabbar" id="analyticsTabbar">
-          <button class="segment-btn active" data-atab="live" onclick="switchAnalyticsTab('live')">Live</button>
-          <button class="segment-btn" data-atab="uploads" onclick="switchAnalyticsTab('uploads')">Uploads</button>
-          <button class="segment-btn" data-atab="threads" onclick="switchAnalyticsTab('threads')">Threads</button>
-        </div>
+            </div>
 
         <!-- LIVE ANALYTICS -->
-        <div class="analytics-tab-pane active" id="analytics-live">
+        <div class="analytics-tab-pane" id="analytics-live">
           <div class="insights-heading" id="insightsHeading-live"><div><h3>Key insights</h3><p>Notable patterns from the current filters</p></div><span class="insights-count"></span></div>
           <div class="insights-strip" id="insightsStrip-live"></div>
           <!-- KPI cards are rendered from analyticsMetrics by initializeVisualAnalytics(). -->
@@ -7293,6 +7869,7 @@
           </div>
         </div>
 
+        <div id="analyticsSharedHealth">
         <h2 class="section-title">Content Health and Moderation</h2>
         <div class="chart-card">
           <h3>Operational and Safety Signals</h3>
@@ -7300,6 +7877,9 @@
                it previously claimed to follow the selected content type. -->
           <p class="chart-sub">Measured against the moderation targets, across all content types</p>
           <div class="health-grid" id="healthMetricsGrid"></div>
+        </div>
+        </div>
+          </div>
         </div>
       </div>
 
@@ -8979,7 +9559,7 @@
       return `<span class="stat-trend ${good ? 'good' : 'bad'}">${arrow} ${delta.replace(/^[+-]/, '')}${suffix}</span>`;
     }
 
-    function goToAnalytics(tab) {
+    function goToAnalytics(tab = "overview") {
       goToPage('analytics');
       switchAnalyticsTab(tab);
     }
@@ -9028,21 +9608,21 @@
       const totalWeight = sources.reduce((a, s) => a + s.n, 0);
       const avgReviewTime = sources.reduce((a, s) => a + s.hrs * s.n, 0) / totalWeight;
 
-      // "vs 7d" is stated once in the zone caption above rather than repeated
-      // on all three badges here.
       document.getElementById('overviewStats').innerHTML = `
-      <div class="stat-card accent-amber hero clickable" onclick="goToThreadsQueue('pending','Pending')">
+      <div class="stat-card accent-amber hero">
         <p class="label"><span class="dot amber"></span>Pending Review</p>
-        <div class="value-row"><p class="value">${totalPending}</p><span class="stat-trend good">▼ 4</span></div>
+        <div class="value-row"><p class="value">${totalPending}</p><span class="attention-card-status good">Improving</span></div>
+        <p class="attention-comparison"><span class="stat-trend good">▼ 4</span><span>vs 7 days ago</span></p>
         <div class="stat-breakdown">
           <a onclick="event.stopPropagation();goToFilteredPage('uploads','uploadsStatusFilter','pending','Pending Review','renderUploadsTable')">${uploadsPending} Uploads</a>
           <a onclick="event.stopPropagation();goToFilteredPage('live','liveLogStatusFilter','pending','Pending Review','renderLiveTable')">${livePending} Live</a>
           <a onclick="event.stopPropagation();goToThreadsQueue('pending','Pending')">${threadsPending} Threads</a>
         </div>
       </div>
-      <div class="stat-card flagged hero clickable" onclick="goToThreadsQueue('flagged','Flagged')">
+      <div class="stat-card flagged hero">
         <p class="label"><span class="dot red"></span>Flagged</p>
-        <div class="value-row"><p class="value">${totalFlagged}</p><span class="stat-trend bad">▲ 2</span></div>
+        <div class="value-row"><p class="value">${totalFlagged}</p><span class="attention-card-status bad">Needs attention</span></div>
+        <p class="attention-comparison"><span class="stat-trend bad">▲ 2</span><span>vs 7 days ago</span></p>
         <div class="stat-breakdown">
           <a onclick="event.stopPropagation();goToFilteredPage('uploads','uploadsStatusFilter','flagged','Flagged','renderUploadsTable')">${uploadsFlagged} Uploads</a>
           <a onclick="event.stopPropagation();goToFilteredPage('live','liveLogStatusFilter','flagged','Flagged','renderLiveTable')">${liveFlagged} Live</a>
@@ -9051,7 +9631,8 @@
       </div>
       <div class="stat-card accent-teal hero">
         <p class="label"><span class="dot gray"></span>Avg Review Time</p>
-        <div class="value-row"><p class="value">${avgReviewTime.toFixed(1)}h</p><span class="stat-trend good">▼ 0.6h</span></div>
+        <div class="value-row"><p class="value">${avgReviewTime.toFixed(1)}h</p><span class="attention-card-status neutral">Within target</span></div>
+        <p class="attention-comparison"><span class="stat-trend good">▼ 0.6h</span><span>vs previous 7-day average</span></p>
       </div>
     `;
     }
@@ -10128,12 +10709,7 @@
     }
 
     function initializeVisualAnalytics() {
-      if (document.getElementById("formatComparisonChart")) return;
-      document.getElementById("analyticsTabbar").insertAdjacentHTML("beforebegin", `
-        <div class="chart-card visual-analytics-overview">
-          <div class="visual-analytics-head"><div><h3>Performance by Content Format</h3><p>Compare reach and meaningful participation across Live, Uploads and Threads</p></div><span class="result-count">Filtered selection</span></div>
-          <div class="format-comparison-grid" id="formatComparisonChart"></div>
-        </div>`);
+      if (document.querySelector("#analytics-live .visual-kpi-strip")) return;
       ["live","uploads","threads"].forEach(type => {
         const pane = document.getElementById(`analytics-${type}`);
         const grid = pane.querySelector(".kpi-grid");
@@ -10179,10 +10755,16 @@
 
     function crossFormatRows(type) {
       const status = document.getElementById("analyticsStatusFilter");
-      const saved = status.value;
+      const creator = document.getElementById("analyticsCreatorFilter");
+      const segment = document.getElementById("analyticsSegmentFilter");
+      const saved = { status: status.value, creator: creator.value, segment: segment.value };
       status.value = "all";
+      creator.value = "all";
+      segment.value = "all";
       const rows = analyticsFilteredItems(type);
-      status.value = saved;
+      status.value = saved.status;
+      creator.value = saved.creator;
+      segment.value = saved.segment;
       return rows;
     }
 
@@ -10190,18 +10772,25 @@
       const types = ["live","uploads","threads"];
       const totals = types.map(type => {
         const rows = crossFormatRows(type);
+        const section = document.getElementById("analyticsSectionFilter").value;
+        const base = visualAnalyticsSeries[type][0];
+        const profile = visualSectionTrendProfiles[type]?.[section];
+        const shaped = profile ? base.map((value, pointIndex) => value * profile[pointIndex]) : base;
+        const previous = shaped.at(-2);
+        const delta = previous ? (shaped.at(-1) - previous) / previous * 100 : 0;
         return {
           type,
           reach: rows.reduce((sum,item) => sum + item.views,0),
-          engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0))
+          engaged: Math.round(rows.reduce((sum,item) => sum + item.views*item.engagement/100,0)),
+          delta
         };
       });
       const colors = {live:"var(--chart-red)",uploads:"var(--chart-teal)",threads:"var(--chart-gold)"};
-      document.getElementById("formatComparisonChart").innerHTML = totals.map((item,index) => {
+      document.getElementById("formatComparisonChart").innerHTML = totals.map(item => {
         const engagementRate = item.reach ? item.engaged / item.reach * 100 : 0;
         return `
-          <div class="format-comparison-card">
-            <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">+${[8.4,12.1,9.2][index]}% views vs prior period</span></div>
+          <div class="format-comparison-card clickable" role="button" tabindex="0" onclick="switchAnalyticsTab('${item.type}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchAnalyticsTab('${item.type}')}">
+            <div class="format-comparison-title"><b>${item.type[0].toUpperCase()+item.type.slice(1)}</b><span class="format-delta">${item.delta >= 0 ? "+" : ""}${item.delta.toFixed(1)}% views vs prior period</span></div>
             <div class="format-count-row"><span>Total views</span><b>${compactVisualNumber(item.reach)}</b></div>
             <div class="format-count-row"><span>Engaged viewers</span><b>${compactVisualNumber(item.engaged)}</b></div>
             <div class="format-engagement-head"><span>Engagement rate</span><b>${engagementRate.toFixed(1)}% of views</b></div>
@@ -10210,6 +10799,44 @@
             </div>
           </div>`;
       }).join("");
+    }
+
+    function initializeMergedAnalyticsWorkspace() {
+      const attention = document.getElementById("overviewStats");
+      if (attention) document.getElementById("analyticsOverviewAttentionMount").appendChild(attention);
+
+      const registrationCard = document.getElementById("overviewRegistrationCard");
+      const liveFunnelCard = document.getElementById("liveFunnelChart")?.closest(".chart-card");
+      if (registrationCard && liveFunnelCard) {
+        registrationCard.classList.remove("stretch");
+        registrationCard.style.marginBottom = "16px";
+        liveFunnelCard.before(registrationCard);
+      }
+
+      const livePreviewCard = document.getElementById("liveAppPreviewCard");
+      const liveStats = document.getElementById("liveStats");
+      if (livePreviewCard && liveStats) {
+        livePreviewCard.classList.add("management-preview-card");
+        livePreviewCard.style.marginBottom = "18px";
+        liveStats.insertAdjacentElement("afterend", livePreviewCard);
+      }
+
+      const submissionStatusCard = document.getElementById("overviewSubmissionStatusCard");
+      const verificationPanel = document.querySelector("#thread-queue > .panel");
+      if (submissionStatusCard && verificationPanel) {
+        submissionStatusCard.style.marginBottom = "18px";
+        verificationPanel.before(submissionStatusCard);
+      }
+
+      const topPostCard = document.getElementById("topPostPreviewCard");
+      const liveFeedPanel = document.querySelector("#thread-live > .panel");
+      if (topPostCard && liveFeedPanel) {
+        topPostCard.style.marginBottom = "18px";
+        liveFeedPanel.before(topPostCard);
+      }
+
+      document.getElementById("page-overview")?.remove();
+      switchAnalyticsTab("overview");
     }
 
     // The series supplies the SHAPE of the trend; its final point is pinned to the
@@ -11166,6 +11793,7 @@
         renderAnalyticsInsights(type);
         renderSectionPerformance(type);
       });
+      renderAnalyticsCommunityPulse();
     }
 
     function sortPerformance(type, key) {
@@ -11364,16 +11992,37 @@
     document.getElementById("analyticsDetailOverlay").addEventListener("click", e => { if (e.target === e.currentTarget) closeAnalyticsDetail(); });
     document.addEventListener("keydown", e => { if (e.key === "Escape" && document.getElementById("analyticsDetailOverlay").classList.contains("open")) closeAnalyticsDetail(); });
 
+    let activeAnalyticsTab = "overview";
+    let lastAnalyticsContentTab = "live";
+
     function switchAnalyticsTab(tab) {
-      document.querySelectorAll('#analyticsTabbar .segment-btn').forEach(b => b.classList.toggle('active', b.dataset.atab === tab));
+      const isOverview = tab === "overview";
+      document.querySelectorAll('#analyticsTabbar .analytics-rail-item').forEach(b => b.classList.toggle('active', b.dataset.atab === tab));
       document.querySelectorAll('.analytics-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'analytics-' + tab));
+      const filters = document.querySelector(".analytics-filters");
+      const overviewFilterMount = document.getElementById("analyticsOverviewFilterMount");
+      const detailFilterMount = document.getElementById("detailAnalyticsFilterMount");
+      (isOverview ? overviewFilterMount : detailFilterMount).appendChild(filters);
+      ["analyticsCreatorFilter", "analyticsSegmentFilter", "analyticsStatusFilter"].forEach(id => {
+        document.getElementById(id).closest("label").style.display = isOverview ? "none" : "";
+      });
+      document.getElementById("analyticsSharedHealth").style.display = isOverview ? "none" : "";
+      activeAnalyticsTab = tab;
+      if (isOverview) {
+        renderFormatComparison();
+        renderAnalyticsCommunityPulse();
+        return;
+      }
       const status = document.getElementById('analyticsStatusFilter');
       const options = {
         live: ['Upcoming', 'Completed', 'Cancelled'],
         uploads: ['Published', 'Draft', 'Archived'],
         threads: ['Active', 'Dormant', 'Flagged']
       };
-      status.innerHTML = `<option value="all">All statuses</option>${options[tab].map(label => `<option>${label}</option>`).join('')}`;
+      if (lastAnalyticsContentTab !== tab) {
+        status.innerHTML = `<option value="all">All statuses</option>${options[tab].map(label => `<option>${label}</option>`).join('')}`;
+      }
+      lastAnalyticsContentTab = tab;
       handleAnalyticsFilterChange();
     }
 
@@ -11595,6 +12244,101 @@
       return { totalMentions, bullish, bearish, topMomentum };
     }
 
+    function renderAnalyticsCommunityPulse() {
+      const mount = document.getElementById("analyticsCommunityPulse");
+      if (!mount) return;
+      const section = document.getElementById("analyticsSectionFilter")?.value || "all";
+      const days = Number(document.getElementById("analyticsDateFilter")?.value || 7);
+      const sectionTerms = {
+        Markets: ["market", "rates", "reit", "stocks", "digital assets"],
+        Wealth: ["wealth", "retirement", "cpf", "portfolio", "planning"],
+        SME: ["sme", "loan", "working capital"]
+      };
+      const terms = sectionTerms[section] || [];
+      const scopedTopics = section === "all"
+        ? hotTopics
+        : hotTopics.filter(topic => {
+            const searchable = `${topic.title} ${topic.tag} ${topic.related.join(" ")} ${topic.blurb}`.toLowerCase();
+            return terms.some(term => searchable.includes(term));
+          });
+      const topics = scopedTopics.length ? scopedTopics : hotTopics;
+      const periodFactor = days === 7 ? 1 : days === 30 ? 3.6 : 9.2;
+      const mentions = topics.reduce((sum, topic) => sum + topic.mentions, 0) * periodFactor;
+      const sentimentMentions = sentiment => topics
+        .filter(topic => topic.sentiment === sentiment)
+        .reduce((sum, topic) => sum + topic.mentions, 0);
+      const rawMentions = topics.reduce((sum, topic) => sum + topic.mentions, 0) || 1;
+      const bullishPct = sentimentMentions("bullish") / rawMentions * 100;
+      const bearishPct = sentimentMentions("bearish") / rawMentions * 100;
+      const neutralPct = Math.max(0, 100 - bullishPct - bearishPct);
+      const netSentiment = Math.round(bullishPct - bearishPct);
+      const leading = [...topics].sort((a, b) => b.mentions - a.mentions)[0];
+      const scoreLabel = netSentiment >= 20 ? "Positive" : netSentiment <= -20 ? "Negative" : "Mixed";
+      const driverRows = sentiment => [...topics]
+        .filter(topic => topic.sentiment === sentiment)
+        .sort((a, b) => b.mentions - a.mentions)
+        .slice(0, 2)
+        .map(topic => `
+          <button class="community-driver-row" type="button" data-topic-title="${topic.title}" onclick="goToHotTopic(this.dataset.topicTitle, '${sentiment}')">
+            <div><b>${topic.title}</b><span>${topic.blurb}</span></div>
+            <strong>${compactVisualNumber(topic.mentions * periodFactor)}</strong>
+          </button>`).join("") || `<p style="margin:0;color:var(--ink-500);font-size:11px">No ${sentiment === "bullish" ? "positive" : "negative"} driver is present under these filters.</p>`;
+      mount.innerHTML = `
+        <div class="community-pulse-card">
+          <div class="community-pulse-summary">
+            <div class="community-score-panel">
+              <span class="community-pulse-kicker">Hot Topics net sentiment <span class="metric-help" tabindex="0" title="Calculated from mentions associated with currently trending Hot Topics. It does not represent all Threads, overall customer sentiment, or customer satisfaction. Scores range from −100 (entirely negative) to +100 (entirely positive)." aria-label="Calculated from mentions associated with currently trending Hot Topics. It does not represent all Threads, overall customer sentiment, or customer satisfaction. Scores range from minus 100 to plus 100.">i</span></span>
+              <div class="community-score-line"><strong style="color:var(--${netSentiment >= 0 ? "green" : "danger"}-600)">${netSentiment >= 0 ? "+" : ""}${netSentiment}</strong><span style="color:var(--${netSentiment >= 0 ? "green" : "danger"}-600)">${scoreLabel}</span></div>
+              <p class="community-score-explanation"><span class="positive">${bullishPct.toFixed(0)}%</span><span class="operator">-</span><span class="negative">${bearishPct.toFixed(0)}%</span></p>
+            </div>
+            <div class="community-summary-stat"><span class="community-pulse-kicker">Total mentions · ${days}d</span><strong>${compactVisualNumber(mentions)}</strong></div>
+            <div class="community-summary-stat topic"><span class="community-pulse-kicker">Leading topic</span><strong>${leading.title}</strong></div>
+          </div>
+          <div class="community-distribution">
+            <div class="community-distribution-head"><b>Sentiment distribution</b><span>${section === "all" ? "All sections" : section} · ${days} days</span></div>
+            <div class="community-distribution-bar" role="img" aria-label="${bullishPct.toFixed(0)}% positive, ${neutralPct.toFixed(0)}% neutral, ${bearishPct.toFixed(0)}% negative">
+              <i style="width:${bullishPct}%;background:var(--green-600)"></i>
+              <i style="width:${neutralPct}%;background:var(--chart-gray)"></i>
+              <i style="width:${bearishPct}%;background:var(--danger-600)"></i>
+            </div>
+            <div class="community-distribution-legend">
+              <span><i style="background:var(--green-600)"></i>${bullishPct.toFixed(0)}% positive</span>
+              <span><i style="background:var(--chart-gray)"></i>${neutralPct.toFixed(0)}% neutral</span>
+              <span><i style="background:var(--danger-600)"></i>${bearishPct.toFixed(0)}% negative</span>
+            </div>
+          </div>
+          <div class="community-driver-grid">
+            <div class="community-driver-panel">
+              <div class="community-driver-heading"><b style="color:var(--green-600)">Top positive drivers</b><button type="button" onclick="goToHotTopicsSentiment('bullish')">View positive topics</button></div>
+              ${driverRows("bullish")}
+            </div>
+            <div class="community-driver-panel">
+              <div class="community-driver-heading"><b style="color:var(--danger-600)">Top negative drivers</b><button type="button" onclick="goToHotTopicsSentiment('bearish')">View negative topics</button></div>
+              ${driverRows("bearish")}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function goToHotTopicsSentiment(sentiment) {
+      goToPage("hottopics");
+      const label = sentiment === "bullish" ? "Bullish" : "Bearish";
+      setUiSelectValue("hotTopicsSentimentFilter", sentiment, label);
+      renderHotTopics();
+    }
+
+    function goToHotTopic(topicTitle, sentiment) {
+      goToHotTopicsSentiment(sentiment);
+      requestAnimationFrame(() => {
+        const topic = [...document.querySelectorAll(".hot-topic-card")]
+          .find(card => card.dataset.topicTitle === topicTitle);
+        if (!topic) return;
+        topic.classList.add("topic-focus");
+        topic.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.setTimeout(() => topic.classList.remove("topic-focus"), 2400);
+      });
+    }
+
     function renderHotTopicsStats() {
       const s = computeHotTopicsStats();
       document.getElementById('hotTopicsStats').innerHTML = `
@@ -11614,6 +12358,7 @@
         .forEach((t, idx) => {
           const card = document.createElement('div');
           card.className = 'hot-topic-card';
+          card.dataset.topicTitle = t.title;
           card.innerHTML = `
           <div class="hot-topic-head">
             <div>
@@ -13442,6 +14187,7 @@
     renderGroupsList();
     // Must run first: it builds the KPI cards the renderers below write into.
     initializeVisualAnalytics();
+    initializeMergedAnalyticsWorkspace();
     renderHealthMetrics();
     renderLivePerformanceTable();
     renderPerformanceTable('uploads');
