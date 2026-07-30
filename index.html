@@ -6779,11 +6779,15 @@
       border-radius: 10px;
       background: var(--paper-0);
       cursor: pointer;
-      transition: border-color .14s, background .14s;
+      transition: border-color .14s, background .14s, box-shadow .14s;
       text-align: left;
     }
     .tmpl-card:hover { border-color: var(--ink-300); }
-    .tmpl-card.selected { border-color: var(--accent); background: var(--accent); }
+    .tmpl-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-10);
+      box-shadow: 0 0 0 1.5px var(--accent), 0 0 16px -3px var(--accent);
+    }
     .tmpl-card-icon {
       width: 28px; height: 28px;
       border-radius: 7px;
@@ -6792,11 +6796,11 @@
       margin-bottom: 8px;
       color: var(--ink-500);
     }
-    .tmpl-card.selected .tmpl-card-icon { background: rgba(255,255,255,.18); color: #fff; }
+    .tmpl-card.selected .tmpl-card-icon { background: var(--accent-10); color: var(--accent); }
     .tmpl-card-name { font-size: 12.5px; font-weight: 700; color: var(--ink-900); margin-bottom: 3px; }
-    .tmpl-card.selected .tmpl-card-name { color: #fff; }
+    .tmpl-card.selected .tmpl-card-name { color: var(--accent); }
     .tmpl-card-desc { font-size: 11px; color: var(--ink-500); line-height: 1.4; }
-    .tmpl-card.selected .tmpl-card-desc { color: rgba(255,255,255,.72); }
+    .tmpl-card.selected .tmpl-card-desc { color: var(--ink-500); }
     .tmpl-vars-panel {
       margin-top: 12px;
       padding: 14px 16px;
